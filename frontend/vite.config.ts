@@ -9,7 +9,7 @@ export default defineConfig(***REMOVED***
     VitePWA(***REMOVED***
       registerType: 'autoUpdate',
       manifest: ***REMOVED***
-        name: 'My React App',
+        name: 'WEDDY',
         short_name: 'ReactApp',
         description: 'My Awesome React App with PWA support',
         theme_color: '#ffffff',
