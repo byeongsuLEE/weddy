@@ -1,0 +1,42 @@
+#root ***REMOVED***
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+***REMOVED***
+
+.logo ***REMOVED***
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+***REMOVED***
+.logo:hover ***REMOVED***
+  filter: drop-shadow(0 0 2em #646cffaa);
+***REMOVED***
+.logo.react:hover ***REMOVED***
+  filter: drop-shadow(0 0 2em #61dafbaa);
+***REMOVED***
+
+@keyframes logo-spin ***REMOVED***
+  from ***REMOVED***
+    transform: rotate(0deg);
+  ***REMOVED***
+  to ***REMOVED***
+    transform: rotate(360deg);
+  ***REMOVED***
+***REMOVED***
+
+@media (prefers-reduced-motion: no-preference) ***REMOVED***
+  a:nth-of-type(2) .logo ***REMOVED***
+    animation: logo-spin infinite 20s linear;
+  ***REMOVED***
+***REMOVED***
+
+.card ***REMOVED***
+  padding: 2em;
+***REMOVED***
+
+.read-the-docs ***REMOVED***
+  color: #888;
+***REMOVED***
