@@ -3,7 +3,7 @@ import './App.css'
 import Footer from './common/Footer'
 import Navbar from './common/Navbar'
 import Main from './pages/MainPage'
-import Test from './test/test'
+import Test from './test/Test'
 
 function App() ***REMOVED***
 

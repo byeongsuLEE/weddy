@@ -10,6 +10,7 @@ const Main = () => ***REMOVED***
   return (
     <>
     <div>Main Page</div>
+    <button onClick=***REMOVED***goTest***REMOVED***>test 이동</button>
     </>
   )
 ***REMOVED***
