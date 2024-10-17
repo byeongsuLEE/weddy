@@ -1,6 +1,7 @@
 import ***REMOVED*** defineConfig ***REMOVED*** from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import ***REMOVED*** VitePWA ***REMOVED*** from 'vite-plugin-pwa'
+import tailwindcss from "tailwindcss";
 
 // https://vitejs.dev/config/
 export default defineConfig(***REMOVED***
@@ -28,4 +29,9 @@ export default defineConfig(***REMOVED***
       ***REMOVED***,
     ***REMOVED***),
   ],
+  css: ***REMOVED***
+    postcss: ***REMOVED***
+      plugins: [tailwindcss()],
+    ***REMOVED***,
+  ***REMOVED***,
 ***REMOVED***)

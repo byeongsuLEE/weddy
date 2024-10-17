@@ -1,5 +1,76 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root ***REMOVED***
+  height: 100%;
+  margin: 0;
+  width: 100%;
+  background-color: #F9F9F4;
+  font-family: noto-sans, sans-serif;
+***REMOVED***
+
+* ***REMOVED***
+  box-sizing: border-box; /* Tailwind와 충돌하지 않음 */
+***REMOVED***
+
+#root ***REMOVED***
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+***REMOVED***
+
+nav ***REMOVED***
+  position: fixed;
+  top: 0; 
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: small;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  background-color: white;
+***REMOVED***
+
+nav .textAlign ***REMOVED***
+  margin: 0 20px;
+  text-align: center;
+***REMOVED***
+
+nav .backIcon ***REMOVED***
+  position: absolute;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+***REMOVED***
+
+.App ***REMOVED***
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+***REMOVED***
+
+.content ***REMOVED***
+  flex-grow: 1;/* 남은 공간을 차지 */
+  padding-top: 70px; /* Tailwind 패딩 유틸리티 클래스 사용 가능 */
+  padding-left: 20px; /* Tailwind 유틸리티를 사용하는 방식으로 변경 가능 */
+  padding-right: 20px;
+***REMOVED***
+
+footer ***REMOVED***
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 1rem 2rem 2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+***REMOVED***
