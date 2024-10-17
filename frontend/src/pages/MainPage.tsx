@@ -9,8 +9,7 @@ const Main = () => ***REMOVED***
 
   return (
     <>
-    <div>이호영 바보바보</div>
-    <button onClick=***REMOVED***goTest***REMOVED***>test 이동</button>
+    <div>Main Page</div>
     </>
   )
 ***REMOVED***
