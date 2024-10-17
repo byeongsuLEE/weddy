@@ -9,7 +9,7 @@ const Main = () => ***REMOVED***
 
   return (
     <>
-    <div>Main Page</div>
+      <div>Main Page</div>
     </>
   )
 ***REMOVED***
