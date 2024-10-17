@@ -1,8 +1,12 @@
+import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
+
+
 const Main = () => ***REMOVED***
+  
 
   return (
     <>
-    <div>Main Page</div>
+      <MainCarousel />
     </>
   )
 ***REMOVED***

@@ -3,5 +3,11 @@
   "references": [
     ***REMOVED*** "path": "./tsconfig.app.json" ***REMOVED***,
     ***REMOVED*** "path": "./tsconfig.node.json" ***REMOVED***
-  ]
+  ],
+  "compilerOptions": ***REMOVED***
+    "baseUrl": ".",
+    "paths": ***REMOVED***
+      "@/*": ["./src/*"]
+    ***REMOVED***
+  ***REMOVED***
 ***REMOVED***
