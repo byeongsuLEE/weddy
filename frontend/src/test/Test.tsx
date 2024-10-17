@@ -1,19 +1,18 @@
 import ***REMOVED*** useState ***REMOVED*** from "react";
-import ***REMOVED*** connect ***REMOVED*** from "./initMetaMsk";
-
+import ***REMOVED*** wallet ***REMOVED*** from "./metaMask";
 const Test = () => ***REMOVED***
-  const ***REMOVED*** initMetaMask ***REMOVED*** = connect();
+  const ***REMOVED*** connectWallet ***REMOVED*** = wallet();
   const [ account, setAccount ] = useState<any>();
 
-  const connectWallet = async () => ***REMOVED***
-    const data = await initMetaMask();
+  const handleConnect = async () => ***REMOVED***
+    const data = await connectWallet();
     setAccount(data);
   ***REMOVED***
 
   return (
     <>
-    <button onClick=***REMOVED***connectWallet***REMOVED***>지갑연결</button>
-    <div>***REMOVED***account***REMOVED***</div>
+    <button onClick=***REMOVED***handleConnect***REMOVED***>지갑연결</button>
+    <div>지갑 주소 : ***REMOVED***account***REMOVED***</div>
     </>
   )
 ***REMOVED***
