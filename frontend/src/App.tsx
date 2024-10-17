@@ -3,6 +3,7 @@ import './App.css'
 import Footer from './common/Footer'
 import Navbar from './common/Navbar'
 import Main from './pages/MainPage'
+import Test from './test/test'
 
 function App() ***REMOVED***
 
@@ -12,6 +13,7 @@ function App() ***REMOVED***
       <Navbar />
         <Routes>
           <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
+          <Route path="/test" element=***REMOVED***<Test />***REMOVED***/>
         </Routes>
       </BrowserRouter>
       <Footer />
