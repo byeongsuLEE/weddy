@@ -1,6 +1,7 @@
 import ***REMOVED*** BrowserRouter, Route, Routes ***REMOVED*** from 'react-router-dom'
 import './App.css'
 import Main from './pages/MainPage'
+import Test from './test/test'
 
 function App() ***REMOVED***
 
@@ -9,6 +10,7 @@ function App() ***REMOVED***
       <BrowserRouter>
         <Routes>
           <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
+          <Route path="/test" element=***REMOVED***<Test />***REMOVED***/>
         </Routes>
       </BrowserRouter>
     </>
