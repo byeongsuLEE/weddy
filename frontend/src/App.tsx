@@ -10,7 +10,7 @@ import Main from './pages/MainPage'
 import Mypage from './pages/MyPage'
 import Planner from './pages/PlannerPage'
 import Schedule from './pages/SchedulePage'
-import Test from './test/Test'
+import CallBack from './pages/CallBack'
 
 function App() ***REMOVED***
 
@@ -28,7 +28,7 @@ function App() ***REMOVED***
           <Route path="/contract" element=***REMOVED***<Contract />***REMOVED*** />
           <Route path="/contractlist" element=***REMOVED***<ContractList />***REMOVED*** />
           <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
-          <Route path='/test' element=***REMOVED***<Test />***REMOVED*** />
+          <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED***/>
         </Routes>
         
         ***REMOVED***location.pathname !== "/login" && (
