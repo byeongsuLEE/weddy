@@ -4,6 +4,7 @@ import Navbar from './common/Navbar'
 import Main from './pages/MainPage'
 import Login from './pages/LoginPage'
 import './index.css'; 
+import Test from './test/Test'
 
 
 function App() ***REMOVED***
@@ -16,6 +17,7 @@ function App() ***REMOVED***
         <Routes>
           <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
           <Route path="/login" element=***REMOVED***<Login />***REMOVED*** />
+          <Route path='/test' element=***REMOVED***<Test />***REMOVED*** />
         </Routes>
       </BrowserRouter>
       ***REMOVED***location.pathname !== "/login" && (
