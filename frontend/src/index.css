@@ -50,6 +50,13 @@ nav .textAlign ***REMOVED***
   align-items: center;
 ***REMOVED***
 
+.cartIcon ***REMOVED***
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+***REMOVED***
+
 .App ***REMOVED***
   display: flex;
   flex-direction: column;
