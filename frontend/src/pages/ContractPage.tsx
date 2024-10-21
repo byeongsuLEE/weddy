@@ -23,9 +23,9 @@ const Contract = () => ***REMOVED***
 
     await Promise.all([
       //== NFT 민팅 ==//
-      await mintNFT(hash),
+      mintNFT(hash),
       //== 서명 값 저장 api ==//
-      await signature(sign)
+      signature(sign)
     ]);
   ***REMOVED***
 
