@@ -7,7 +7,7 @@ export default ***REMOVED***
   		colors: ***REMOVED***
   			mainbg: '#FFFFE6',
   			main1: '#FFFFC8',
-  			main2: '#FFFC51',
+  			main2: '#FCCD2A',
   			main3: '#8F0786',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
