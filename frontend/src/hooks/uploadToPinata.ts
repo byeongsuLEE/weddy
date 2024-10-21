@@ -1,9 +1,12 @@
 import ***REMOVED*** contractUpload ***REMOVED*** from "../apis/nftApi";
 
-//== pinata에 업로드 후 ipfsHash 값 반환 ==// => File로 수정 필요
-export const uploadToPinata = async (file: any) => ***REMOVED***
+//== pinata에 업로드 후 ipfsHash 값 반환 ==//
+export const uploadToPinata = async (file?: File) => ***REMOVED***
   const formData = new FormData();
-  formData.append('file', file);
 
+  if (file)***REMOVED***
+    formData.append('file', file);
+  ***REMOVED***
+  
   return await contractUpload(formData);
 ***REMOVED***

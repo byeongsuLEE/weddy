@@ -14,7 +14,7 @@ const Test = () => ***REMOVED***
   const [cid, setCid] = useState<string>();
   const [mint, setMint] = useState<any>();
   const [nfts, setNfts] = useState<any[]>([]);
-
+ 
   const handleConnect = async () => ***REMOVED***
     const data = await connectWallet();
     setAccount(data);
