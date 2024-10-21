@@ -12,6 +12,7 @@ import Planner from './pages/PlannerPage'
 import Schedule from './pages/SchedulePage'
 import BoardDetail from './pages/BoardDetailPage'
 import Cart from './pages/CartPage'
+import CallBack from './pages/CallBack'
 
 function App() ***REMOVED***
 
