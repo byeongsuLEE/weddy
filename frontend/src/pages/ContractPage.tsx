@@ -1,11 +1,22 @@
 import TodoButton from "../common/TodoButton";
+import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
 import ***REMOVED*** signature ***REMOVED*** from "../hooks/signature";
+import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
 
 const Contract = () => ***REMOVED***
-  //== 전자서명 후 NFT 발행 ==//
+  //== 전자서명 후 NFT 민팅 ==//
   const handleSignature = async () => ***REMOVED***
+    //== pdf 생성 ==// => pdf 로직 생성 후 수정 필요
+    const contractImage = '안냥';
+
+    //== 전자 서명 ==//
     await signature();
-    
+
+    //== pinata 업로드 ==//
+    const hash = await uploadToPinata(contractImage);
+
+    //== NFT 민팅 ==//
+    await mintNFT(hash);
   ***REMOVED***
 
   return (
@@ -77,6 +88,7 @@ const Contract = () => ***REMOVED***
           계약일자 : ***REMOVED***new Date().getFullYear()***REMOVED***년 ***REMOVED***new Date().getMonth() + 1***REMOVED***월 ***REMOVED***new Date().getDate()***REMOVED***일
         </span>
       </div>
+
       <div className="text-end" onClick=***REMOVED***handleSignature***REMOVED***>
         <TodoButton title="전자 서명" colorId=***REMOVED***1***REMOVED*** />
       </div>
