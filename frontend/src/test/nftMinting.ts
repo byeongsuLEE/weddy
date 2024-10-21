@@ -9,9 +9,8 @@ declare let window: WindowWithEthereum;
 
 export const makeNFT = () => ***REMOVED***
 
-  const mintNFT = async () => ***REMOVED***
+  const mintNFT = async (CID?: string) => ***REMOVED***
     const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
-    const CID = 'Qmd5DXggMxmT6vHNN2JSSEZW7DKWnbK59KDu7xJ3v5Eu7Q';
     const metadataURI = `https://ipfs.io/ipfs/$***REMOVED***CID***REMOVED***`;
     const contractABI = MyNFT.abi;
 

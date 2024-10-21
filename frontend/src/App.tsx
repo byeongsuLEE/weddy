@@ -11,7 +11,6 @@ import Mypage from './pages/MyPage'
 import Planner from './pages/PlannerPage'
 import Schedule from './pages/SchedulePage'
 
-
 function App() ***REMOVED***
 
   return (
