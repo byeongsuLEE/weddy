@@ -5,7 +5,7 @@ import BoardReview from "../components/BoardDetailPage/BoardReview";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
 import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import ***REMOVED*** detailProduct ***REMOVED*** from "../apis/productApi";
+import ***REMOVED*** addProductToCart, detailProduct ***REMOVED*** from "../apis/productApi";
 
 const BoardDetail = () => ***REMOVED***
   const ***REMOVED*** productId ***REMOVED*** = useParams();
@@ -16,6 +16,11 @@ const BoardDetail = () => ***REMOVED***
     () => detailProduct(productId),
     ***REMOVED***enabled: !!productId***REMOVED***
   );
+
+  //== 장바구니 추가 ==//
+  const addCart = async () => ***REMOVED***
+    await addProductToCart(productId);
+  ***REMOVED***;
 
   const dummyData = [
     '/dummy/test1.jpg',
