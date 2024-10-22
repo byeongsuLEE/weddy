@@ -8,19 +8,19 @@ import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** addProductToCart, detailProduct ***REMOVED*** from "../apis/productApi";
 
 const BoardDetail = () => ***REMOVED***
-  const ***REMOVED*** productId ***REMOVED*** = useParams();
+  // const ***REMOVED*** productId ***REMOVED*** = useParams();
 
-  //== 상품 상세 데이터 ==//
-  const ***REMOVED*** data: productDetail, isLoading ***REMOVED*** = useQuery(
-    ['detailProduct', productId],
-    () => detailProduct(productId),
-    ***REMOVED***enabled: !!productId***REMOVED***
-  );
+  // //== 상품 상세 데이터 ==//
+  // const ***REMOVED*** data: productDetail, isLoading ***REMOVED*** = useQuery(
+  //   ['detailProduct', productId],
+  //   () => detailProduct(productId),
+  //   ***REMOVED***enabled: !!productId***REMOVED***
+  // );
 
-  //== 장바구니 추가 ==//
-  const addCart = async () => ***REMOVED***
-    await addProductToCart(productId);
-  ***REMOVED***;
+  // //== 장바구니 추가 ==//
+  // const addCart = async () => ***REMOVED***
+  //   await addProductToCart(productId);
+  // ***REMOVED***;
 
   const dummyData = [
     '/dummy/test1.jpg',
@@ -29,9 +29,9 @@ const BoardDetail = () => ***REMOVED***
     '/dummy/test2.jpg',
   ];
 
-  if (isLoading) ***REMOVED***
-    return <p>Loading</p>;
-  ***REMOVED***;
+  // if (isLoading) ***REMOVED***
+  //   return <p>Loading</p>;
+  // ***REMOVED***;
 
   return (
     <div>
