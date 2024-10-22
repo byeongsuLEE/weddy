@@ -3,8 +3,20 @@ import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
 import ***REMOVED*** allProduct ***REMOVED*** from "../apis/productApi";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** Product ***REMOVED*** from "../apis/product.type";
 
 const Board = () => ***REMOVED***
+  // const ***REMOVED*** data: productList, isLoading ***REMOVED*** = useQuery('allProduct', allProduct);
+
+  // if (isLoading) ***REMOVED***
+  //   return <p>Loading</p>;
+  // ***REMOVED***;
+  
+  // //== 스드메 필터링 ==//
+  // const studioProducts = productList.filter((product: Product) => product.type === 'studio');
+  // const dressProducts = productList.filter((product: Product) => product.type === 'dress');
+  // const makeupProducts = productList.filter((product: Product) => product.type === 'makeup');
+
   //dummy data
   const regions = [
     ***REMOVED***
@@ -36,6 +48,7 @@ const Board = () => ***REMOVED***
       label: "울산",
     ***REMOVED***,
   ];
+
   const prices = [
     ***REMOVED***
       value: "5,000,000",
@@ -67,12 +80,15 @@ const Board = () => ***REMOVED***
         <TabsContent value="studio">
           <SDMList value="studio" />
         </TabsContent>
+
         <TabsContent value="dress">
           <SDMList value="dress" />
         </TabsContent>
+        
         <TabsContent value="makeup">
           <SDMList value="makeup" />
         </TabsContent>
+
       </Tabs>
     </div>
   );

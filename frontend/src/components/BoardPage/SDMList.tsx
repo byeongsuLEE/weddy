@@ -10,6 +10,7 @@ const SDMList = (***REMOVED*** value ***REMOVED***: SDMListProps) => ***REMOVED*
   // dummy data
   const sdmItems = Array.from(***REMOVED*** length: 10 ***REMOVED***);
   const navigate = useNavigate();
+  
   const toDetail = () => ***REMOVED***
     navigate("/board/detail");
   ***REMOVED***

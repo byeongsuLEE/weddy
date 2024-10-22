@@ -14,7 +14,6 @@ import Schedule from './pages/SchedulePage'
 import BoardDetail from './pages/BoardDetailPage'
 import Cart from './pages/CartPage'
 import CallBack from './pages/CallBack'
-import ***REMOVED*** CalendarDemo ***REMOVED*** from "./test/Test";
 
 function App() ***REMOVED***
   const queryClient = new QueryClient();
@@ -37,7 +36,6 @@ function App() ***REMOVED***
             <Route path="/contractlist" element=***REMOVED***<ContractList />***REMOVED*** />
             <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
             <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED***/>
-            <Route path="/test" element=***REMOVED***<CalendarDemo />***REMOVED***/>
           </Routes>
           
           ***REMOVED***location.pathname !== "/login" && (

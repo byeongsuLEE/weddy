@@ -7,10 +7,12 @@ interface ContractListBoxProps ***REMOVED***
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps) => ***REMOVED***
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const toDetail = () => ***REMOVED***
-    navigate('/board/detail')
-  ***REMOVED***
+    navigate('/board/detail');
+  ***REMOVED***;
+  
   return (
     <>
     <div className="w-auto h-[100px] bg-white rounded-3xl p-5 flex items-center justify-between my-5">
