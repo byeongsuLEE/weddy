@@ -11,20 +11,15 @@ const Contract = () => ***REMOVED***
 
   //== 전자서명 후 NFT 민팅 ==//
   const handleSignature = async () => ***REMOVED***
-    //== png 파일 생성 ==//
     const contractImage = await makeImage(pageRef);
 
     const [ sign, hash ] = await Promise.all([
-      //== 전자 서명 ==//
       makeSignature(),
-      //== pinata 업로드 ==//
       uploadToPinata(contractImage)
     ]);
 
     await Promise.all([
-      //== NFT 민팅 ==//
       mintNFT(hash),
-      //== 서명 값 저장 api ==//
       signature(sign)
     ]);
   ***REMOVED***

@@ -1,4 +1,5 @@
 import axios from "axios"
+import ***REMOVED*** Review ***REMOVED*** from "./product.type";
 
 const BASE_URL = 'http://localhost:8080/api/products'
 
@@ -26,6 +27,42 @@ export const detailProduct = async (productId: number): Promise<void> => ***REMO
   console.log(response.data);
 ***REMOVED***;
 
+//== 전화번호 조회 ==//
+export const getPhone = async (productId: string): Promise<void> => ***REMOVED***
+  const response = await axios(***REMOVED***
+    method: 'get',
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/comment`,
+    headers: ***REMOVED***
+      Authorization: `Bearer `
+    ***REMOVED***
+  ***REMOVED***);
+  console.log(response.data);
+***REMOVED***;
+
+//== 상품 담기 ==//
+export const productCart = async (productId: string): Promise<void> => ***REMOVED***
+  const response = await axios(***REMOVED***
+    method: 'post',
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
+    headers: ***REMOVED***
+      Authorization: `Bearer `
+    ***REMOVED***
+  ***REMOVED***);
+  console.log(response.data);
+***REMOVED***;
+
+//== 장바구니 리스트 조회 ==//
+export const myCart = async (): Promise<void> => ***REMOVED***
+  const response = await axios(***REMOVED***
+    method: 'get',
+    url: `$***REMOVED***BASE_URL***REMOVED***/my`,
+    headers: ***REMOVED***
+      Authorization: `Bearer `
+    ***REMOVED***
+  ***REMOVED***);
+  console.log(response.data);
+***REMOVED***;
+
 //== 리뷰 리스트 ==//
 export const reviewList = async (productId: number): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
@@ -39,14 +76,14 @@ export const reviewList = async (productId: number): Promise<void> => ***REMOVED
 ***REMOVED***;
 
 //== 리뷰 등록 ==//
-export const submitReview = async (productId: number, data: any): Promise<void> => ***REMOVED***
+export const submitReview = async (productId: number, reviewData: Review): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
     headers: ***REMOVED***
       Authorization: `Bearer `
     ***REMOVED***,
-    data: data
+    data: reviewData
   ***REMOVED***);
   console.log(response.data);
 ***REMOVED***;
