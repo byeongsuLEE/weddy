@@ -14,7 +14,7 @@ import ***REMOVED***
   PopoverContent,
   PopoverTrigger,
 ***REMOVED*** from "../components/ui/popover"
-import ***REMOVED*** cn ***REMOVED*** from "../lib/utils"
+import ***REMOVED*** cn ***REMOVED*** from "@/lib/utils"
 
 interface ComboboxDemoProps ***REMOVED***
   lists: ***REMOVED***
