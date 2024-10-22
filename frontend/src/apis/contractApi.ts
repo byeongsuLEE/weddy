@@ -11,7 +11,6 @@ export const contractInfo = async (contractId: number): Promise<void> => ***REMO
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-
   console.log(response.data);
 ***REMOVED***;
 
@@ -25,7 +24,6 @@ export const signature = async (signature: string): Promise<void> => ***REMOVED*
     ***REMOVED***,
     data: signature
   ***REMOVED***);
-
   console.log(response.data);
 ***REMOVED***;
 

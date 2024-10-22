@@ -1,16 +1,17 @@
 import axios from "axios"
+import ***REMOVED*** Schedule ***REMOVED*** from "./schedule.type";
 
 const BASE_URL = 'http://localhost:8080/api/schedules';
 
 //== 일정 등록 ==//
-export const schedule = async (data: any): Promise<void> => ***REMOVED***
+export const schedule = async (scheduleData: Schedule): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'post',
     url: BASE_URL,
     headers: ***REMOVED***
       Authorization: `Bearer `
     ***REMOVED***,
-    data: data
+    data: scheduleData
   ***REMOVED***);
   console.log(response.data);
 ***REMOVED***;
