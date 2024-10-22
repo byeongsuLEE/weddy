@@ -2,33 +2,24 @@ import axios from "axios"
 
 const BASE_URL = 'http://localhost:8080/api/users'
 
-//== 카카오 로그인 ==//
-export const kakaoLogin = () => ***REMOVED***
-
-***REMOVED***
-
-//== 구글 로그인 ==//
-export const googleLogin = () => ***REMOVED***
-
-***REMOVED***
-
-//== 로그아웃 ==//
-export const logout = () => ***REMOVED***
-  axios(***REMOVED***
-    method: 'post',
-    url: `$***REMOVED***BASE_URL***REMOVED***/logout`
+//== 토큰 정보 ==//
+export const getToken = async (userId: string): Promise<void> => ***REMOVED***
+  const response = await axios(***REMOVED***
+    method: 'get',
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***userId***REMOVED***/token`
   ***REMOVED***);
-***REMOVED***
+  console.log(response.data);
+***REMOVED***;
 
 //== 회원 정보 수정 ==//
-export const editInfomation = async (data: any) => ***REMOVED***
+export const editInfomation = async (info: any): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'patch',
-    url: `$***REMOVED***BASE_URL***REMOVED***`,
+    url: BASE_URL,
     headers: ***REMOVED***
       Authorization: `Bearer `
     ***REMOVED***,
-    data: data
+    data: info
   ***REMOVED***);
   console.log(response.data);
-***REMOVED***
+***REMOVED***;
