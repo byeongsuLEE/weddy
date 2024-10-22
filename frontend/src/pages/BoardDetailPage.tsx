@@ -3,14 +3,31 @@ import BoardAsk from "../components/BoardDetailPage/BoardAsk";
 import BoardContent from "../components/BoardDetailPage/BoardContent";
 import BoardReview from "../components/BoardDetailPage/BoardReview";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
+import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** detailProduct ***REMOVED*** from "../apis/productApi";
 
 const BoardDetail = () => ***REMOVED***
+  const ***REMOVED*** productId ***REMOVED*** = useParams();
+
+  //== 상품 상세 데이터 ==//
+  const ***REMOVED*** data: productDetail, isLoading ***REMOVED*** = useQuery(
+    ['detailProduct', productId],
+    () => detailProduct(productId),
+    ***REMOVED***enabled: !!productId***REMOVED***
+  );
+
   const dummyData = [
     '/dummy/test1.jpg',
     '/dummy/test2.jpg',
     '/dummy/test1.jpg',
     '/dummy/test2.jpg',
-  ]
+  ];
+
+  if (isLoading) ***REMOVED***
+    return <p>Loading</p>;
+  ***REMOVED***;
+
   return (
     <div>
       <MainCarousel dummyData=***REMOVED***dummyData***REMOVED*** />

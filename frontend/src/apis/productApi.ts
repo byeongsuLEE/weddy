@@ -17,7 +17,7 @@ export const allProduct = async (): Promise<Product[]> => ***REMOVED***
 ***REMOVED***;
 
 //== 상품 상세 조회 ==//
-export const detailProduct = async (productId: number): Promise<void> => ***REMOVED***
+export const detailProduct = async (productId?: string): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***`,
