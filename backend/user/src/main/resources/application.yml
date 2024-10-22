@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: weddy
+  profiles:
+    active: common
+  config:
+    import: optional:configserver:***REMOVED***:8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
