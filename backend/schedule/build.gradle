@@ -1,0 +1,54 @@
+plugins ***REMOVED***
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.6'
+***REMOVED***
+
+group = 'com.ssafy'
+version = '0.0.1-SNAPSHOT'
+
+java ***REMOVED***
+    toolchain ***REMOVED***
+        languageVersion = JavaLanguageVersion.of(17)
+    ***REMOVED***
+***REMOVED***
+
+configurations ***REMOVED***
+    compileOnly ***REMOVED***
+        extendsFrom annotationProcessor
+    ***REMOVED***
+***REMOVED***
+
+repositories ***REMOVED***
+    mavenCentral()
+***REMOVED***
+
+ext ***REMOVED***
+    set('springCloudVersion', "2023.0.3")
+***REMOVED***
+
+dependencies ***REMOVED***
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+***REMOVED***
+
+dependencyManagement ***REMOVED***
+    imports ***REMOVED***
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$***REMOVED***springCloudVersion***REMOVED***"
+    ***REMOVED***
+***REMOVED***
+
+tasks.named('test') ***REMOVED***
+    useJUnitPlatform()
+***REMOVED***
