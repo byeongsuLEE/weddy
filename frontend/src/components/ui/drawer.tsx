@@ -69,7 +69,7 @@ const DrawerFooter = (***REMOVED***
   ...props
 ***REMOVED***: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className=***REMOVED***cn("mt-auto flex flex-col gap-2 p-4 mb-3", className)***REMOVED***
+    className=***REMOVED***cn("flex flex-col gap-2 px-4 mb-3", className)***REMOVED***
     ***REMOVED***...props***REMOVED***
   />
 )

@@ -5,10 +5,13 @@ export default ***REMOVED***
   theme: ***REMOVED***
   	extend: ***REMOVED***
   		colors: ***REMOVED***
-  			mainbg: '#FFFFE6',
-  			main1: '#FFFFC8',
-  			main2: '#FCCD2A',
-  			main3: '#8F0786',
+  			mainbg: '#FFFFE6',	// yellow
+  			main1: '#FFFFC8',	// yellow
+  			main2: '#FCCD2A',	// yellow
+  			main3: '#F8F1FF', // purple
+				main4: '#FFF0F7', // light pink
+				main5: '#F10674', // hot pink
+				main6: '#5B00B7', // dark purple
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: ***REMOVED***
