@@ -1,6 +1,6 @@
 const Mypage = () => ***REMOVED***
   return (
-    <div>
+    <div className="m-5">
       <h1>My Page</h1>
     </div>
   )

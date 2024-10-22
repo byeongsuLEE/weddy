@@ -65,9 +65,7 @@ nav .textAlign ***REMOVED***
 
 .content ***REMOVED***
   flex-grow: 1;/* 남은 공간을 차지 */
-  padding-top: 70px; /* Tailwind 패딩 유틸리티 클래스 사용 가능 */
-  padding-left: 20px; /* Tailwind 유틸리티를 사용하는 방식으로 변경 가능 */
-  padding-right: 20px;
+  padding-top: 50px; 
 ***REMOVED***
 
 footer ***REMOVED***

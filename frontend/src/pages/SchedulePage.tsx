@@ -1,7 +1,9 @@
+import CalenderBox from "../components/SchedulePage/CalenderBox";
+
 const Schedule = ()=>***REMOVED***
   return (
-    <div>
-      <h1>Schedule</h1>
+    <div className="m-5">
+      <CalenderBox />
     </div>
   )
 ***REMOVED***
