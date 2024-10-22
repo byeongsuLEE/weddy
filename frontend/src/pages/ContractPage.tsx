@@ -4,10 +4,20 @@ import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
 import ***REMOVED*** makeSignature ***REMOVED*** from "../hooks/signature";
 import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
 import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
-import ***REMOVED*** signature ***REMOVED*** from "../apis/contractApi";
+import ***REMOVED*** contractInfo, signature ***REMOVED*** from "../apis/contractApi";
+import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Contract = () => ***REMOVED***
+  // const ***REMOVED*** contractId ***REMOVED*** = useParams();
   const pageRef = useRef<HTMLDivElement>(null);
+
+  // //== 계약서 정보 ==//
+  // const ***REMOVED*** data: contractData, isLoading ***REMOVED*** = useQuery(
+  //   ['contractInfo', contractId],
+  //   () => contractInfo(contractId),
+  //   ***REMOVED***enabled: !!contractId***REMOVED***
+  // );
 
   //== 전자서명 후 NFT 민팅 ==//
   const handleSignature = async () => ***REMOVED***
@@ -22,7 +32,11 @@ const Contract = () => ***REMOVED***
       mintNFT(hash),
       signature(sign)
     ]);
-  ***REMOVED***
+  ***REMOVED***;
+
+  // if (isLoading) ***REMOVED***
+  //   return <p>Loading</p>;
+  // ***REMOVED***;
 
   return (
     <div>
