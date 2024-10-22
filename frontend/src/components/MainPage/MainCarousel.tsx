@@ -9,10 +9,16 @@ import ***REMOVED***
   CarouselPrevious
 ***REMOVED*** from "../ui/carousel"
 
-export const MainCarousel = () => ***REMOVED***
+interface MainCarouselProps ***REMOVED***
+  dummyData: string[];
+***REMOVED***
+
+
+export const MainCarousel = (***REMOVED***dummyData***REMOVED***:MainCarouselProps) => ***REMOVED***
   const plugin = React.useRef(
     Autoplay(***REMOVED*** delay: 2000, stopOnInteraction: true ***REMOVED***)
   )
+ 
   return (
     <>
       <Carousel
@@ -22,15 +28,14 @@ export const MainCarousel = () => ***REMOVED***
         onMouseLeave=***REMOVED***plugin.current.reset***REMOVED***
       >
         <CarouselContent>
-          ***REMOVED***Array.from(***REMOVED*** length: 5 ***REMOVED***).map((_, index) => (
+          ***REMOVED***/* 이미지 리스트 넣기 */***REMOVED***
+          ***REMOVED***dummyData.map((imgdata, index) => (
             <CarouselItem key=***REMOVED***index***REMOVED***>
-              <div className="p-1">
                 <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-4xl font-semibold">***REMOVED***index + 1***REMOVED***</span>
+                  <CardContent>
+                      <img className="w-full h-full object-cover" src=***REMOVED***imgdata***REMOVED*** alt="제품 상세 이미지" />
                   </CardContent>
                 </Card>
-              </div>
             </CarouselItem>
           ))***REMOVED***
         </CarouselContent>

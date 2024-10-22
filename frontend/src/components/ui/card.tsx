@@ -9,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref=***REMOVED***ref***REMOVED***
     className=***REMOVED***cn(
-      "rounded-xl border bg-card text-card-foreground shadow",
+      "text-card-foreground",
       className
     )***REMOVED***
     ***REMOVED***...props***REMOVED***
@@ -23,7 +23,7 @@ const CardHeader = React.forwardRef<
 >((***REMOVED*** className, ...props ***REMOVED***, ref) => (
   <div
     ref=***REMOVED***ref***REMOVED***
-    className=***REMOVED***cn("flex flex-col space-y-1.5 p-6", className)***REMOVED***
+    className=***REMOVED***cn("flex flex-col space-y-1.5", className)***REMOVED***
     ***REMOVED***...props***REMOVED***
   />
 ))
@@ -57,7 +57,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >((***REMOVED*** className, ...props ***REMOVED***, ref) => (
-  <div ref=***REMOVED***ref***REMOVED*** className=***REMOVED***cn("p-6 pt-0", className)***REMOVED*** ***REMOVED***...props***REMOVED*** />
+  <div ref=***REMOVED***ref***REMOVED*** className=***REMOVED***cn("w-full", className)***REMOVED*** ***REMOVED***...props***REMOVED*** />
 ))
 CardContent.displayName = "CardContent"
 
@@ -67,7 +67,7 @@ const CardFooter = React.forwardRef<
 >((***REMOVED*** className, ...props ***REMOVED***, ref) => (
   <div
     ref=***REMOVED***ref***REMOVED***
-    className=***REMOVED***cn("flex items-center p-6 pt-0", className)***REMOVED***
+    className=***REMOVED***cn("flex items-center", className)***REMOVED***
     ***REMOVED***...props***REMOVED***
   />
 ))

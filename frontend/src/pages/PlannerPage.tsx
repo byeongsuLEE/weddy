@@ -1,6 +1,6 @@
 const Planner = ()=>***REMOVED***
   return (
-    <div>
+    <div className="m-5">
       <h1>Planner Page</h1>
     </div>
   ) 
