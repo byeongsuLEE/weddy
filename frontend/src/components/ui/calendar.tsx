@@ -47,7 +47,7 @@ function Calendar(***REMOVED***
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected:
-          "bg-main1 text-main1-foreground hover:bg-main1 hover:text-main1-foreground focus:bg-main1 focus:text-main1-foreground",
+          "bg-main2 text-main2-foreground hover:bg-main2 hover:text-main2-foreground focus:bg-main2 focus:text-main2-foreground",
         day_today: "bg-accent text-accent-foreground",
         day_outside:
           "day-outside text-muted-foreground opacity-50  aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
