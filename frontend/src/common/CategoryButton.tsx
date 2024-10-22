@@ -1,12 +1,22 @@
-import ***REMOVED*** useState ***REMOVED*** from "react";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 
-const CategoryButton=()=>***REMOVED***
+interface categoryProps ***REMOVED***
+  changeCategory: (category: string) => void;
+***REMOVED***;
+
+const CategoryButton=(***REMOVED*** changeCategory ***REMOVED***: categoryProps)=>***REMOVED***
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
   const handleButtonClick = (buttonName: string) => ***REMOVED***
-    // 클릭한 버튼의 이름을 상태로 저장
     setSelectedButton(buttonName);
   ***REMOVED***;
+
+  useEffect(() => ***REMOVED***
+    if (selectedButton)***REMOVED***
+      changeCategory(selectedButton);
+    ***REMOVED***;
+  ***REMOVED***, [selectedButton]);
+
   return (
     <div className="flex justify-center">
     <button

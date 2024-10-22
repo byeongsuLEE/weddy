@@ -1,7 +1,6 @@
-
 import ***REMOVED*** CalendarIcon ***REMOVED*** from "@radix-ui/react-icons"
 import ***REMOVED*** format ***REMOVED*** from "date-fns"
-import * as React from "react"
+// import * as React from "react"
 
 import ***REMOVED*** cn ***REMOVED*** from "@/lib/utils"
 import ***REMOVED*** Button ***REMOVED*** from "../ui/button"
@@ -11,14 +10,22 @@ import ***REMOVED***
   PopoverContent,
   PopoverTrigger,
 ***REMOVED*** from "../ui/popover"
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react"
 
 interface DatePickProps ***REMOVED***
   title:string;
-***REMOVED***
+  changeDate: (newDate: Date) => void;
+***REMOVED***;
 
+const DatePick = (***REMOVED***title, changeDate***REMOVED***:DatePickProps ) => ***REMOVED***
+  const [date, setDate] = useState<Date>();
+  
+  useEffect(() => ***REMOVED***
+    if(date) ***REMOVED***
+      changeDate(date);
+    ***REMOVED***;
+  ***REMOVED***, [date]);
 
-const DatePick = (***REMOVED***title***REMOVED***:DatePickProps) => ***REMOVED***
-  const [date, setDate] = React.useState<Date>()
   return (
     <>
       <Popover>
