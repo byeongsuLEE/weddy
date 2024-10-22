@@ -2,11 +2,14 @@ import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/Mai
 
 
 const Main = () => ***REMOVED***
-  
+  const dummyData = [
+    '/dummy/test1.jpg',
+    '/dummy/test2.jpg',
+  ]
 
   return (
     <>
-      <MainCarousel />
+      <MainCarousel dummyData=***REMOVED***dummyData***REMOVED***/>
     </>
   )
 ***REMOVED***
