@@ -1,6 +1,5 @@
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
 
-
 const Main = () => ***REMOVED***
   const dummyData = [
     '/dummy/test1.jpg',
