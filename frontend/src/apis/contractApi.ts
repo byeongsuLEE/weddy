@@ -1,9 +1,10 @@
 import axios from "axios"
+import ***REMOVED*** ContractData ***REMOVED*** from "./contract.type";
 
 const BASE_URL = 'http://localhost:8080/api/product/contracts'
 
 //== 계약서 상세 조회 ==//
-export const contractInfo = async (contractId: number): Promise<void> => ***REMOVED***
+export const contractInfo = async (contractId?: string): Promise<ContractData> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
@@ -12,6 +13,7 @@ export const contractInfo = async (contractId: number): Promise<void> => ***REMO
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
+  return response.data;
 ***REMOVED***;
 
 //== 계약서 전자서명 ==//
