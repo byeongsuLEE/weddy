@@ -1,13 +1,19 @@
 ***REMOVED***
   "files": [],
   "references": [
-    ***REMOVED*** "path": "./tsconfig.app.json" ***REMOVED***,
-    ***REMOVED*** "path": "./tsconfig.node.json" ***REMOVED***
+    ***REMOVED***
+      "path": "./tsconfig.app.json"
+    ***REMOVED***,
+    ***REMOVED***
+      "path": "./tsconfig.node.json"
+    ***REMOVED***
   ],
   "compilerOptions": ***REMOVED***
     "baseUrl": ".",
     "paths": ***REMOVED***
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     ***REMOVED***
   ***REMOVED***
 ***REMOVED***

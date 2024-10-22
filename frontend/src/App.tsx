@@ -1,20 +1,19 @@
 import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-query";
-import ***REMOVED*** BrowserRouter, Route, Routes ***REMOVED*** from 'react-router-dom'
-import Footer from './common/Footer'
-import Navbar from './common/Navbar'
-import './index.css'
-import Board from './pages/BoardPage'
-import ContractList from './pages/ContractListPage'
-import Contract from './pages/ContractPage'
-import Login from './pages/LoginPage'
-import Main from './pages/MainPage'
-import Mypage from './pages/MyPage'
-import Planner from './pages/PlannerPage'
-import Schedule from './pages/SchedulePage'
-import BoardDetail from './pages/BoardDetailPage'
-import Cart from './pages/CartPage'
-import CallBack from './pages/CallBack'
-import ***REMOVED*** CalendarDemo ***REMOVED*** from "./test/Test";
+import ***REMOVED*** BrowserRouter, Route, Routes ***REMOVED*** from 'react-router-dom';
+import Footer from './common/Footer';
+import Navbar from './common/Navbar';
+import './index.css';
+import BoardDetail from './pages/BoardDetailPage';
+import Board from './pages/BoardPage';
+import CallBack from './pages/CallBack';
+import Cart from './pages/CartPage';
+import ContractList from './pages/ContractListPage';
+import Contract from './pages/ContractPage';
+import Login from './pages/LoginPage';
+import Main from './pages/MainPage';
+import Mypage from './pages/MyPage';
+import Planner from './pages/PlannerPage';
+import Schedule from './pages/SchedulePage';
 
 function App() ***REMOVED***
   const queryClient = new QueryClient();
@@ -36,10 +35,9 @@ function App() ***REMOVED***
             <Route path="/contract" element=***REMOVED***<Contract />***REMOVED*** />
             <Route path="/contractlist" element=***REMOVED***<ContractList />***REMOVED*** />
             <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
-            <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED***/>
-            <Route path="/test" element=***REMOVED***<CalendarDemo />***REMOVED***/>
+            <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
           </Routes>
-          
+
           ***REMOVED***location.pathname !== "/login" && (
             <Footer />)***REMOVED***
         </BrowserRouter>
