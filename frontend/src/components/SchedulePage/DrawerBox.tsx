@@ -32,8 +32,11 @@ const DrawerBox: React.FC<DrawerBoxProps> = (***REMOVED*** isOpen, onClose ***RE
             </DrawerDescription>
             <DrawerDescription>
               <input type="text" placeholder="일정을 입력하세요." className="w-[320px] border rounded-md p-3 my-2" />
+            </DrawerDescription>
+            <DrawerDescription className="flex justify-center">
               <CategoryButton />
             </DrawerDescription>
+
           </DrawerHeader>
           <DrawerFooter>
             <Button>추가</Button>

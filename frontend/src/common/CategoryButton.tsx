@@ -8,7 +8,8 @@ const CategoryButton=()=>***REMOVED***
     setSelectedButton(buttonName);
   ***REMOVED***;
   return (
-    <div className="flex justify-center">
+    // <div className="flex justify-center">
+    <>
     <button
     onClick=***REMOVED***() => handleButtonClick('스튜디오')***REMOVED***
     className=***REMOVED***`bg-main3 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 $***REMOVED***
@@ -33,7 +34,8 @@ const CategoryButton=()=>***REMOVED***
   >
     메이크업
   </button>
-    </div>
+    </>
+    // </div>
   )
 ***REMOVED***
 
