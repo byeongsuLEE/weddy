@@ -1,8 +1,16 @@
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
+import ***REMOVED*** allProduct ***REMOVED*** from "../apis/productApi";
+import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Board = () => ***REMOVED***
+  // const ***REMOVED*** data: productList, isLoading ***REMOVED*** = useQuery('allProduct', allProduct);
+
+  // if (isLoading) ***REMOVED***
+  //   return <p>Loading</p>;
+  // ***REMOVED***;
+
     //dummy data
     const regions = [
         ***REMOVED***

@@ -1,10 +1,10 @@
 import axios from "axios"
-import ***REMOVED*** Review ***REMOVED*** from "./product.type";
+import ***REMOVED*** Product, Review ***REMOVED*** from "./product.type";
 
 const BASE_URL = 'http://localhost:8080/api/products'
 
 //== 상품 조회 ==//
-export const allProduct = async (): Promise<void> => ***REMOVED***
+export const allProduct = async (): Promise<Product[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: BASE_URL,
@@ -13,6 +13,7 @@ export const allProduct = async (): Promise<void> => ***REMOVED***
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
+  return response.data;
 ***REMOVED***;
 
 //== 상품 상세 조회 ==//

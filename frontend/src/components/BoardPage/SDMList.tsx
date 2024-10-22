@@ -1,6 +1,7 @@
 import ***REMOVED*** TabsContent ***REMOVED*** from "@radix-ui/react-tabs";
 import SDM from "./SDM";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
+
 interface SDMListProps ***REMOVED***
   value: string;
 ***REMOVED***
@@ -10,7 +11,7 @@ const SDMList = (***REMOVED*** value ***REMOVED***: SDMListProps) => ***REMOVED*
   const sdmItems = Array.from(***REMOVED*** length: 10 ***REMOVED***);
   const navigate = useNavigate();
   const toDetail = () => ***REMOVED***
-    navigate("/board/detail");cccc
+    navigate("/board/detail");
   ***REMOVED***
   return (
       
