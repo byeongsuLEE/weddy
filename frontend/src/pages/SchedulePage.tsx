@@ -9,7 +9,7 @@ const Schedule = () => ***REMOVED***
   return (
     <div className="m-5 flex flex-col">
       <CalenderBox />
-      <div className="my-5">
+      <div className="my-5 flex justify-center">
       <CategoryButton changeCategory=***REMOVED***selectCategory***REMOVED***/>
       </div>
     </div>

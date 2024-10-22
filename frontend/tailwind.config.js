@@ -5,13 +5,13 @@ export default ***REMOVED***
   theme: ***REMOVED***
   	extend: ***REMOVED***
   		colors: ***REMOVED***
-  			mainbg: '#FFFFE6',	// yellow
-  			main1: '#FFFFC8',	// yellow
-  			main2: '#FCCD2A',	// yellow
-  			main3: '#F8F1FF', // purple
-				main4: '#FFF0F7', // light pink
-				main5: '#F10674', // hot pink
-				main6: '#5B00B7', // dark purple
+  			mainbg: '#FFFFE6',
+  			main1: '#FFFFC8',
+  			main2: '#FCCD2A',
+  			main3: '#F8F1FF',
+  			main4: '#FFF0F7',
+  			main5: '#F10674',
+  			main6: '#5B00B7',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: ***REMOVED***
@@ -57,6 +57,28 @@ export default ***REMOVED***
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		***REMOVED***,
+  		keyframes: ***REMOVED***
+  			'accordion-down': ***REMOVED***
+  				from: ***REMOVED***
+  					height: '0'
+  				***REMOVED***,
+  				to: ***REMOVED***
+  					height: 'var(--radix-accordion-content-height)'
+  				***REMOVED***
+  			***REMOVED***,
+  			'accordion-up': ***REMOVED***
+  				from: ***REMOVED***
+  					height: 'var(--radix-accordion-content-height)'
+  				***REMOVED***,
+  				to: ***REMOVED***
+  					height: '0'
+  				***REMOVED***
+  			***REMOVED***
+  		***REMOVED***,
+  		animation: ***REMOVED***
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		***REMOVED***
   	***REMOVED***
   ***REMOVED***,
