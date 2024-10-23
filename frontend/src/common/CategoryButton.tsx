@@ -44,8 +44,8 @@ const CategoryButton=(***REMOVED*** changeCategory ***REMOVED***: categoryProps)
   >
     메이크업
   </button>
-    </>
-    // </div>
+  </>
+  // ***REMOVED***/* </div> */***REMOVED***
   )
 ***REMOVED***
 
