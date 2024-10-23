@@ -1,15 +1,26 @@
+import BestBox from "@/components/MianPage/BestBox";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
 
 const Main = () => ***REMOVED***
   const dummyData = [
     '/dummy/test1.jpg',
     '/dummy/test2.jpg',
-  ]
+    '/dummy/test1.jpg',
+    '/dummy/test2.jpg',
+    '/dummy/test1.jpg',
+    '/dummy/test2.jpg',
+  ];
 
   return (
-    <>
-      <MainCarousel dummyData=***REMOVED***dummyData***REMOVED***/>
-    </>
-  )
-***REMOVED***
+    <div className="flex flex-col items-center mb-24">
+      <MainCarousel dummyData=***REMOVED***dummyData***REMOVED*** />
+      <div className="grid grid-cols-2 gap-8 mt-10"> ***REMOVED***/* 그리드 적용 */***REMOVED***
+        ***REMOVED***dummyData.map((src, index) => (
+          <BestBox key=***REMOVED***index***REMOVED*** src=***REMOVED***src***REMOVED*** title="test" price=***REMOVED***10000***REMOVED*** />
+        ))***REMOVED***
+      </div>
+    </div>
+  );
+***REMOVED***;
+
 export default Main;

@@ -10,9 +10,6 @@ const Navbar = () => ***REMOVED***
   const navigateBack = () => ***REMOVED***
     navigate(-1);
   ***REMOVED***;
-  const goCart = () => ***REMOVED***
-    navigate('/cart');
-  ***REMOVED***
 
   return (
     <nav>
@@ -21,7 +18,7 @@ const Navbar = () => ***REMOVED***
           <BackIcon />
         </div>
       )***REMOVED***
-      ***REMOVED***(location === "" || location === "board" || location === "planner" ) && (locationDetail===undefined) && (
+      ***REMOVED***(location === "" || location === "board" || location === "planner") && (locationDetail === undefined) && (
         <>
           <Link to='/board'>
             <div className="textAlign">스드메</div>
@@ -41,17 +38,20 @@ const Navbar = () => ***REMOVED***
         <div>마이페이지</div>
       )***REMOVED***
       ***REMOVED***location === "cart" && (
-        <div>장바구니</div>
+        <div>견적함</div>
       )***REMOVED***
 
-      ***REMOVED***location === "board" && locationDetail==="detail" && (
+      ***REMOVED***location === "board" && locationDetail === "detail" && (
         <div>제품 상세</div>
+      )***REMOVED***
+      ***REMOVED***location === "planner" && locationDetail === "list" && (
+        <div>WEDDY 플래너</div>
       )***REMOVED***
 
       ***REMOVED***location != "contract" && (
-        <div className="cartIcon" onClick=***REMOVED***goCart***REMOVED***>
+        <Link className="cartIcon" to='/cart'>
           <CartIcon />
-        </div>
+        </Link>
       )***REMOVED***
     </nav>
   );

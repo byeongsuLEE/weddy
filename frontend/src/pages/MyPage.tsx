@@ -4,6 +4,8 @@
 // import ***REMOVED*** useState ***REMOVED*** from "react";
 // import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
+import TodoButton from "@/common/TodoButton";
+
 const Mypage = () => ***REMOVED***
   // const [ userInfo, setUserInfo ] = useState<EditUserInfo>();
 
@@ -37,16 +39,23 @@ const Mypage = () => ***REMOVED***
         />
       </div>
       <div className="flex justify-between ml-3 mr-10">
-      <div className="flex flex-col mt-10">
-        <span className="my-2 text-gray-600">이름</span>
-        <span className="my-3 text-gray-600">전화번호</span>
-        <span className="my-3 text-gray-600">이메일</span>
+        <div className="flex flex-col mt-10">
+          <span className="my-2 text-gray-600">이름</span>
+          <span className="my-3 text-gray-600">전화번호</span>
+          <span className="my-3 text-gray-600">이메일</span>
+        </div>
+        <div className="flex flex-col mt-10">
+          <input defaultValue=***REMOVED***'김싸피'***REMOVED*** className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]" type="text" />
+          <input defaultValue=***REMOVED***'010-1234-5678'***REMOVED*** className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]" type="text" />
+          <input defaultValue=***REMOVED***'ssafy@ssafy.com'***REMOVED*** className="my-2 border p-2 w-[150px] border-gray-400 rounded-lg h-[30px]" type="text" />
+        </div>
       </div>
-      <div className="flex flex-col mt-10">
-        <input defaultValue=***REMOVED***'김싸피'***REMOVED*** className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]" type="text" />
-        <input defaultValue=***REMOVED***'010-1234-5678'***REMOVED*** className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]" type="text" />
-        <input defaultValue=***REMOVED***'ssafy@ssafy.com'***REMOVED*** className="my-2 border p-2 w-[150px] border-gray-400 rounded-lg h-[30px]" type="text" />       
+      <div className="text-end my-5">
+        <TodoButton title="수정하기" colorId=***REMOVED***1***REMOVED*** />
       </div>
+      <div className="bg-main1 flex flex-col items-center p-5 h-[150px] w-[310px] mt-12 rounded-xl">
+        <h1 className="mb-5">커플 커넥트</h1>
+        <span className="font-bold text-lg">커플 코드</span>
       </div>
     </div>
   )
