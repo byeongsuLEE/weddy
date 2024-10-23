@@ -20,7 +20,6 @@ interface DrawerBoxProps ***REMOVED***
 ***REMOVED***;
 
 const DrawerBox: React.FC<DrawerBoxProps> = (***REMOVED*** isOpen, onClose ***REMOVED***) => ***REMOVED***
-  // Schedule 타입의 초기 상태를 빈 객체로 설정
   const [scheduleInfo, setScheduleInfo] = useState<Schedule>(***REMOVED***
     startDate: null,
     endDate: null,
