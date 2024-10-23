@@ -15,7 +15,7 @@ const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps
   
   return (
     <>
-    <div className="w-auto h-[100px] bg-white rounded-3xl p-5 flex items-center justify-between my-5">
+    <div className="w-auto h-[100px] bg-white rounded-3xl p-5 flex items-center justify-between my-10">
       <div className="flex items-center" onClick=***REMOVED***toDetail***REMOVED***>
       <h1 className="font-bold mr-4">***REMOVED***title***REMOVED***</h1>
       <SearchIcon />

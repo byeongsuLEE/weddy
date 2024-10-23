@@ -6,7 +6,7 @@ const ContractList = () => ***REMOVED***
   // const ***REMOVED*** data: contractList ***REMOVED*** = useQuery('myContract', myContract);
 
   return (
-    <div className="m-5">
+    <div className="my-12 mx-5">
       <ContractListBox title="스튜디오" />
       <ContractListBox title="드레스" />
       <ContractListBox title="메이크업" />

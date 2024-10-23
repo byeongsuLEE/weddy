@@ -1,4 +1,8 @@
+import ***REMOVED*** Schedule ***REMOVED*** from "@/apis/schedule.type";
+import ***REMOVED*** schedule ***REMOVED*** from "@/apis/scheduleApi";
 import CategoryButton from "@/common/CategoryButton";
+import React, ***REMOVED*** useState ***REMOVED*** from "react";
+import styled from 'styled-components';
 import ***REMOVED*** Button ***REMOVED*** from "../ui/button";
 import ***REMOVED***
   Drawer,
@@ -10,16 +14,19 @@ import ***REMOVED***
   DrawerTitle,
 ***REMOVED*** from "../ui/drawer";
 import DatePick from "./DatePick";
-import React, ***REMOVED*** useState ***REMOVED*** from "react";
-import ***REMOVED*** Schedule ***REMOVED*** from "@/apis/schedule.type";
-import ***REMOVED*** schedule ***REMOVED*** from "@/apis/scheduleApi";
 
 interface DrawerBoxProps ***REMOVED***
   isOpen: boolean;
   onClose: () => void;
 ***REMOVED***;
 
+const FlexCenterWrapper = styled.div`
+display: flex;
+justify-content: center;
+`;
 const DrawerBox: React.FC<DrawerBoxProps> = (***REMOVED*** isOpen, onClose ***REMOVED***) => ***REMOVED***
+
+  // Schedule 타입의 초기 상태를 빈 객체로 설정
   const [scheduleInfo, setScheduleInfo] = useState<Schedule>(***REMOVED***
     startDate: null,
     endDate: null,
@@ -31,7 +38,7 @@ const DrawerBox: React.FC<DrawerBoxProps> = (***REMOVED*** isOpen, onClose ***RE
   const updateScheduleInfo = (key: keyof Schedule, value: any) => ***REMOVED***
     setScheduleInfo((prev) => ***REMOVED***
       const formattedValue = (key === "startDate" || key === "endDate") && value instanceof Date ?
-       value.toISOString().split("T")[0] : value;
+        value.toISOString().split("T")[0] : value;
 
       return ***REMOVED*** ...prev, [key]: formattedValue ***REMOVED***;
     ***REMOVED***);
@@ -51,15 +58,17 @@ const DrawerBox: React.FC<DrawerBoxProps> = (***REMOVED*** isOpen, onClose ***RE
             <DatePick title="시작일" changeDate=***REMOVED***(date) => updateScheduleInfo("startDate", date)***REMOVED*** />
             <DatePick title="종료일" changeDate=***REMOVED***(date) => updateScheduleInfo("endDate", date)***REMOVED*** />
           </DrawerDescription>
-          <DrawerDescription>
+          <div>
             <input
               type="text"
               placeholder="일정을 입력하세요."
-              className="w-[320px] border rounded-md p-3 my-2"
+              className="w-[320px] border rounded-md p-3 my-2 text-[16px]"
               onChange=***REMOVED***(e) => updateScheduleInfo("content", e.target.value)***REMOVED***
             />
-            <CategoryButton changeCategory=***REMOVED***(category) => updateScheduleInfo("type", category)***REMOVED*** />
-          </DrawerDescription>
+            <FlexCenterWrapper>
+              <CategoryButton changeCategory=***REMOVED***(category) => updateScheduleInfo("type", category)***REMOVED*** />
+            </FlexCenterWrapper>
+          </div>
         </DrawerHeader>
         <DrawerFooter>
           <Button onClick=***REMOVED***updateSchedule***REMOVED***>추가</Button>

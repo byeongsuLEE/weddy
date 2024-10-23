@@ -20,9 +20,34 @@ const Mypage = () => ***REMOVED***
   //   await editInfomation(userInfo);
   // ***REMOVED***;
 
+
+
   return (
-    <div className="m-5">
-      <h1>My Page</h1>
+    <div className="m-5 bg-white h-[630px] rounded-xl p-5">
+      <div className="relative inline-block">
+        <img
+          className="bg-main1 rounded-full h-[100px] w-[100px] mt-3"
+          src="/icons/profile.png"
+          alt="profile image"
+        />
+        <img
+          className="h-[30px] w-[30px] absolute bottom-0 right-0"
+          src="/icons/camera.png"
+          alt="camera image"
+        />
+      </div>
+      <div className="flex justify-between ml-3 mr-10">
+      <div className="flex flex-col mt-10">
+        <span className="my-2 text-gray-600">이름</span>
+        <span className="my-3 text-gray-600">전화번호</span>
+        <span className="my-3 text-gray-600">이메일</span>
+      </div>
+      <div className="flex flex-col mt-10">
+        <input defaultValue=***REMOVED***'김싸피'***REMOVED*** className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]" type="text" />
+        <input defaultValue=***REMOVED***'010-1234-5678'***REMOVED*** className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]" type="text" />
+        <input defaultValue=***REMOVED***'ssafy@ssafy.com'***REMOVED*** className="my-2 border p-2 w-[150px] border-gray-400 rounded-lg h-[30px]" type="text" />       
+      </div>
+      </div>
     </div>
   )
 ***REMOVED***
