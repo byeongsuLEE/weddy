@@ -1,5 +1,5 @@
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import ***REMOVED*** getCartItems ***REMOVED*** from "../apis/productApi";
+// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+// import ***REMOVED*** getCartItems ***REMOVED*** from "../apis/productApi";
 
 const Cart = () => ***REMOVED***
   //== 장바구니 목록 데이터 ==//
