@@ -1,8 +1,11 @@
+// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import BoardAsk from "../components/BoardDetailPage/BoardAsk";
 import BoardContent from "../components/BoardDetailPage/BoardContent";
 import BoardReview from "../components/BoardDetailPage/BoardReview";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
+// import ***REMOVED*** addProductToCart, detailProduct, getPhone, getReviewList ***REMOVED*** from "@/apis/productApi";
+// import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 
 const BoardDetail = () => ***REMOVED***
   // const ***REMOVED*** productId ***REMOVED*** = useParams();
@@ -11,6 +14,20 @@ const BoardDetail = () => ***REMOVED***
   // const ***REMOVED*** data: productDetail ***REMOVED*** = useQuery(
   //   ['detailProduct', productId],
   //   () => detailProduct(productId),
+  //   ***REMOVED***enabled: !!productId***REMOVED***
+  // );
+
+  // //== 리뷰 리스트 ==//
+  // const ***REMOVED*** data: reviewList ***REMOVED*** = useQuery(
+  //   ['getReviewList', productId],
+  //   () => getReviewList(productId),
+  //   ***REMOVED***enabled: !!productId***REMOVED***
+  // );
+
+  // //== 문의 하기 ==//
+  // const ***REMOVED*** data: phone ***REMOVED*** = useQuery(
+  //   ['getPhone', productId],
+  //   () => getPhone(productId),
   //   ***REMOVED***enabled: !!productId***REMOVED***
   // );
 
@@ -35,6 +52,7 @@ const BoardDetail = () => ***REMOVED***
           <TabsTrigger value="review">리뷰</TabsTrigger>
           <TabsTrigger value="ask">문의 정보</TabsTrigger>
         </TabsList>
+
         ***REMOVED***/* 각 탭에 대응하는 콘텐츠를 렌더링 */***REMOVED***
         <TabsContent value="info">
           <BoardContent />
@@ -45,6 +63,17 @@ const BoardDetail = () => ***REMOVED***
         <TabsContent value="ask">
           <BoardAsk />
         </TabsContent>
+
+        ***REMOVED***/* api 연결 후 */***REMOVED***
+        ***REMOVED***/* <TabsContent value="info">
+          <BoardContent boardDetail=***REMOVED***productDetail***REMOVED***/>
+        </TabsContent>
+        <TabsContent value="review">
+          <BoardReview reviewList=***REMOVED***reviewList ?? []***REMOVED***/>
+        </TabsContent>
+        <TabsContent value="ask">
+          <BoardAsk phone=***REMOVED***phone***REMOVED***/>
+        </TabsContent> */***REMOVED***
       </Tabs>
     </div>
   )

@@ -17,7 +17,7 @@ export const allProduct = async (): Promise<Product[]> => ***REMOVED***
 ***REMOVED***;
 
 //== 상품 상세 조회 ==//
-export const detailProduct = async (productId?: string): Promise<void> => ***REMOVED***
+export const detailProduct = async (productId?: string): Promise<Product> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***`,
@@ -26,10 +26,11 @@ export const detailProduct = async (productId?: string): Promise<void> => ***REM
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
+  return response.data;
 ***REMOVED***;
 
 //== 전화번호 조회 ==//
-export const getPhone = async (productId: string): Promise<void> => ***REMOVED***
+export const getPhone = async (productId?: string): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/comment`,

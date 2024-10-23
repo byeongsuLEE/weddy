@@ -1,4 +1,9 @@
+// import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
 import Separate from "../../common/Separate";
+
+// interface BoardContentProp ***REMOVED***
+//   boardDetail: Product | undefined
+// ***REMOVED***;
 
 const BoardContent = () => ***REMOVED***
   return (
