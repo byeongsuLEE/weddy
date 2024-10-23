@@ -4,7 +4,7 @@ import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
 import ***REMOVED*** makeSignature ***REMOVED*** from "../hooks/signature";
 import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
 import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
-// import ***REMOVED*** contractInfo, signature ***REMOVED*** from "../apis/contractApi";
+import ***REMOVED*** contractInfo, signature ***REMOVED*** from "../apis/contractApi";
 // import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 // import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 

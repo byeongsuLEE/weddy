@@ -1,14 +1,17 @@
+// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
+// import ***REMOVED*** allProduct ***REMOVED*** from "@/apis/productApi";
+// import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
 
 const Board = () => ***REMOVED***
   // const ***REMOVED*** data: productList ***REMOVED*** = useQuery('allProduct', allProduct);
-  
-  // //== 스드메 필터링 ==//
-  // const studioProducts = productList.filter((product: Product) => product.type === 'studio');
-  // const dressProducts = productList.filter((product: Product) => product.type === 'dress');
-  // const makeupProducts = productList.filter((product: Product) => product.type === 'makeup');
+
+  // // == 스드메 필터링 ==//
+  // const studioProducts = productList?.filter((product: Product) => product.type === 'studio');
+  // const dressProducts = productList?.filter((product: Product) => product.type === 'dress');
+  // const makeupProducts = productList?.filter((product: Product) => product.type === 'makeup');
 
   //dummy data
   const regions = [
@@ -69,7 +72,9 @@ const Board = () => ***REMOVED***
           <ComboboxDemo lists=***REMOVED***regions***REMOVED*** title="지역" />
           <ComboboxDemo lists=***REMOVED***prices***REMOVED*** title="가격" />
         </div>
+
         ***REMOVED***/* 각 탭에 대응하는 콘텐츠를 렌더링 */***REMOVED***
+
         <TabsContent value="studio">
           <SDMList value="studio" />
         </TabsContent>
@@ -77,10 +82,24 @@ const Board = () => ***REMOVED***
         <TabsContent value="dress">
           <SDMList value="dress" />
         </TabsContent>
-        
+
         <TabsContent value="makeup">
           <SDMList value="makeup" />
         </TabsContent>
+
+        ***REMOVED***/* api 연결 */***REMOVED***
+
+        ***REMOVED***/* <TabsContent value="studio">
+          <SDMList value="studio" products=***REMOVED***studioProducts ?? []***REMOVED***/>
+        </TabsContent>
+
+        <TabsContent value="dress">
+          <SDMList value="dress" products=***REMOVED***dressProducts ?? []***REMOVED***/>
+        </TabsContent>
+
+        <TabsContent value="makeup">
+          <SDMList value="makeup" products=***REMOVED***makeupProducts ?? []***REMOVED***/>
+        </TabsContent> */***REMOVED***
 
       </Tabs>
     </div>
