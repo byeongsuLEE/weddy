@@ -1,6 +1,7 @@
 import ***REMOVED*** Checkbox ***REMOVED*** from "@/components/ui/checkbox";
 import SearchIcon from "@/icons/searchIcon";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
+import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 
 interface PlannerBoxProps ***REMOVED***
   title: string;
@@ -34,11 +35,11 @@ const PlannerBox = ((***REMOVED*** title ***REMOVED***: PlannerBoxProps) => ***R
         <Checkbox />
         <h1 className="font-bold mx-4">***REMOVED***title***REMOVED***</h1>
         </div>
-        <div className="flex items-center">
+        <Link to='/planner/list' className="flex items-center">
         ***REMOVED***/* 업체 선택되었으면, 선택하기 버튼 없애기 */***REMOVED***
         <p className="mr-1">선택하기</p>
         <SearchIcon />
-        </div>
+        </Link>
         </div>
 
       </AccordionSummary>
