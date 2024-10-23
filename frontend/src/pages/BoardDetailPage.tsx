@@ -8,7 +8,7 @@ const BoardDetail = () => ***REMOVED***
   // const ***REMOVED*** productId ***REMOVED*** = useParams();
 
   // //== 상품 상세 데이터 ==//
-  // const ***REMOVED*** data: productDetail, isLoading ***REMOVED*** = useQuery(
+  // const ***REMOVED*** data: productDetail ***REMOVED*** = useQuery(
   //   ['detailProduct', productId],
   //   () => detailProduct(productId),
   //   ***REMOVED***enabled: !!productId***REMOVED***
@@ -25,10 +25,6 @@ const BoardDetail = () => ***REMOVED***
     '/dummy/test1.jpg',
     '/dummy/test2.jpg',
   ];
-
-  // if (isLoading) ***REMOVED***
-  //   return <p>Loading</p>;
-  // ***REMOVED***;
 
   return (
     <div>

@@ -1,16 +1,9 @@
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
-import ***REMOVED*** allProduct ***REMOVED*** from "../apis/productApi";
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import ***REMOVED*** Product ***REMOVED*** from "../apis/product.type";
 
 const Board = () => ***REMOVED***
-  // const ***REMOVED*** data: productList, isLoading ***REMOVED*** = useQuery('allProduct', allProduct);
-
-  // if (isLoading) ***REMOVED***
-  //   return <p>Loading</p>;
-  // ***REMOVED***;
+  // const ***REMOVED*** data: productList ***REMOVED*** = useQuery('allProduct', allProduct);
   
   // //== 스드메 필터링 ==//
   // const studioProducts = productList.filter((product: Product) => product.type === 'studio');
