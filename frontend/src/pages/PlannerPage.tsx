@@ -3,7 +3,6 @@ import PlannerBox from "@/components/PlannerPage/PlannerBox";
 
 const Planner = () => ***REMOVED***
 
-
   return (
     <div className="m-5 flex flex-col items-center">
       <h1 className="mb-5">WEDDY 플래너</h1>
