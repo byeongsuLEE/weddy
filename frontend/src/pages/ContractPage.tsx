@@ -5,11 +5,12 @@ import ***REMOVED*** makeSignature ***REMOVED*** from "../hooks/signature";
 import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
 import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
 import ***REMOVED*** signature ***REMOVED*** from "../apis/contractApi";
-// import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 // import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Contract = () => ***REMOVED***
-  // const ***REMOVED*** contractId ***REMOVED*** = useParams();
+  const ***REMOVED*** category ***REMOVED*** = useParams();
+
   const pageRef = useRef<HTMLDivElement>(null);
 
   // //== 계약서 정보 ==//
@@ -25,7 +26,7 @@ const Contract = () => ***REMOVED***
 
     const [ sign, hash ] = await Promise.all([
       makeSignature(),
-      uploadToPinata(contractImage)
+      uploadToPinata(contractImage, category)
     ]);
 
     await Promise.all([
