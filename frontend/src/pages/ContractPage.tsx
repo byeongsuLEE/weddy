@@ -102,7 +102,7 @@ const Contract = () => ***REMOVED***
           </span>
         </div>
     </div>
-    <div className="text-end mt-3 mb-24 mr-5" onClick=***REMOVED***handleSignature***REMOVED***>
+    <div className="flex justify-end mt-3 mb-24 mr-5" onClick=***REMOVED***handleSignature***REMOVED***>
     <TodoButton title="전자 서명" colorId=***REMOVED***1***REMOVED*** />
     </div>
     </div>

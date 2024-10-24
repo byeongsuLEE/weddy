@@ -199,24 +199,25 @@ const CarouselPrevious = React.forwardRef<
   const ***REMOVED*** orientation, scrollPrev, canScrollPrev ***REMOVED*** = useCarousel()
 
   return (
-    <Button
-      ref=***REMOVED***ref***REMOVED***
-      variant=***REMOVED***variant***REMOVED***
-      size=***REMOVED***size***REMOVED***
-      className=***REMOVED***cn(
-        "absolute  h-8 w-8 rounded-full",
-        orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
-        className
-      )***REMOVED***
-      disabled=***REMOVED***!canScrollPrev***REMOVED***
-      onClick=***REMOVED***scrollPrev***REMOVED***
-      ***REMOVED***...props***REMOVED***
-    >
-      <ArrowLeftIcon className="h-4 w-4" />
-      <span className="sr-only">Previous slide</span>
-    </Button>
+    <></>
+    // <Button
+    //   ref=***REMOVED***ref***REMOVED***
+    //   variant=***REMOVED***variant***REMOVED***
+    //   size=***REMOVED***size***REMOVED***
+    //   className=***REMOVED***cn(
+    //     "absolute  h-8 w-8 rounded-full",
+    //     orientation === "horizontal"
+    //       ? "-left-12 top-1/2 -translate-y-1/2"
+    //       : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+    //     className
+    //   )***REMOVED***
+    //   disabled=***REMOVED***!canScrollPrev***REMOVED***
+    //   onClick=***REMOVED***scrollPrev***REMOVED***
+    //   ***REMOVED***...props***REMOVED***
+    // >
+    //   <ArrowLeftIcon className="h-4 w-4" />
+    //   <span className="sr-only">Previous slide</span>
+    // </Button>
   )
 ***REMOVED***)
 CarouselPrevious.displayName = "CarouselPrevious"

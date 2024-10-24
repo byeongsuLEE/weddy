@@ -37,11 +37,11 @@ function AppContent() ***REMOVED***
         <Route path="/planner/list" element=***REMOVED***<PlannerList />***REMOVED*** />
         <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
         <Route path="/contract" element=***REMOVED***<Contract />***REMOVED*** />
-        <Route path="/contractlist" element=***REMOVED***<ContractList />***REMOVED*** />
+        <Route path="/contract/list" element=***REMOVED***<ContractList />***REMOVED*** />
         <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
         <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
       </Routes>
-      ***REMOVED***currentPath !== "login" && (currentPath !== "board" && currentDetail!=="datail") && <Footer />***REMOVED***
+      ***REMOVED***(currentPath !== "login") && currentDetail!=="datail" && <Footer />***REMOVED***
       ***REMOVED***currentPath === "board" && currentDetail === "detail" && <FooterButton />***REMOVED***
     </>
   );
@@ -51,7 +51,7 @@ function App() ***REMOVED***
   const queryClient = new QueryClient();
 
   return (
-    <div className='content'>
+    <div className='container'>
       <QueryClientProvider client=***REMOVED***queryClient***REMOVED***>
         <BrowserRouter>
           <AppContent />

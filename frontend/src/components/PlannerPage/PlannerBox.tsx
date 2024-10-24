@@ -1,5 +1,5 @@
 import ***REMOVED*** Checkbox ***REMOVED*** from "@/components/ui/checkbox";
-import SearchIcon from "@/icons/searchIcon";
+import GotoIcon from "@/icons/Goto";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
 import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 
@@ -9,16 +9,16 @@ interface PlannerBoxProps ***REMOVED***
 
 const PlannerBox = ((***REMOVED*** title ***REMOVED***: PlannerBoxProps) => ***REMOVED***
   return (
-    <Accordion 
-    sx=***REMOVED******REMOVED***
-      boxShadow: "none",
-      border: "none",
-      borderRadius: "8px",
-      marginY: 3,
-      "&:before": ***REMOVED***
-        display: "none",
-      ***REMOVED***,
-    ***REMOVED******REMOVED***>
+    <Accordion
+      sx=***REMOVED******REMOVED***
+        boxShadow: "none",
+        border: "none",
+        borderRadius: "8px",
+        marginY: 3,
+        "&:before": ***REMOVED***
+          display: "none",
+        ***REMOVED***,
+      ***REMOVED******REMOVED***>
       <AccordionSummary
         aria-controls="panel1-content"
         id="panel1-header"
@@ -31,15 +31,15 @@ const PlannerBox = ((***REMOVED*** title ***REMOVED***: PlannerBoxProps) => ***R
         ***REMOVED******REMOVED***
       >
         <div className="flex justify-between w-[300px]">
-        <div className="flex">
-        <Checkbox />
-        <h1 className="font-bold mx-4">***REMOVED***title***REMOVED***</h1>
-        </div>
-        <Link to='/planner/list' className="flex items-center">
-        ***REMOVED***/* 업체 선택되었으면, 선택하기 버튼 없애기 */***REMOVED***
-        <p className="mr-1">선택하기</p>
-        <SearchIcon />
-        </Link>
+          <div className="flex">
+            <Checkbox />
+            <h1 className="font-bold mx-4">***REMOVED***title***REMOVED***</h1>
+          </div>
+          <Link to='/planner/list' className="flex items-center">
+            ***REMOVED***/* 업체 선택되었으면, 선택하기 버튼 없애기 */***REMOVED***
+            <p className="mr-1">선택하기</p>
+            <GotoIcon />
+          </Link>
         </div>
 
       </AccordionSummary>
