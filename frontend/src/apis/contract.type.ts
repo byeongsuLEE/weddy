@@ -1,7 +1,7 @@
 export interface ContractData ***REMOVED***
   id: number;
   type: string;
-  state: string;
+  status: string;
   totalMount: string;
   downPayment: string;
   finalPayment: string;

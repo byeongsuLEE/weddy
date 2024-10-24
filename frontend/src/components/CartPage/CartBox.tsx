@@ -2,8 +2,8 @@ import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED***
 
 interface CartBoxProps ***REMOVED***
   title: string;
+  // product: Product;
 ***REMOVED***
-
 
 const CartBox = (***REMOVED*** title ***REMOVED***: CartBoxProps) => ***REMOVED***
 

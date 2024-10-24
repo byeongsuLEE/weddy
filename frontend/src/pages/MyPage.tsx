@@ -1,11 +1,9 @@
-// import ***REMOVED*** connectCoupleCode, getCoupleCode ***REMOVED*** from "@/apis/coupleApi";
-import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/apis/userApi";
+import ***REMOVED*** getCoupleCode ***REMOVED*** from "@/apis/coupleApi";
 import ***REMOVED*** userInformation ***REMOVED*** from "@/apis/user.type";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/apis/userApi";
 import TodoButton from "@/common/TodoButton";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-
 
 const Mypage = () => ***REMOVED***
   const [ userInfo, setUserInfo ] = useState<userInformation>(***REMOVED***
@@ -35,15 +33,13 @@ const Mypage = () => ***REMOVED***
     setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value***REMOVED*** ***REMOVED***);
   ***REMOVED***;
 
-  // //== 커플 코드 조회 ==//
-  // const ***REMOVED*** data: myCode ***REMOVED*** = useQuery('getCoupleCode', getCoupleCode);
+  //== 커플 코드 조회 ==//
+  const ***REMOVED*** data: myCode ***REMOVED*** = useQuery('getCoupleCode', getCoupleCode);
 
   // //== 커플 코드 연결 ==//
   // const handleConnect = async (code: string) => ***REMOVED***
   //   await connectCoupleCode(code);
   // ***REMOVED***;
-
-  
 
   return (
     <div className="m-5 bg-white h-[630px] rounded-xl p-5">
@@ -98,7 +94,7 @@ const Mypage = () => ***REMOVED***
       </div>
       <div className="bg-main1 flex flex-col items-center p-5 h-[150px] w-[310px] mt-12 rounded-xl">
         <h1 className="mb-5">커플 커넥트</h1>
-        <span className="font-bold text-lg">커플 코드</span>
+        <span className="font-bold text-lg">***REMOVED***myCode***REMOVED***</span>
       </div>
     </div>
   )
