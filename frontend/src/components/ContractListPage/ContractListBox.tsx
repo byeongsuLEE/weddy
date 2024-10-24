@@ -1,11 +1,11 @@
 import ***REMOVED*** Link, useNavigate ***REMOVED*** from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import SearchIcon from "../../icons/searchIcon";
-import ***REMOVED*** ContractData ***REMOVED*** from "@/apis/contract.type";
+// import ***REMOVED*** ContractData ***REMOVED*** from "@/apis/contract.type";
 
 interface ContractListBoxProps ***REMOVED***
   title: string;
-  contractInfo: ContractData;
+  // contractInfo: ContractData;
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps) => ***REMOVED***
