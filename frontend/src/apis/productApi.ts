@@ -54,7 +54,7 @@ export const addProductToCart = async (productId?: string): Promise<void> => ***
 ***REMOVED***;
 
 //== 장바구니 리스트 조회 ==//
-export const getCartItems = async (): Promise<void> => ***REMOVED***
+export const getCartItems = async (): Promise<Product[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/my`,
@@ -63,6 +63,7 @@ export const getCartItems = async (): Promise<void> => ***REMOVED***
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
+  return response.data;
 ***REMOVED***;
 
 //== 리뷰 리스트 ==//
