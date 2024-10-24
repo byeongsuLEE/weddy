@@ -1,15 +1,12 @@
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-// import ***REMOVED*** getCartItems ***REMOVED*** from "../apis/productApi";
-
 import CartBox from "@/components/CartPage/CartBox";
 
 const Cart = () => ***REMOVED***
-  //== 장바구니 목록 데이터 ==//
-  // const ***REMOVED*** data:cartItem, isLoading ***REMOVED*** = useQuery('getCartItems', getCartItems);
+  // //== 장바구니 목록 데이터 ==//
+  // const ***REMOVED*** data: cartItem ***REMOVED*** = useQuery('getCartItems', getCartItems);
 
-  // if (isLoading) ***REMOVED***
-  //   return <p>Loading</p>;
-  // ***REMOVED***;
+  // const studio = cartItem?.find((item: Product) => item.type === 'studio');
+  // const dress = cartItem?.find((item: Product) => item.type === 'dress');
+  // const makeup = cartItem?.find((item: Product) => item.type === 'makeup');
   
   return (
     <div className="m-5">

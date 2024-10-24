@@ -1,5 +1,6 @@
-export interface EditUserInfo ***REMOVED***
+export interface userInformation ***REMOVED***
   name: string;
   phone: string;
+  email: string;
   address: string;
 ***REMOVED***;
