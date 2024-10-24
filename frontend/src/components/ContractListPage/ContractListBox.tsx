@@ -4,6 +4,7 @@ import SearchIcon from "../../icons/searchIcon";
 
 interface ContractListBoxProps ***REMOVED***
   title: string;
+  // contractData: ContractData;
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps) => ***REMOVED***

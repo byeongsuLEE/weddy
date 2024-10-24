@@ -1,4 +1,3 @@
-// import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
 
 interface CartBoxProps ***REMOVED***

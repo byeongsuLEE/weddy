@@ -1,8 +1,4 @@
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import ***REMOVED*** getCartItems ***REMOVED*** from "../apis/productApi";
-
 import CartBox from "@/components/CartPage/CartBox";
-// import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
 
 const Cart = () => ***REMOVED***
   // //== 장바구니 목록 데이터 ==//

@@ -1,9 +1,11 @@
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ContractListBox from "../components/ContractListPage/ContractListBox";
-// import ***REMOVED*** myContract ***REMOVED*** from "@/apis/contractApi";
 
 const ContractList = () => ***REMOVED***
   // const ***REMOVED*** data: contractList ***REMOVED*** = useQuery('myContract', myContract);
+
+  // const studioContract = contractList?.find((contract: ContractData) => contract.type === 'studio');
+  // const dressContract = contractList?.find((contract: ContractData) => contract.type === 'dress');
+  // const makeupContract = contractList?.find((contract: ContractData) => contract.type === 'makeup');
 
   return (
     <div className="my-12 mx-5">
