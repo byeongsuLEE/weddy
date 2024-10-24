@@ -55,7 +55,6 @@ const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps
           )
         )
       )***REMOVED*** */***REMOVED***
-    </div>
     </>
   )
 ***REMOVED***
