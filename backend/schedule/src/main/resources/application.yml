@@ -7,7 +7,7 @@ spring:
     import: optional:configserver:***REMOVED***:8888
 
 management:
-  endpoints:
+endpoints:
     web:
       exposure:
         include: refresh
