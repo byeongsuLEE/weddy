@@ -32,10 +32,10 @@ const Footer = () => ***REMOVED***
 
       )***REMOVED***
 
-      ***REMOVED***location === "contractlist" ? (
+      ***REMOVED***location === "contract" ? (
         <FileSelectIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
       ) : (
-        <Link to='/contractlist'>
+        <Link to='/contract/list'>
           <FileIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
         </Link>
       )***REMOVED***

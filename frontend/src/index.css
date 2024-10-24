@@ -6,7 +6,6 @@ html, body, #root ***REMOVED***
   height: 100%;
   margin: 0;
   width: 100%;
-  background-color: #F9F9F4;
   font-family: noto-sans, sans-serif;
 ***REMOVED***
 
@@ -26,17 +25,18 @@ nav ***REMOVED***
   position: fixed;
   height: 50px;
   top: 0; 
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: small;
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
   z-index: 1000;
   background-color: white;
+  width: 414px;
 ***REMOVED***
+
 
 nav .textAlign ***REMOVED***
   margin: 0 20px;
@@ -45,14 +45,14 @@ nav .textAlign ***REMOVED***
 
 .backIcon ***REMOVED***
   position: absolute;
-  left: 1rem;
+  left: 2rem;
   display: flex;
   align-items: center;
 ***REMOVED***
 
 .cartIcon ***REMOVED***
   position: absolute;
-  right: 1rem;
+  right: 2rem;
   display: flex;
   align-items: center;
 ***REMOVED***
@@ -73,8 +73,10 @@ footer ***REMOVED***
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100%;
+  width: 414px;
   padding: 1rem 2rem 2rem 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -82,6 +84,7 @@ footer ***REMOVED***
 ***REMOVED***
 
 .footerButton ***REMOVED***
+  max-width: 414px; /* iPhone XR, iPhone 11 기준 */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -92,6 +95,16 @@ footer ***REMOVED***
   background-color: black;
   justify-content: center;
   color: white;
+***REMOVED***
+.container ***REMOVED***
+  max-width: 414px; /* iPhone XR, iPhone 11 기준 */
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #F9F9F4;
+  font-family: noto-sans, sans-serif;
+  flex-grow: 1;/* 남은 공간을 차지 */
+  padding-top: 50px; 
 ***REMOVED***
 
 @layer base ***REMOVED***
