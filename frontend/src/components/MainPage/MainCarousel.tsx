@@ -33,7 +33,9 @@ export const MainCarousel = (***REMOVED***dummyData***REMOVED***:MainCarouselPro
             <CarouselItem key=***REMOVED***index***REMOVED***>
                 <Card>
                   <CardContent>
+                  <a href=***REMOVED***index === 0 ? '/board' : index === 1 ? '/schedule' : '/contractlist'***REMOVED***>
                       <img className="w-full h-full object-cover" src=***REMOVED***imgdata***REMOVED*** alt="제품 상세 이미지" />
+                  </a>
                   </CardContent>
                 </Card>
             </CarouselItem>
