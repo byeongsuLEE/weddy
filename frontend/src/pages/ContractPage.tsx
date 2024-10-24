@@ -37,7 +37,7 @@ const Contract = () => ***REMOVED***
 
   return (
     <div>
-      <div className="bg-white border rounded-sm p-5" ref=***REMOVED***pageRef***REMOVED***>
+      <div className="bg-white border rounded-sm p-5 mx-5 mt-5" ref=***REMOVED***pageRef***REMOVED***>
         <div className="text-center text-lg font-bold">
           계약서
         </div>
@@ -97,16 +97,12 @@ const Contract = () => ***REMOVED***
           <br />
           <span className="text-sm">각 당사자는 위 계약을 증명하기 위하여 본 계약서 2통을 작성하여 각각 서명(또는 기명)날인 후 “갑”과 “을”이 각각 1통씩 보관한다.</span>
           <br />
-          <label htmlFor="condition" className="font-bold text-sm">추가 특약사항</label>
-          <textarea name="condition"  className="bg-white border p-2 text-sm border-mainGreen h-[100px] mt-2 rounded-lg">
-          </textarea>
-          <br />
           <span className="text-center my-10 font-bold">
             계약일자 : ***REMOVED***new Date().getFullYear()***REMOVED***년 ***REMOVED***new Date().getMonth() + 1***REMOVED***월 ***REMOVED***new Date().getDate()***REMOVED***일
           </span>
         </div>
     </div>
-    <div className="text-end mt-3 mb-24" onClick=***REMOVED***handleSignature***REMOVED***>
+    <div className="text-end mt-3 mb-24 mr-5" onClick=***REMOVED***handleSignature***REMOVED***>
     <TodoButton title="전자 서명" colorId=***REMOVED***1***REMOVED*** />
     </div>
     </div>

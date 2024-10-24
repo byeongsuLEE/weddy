@@ -12,21 +12,24 @@ const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps
   const toDetail = () => ***REMOVED***
     navigate('/board/detail');
   ***REMOVED***;
-  
+
   return (
     <>
-    <div className="w-auto h-[100px] bg-white rounded-3xl p-5 flex items-center justify-between my-10">
-      <div className="flex items-center" onClick=***REMOVED***toDetail***REMOVED***>
-      <h1 className="font-bold mr-4">***REMOVED***title***REMOVED***</h1>
-      <SearchIcon />
+      <div className="w-auto h-[100px] bg-white rounded-3xl p-5 flex items-center justify-between my-10">
+        <div className="flex items-center" onClick=***REMOVED***toDetail***REMOVED***>
+          <h1 className="font-bold mr-4">***REMOVED***title***REMOVED***</h1>
+          <SearchIcon />
+        </div>
+        ***REMOVED***/* <TodoButton title="계약 요청" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
+        ***REMOVED***/* <TodoButton title="계약 요청중" colorId=***REMOVED***2***REMOVED*** /> */***REMOVED***
+        ***REMOVED***/* <Link to='/contract'>
+          <TodoButton title="서명하기" colorId=***REMOVED***1***REMOVED*** />
+        </Link> */***REMOVED***
+        ***REMOVED***/* <TodoButton title="결제 하기" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
+        <Link to='/review'>
+        <TodoButton title="리뷰 쓰기" colorId=***REMOVED***2***REMOVED*** />
+        </Link>
       </div>
-      ***REMOVED***/* <TodoButton title="계약 요청" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
-      ***REMOVED***/* <TodoButton title="계약 요청중" colorId=***REMOVED***2***REMOVED*** /> */***REMOVED***
-      <Link to='/contract'>
-      <TodoButton title="서명하기" colorId=***REMOVED***1***REMOVED*** />
-      </Link>
-      ***REMOVED***/* <TodoButton title="결제하기" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
-    </div>
     </>
   )
 ***REMOVED***

@@ -11,11 +11,17 @@ const Navbar = () => ***REMOVED***
     navigate(-1);
   ***REMOVED***;
 
+
   return (
     <nav>
       ***REMOVED***location !== "" && (
         <div className="backIcon" onClick=***REMOVED***navigateBack***REMOVED***>
           <BackIcon />
+        </div>
+      )***REMOVED***
+       ***REMOVED***location === "" && (
+        <div className="backIcon">
+          <span className="font-bold text-main2">WEDDY</span>
         </div>
       )***REMOVED***
       ***REMOVED***(location === "" || location === "board" || location === "planner") && (locationDetail === undefined) && (
@@ -46,6 +52,9 @@ const Navbar = () => ***REMOVED***
       )***REMOVED***
       ***REMOVED***location === "planner" && locationDetail === "list" && (
         <div>WEDDY 플래너</div>
+      )***REMOVED***
+      ***REMOVED***location === "review" && (
+        <div>리뷰 작성</div>
       )***REMOVED***
 
       ***REMOVED***location != "contract" && (
