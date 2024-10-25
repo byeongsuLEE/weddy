@@ -2,7 +2,6 @@ import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-
 import ***REMOVED*** BrowserRouter, Route, Routes, useLocation ***REMOVED*** from 'react-router-dom';
 import Footer from './common/Footer';
 import Navbar from './common/Navbar';
-import FooterButton from "./components/BoardDetailPage/FooterButton";
 import './index.css';
 import BoardDetail from './pages/BoardDetailPage';
 import Board from './pages/BoardPage';
@@ -41,8 +40,7 @@ function AppContent() ***REMOVED***
         <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
         <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
       </Routes>
-      ***REMOVED***(currentPath !== "login") && currentDetail!=="datail" && <Footer />***REMOVED***
-      ***REMOVED***currentPath === "board" && currentDetail === "detail" && <FooterButton />***REMOVED***
+      ***REMOVED***(currentPath !== "login") && (currentDetail !== "detail") && <Footer />***REMOVED***
     </>
   );
 ***REMOVED***
