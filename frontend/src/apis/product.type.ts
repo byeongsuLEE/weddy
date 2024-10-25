@@ -5,9 +5,8 @@ export interface Product ***REMOVED***
   location: string;
 ***REMOVED***;
 
-export interface Review ***REMOVED***
+export interface ReviewData ***REMOVED***
   content: string;
-  date: Date;
+  date: string;
   score: number;
-  image: string[];
 ***REMOVED***;
