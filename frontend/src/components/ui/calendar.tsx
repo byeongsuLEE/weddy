@@ -18,8 +18,8 @@ function Calendar(***REMOVED***
       showOutsideDays=***REMOVED***showOutsideDays***REMOVED***
       className=***REMOVED***cn("p-3 w-full h-[350px]", className)***REMOVED***
       classNames=***REMOVED******REMOVED***
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-        month: "space-y-4",
+        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 w-full",
+        month: "space-y-4 w-full",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium",
         nav: "space-x-1 flex items-center",
@@ -58,8 +58,8 @@ function Calendar(***REMOVED***
         ...classNames,
       ***REMOVED******REMOVED***
       components=***REMOVED******REMOVED***
-        IconLeft: (***REMOVED*** ...props ***REMOVED***) => <ChevronLeftIcon className="h-4 w-4" />,
-        IconRight: (***REMOVED*** ...props ***REMOVED***) => <ChevronRightIcon className="h-4 w-4" />,
+        IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,
+        IconRight: () => <ChevronRightIcon className="h-4 w-4" />,
       ***REMOVED******REMOVED***
       ***REMOVED***...props***REMOVED***
     />

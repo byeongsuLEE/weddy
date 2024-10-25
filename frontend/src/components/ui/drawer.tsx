@@ -22,11 +22,14 @@ const DrawerClose = DrawerPrimitive.Close
 
 const DrawerOverlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay> & ***REMOVED*** className?: string ***REMOVED***
 >((***REMOVED*** className, ...props ***REMOVED***, ref) => (
   <DrawerPrimitive.Overlay
     ref=***REMOVED***ref***REMOVED***
-    className=***REMOVED***cn("fixed inset-0 z-50", className)***REMOVED***
+    className=***REMOVED***cn(
+      "fixed z-50 flex h-[350px] flex-col rounded-t-[10px] border bg-background",
+      className
+    )***REMOVED***
     ***REMOVED***...props***REMOVED***
   />
 ))
@@ -34,14 +37,14 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & ***REMOVED*** className?: string ***REMOVED***
 >((***REMOVED*** className, children, ...props ***REMOVED***, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref=***REMOVED***ref***REMOVED***
       className=***REMOVED***cn(
-        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[350px] flex-col rounded-t-[10px] border bg-background",
+        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[350px] flex-col text-center rounded-t-[10px] border bg-background",
         className
       )***REMOVED***
       ***REMOVED***...props***REMOVED***
@@ -56,7 +59,7 @@ DrawerContent.displayName = "DrawerContent"
 const DrawerHeader = (***REMOVED***
   className,
   ...props
-***REMOVED***: React.HTMLAttributes<HTMLDivElement>) => (
+***REMOVED***: React.HTMLAttributes<HTMLDivElement> & ***REMOVED*** className?: string ***REMOVED***) => (
   <div
     className=***REMOVED***cn("grid gap-1.5 p-4 text-center sm:text-left", className)***REMOVED***
     ***REMOVED***...props***REMOVED***
@@ -67,7 +70,7 @@ DrawerHeader.displayName = "DrawerHeader"
 const DrawerFooter = (***REMOVED***
   className,
   ...props
-***REMOVED***: React.HTMLAttributes<HTMLDivElement>) => (
+***REMOVED***: React.HTMLAttributes<HTMLDivElement> & ***REMOVED*** className?: string ***REMOVED***) => (
   <div
     className=***REMOVED***cn("flex flex-col gap-2 px-4 mb-3", className)***REMOVED***
     ***REMOVED***...props***REMOVED***
@@ -77,7 +80,7 @@ DrawerFooter.displayName = "DrawerFooter"
 
 const DrawerTitle = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title> & ***REMOVED*** className?: string ***REMOVED***
 >((***REMOVED*** className, ...props ***REMOVED***, ref) => (
   <DrawerPrimitive.Title
     ref=***REMOVED***ref***REMOVED***
@@ -92,7 +95,7 @@ DrawerTitle.displayName = DrawerPrimitive.Title.displayName
 
 const DrawerDescription = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description> & ***REMOVED*** className?: string ***REMOVED***
 >((***REMOVED*** className, ...props ***REMOVED***, ref) => (
   <DrawerPrimitive.Description
     ref=***REMOVED***ref***REMOVED***
