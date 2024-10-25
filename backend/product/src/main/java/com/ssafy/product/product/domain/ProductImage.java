@@ -1,10 +1,7 @@
 package com.ssafy.product.product.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
@@ -22,4 +19,10 @@ public class ProductImage ***REMOVED***
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Builder
+    public ProductImage(String imageUrl, Product product) ***REMOVED***
+        this.imageUrl = imageUrl;
+        this.product = product;
+    ***REMOVED***
 ***REMOVED***

@@ -1,13 +1,11 @@
 package com.ssafy.product.product.domain;
 
 import com.ssafy.product.product.constant.ProductType;
+import com.ssafy.product.product.dto.request.ProductRegistRequestDto;
 import com.ssafy.product.product.dto.response.ProductImageResponseDto;
 import com.ssafy.product.product.dto.response.ProductResponseDto;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -50,5 +48,13 @@ public class Product ***REMOVED***
                 .address(product.address)
                 .images(images)
                 .build();
+    ***REMOVED***
+
+    @Builder
+    public Product(ProductRegistRequestDto productRegistRequestDto)***REMOVED***
+        this.name = productRegistRequestDto.name();
+        this.type = productRegistRequestDto.type();
+        this.price = productRegistRequestDto.price();
+        this.address = productRegistRequestDto.address();
     ***REMOVED***
 ***REMOVED***

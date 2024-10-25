@@ -1,5 +1,6 @@
 package com.ssafy.product.product.service;
 
+import com.ssafy.product.config.s3.S3Uploader;
 import com.ssafy.product.product.domain.Product;
 import com.ssafy.product.product.domain.ProductImage;
 import com.ssafy.product.product.dto.request.ProductRegistRequestDto;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,8 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService***REMOVED***
     private final ProductRepository productRepository;
+    private final ProductImageRepository productImageRepository;
+    private final S3Uploader s3Uploader;
 
     @Override
     public List<ProductResponseDto> getList() ***REMOVED***
@@ -36,7 +40,15 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     ***REMOVED***
 
     @Override
-    public ProductResponseDto registProduct(ProductRegistRequestDto productRegistRequestDto) ***REMOVED***
-        return null;
+    public ProductResponseDto registProduct(final ProductRegistRequestDto productRegistRequestDto,
+                                            final List<MultipartFile> images) ***REMOVED***
+        Product product = productRepository.save(Product.builder().productRegistRequestDto(productRegistRequestDto).build());
+        List<ProductImage> productImages = productImageRepository.saveAll(images.stream()
+                        .map(image -> ProductImage.builder()
+                                .imageUrl(s3Uploader.putS3(image))
+                                .product(product)
+                                .build())
+                        .toList());
+        return ProductResponseDto.registProductResponseDto(product,productImages);
     ***REMOVED***
 ***REMOVED***

@@ -1,14 +1,13 @@
 package com.ssafy.product.product.controller;
 
+import com.ssafy.product.product.dto.request.ProductRegistRequestDto;
 import com.ssafy.product.product.dto.response.ProductResponseDto;
 import com.ssafy.product.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,6 +26,12 @@ public class ProductController ***REMOVED***
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable("product_id") Long productId) ***REMOVED***
         return ResponseEntity.status(HttpStatus.OK)
                 .body(productService.detailProduct(productId));
+    ***REMOVED***
+
+    @PostMapping
+    public ResponseEntity<ProductResponseDto> registProduct(@RequestPart ProductRegistRequestDto registRequestDto, @RequestPart List<MultipartFile> images)***REMOVED***
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(productService.registProduct(registRequestDto, images));
     ***REMOVED***
 
 ***REMOVED***
