@@ -15,8 +15,9 @@ import Main from './pages/MainPage';
 import Mypage from './pages/MyPage';
 import PlannerList from "./pages/PlannerListPage";
 import Planner from './pages/PlannerPage';
-import Schedule from './pages/SchedulePage';
 import Review from "./pages/ReviewPage";
+import Schedule from './pages/SchedulePage';
+
 
 function AppContent() ***REMOVED***
   const location = useLocation();
@@ -41,7 +42,7 @@ function AppContent() ***REMOVED***
         <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
         <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
       </Routes>
-      ***REMOVED***(currentPath !== "login") && currentDetail!=="datail" && <Footer />***REMOVED***
+      ***REMOVED***(currentPath !== "login") && currentDetail !== "detail" && <Footer />***REMOVED***
       ***REMOVED***currentPath === "board" && currentDetail === "detail" && <FooterButton />***REMOVED***
     </>
   );
@@ -51,6 +52,8 @@ function App() ***REMOVED***
   const queryClient = new QueryClient();
 
   return (
+    <>
+   
     <div className='container'>
       <QueryClientProvider client=***REMOVED***queryClient***REMOVED***>
         <BrowserRouter>
@@ -58,6 +61,7 @@ function App() ***REMOVED***
         </BrowserRouter>
       </QueryClientProvider>
     </div>
+    </>
   );
 ***REMOVED***
 

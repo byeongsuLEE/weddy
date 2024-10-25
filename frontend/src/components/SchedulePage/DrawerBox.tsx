@@ -1,31 +1,31 @@
 import ***REMOVED*** Schedule ***REMOVED*** from "@/apis/schedule.type";
 import ***REMOVED*** schedule ***REMOVED*** from "@/apis/scheduleApi";
 import CategoryButton from "@/common/CategoryButton";
-import React, ***REMOVED*** useState ***REMOVED*** from "react";
-import styled from 'styled-components';
-import ***REMOVED*** Button ***REMOVED*** from "../ui/button";
 import ***REMOVED***
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-***REMOVED*** from "../ui/drawer";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+***REMOVED*** from "@/components/ui/alert-dialog";
+import ***REMOVED*** useState ***REMOVED*** from "react";
+import styled from "styled-components";
 import DatePick from "./DatePick";
 
-interface DrawerBoxProps ***REMOVED***
+interface AlertDialogDemoProps ***REMOVED***
   isOpen: boolean;
-  onClose: () => void;
-***REMOVED***;
-
+  onClose: () => void; // 다이얼로그를 닫을 때 사용할 콜백 함수
+***REMOVED***
 const FlexCenterWrapper = styled.div`
 display: flex;
 justify-content: center;
 `;
-const DrawerBox: React.FC<DrawerBoxProps> = (***REMOVED*** isOpen, onClose ***REMOVED***) => ***REMOVED***
 
+export function AlertDialogDemo(***REMOVED*** isOpen, onClose ***REMOVED***: AlertDialogDemoProps) ***REMOVED***
   const [scheduleInfo, setScheduleInfo] = useState<Schedule>(***REMOVED***
     startDate: null,
     endDate: null,
@@ -46,38 +46,40 @@ const DrawerBox: React.FC<DrawerBoxProps> = (***REMOVED*** isOpen, onClose ***RE
   //== 일정 업데이트 ==//
   const updateSchedule = async () => ***REMOVED***
     schedule(scheduleInfo);
+    onClose();
+    console.log(scheduleInfo);
   ***REMOVED***;
-
   return (
-    <Drawer shouldScaleBackground open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***onClose***REMOVED***>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle className="text-gray-500">일정 추가</DrawerTitle>
-          <DrawerDescription>
-            <DatePick title="시작일" changeDate=***REMOVED***(date) => updateScheduleInfo("startDate", date)***REMOVED*** />
-            <DatePick title="종료일" changeDate=***REMOVED***(date) => updateScheduleInfo("endDate", date)***REMOVED*** />
-          </DrawerDescription>
-          <div>
+    <AlertDialog open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***onClose***REMOVED***>
+      <AlertDialogTrigger asChild>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>일정 추가</AlertDialogTitle>
+          <AlertDialogDescription>
+              <DatePick title="시작일" changeDate=***REMOVED***(date) => updateScheduleInfo("startDate", date)***REMOVED*** />
+              <DatePick title="종료일" changeDate=***REMOVED***(date) => updateScheduleInfo("endDate", date)***REMOVED*** />
+          </AlertDialogDescription>
+
+          <FlexCenterWrapper>
             <input
               type="text"
               placeholder="일정을 입력하세요."
               className="w-[320px] border rounded-md p-3 my-2 text-[16px]"
               onChange=***REMOVED***(e) => updateScheduleInfo("content", e.target.value)***REMOVED***
             />
-            <FlexCenterWrapper>
-              <CategoryButton changeCategory=***REMOVED***(category) => updateScheduleInfo("type", category)***REMOVED*** />
-            </FlexCenterWrapper>
-          </div>
-        </DrawerHeader>
-        <DrawerFooter>
-          <Button onClick=***REMOVED***updateSchedule***REMOVED***>추가</Button>
-          <DrawerClose asChild>
-            <Button variant="outline">취소</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
-  );
-***REMOVED***;
+          </FlexCenterWrapper>
 
-export default DrawerBox;
+          <FlexCenterWrapper>
+            <CategoryButton changeCategory=***REMOVED***(category) => updateScheduleInfo("type", category)***REMOVED*** />
+          </FlexCenterWrapper>
+
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick=***REMOVED***onClose***REMOVED***>취소</AlertDialogCancel>
+          <AlertDialogAction onClick=***REMOVED***updateSchedule***REMOVED***>추가</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+***REMOVED***
