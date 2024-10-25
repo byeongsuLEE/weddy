@@ -1,10 +1,11 @@
 // import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import FooterButton from "@/components/BoardDetailPage/FooterButton";
 import BoardAsk from "../components/BoardDetailPage/BoardAsk";
 import BoardContent from "../components/BoardDetailPage/BoardContent";
 import BoardReview from "../components/BoardDetailPage/BoardReview";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
-// import ***REMOVED*** addProductToCart, detailProduct, getPhone, getReviewList ***REMOVED*** from "@/apis/productApi";
+// import ***REMOVED*** detailProduct, getPhone, getReviewList ***REMOVED*** from "@/apis/productApi";
 // import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 
 const BoardDetail = () => ***REMOVED***
@@ -16,6 +17,11 @@ const BoardDetail = () => ***REMOVED***
   //   () => detailProduct(productId),
   //   ***REMOVED***enabled: !!productId***REMOVED***
   // );
+
+  //== 장바구니 담기 ==//
+  const addToCart = async () => ***REMOVED***
+    // await addProductToCart(productId);
+  ***REMOVED***;
 
   // //== 리뷰 리스트 ==//
   // const ***REMOVED*** data: reviewList ***REMOVED*** = useQuery(
@@ -30,11 +36,6 @@ const BoardDetail = () => ***REMOVED***
   //   () => getPhone(productId),
   //   ***REMOVED***enabled: !!productId***REMOVED***
   // );
-
-  // //== 장바구니 추가 ==//
-  // const addCart = async () => ***REMOVED***
-  //   await addProductToCart(productId);
-  // ***REMOVED***;
 
   const dummyData = [
     '/dummy/test1.jpg',
@@ -74,6 +75,10 @@ const BoardDetail = () => ***REMOVED***
         <TabsContent value="ask">
           <BoardAsk phone=***REMOVED***phone***REMOVED***/>
         </TabsContent> */***REMOVED***
+
+        <div onClick=***REMOVED***addToCart***REMOVED***>
+          <FooterButton />
+        </div>
       </Tabs>
     </div>
   )
