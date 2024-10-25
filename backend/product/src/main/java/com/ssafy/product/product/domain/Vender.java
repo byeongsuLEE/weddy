@@ -1,5 +1,6 @@
 package com.ssafy.product.product.domain;
 
+import com.ssafy.product.product.dto.request.VenderRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,9 @@ public class Vender ***REMOVED***
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false, unique = true, length = 30)
     private String businessNumber;
