@@ -10,12 +10,11 @@ const Main = () => ***REMOVED***
     '/dummy/test1.jpg',
     '/dummy/test2.jpg',
   ];
+
   const dummyMain = [
     '/main/main1.png',
     '/main/main2.png',
     '/main/main3.png',
-
-   
   ];
 
   return (

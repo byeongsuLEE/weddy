@@ -16,6 +16,19 @@ export const allProduct = async (): Promise<Product[]> => ***REMOVED***
   return response.data;
 ***REMOVED***;
 
+//== 상품 랭킹 ==//
+export const getRankedProducts = async (): Promise<Product[]> => ***REMOVED***
+  const response = await axios(***REMOVED***
+    method: 'get',
+    url: `$***REMOVED***BASE_URL***REMOVED***/ranking`,
+    headers: ***REMOVED***
+      Authorization: `Bearer `
+    ***REMOVED***
+  ***REMOVED***);
+  console.log(response.data);
+  return response.data;
+***REMOVED***;
+
 //== 상품 상세 조회 ==//
 export const detailProduct = async (productId?: string): Promise<Product> => ***REMOVED***
   const response = await axios(***REMOVED***
