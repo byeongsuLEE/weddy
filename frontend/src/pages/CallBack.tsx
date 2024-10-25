@@ -12,7 +12,7 @@ const CallBack = () => ***REMOVED***
     ['getToken', userId],
     () => getToken(userId),
     ***REMOVED***
-      enabled: !userId,
+      enabled: !!userId,
       onSuccess: () => ***REMOVED***
         navigate('/');
       ***REMOVED***,
