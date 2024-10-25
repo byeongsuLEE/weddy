@@ -1,5 +1,5 @@
 import axios from "axios"
-import ***REMOVED*** Product, Review ***REMOVED*** from "./product.type";
+import ***REMOVED*** Product, ReviewData ***REMOVED*** from "./product.type";
 
 const BASE_URL = 'http://localhost:8080/api/products'
 
@@ -91,14 +91,15 @@ export const getReviewList = async (productId?: string): Promise<void> => ***REM
 ***REMOVED***;
 
 //== 리뷰 등록 ==//
-export const submitReview = async (productId: number, reviewData: Review): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
-    method: 'post',
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
-    headers: ***REMOVED***
-      Authorization: `Bearer `
-    ***REMOVED***,
-    data: reviewData
-  ***REMOVED***);
-  console.log(response.data);
+export const submitReview = async (reviewData: ReviewData, productId?: string): Promise<void> => ***REMOVED***
+  console.log(reviewData);
+  // const response = await axios(***REMOVED***
+  //   method: 'post',
+  //   url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
+  //   headers: ***REMOVED***
+  //     Authorization: `Bearer `
+  //   ***REMOVED***,
+  //   data: reviewData
+  // ***REMOVED***);
+  // console.log(response.data);
 ***REMOVED***;
