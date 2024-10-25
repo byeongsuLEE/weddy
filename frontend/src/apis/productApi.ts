@@ -3,7 +3,7 @@ import ***REMOVED*** Product, ReviewData ***REMOVED*** from "./product.type";
 
 const BASE_URL = 'http://localhost:8080/api/products'
 
-//== 상품 조회 ==//
+//== 모든 상품 조회 ==//
 export const allProduct = async (): Promise<Product[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
@@ -105,14 +105,13 @@ export const getReviewList = async (productId?: string): Promise<void> => ***REM
 
 //== 리뷰 등록 ==//
 export const submitReview = async (reviewData: ReviewData, productId?: string): Promise<void> => ***REMOVED***
-  console.log(reviewData);
-  // const response = await axios(***REMOVED***
-  //   method: 'post',
-  //   url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
-  //   headers: ***REMOVED***
-  //     Authorization: `Bearer `
-  //   ***REMOVED***,
-  //   data: reviewData
-  // ***REMOVED***);
-  // console.log(response.data);
+  const response = await axios(***REMOVED***
+    method: 'post',
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
+    headers: ***REMOVED***
+      Authorization: `Bearer `
+    ***REMOVED***,
+    data: reviewData
+  ***REMOVED***);
+  console.log(response.data);
 ***REMOVED***;
