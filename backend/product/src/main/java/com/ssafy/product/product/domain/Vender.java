@@ -2,10 +2,7 @@ package com.ssafy.product.product.domain;
 
 import com.ssafy.product.product.dto.request.VenderRequestDto;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
@@ -28,5 +25,14 @@ public class Vender ***REMOVED***
     @Column(nullable = false, length = 100)
     private String address;
 
-    private String image_url;
+    private String imageUrl;
+
+    @Builder
+    public Vender (VenderRequestDto venderRequestDto, String s3Url)***REMOVED***
+        this.name = venderRequestDto.name();
+        this.businessNumber = venderRequestDto.businessNumber();
+        this.phone = venderRequestDto.phone();
+        this.address = venderRequestDto.address();
+        this.imageUrl = s3Url;
+    ***REMOVED***
 ***REMOVED***
