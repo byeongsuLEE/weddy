@@ -15,7 +15,8 @@ const SDMList = (***REMOVED*** value ***REMOVED***: SDMListProps) => ***REMOVED*
   
   const toDetail = () => ***REMOVED***
     navigate("/board/detail");
-  ***REMOVED***
+  ***REMOVED***;
+  
   return (
       
     <div>

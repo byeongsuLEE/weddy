@@ -1,5 +1,5 @@
 // import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import SearchIcon from "@/icons/SearchIcon";
+import SearchIcon from "@/icons/searchIcon";
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
