@@ -1,4 +1,5 @@
 import BestIcon from "@/icons/BestIcon";
+
 interface BestBoxProps ***REMOVED***
   src: string;
   title: string;
@@ -7,6 +8,9 @@ interface BestBoxProps ***REMOVED***
 ***REMOVED***
 
 const BestBox = (***REMOVED***src, title, price, index***REMOVED***:BestBoxProps) => ***REMOVED***
+  // //== 베스트 ==//
+  // const ***REMOVED*** data: getRankedProductList ***REMOVED*** = useQuery('getRankedProducts', getRankedProducts);
+
   return(
     <div className="flex flex-col relative">
       <img className="w-[150px] h-[150px] rounded-md" src=***REMOVED***src***REMOVED*** alt="" />
