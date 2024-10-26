@@ -20,7 +20,7 @@ public class ScheduleOutputDto ***REMOVED***
     private LocalDate endDate;
     private String content;
     private Long contractId;
-
+    private String code;
 
     /**
      *
@@ -32,7 +32,7 @@ public class ScheduleOutputDto ***REMOVED***
      * @return
      */
 
-    public ScheduleOutputDto mapToDto(Schedule schedule) ***REMOVED***
+    public static ScheduleOutputDto mapToDto(Schedule schedule) ***REMOVED***
         return ScheduleOutputDto.builder()
                 .id(schedule.getId())
                 .contractType(schedule.getType())
@@ -40,6 +40,7 @@ public class ScheduleOutputDto ***REMOVED***
                 .endDate(schedule.getEndDate())
                 .content(schedule.getContent())
                 .contractId(schedule.getContract_id())
+                .code(schedule.getCode())
                 .build();
     ***REMOVED***
 

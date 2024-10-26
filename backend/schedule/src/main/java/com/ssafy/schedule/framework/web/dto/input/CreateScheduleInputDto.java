@@ -18,6 +18,8 @@ public class CreateScheduleInputDto ***REMOVED***
     private LocalDate endDate;
     private String content;
     private Long contractId;
+    private Long userId;
+    private String code;
 
     public ScheduleOutputDto mapToDto(Schedule schedule) ***REMOVED***
         return ScheduleOutputDto.builder()
@@ -27,6 +29,7 @@ public class CreateScheduleInputDto ***REMOVED***
                 .endDate(schedule.getEndDate())
                 .content(schedule.getContent())
                 .contractId(schedule.getContract_id())
+                .code(schedule.getCode())
                 .build();
     ***REMOVED***
 
