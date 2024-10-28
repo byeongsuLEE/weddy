@@ -14,11 +14,13 @@ import ***REMOVED*** useEffect, useState ***REMOVED*** from "react"
 interface DatePickProps ***REMOVED***
   title:string;
   changeDate: (newDate: Date) => void;
+  type: "start" | "center" | "end"; 
 ***REMOVED***;
 
-const DatePick = (***REMOVED***title, changeDate***REMOVED***:DatePickProps ) => ***REMOVED***
+const DatePick = (***REMOVED***title, changeDate,type***REMOVED***:DatePickProps ) => ***REMOVED***
   const [date, setDate] = useState<Date>();
   
+
   useEffect(() => ***REMOVED***
     if(date) ***REMOVED***
       changeDate(date);
@@ -40,7 +42,7 @@ const DatePick = (***REMOVED***title, changeDate***REMOVED***:DatePickProps ) =>
             ***REMOVED***date ? format(date, "yyyy-MM-dd") : <span>***REMOVED***title***REMOVED***</span>***REMOVED***
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto p-0" align=***REMOVED***type***REMOVED***>
           <Calendar
             mode="single"
             selected=***REMOVED***date***REMOVED***

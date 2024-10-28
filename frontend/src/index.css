@@ -119,6 +119,13 @@ footer ***REMOVED***
   padding-top: 50px; 
 ***REMOVED***
 
+.plusIconButton ***REMOVED***
+  position: fixed;
+  bottom: 5.5rem;  /* footer와 충분히 떨어지도록 */
+  right: calc(50% - 190px); /* 414px 화면 폭의 절반에서 아이콘 위치 조정 */
+   /* nav 및 footer 위에 위치 */
+***REMOVED***
+
 @layer base ***REMOVED***
   :root ***REMOVED***
     --background: 0 0% 100%;
