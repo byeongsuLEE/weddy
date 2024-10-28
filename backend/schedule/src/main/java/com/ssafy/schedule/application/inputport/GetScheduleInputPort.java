@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class GetScheduleInputPort implements GetScheduleUsecase ***REMOVED***
 

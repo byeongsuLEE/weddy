@@ -4,7 +4,6 @@ import com.ssafy.schedule.domain.model.ContractType;
 import com.ssafy.schedule.domain.model.Schedule;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Value;
 
 import java.time.LocalDate;
 
@@ -16,7 +15,7 @@ public class ScheduleOutputDto ***REMOVED***
 
     private Long id;
     private ContractType contractType;
-    private LocalDate starDate;
+    private LocalDate startDate;
     private LocalDate endDate;
     private String content;
     private Long contractId;
@@ -36,7 +35,7 @@ public class ScheduleOutputDto ***REMOVED***
         return ScheduleOutputDto.builder()
                 .id(schedule.getId())
                 .contractType(schedule.getType())
-                .starDate(schedule.getStartDate())
+                .startDate(schedule.getStartDate())
                 .endDate(schedule.getEndDate())
                 .content(schedule.getContent())
                 .contractId(schedule.getContract_id())

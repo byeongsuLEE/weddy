@@ -2,7 +2,6 @@ package com.ssafy.schedule.domain.model;
 
 
 import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
-import com.ssafy.schedule.framework.web.dto.input.ScheduleInputDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,7 +33,7 @@ public class Schedule ***REMOVED***
         //객체를 만들고 save까지 하는거같음 apator.save() 이런느낌
 
         Schedule schedule =   Schedule.builder()
-                .startDate(createScheduleInputDto.getStarDate())
+                .startDate(createScheduleInputDto.getStartDate())
                 .endDate(createScheduleInputDto.getEndDate())
                 .content(createScheduleInputDto.getContent())
                 .type(createScheduleInputDto.getContractType())
