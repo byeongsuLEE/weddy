@@ -10,23 +10,23 @@ interface ContractListBoxProps ***REMOVED***
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps) => ***REMOVED***
-  const [ category, setCategory ] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const navigate = useNavigate();
 
   const toDetail = () => ***REMOVED***
-    navigate('/board/detail');
+    navigate("/board/detail");
   ***REMOVED***;
 
   useEffect(() => ***REMOVED***
-    if (title === '스튜디오') ***REMOVED***
-      setCategory('studio');
-    ***REMOVED*** else if (title === '드레스') ***REMOVED***
-      setCategory('dress');
+    if (title === "스튜디오") ***REMOVED***
+      setCategory("studio");
+    ***REMOVED*** else if (title === "드레스") ***REMOVED***
+      setCategory("dress");
     ***REMOVED*** else ***REMOVED***
-      setCategory('makeup');
+      setCategory("makeup");
     ***REMOVED***
   ***REMOVED***, [title]);
-  
+
   return (
     <>
       <div className="w-auto h-[100px] bg-white rounded-3xl p-5 flex items-center justify-between my-10">
@@ -50,24 +50,20 @@ const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps
         </Link>
         ***REMOVED***/* <TodoButton title="결제하기" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
 
-        ***REMOVED***/* ***REMOVED***contractInfo.status === 'CONTRACT_PENDING' ? (
-        <TodoButton title="계약 요청" colorId=***REMOVED***1***REMOVED*** />
-        // <TodoButton title="계약 요청중" colorId=***REMOVED***2***REMOVED*** />
-        ) : (
-          contractInfo.status === 'CONTRACT_COMPLETED' ? (
-            <Link to='/contract'>
+        ***REMOVED***/* ***REMOVED***contractInfo.status === "CONTRACT_PENDING" ? (
+          <TodoButton title="계약 요청" colorId=***REMOVED***1***REMOVED*** />
+        ) : // <TodoButton title="계약 요청중" colorId=***REMOVED***2***REMOVED*** />
+        contractInfo.status === "CONTRACT_COMPLETED" ? (
+          <Link to=***REMOVED***`/contract/$***REMOVED***category***REMOVED***`***REMOVED***>
             <TodoButton title="서명하기" colorId=***REMOVED***1***REMOVED*** />
-            </Link>
-            ) : (
-              contractInfo.status === 'SIGN_COMPLETED' ? (
-                <TodoButton title="결제하기" colorId=***REMOVED***1***REMOVED*** />
-                ) : (
-                  <TodoButton title="결제완료" colorId=***REMOVED***1***REMOVED*** />
-                  )
-                  )
-                  )***REMOVED*** */***REMOVED***
+          </Link>
+        ) : contractInfo.status === "SIGN_COMPLETED" ? (
+          <TodoButton title="결제하기" colorId=***REMOVED***1***REMOVED*** />
+        ) : (
+          <TodoButton title="결제완료" colorId=***REMOVED***1***REMOVED*** />
+        )***REMOVED*** */***REMOVED***
       </div>
     </>
-  )
-***REMOVED***
-export default ContractListBox
+  );
+***REMOVED***;
+export default ContractListBox;
