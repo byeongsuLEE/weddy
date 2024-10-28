@@ -33,6 +33,7 @@ const Contract = () => ***REMOVED***
       signature(sign)
     ]);
   ***REMOVED***;
+  
   const type = ***REMOVED***
     studio: "촬영",
     dress: "드레스",

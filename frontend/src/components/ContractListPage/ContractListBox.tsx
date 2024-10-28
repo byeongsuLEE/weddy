@@ -1,7 +1,6 @@
 import ***REMOVED*** Link, useNavigate ***REMOVED*** from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 // import ***REMOVED*** ContractData ***REMOVED*** from "@/apis/contract.type";
 
 interface ContractListBoxProps ***REMOVED***
@@ -10,22 +9,17 @@ interface ContractListBoxProps ***REMOVED***
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps) => ***REMOVED***
-  const [category, setCategory] = useState<string>("");
   const navigate = useNavigate();
 
   const toDetail = () => ***REMOVED***
     navigate("/board/detail");
   ***REMOVED***;
 
-  useEffect(() => ***REMOVED***
-    if (title === "스튜디오") ***REMOVED***
-      setCategory("studio");
-    ***REMOVED*** else if (title === "드레스") ***REMOVED***
-      setCategory("dress");
-    ***REMOVED*** else ***REMOVED***
-      setCategory("makeup");
-    ***REMOVED***
-  ***REMOVED***, [title]);
+  const category = ***REMOVED***
+    스튜디오: "studio",
+    드레스: "dress",
+    메이크업: "makeup"
+  ***REMOVED***[title as "스튜디오" | "드레스" | "메이크업"];
 
   return (
     <>
