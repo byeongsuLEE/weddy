@@ -1,11 +1,11 @@
 import ***REMOVED*** useRef ***REMOVED*** from "react";
+import ***REMOVED*** useParams, useLocation ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** signature ***REMOVED*** from "../apis/contractApi";
 import TodoButton from "../common/TodoButton";
+import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
 import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
 import ***REMOVED*** makeSignature ***REMOVED*** from "../hooks/signature";
 import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
-import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
-import ***REMOVED*** signature ***REMOVED*** from "../apis/contractApi";
-import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 // import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Contract = () => ***REMOVED***
@@ -24,7 +24,7 @@ const Contract = () => ***REMOVED***
   const handleSignature = async () => ***REMOVED***
     const contractImage = await makeImage(pageRef);
 
-    const [ sign, hash ] = await Promise.all([
+    const [sign, hash] = await Promise.all([
       makeSignature(),
       uploadToPinata(contractImage, category)
     ]);
@@ -34,6 +34,8 @@ const Contract = () => ***REMOVED***
       signature(sign)
     ]);
   ***REMOVED***;
+  const location = useLocation();
+  const type = location.state?.type;
 
   return (
     <div>
@@ -43,36 +45,41 @@ const Contract = () => ***REMOVED***
         </div>
         <div className="flex flex-col">
           <br />
-          <span className="font-bold text-sm">상품명 :
-            <input name="projectName"  className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
-          </span>
-          <span className="font-bold text-sm">계약기간 :
-            <input name="period"  className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
-          </span>
+          <div className="flex font-bold">
+            <div>상품명 :</div>
+            <div className="ml-2">상품명</div>
+          </div>
+          <div className="flex font-bold">
+            <div>예식 :</div>
+            <div className="ml-2">2024.11.11</div>
+          </div>
+          <div className="flex font-bold">
+            <div>***REMOVED***type***REMOVED*** :</div>
+            <div className="ml-2">2024.11.01</div>
+          </div>
           <br />
           <span className="text-sm">
-            <input name="clientName" placeholder="소비자"  className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
+            <input disabled name="clientName" placeholder="고객" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
             (이하 “갑” 아리 한다.)와
-            <input name="candidateName" placeholder="업체" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
+            <input disabled name="candidateName" placeholder="업체" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
             (이하 “을” 이라 한다.)는 상품명에 명시된 업무작업을 수행하기 위해 다음과 같이 계약을 체결한다.</span>
           <br />
           <span className="font-bold text-sm">제 1조[목적]</span>
           <span className="text-sm">본 계약을 “갑”이 “을”에게 의뢰한 업무를 “갑”에게 공급함에 있어 “갑”과 “을" 사이에 필요한 사항을 정하는 것을 목적으로 한다.</span>
           <br />
           <span className="font-bold text-sm">제 2조 [계약기간]</span>
-          <span className="text-sm">계약 기간은
-            <input name="startDate" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />부터
-            <input name="endDate"  className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
-            까지로 하며, 갑과 을의 합의 하에 본 계약기간은 연장 될 수 있다.</span>
+          <span className="text-sm">계약 일시는
+            <input disabled name="endDate" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
+            로 하며, 갑과 을의 합의 하에 본 계약일시는 변경 될 수 있다.</span>
           <br />
           <span className="font-bold text-sm">제 3조 [계약금액]</span>
           <span className="text-sm">총 계약금액은
-            <input name="deposit"  className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
+            <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
             만원으로 하며, 계약금액 중
-            <input name="startPayment" placeholder="0"  className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
+            <input disabled name="startPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
             만원은 착수시점에 지급하고,
             잔금
-            <input name="finalPayment" placeholder="0"  className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
+            <input disabled name="finalPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" />
             만원은 작업 완료 시 작업완료납품과 동시에 “갑”은 “을”에게 지급하기로 한다.</span>
           <br />
           <span className="font-bold text-sm">제 4조 [납품]</span>
@@ -101,10 +108,10 @@ const Contract = () => ***REMOVED***
             계약일자 : ***REMOVED***new Date().getFullYear()***REMOVED***년 ***REMOVED***new Date().getMonth() + 1***REMOVED***월 ***REMOVED***new Date().getDate()***REMOVED***일
           </span>
         </div>
-    </div>
-    <div className="flex justify-end mt-3 mb-24 mr-5" onClick=***REMOVED***handleSignature***REMOVED***>
-    <TodoButton title="전자 서명" colorId=***REMOVED***1***REMOVED*** />
-    </div>
+      </div>
+      <div className="flex justify-end mt-3 mb-24 mr-5" onClick=***REMOVED***handleSignature***REMOVED***>
+        <TodoButton title="전자 서명" colorId=***REMOVED***1***REMOVED*** />
+      </div>
     </div>
   )
 ***REMOVED***

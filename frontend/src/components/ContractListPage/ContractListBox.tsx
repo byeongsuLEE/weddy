@@ -4,7 +4,7 @@ import GotoIcon from "../../icons/Goto";
 // import ***REMOVED*** ContractData ***REMOVED*** from "@/apis/contract.type";
 
 interface ContractListBoxProps ***REMOVED***
-  title: string;
+  title: "스튜디오" | "드레스" | "메이크업";
   // contractInfo: ContractData;
 ***REMOVED***
 
@@ -14,6 +14,12 @@ const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps
   const toDetail = () => ***REMOVED***
     navigate('/board/detail');
   ***REMOVED***;
+
+  const contractType = ***REMOVED***
+    스튜디오: "촬영",
+    드레스: "드레스",
+    메이크업: "메이크업",
+  ***REMOVED***[title];
 
   return (
     <>
@@ -33,7 +39,8 @@ const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps
         </Link> */***REMOVED***
         ***REMOVED***/* <TodoButton title="계약 요청" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
         ***REMOVED***/* <TodoButton title="계약 요청중" colorId=***REMOVED***2***REMOVED*** /> */***REMOVED***
-        <Link to='/contract'>
+        <Link to="/contract"
+          state=***REMOVED******REMOVED*** type: contractType ***REMOVED******REMOVED***>
           <TodoButton title="서명하기" colorId=***REMOVED***1***REMOVED*** />
         </Link>
         ***REMOVED***/* <TodoButton title="결제하기" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
