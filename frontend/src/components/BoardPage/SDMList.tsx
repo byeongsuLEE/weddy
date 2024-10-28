@@ -11,6 +11,7 @@ interface SDMListProps ***REMOVED***
 ***REMOVED***
 
 const SDMList = (***REMOVED*** value ***REMOVED***: SDMListProps) => ***REMOVED***
+  // const [ searchTerm, setSearchTerm ] = useState<string>();
   // const [filteredList, setFilteredList] = useState<Product[]>([]);
 
   // dummy data
@@ -20,6 +21,7 @@ const SDMList = (***REMOVED*** value ***REMOVED***: SDMListProps) => ***REMOVED*
     console.log(searchTerm);
     // const data = productList.filter((product: Product) => product.vendorName === searchTerm);
     // setFilteredList(data);
+    // setSearchTerm(searchTerm);
   ***REMOVED***;
 
   return (
@@ -44,18 +46,23 @@ const SDMList = (***REMOVED*** value ***REMOVED***: SDMListProps) => ***REMOVED*
       >
         <Search search=***REMOVED***search***REMOVED*** />
 
-        ***REMOVED***filteredList.length > 0
-          ? filteredList.map((product: Product) => (
+        ***REMOVED***searchTerm ? (
+          filteredList.length > 0 ? (
+            filteredList.map((product: Product) => (
               <Link to=***REMOVED***`board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
                 <SDM src=***REMOVED***"./dummy/test1.jpg"***REMOVED*** name="업체명" price=***REMOVED***1000000***REMOVED*** />
               </Link>
             ))
-          : productList.map((product: Product) => (
-              <Link to=***REMOVED***`board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
-                <SDM src=***REMOVED***"./dummy/test1.jpg"***REMOVED*** name="업체명" price=***REMOVED***1000000***REMOVED*** />
-              </Link>
-            ))***REMOVED***
-
+          ) : (
+            <p>해당 상품이 없습니다.</p>
+          )
+        ) : (
+          productList.map((product: Product) => (
+            <Link to=***REMOVED***`board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
+              <SDM src=***REMOVED***"./dummy/test1.jpg"***REMOVED*** name="업체명" price=***REMOVED***1000000***REMOVED*** />
+            </Link>
+          ))
+        )***REMOVED***
       </TabsContent> */***REMOVED***
     </div>
   );

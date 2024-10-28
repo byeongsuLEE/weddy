@@ -3,6 +3,7 @@ import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
 // import ***REMOVED*** allProduct ***REMOVED*** from "@/apis/productApi";
+// import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
 
 const Board = () => ***REMOVED***
   // const ***REMOVED*** data: productList ***REMOVED*** = useQuery('allProduct', allProduct);
@@ -90,15 +91,15 @@ const Board = () => ***REMOVED***
         ***REMOVED***/* api 연결 */***REMOVED***
 
         ***REMOVED***/* <TabsContent value="studio">
-          <SDMList value="studio" products=***REMOVED***studioProducts ?? []***REMOVED***/>
+          <SDMList value="studio" productList=***REMOVED***studioProducts ?? []***REMOVED***/>
         </TabsContent>
 
         <TabsContent value="dress">
-          <SDMList value="dress" products=***REMOVED***dressProducts ?? []***REMOVED***/>
+          <SDMList value="dress" productList=***REMOVED***dressProducts ?? []***REMOVED***/>
         </TabsContent>
 
         <TabsContent value="makeup">
-          <SDMList value="makeup" products=***REMOVED***makeupProducts ?? []***REMOVED***/>
+          <SDMList value="makeup" productList=***REMOVED***makeupProducts ?? []***REMOVED***/>
         </TabsContent> */***REMOVED***
 
       </Tabs>
