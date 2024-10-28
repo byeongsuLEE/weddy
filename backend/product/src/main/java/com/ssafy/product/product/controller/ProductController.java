@@ -1,7 +1,9 @@
 package com.ssafy.product.product.controller;
 
 import com.ssafy.product.product.dto.request.ProductRegistRequestDto;
+import com.ssafy.product.product.dto.request.ReviewRequestDto;
 import com.ssafy.product.product.dto.response.ProductResponseDto;
+import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,20 @@ public class ProductController ***REMOVED***
     public ResponseEntity<ProductResponseDto> registProduct(@RequestPart ProductRegistRequestDto registRequestDto, @RequestPart List<MultipartFile> images)***REMOVED***
         return ResponseEntity.status(HttpStatus.OK)
                 .body(productService.registProduct(registRequestDto, images));
+    ***REMOVED***
+
+    @GetMapping("/***REMOVED***product_id***REMOVED***/review")
+    public ResponseEntity<List<ReviewResponseDto>> getReviewByProductId(@PathVariable("product_id") Long productId) ***REMOVED***
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(productService.reviewList(productId));
+
+    ***REMOVED***
+
+    @PostMapping("/***REMOVED***product_id***REMOVED***/review")
+    public ResponseEntity<ReviewResponseDto> registReviewByProductId(@RequestBody ReviewRequestDto reviewRequestDto, @PathVariable("product_id") Long productId) ***REMOVED***
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(productService.registerReview(reviewRequestDto,productId));
+
     ***REMOVED***
 
 ***REMOVED***
