@@ -1,5 +1,5 @@
 import axios from "axios";
-import ***REMOVED*** Schedule ***REMOVED*** from "./schedule.type";
+import ***REMOVED*** GetSchedule, Schedule ***REMOVED*** from "./schedule.type";
 
 const BASE_URL = "http://localhost:8080/api/schedules";
 
@@ -17,7 +17,7 @@ export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REM
 ***REMOVED***;
 
 //== 일정 조회 ==//
-export const getSchedule = async (): Promise<void> => ***REMOVED***
+export const getSchedule = async (): Promise<GetSchedule[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
     url: BASE_URL,
@@ -26,4 +26,5 @@ export const getSchedule = async (): Promise<void> => ***REMOVED***
     ***REMOVED***,
   ***REMOVED***);
   console.log(response.data);
+  return response.data;
 ***REMOVED***;
