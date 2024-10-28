@@ -1,14 +1,15 @@
 export interface Product ***REMOVED***
-  productId: number;
+  id: string;
   type: string;
   name: string;
   price: string;
   address: string;
   vendorName: string;
-***REMOVED***;
+  vendorId: string;
+***REMOVED***
 
 export interface ReviewData ***REMOVED***
   content: string;
   date: string;
   score: number;
-***REMOVED***;
+***REMOVED***

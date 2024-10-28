@@ -13,6 +13,6 @@ const ContractList = () => ***REMOVED***
       <ContractListBox title="드레스" />
       <ContractListBox title="메이크업" />
     </div>
-  )
-***REMOVED***
+  );
+***REMOVED***;
 export default ContractList;
