@@ -2,8 +2,8 @@
 import Separate from "../../common/Separate";
 
 // interface BoardContentProp ***REMOVED***
-//   boardDetail: Product | undefined
-// ***REMOVED***;
+//   product: Product | undefined;
+// ***REMOVED***
 
 const BoardContent = () => ***REMOVED***
   return (
@@ -19,10 +19,24 @@ const BoardContent = () => ***REMOVED***
         <span className="font-bold text-lg">상품 기본 정보</span>
         <span className="font-bold">상품구성</span>
         <span className="font-bold">방문상담 소요시간</span>
-
       </div>
     </div>
-  )
-***REMOVED***
+
+    // <div className="mx-5 mb-24">
+    //   <div className="flex flex-col my-5">
+    //     <span className="text-gray-500 text-sm">***REMOVED***product?.name***REMOVED***</span>
+    //     <span>***REMOVED***product?.address***REMOVED***</span>
+    //     <span className="font-bold mt-2">[ 촬영 + 본식 ] 드레스 4벌</span>
+    //     <span className="font-bold text-xl mt-2">***REMOVED***product?.price***REMOVED*** 원</span>
+    //   </div>
+    //   <Separate />
+    //   <div className="flex flex-col mt-5">
+    //     <span className="font-bold text-lg">상품 기본 정보</span>
+    //     <span className="font-bold">상품구성</span>
+    //     <span className="font-bold">방문상담 소요시간</span>
+    //   </div>
+    // </div>
+  );
+***REMOVED***;
 
 export default BoardContent;
