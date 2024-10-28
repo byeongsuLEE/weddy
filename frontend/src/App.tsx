@@ -36,7 +36,7 @@ function AppContent() ***REMOVED***
         <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
         <Route path="/planner/list" element=***REMOVED***<PlannerList />***REMOVED*** />
         <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
-        <Route path="/contract" element=***REMOVED***<Contract />***REMOVED*** />
+        <Route path="/contract/:category" element=***REMOVED***<Contract />***REMOVED*** />
         <Route path="/contract/list" element=***REMOVED***<ContractList />***REMOVED*** />
         <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
         <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />

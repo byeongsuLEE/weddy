@@ -1,17 +1,17 @@
-import axios from "axios"
+import axios from "axios";
 import ***REMOVED*** Schedule ***REMOVED*** from "./schedule.type";
 
-const BASE_URL = 'http://localhost:8080/api/schedules';
+const BASE_URL = "http://localhost:8080/api/schedules";
 
 //== 일정 등록 ==//
 export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
-    method: 'post',
+    method: "post",
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: `Bearer `,
     ***REMOVED***,
-    data: scheduleData
+    data: scheduleData,
   ***REMOVED***);
   console.log(response.data);
 ***REMOVED***;
@@ -19,11 +19,11 @@ export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REM
 //== 일정 조회 ==//
 export const getSchedule = async (): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
-    method: 'get',
+    method: "get",
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer `
-    ***REMOVED***
+      Authorization: `Bearer `,
+    ***REMOVED***,
   ***REMOVED***);
   console.log(response.data);
 ***REMOVED***;
