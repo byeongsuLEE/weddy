@@ -1,6 +1,7 @@
 import ***REMOVED*** Link, useNavigate ***REMOVED*** from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 // import ***REMOVED*** ContractData ***REMOVED*** from "@/apis/contract.type";
 
 interface ContractListBoxProps ***REMOVED***
@@ -9,12 +10,23 @@ interface ContractListBoxProps ***REMOVED***
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+  const [ category, setCategory ] = useState<string>("");
   const navigate = useNavigate();
 
   const toDetail = () => ***REMOVED***
     navigate('/board/detail');
   ***REMOVED***;
 
+  useEffect(() => ***REMOVED***
+    if (title === '스튜디오') ***REMOVED***
+      setCategory('studio');
+    ***REMOVED*** else if (title === '드레스') ***REMOVED***
+      setCategory('dress');
+    ***REMOVED*** else ***REMOVED***
+      setCategory('makeup');
+    ***REMOVED***
+  ***REMOVED***, [title]);
+  
   return (
     <>
       <div className="w-auto h-[100px] bg-white rounded-3xl p-5 flex items-center justify-between my-10">
@@ -33,7 +45,7 @@ const ContractListBox = (***REMOVED*** title ***REMOVED***: ContractListBoxProps
         </Link> */***REMOVED***
         ***REMOVED***/* <TodoButton title="계약 요청" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
         ***REMOVED***/* <TodoButton title="계약 요청중" colorId=***REMOVED***2***REMOVED*** /> */***REMOVED***
-        <Link to='/contract'>
+        <Link to=***REMOVED***`/contract/$***REMOVED***category***REMOVED***`***REMOVED***>
           <TodoButton title="서명하기" colorId=***REMOVED***1***REMOVED*** />
         </Link>
         ***REMOVED***/* <TodoButton title="결제하기" colorId=***REMOVED***1***REMOVED*** /> */***REMOVED***
