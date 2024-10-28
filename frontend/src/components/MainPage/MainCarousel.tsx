@@ -14,11 +14,11 @@ interface MainCarouselProps ***REMOVED***
 ***REMOVED***
 
 
-export const MainCarousel = (***REMOVED***dummyData***REMOVED***:MainCarouselProps) => ***REMOVED***
+export const MainCarousel = (***REMOVED*** dummyData ***REMOVED***: MainCarouselProps) => ***REMOVED***
   const plugin = React.useRef(
     Autoplay(***REMOVED*** delay: 2000, stopOnInteraction: true ***REMOVED***)
   )
- 
+
   return (
     <>
       <Carousel
@@ -31,13 +31,13 @@ export const MainCarousel = (***REMOVED***dummyData***REMOVED***:MainCarouselPro
           ***REMOVED***/* 이미지 리스트 넣기 */***REMOVED***
           ***REMOVED***dummyData.map((imgdata, index) => (
             <CarouselItem key=***REMOVED***index***REMOVED***>
-                <Card>
-                  <CardContent>
-                  <a href=***REMOVED***index === 0 ? '/board' : index === 1 ? '/schedule' : '/contractlist'***REMOVED***>
-                      <img className="w-full h-full object-cover" src=***REMOVED***imgdata***REMOVED*** alt="제품 상세 이미지" />
+              <Card>
+                <CardContent>
+                  <a href=***REMOVED***index === 0 ? '/board' : index === 1 ? '/schedule' : '/contract/list'***REMOVED***>
+                    <img className="w-full h-full object-cover" src=***REMOVED***imgdata***REMOVED*** alt="제품 상세 이미지" />
                   </a>
-                  </CardContent>
-                </Card>
+                </CardContent>
+              </Card>
             </CarouselItem>
           ))***REMOVED***
         </CarouselContent>
