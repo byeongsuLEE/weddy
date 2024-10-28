@@ -47,8 +47,8 @@ export function AlertDialogDemo(***REMOVED*** isOpen, onClose ***REMOVED***: Ale
   const updateSchedule = async () => ***REMOVED***
     schedule(scheduleInfo);
     onClose();
-    console.log(scheduleInfo);
   ***REMOVED***;
+  
   return (
     <AlertDialog open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***onClose***REMOVED***>
       <AlertDialogTrigger asChild>
