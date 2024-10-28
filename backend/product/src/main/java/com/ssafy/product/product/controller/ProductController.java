@@ -50,4 +50,10 @@ public class ProductController ***REMOVED***
 
     ***REMOVED***
 
+    @GetMapping("/ranking")
+    public ResponseEntity<List<ProductResponseDto>> getRankingProducts() ***REMOVED***
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(productService.rankingList());
+    ***REMOVED***
+
 ***REMOVED***

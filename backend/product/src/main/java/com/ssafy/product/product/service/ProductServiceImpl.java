@@ -1,5 +1,6 @@
 package com.ssafy.product.product.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.product.config.s3.S3Uploader;
 import com.ssafy.product.product.domain.Product;
 import com.ssafy.product.product.domain.ProductImage;
@@ -11,6 +12,7 @@ import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.repository.ProductImageRepository;
 import com.ssafy.product.product.repository.ProductRepository;
 import com.ssafy.product.product.repository.ReviewRepository;
+import com.ssafy.product.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     private final ProductImageRepository productImageRepository;
     private final S3Uploader s3Uploader;
     private final ReviewRepository reviewRepository;
+    private final RedisUtil redisUtil;
 
     @Override
     public List<ProductResponseDto> getList() ***REMOVED***
@@ -36,9 +39,12 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     @Override
     public ProductResponseDto detailProduct(final Long productId) ***REMOVED***
-        return productRepository.findById(productId)
-                .map(product -> product.getProduct(product))
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+        Product product = productIsPresent(productId);
+
+        ProductResponseDto productResponse = product.getProduct(product);
+        redisUtil.addToSortedSet(productResponse);
+
+        return productResponse;
     ***REMOVED***
 
     @Override
@@ -72,6 +78,15 @@ public class ProductServiceImpl implements ProductService***REMOVED***
         Review review = reviewRepository.save(Review.builder().reviewRequestDto(reviewRequestDto).product(product).build());
 
         return review.getReview(review,product);
+    ***REMOVED***
+
+    @Override
+    public List<ProductResponseDto> rankingList() ***REMOVED***
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        return redisUtil.getTopRanked().stream()
+                .map(obj -> objectMapper.convertValue(obj, ProductResponseDto.class))
+                .toList();
     ***REMOVED***
 
     private Product productIsPresent(final Long productId) ***REMOVED***
