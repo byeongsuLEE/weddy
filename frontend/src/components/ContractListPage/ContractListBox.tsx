@@ -5,7 +5,7 @@ import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 // import ***REMOVED*** ContractData ***REMOVED*** from "@/apis/contract.type";
 
 interface ContractListBoxProps ***REMOVED***
-  title: string;
+  title: "스튜디오" | "드레스" | "메이크업";
   // contractInfo: ContractData;
 ***REMOVED***
 
