@@ -1,12 +1,35 @@
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** useState ***REMOVED*** from "react";
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
-// import ***REMOVED*** allProduct ***REMOVED*** from "@/apis/productApi";
+// import ***REMOVED*** allProducts ***REMOVED*** from "@/apis/productApi";
 // import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
+// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Board = () => ***REMOVED***
-  // const ***REMOVED*** data: productList ***REMOVED*** = useQuery('allProduct', allProduct);
+  const [ selectedRegion, setSelectedRegion ] = useState<string>("");
+  const [ selectedPrice, setSelectedPrice ] = useState<string>("");
+  // const [ studioList, setStudioList ] = useState<Product[]>([]);
+  // const [ dressList, setDressList ] = useState<Product[]>([]);
+  // const [ makeupList, setMakeupList ] = useState<Product[]>([]);
+
+  // const ***REMOVED*** data: productList ***REMOVED*** = useQuery(
+  //   ['allProducts', selectedRegion, selectedPrice],
+  //   () => allProducts(selectedPrice, selectedRegion),
+  //   ***REMOVED***
+  //     enabled: !!selectedPrice && !!selectedRegion,
+  //   ***REMOVED***
+  // );
+
+  const handleregionSelect = (value: string) => ***REMOVED***
+    setSelectedRegion(value);
+    console.log(selectedRegion);
+  ***REMOVED***;
+
+  const handlePriceSelect = (value: string) => ***REMOVED***
+    setSelectedPrice(value);
+    console.log(selectedPrice);
+  ***REMOVED***;
 
   //dummy data
   const regions = [
@@ -54,11 +77,14 @@ const Board = () => ***REMOVED***
       label: "15,000,000",
     ***REMOVED***,
   ];
-
-  // // == 스드메 필터링 ==//
-  // const studioProducts = productList?.filter((product: Product) => product.type === 'studio');
-  // const dressProducts = productList?.filter((product: Product) => product.type === 'dress');
-  // const makeupProducts = productList?.filter((product: Product) => product.type === 'makeup');
+  
+  // useEffect(() => ***REMOVED***
+  //   if (productList) ***REMOVED***
+  //     setStudioList(productList?.filter((product: Product) => product.type === 'studio'));
+  //     setDressList(productList?.filter((product: Product) => product.type === 'dress'));
+  //     setMakeupList(productList?.filter((product: Product) => product.type === 'makeup'));
+  //   ***REMOVED***
+  // ***REMOVED***, [productList]);
 
   return (
     <div className="mb-20 mt-5">
@@ -70,8 +96,8 @@ const Board = () => ***REMOVED***
         </TabsList>
 
         <div className="flex text-gray-600 justify-center gap-4 mt-5">
-          <ComboboxDemo lists=***REMOVED***regions***REMOVED*** title="지역" />
-          <ComboboxDemo lists=***REMOVED***prices***REMOVED*** title="가격" />
+          <ComboboxDemo lists=***REMOVED***regions***REMOVED*** title="지역" onSelect=***REMOVED***handleregionSelect***REMOVED***/>
+          <ComboboxDemo lists=***REMOVED***prices***REMOVED*** title="가격" onSelect=***REMOVED***handlePriceSelect***REMOVED***/>
         </div>
 
         ***REMOVED***/* 각 탭에 대응하는 콘텐츠를 렌더링 */***REMOVED***
@@ -91,15 +117,15 @@ const Board = () => ***REMOVED***
         ***REMOVED***/* api 연결 */***REMOVED***
 
         ***REMOVED***/* <TabsContent value="studio">
-          <SDMList value="studio" productList=***REMOVED***studioProducts ?? []***REMOVED***/>
+          <SDMList value="studio" productList=***REMOVED***studioList ?? []***REMOVED***/>
         </TabsContent>
 
         <TabsContent value="dress">
-          <SDMList value="dress" productList=***REMOVED***dressProducts ?? []***REMOVED***/>
+          <SDMList value="dress" productList=***REMOVED***dressList ?? []***REMOVED***/>
         </TabsContent>
 
         <TabsContent value="makeup">
-          <SDMList value="makeup" productList=***REMOVED***makeupProducts ?? []***REMOVED***/>
+          <SDMList value="makeup" productList=***REMOVED***makeupList ?? []***REMOVED***/>
         </TabsContent> */***REMOVED***
 
       </Tabs>
