@@ -4,33 +4,15 @@ import ***REMOVED*** Product, ReviewData ***REMOVED*** from "./product.type";
 const BASE_URL = 'http://localhost:8080/api/products'
 
 //== 모든 상품 조회 ==//
-// export const allProduct = async (): Promise<Product[]> => ***REMOVED***
-//   const response = await axios(***REMOVED***
-//     method: 'get',
-//     url: BASE_URL,
-//     headers: ***REMOVED***
-//       Authorization: `Bearer `
-//     ***REMOVED***
-//   ***REMOVED***);
-//   console.log(response.data);
-//   return response.data;
-// ***REMOVED***;
-
-//== 상품 필터링 ==//
-export const allProducts = async (money:  string, location: string): Promise<Product[]> => ***REMOVED***
+export const allProducts = async (): Promise<Product[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
       Authorization: `Bearer `
-    ***REMOVED***,
-    params: ***REMOVED***
-      money: money,
-      location: location
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
-
   return response.data;
 ***REMOVED***;
 
