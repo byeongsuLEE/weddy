@@ -45,6 +45,9 @@ dependencies ***REMOVED***
 
 	//redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 ***REMOVED***
 
 dependencyManagement ***REMOVED***
