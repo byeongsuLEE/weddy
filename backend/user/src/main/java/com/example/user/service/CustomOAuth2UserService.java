@@ -28,18 +28,21 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
         ***REMOVED***
 
         System.out.println(oAuth2User);
-        System.out.println("로깅전후");
         System.out.println("Client Registration: " + userRequest.getClientRegistration());
         System.out.println("Access Token: " + userRequest.getAccessToken().getTokenValue());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response = null;
-        if (registrationId == "naver") ***REMOVED***
+        System.out.println(registrationId);
+        if (registrationId.equals("naver")) ***REMOVED***
+            System.out.println("네이버입니다");
             oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
-        ***REMOVED*** else if (registrationId == "google") ***REMOVED***
+            System.out.println("네이버입니다");
+        ***REMOVED*** else if (registrationId.equals("google")) ***REMOVED***
+            System.out.println("구글입니다");
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
+            System.out.println("구글입니다");
         ***REMOVED*** else return null;
-        System.out.println("로깅전후2");
         String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
         UserEntity existData = userRepository.findByUsername(username);
 

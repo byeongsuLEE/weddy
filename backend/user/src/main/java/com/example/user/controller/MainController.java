@@ -17,7 +17,7 @@ public class MainController ***REMOVED***
     public String login()***REMOVED***
         return "login";
     ***REMOVED***
-    @GetMapping("/auth")
+    @GetMapping("/api/auth")
     public String auth()***REMOVED***
         return "auth";
     ***REMOVED***
