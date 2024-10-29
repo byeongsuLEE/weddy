@@ -17,13 +17,16 @@ export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REM
 ***REMOVED***;
 
 //== 일정 조회 ==//
-export const getSchedule = async (): Promise<GetSchedule[]> => ***REMOVED***
+export const getSchedule = async (selectedDate: string): Promise<GetSchedule[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
     url: BASE_URL,
     headers: ***REMOVED***
       Authorization: `Bearer `,
     ***REMOVED***,
+    params: ***REMOVED***
+      date: selectedDate
+    ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
   return response.data;

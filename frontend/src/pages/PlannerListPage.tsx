@@ -14,6 +14,7 @@ const PlannerList = () => ***REMOVED***
   ***REMOVED***[category];
 
   const navigate = useNavigate();
+
   const goPlanner =()=>***REMOVED***
     navigate('/planner')
   ***REMOVED***
