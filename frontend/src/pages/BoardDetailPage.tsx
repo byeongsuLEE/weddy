@@ -30,13 +30,6 @@ const BoardDetail = () => ***REMOVED***
   //   ***REMOVED***enabled: !!productId***REMOVED***
   // );
 
-  // //== 문의 하기 ==//
-  // const ***REMOVED*** data: phone ***REMOVED*** = useQuery(
-  //   ['getPhone', productId],
-  //   () => getPhone(productId),
-  //   ***REMOVED***enabled: !!productId***REMOVED***
-  // );
-
   const dummyData = [
     '/dummy/test1.jpg',
     '/dummy/test2.jpg',
@@ -73,7 +66,7 @@ const BoardDetail = () => ***REMOVED***
           <BoardReview reviewList=***REMOVED***reviewList ?? []***REMOVED***/>
         </TabsContent>
         <TabsContent value="ask">
-          <BoardAsk phone=***REMOVED***phone***REMOVED***/>
+          <BoardAsk />
         </TabsContent> */***REMOVED***
 
         <div onClick=***REMOVED***addToCart***REMOVED***>
