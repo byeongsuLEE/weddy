@@ -1,7 +1,7 @@
-import ***REMOVED*** TabsContent ***REMOVED*** from "@radix-ui/react-tabs";
-import SDM from "./SDM";
-import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 import Search from "@/common/Search";
+import ***REMOVED*** TabsContent ***REMOVED*** from "@radix-ui/react-tabs";
+import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
+import SDMBox from "./SDMbox";
 // import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
 // import ***REMOVED*** useState ***REMOVED*** from "react";
 
@@ -33,7 +33,7 @@ const SDMList = (***REMOVED*** value ***REMOVED***: SDMListProps) => ***REMOVED*
         <Search search=***REMOVED***search***REMOVED*** />
         ***REMOVED***sdmItems.map((_, index) => (
           <Link to=***REMOVED***"/board/detail"***REMOVED*** key=***REMOVED***index***REMOVED***>
-            <SDM src=***REMOVED***"./dummy/test1.jpg"***REMOVED*** name="업체명" price=***REMOVED***1000000***REMOVED*** />
+            <SDMBox src=***REMOVED***"./dummy/test1.jpg"***REMOVED*** name="업체명" price=***REMOVED***1000000***REMOVED*** />
           </Link>
         ))***REMOVED***
       </TabsContent>

@@ -16,6 +16,7 @@ import PlannerList from "./pages/PlannerListPage";
 import Planner from './pages/PlannerPage';
 import Review from "./pages/ReviewPage";
 import Schedule from './pages/SchedulePage';
+import Sketch from './pages/SketchPage'
 
 
 function AppContent() ***REMOVED***
@@ -34,8 +35,9 @@ function AppContent() ***REMOVED***
         <Route path="/board" element=***REMOVED***<Board />***REMOVED*** />
         <Route path="/board/detail" element=***REMOVED***<BoardDetail />***REMOVED*** />
         <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
-        <Route path="/planner/list" element=***REMOVED***<PlannerList />***REMOVED*** />
+        <Route path="/planner/list/:category" element=***REMOVED***<PlannerList />***REMOVED*** />
         <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
+        <Route path="/sketch" element=***REMOVED***<Sketch />***REMOVED*** />
         <Route path="/contract/:category" element=***REMOVED***<Contract />***REMOVED*** />
         <Route path="/contract/list" element=***REMOVED***<ContractList />***REMOVED*** />
         <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
