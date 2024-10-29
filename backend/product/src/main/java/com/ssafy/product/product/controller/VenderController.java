@@ -3,7 +3,7 @@ package com.ssafy.product.product.controller;
 import com.ssafy.product.product.dto.request.VenderRequestDto;
 import com.ssafy.product.product.dto.response.VenderResponseDto;
 import com.ssafy.product.product.service.VenderService;
-import com.ssafy.product.global.config.util.response.ApiResponse;
+import com.ssafy.product.global.util.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.ssafy.product.global.config.util.response;
+package com.ssafy.product.global.util.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

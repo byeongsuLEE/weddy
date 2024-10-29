@@ -1,7 +1,7 @@
 package com.ssafy.product.product.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.product.global.config.s3.S3Uploader;
+import com.ssafy.product.global.s3.S3Uploader;
 import com.ssafy.product.product.domain.Product;
 import com.ssafy.product.product.domain.ProductImage;
 import com.ssafy.product.product.domain.Review;
@@ -12,10 +12,10 @@ import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.repository.ProductImageRepository;
 import com.ssafy.product.product.repository.ProductRepository;
 import com.ssafy.product.product.repository.ReviewRepository;
-import com.ssafy.product.global.config.util.RedisUtil;
-import com.ssafy.product.global.config.util.exception.ImageInvalidException;
-import com.ssafy.product.global.config.util.exception.ProductNotFoundExpception;
-import com.ssafy.product.global.config.util.response.ErrorCode;
+import com.ssafy.product.global.util.RedisUtil;
+import com.ssafy.product.global.util.exception.ImageInvalidException;
+import com.ssafy.product.global.util.exception.ProductNotFoundExpception;
+import com.ssafy.product.global.util.response.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

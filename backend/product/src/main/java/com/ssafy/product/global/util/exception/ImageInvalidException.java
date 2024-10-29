@@ -1,6 +1,6 @@
-package com.ssafy.product.global.config.util.exception;
+package com.ssafy.product.global.util.exception;
 
-import com.ssafy.product.global.config.util.response.ErrorCode;
+import com.ssafy.product.global.util.response.ErrorCode;
 import lombok.Getter;
 
 @Getter

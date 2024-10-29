@@ -1,4 +1,4 @@
-package com.ssafy.product.global.config.aop;
+package com.ssafy.product.global.aop;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +32,10 @@ public class LoggingAspect ***REMOVED***
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable ***REMOVED***
         long startTime = System.currentTimeMillis();
         try ***REMOVED***
-            log.info("[***REMOVED******REMOVED*** - ***REMOVED******REMOVED***] URI: ***REMOVED******REMOVED***",
-                    request.getMethod(),
-                    joinPoint.getSignature().toShortString().replace("(..)", ""),
-                    request.getRequestURI());
+//            log.info("[***REMOVED******REMOVED*** - ***REMOVED******REMOVED***] URI: ***REMOVED******REMOVED***",
+//                    request.getMethod(),
+//                    joinPoint.getSignature().toShortString().replace("(..)", ""),
+//                    request.getRequestURI());
             return joinPoint.proceed();
         ***REMOVED*** finally ***REMOVED***
             long endTime = System.currentTimeMillis();

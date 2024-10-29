@@ -1,4 +1,4 @@
-package com.ssafy.product.global.config.s3;
+package com.ssafy.product.global.s3;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;

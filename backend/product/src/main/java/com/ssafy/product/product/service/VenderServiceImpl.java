@@ -1,6 +1,6 @@
 package com.ssafy.product.product.service;
 
-import com.ssafy.product.global.config.s3.S3Uploader;
+import com.ssafy.product.global.s3.S3Uploader;
 import com.ssafy.product.product.domain.Vender;
 import com.ssafy.product.product.dto.request.VenderRequestDto;
 import com.ssafy.product.product.dto.response.VenderResponseDto;
