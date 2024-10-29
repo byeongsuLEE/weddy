@@ -9,13 +9,12 @@ import PlusIcon from "../icons/PlusIcon";
 
 const Schedule = () => ***REMOVED***
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  console.log(selectedDate.toISOString());
+  const [ selectedDate, setSelectedDate ] = useState<Date>(new Date());
 
   const ***REMOVED*** data: scheduleList ***REMOVED*** = useQuery(
-    ['getSchedule', selectedDate.toISOString()],
-    () => getSchedule(selectedDate.toISOString()),
-    ***REMOVED*** enabled: !!selectedDate.toISOString() ***REMOVED***
+    ['getSchedule', selectedDate.toISOString().slice(0, 10)],
+    () => getSchedule(selectedDate.toISOString().slice(0, 10)),
+    ***REMOVED*** enabled: !!selectedDate.toISOString().slice(0, 10)***REMOVED***
   );
 
   const handleCloseDialog = () => ***REMOVED***
@@ -42,18 +41,18 @@ const Schedule = () => ***REMOVED***
         <ScheduleBox type="etc" title="일정이 없습니다." />
       ) : (
         scheduleList?.map((schedule: GetSchedule) => ***REMOVED***
-          switch (schedule.product.type) ***REMOVED***
-            case 'studio':
-              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="studio" title="스튜디오 촬영" />;
-
-            case 'dress':
+          switch (schedule.contractType) ***REMOVED***
+            case 'STUDIO':
+              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="studio" title=***REMOVED***schedule.content***REMOVED*** />;
+            
+            case 'DRESS':
               return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="dress" title="드레스 피팅" />;
 
-            case 'makeup':
+            case 'MAKEUP':
               return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="makeup" title="메이크업" />;
 
             default:
-              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="etc" title="기타 일정" />;
+              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="etc" title=***REMOVED***schedule.content***REMOVED*** />;
           ***REMOVED***
         ***REMOVED***)
       )***REMOVED***
