@@ -6,6 +6,7 @@ import com.ssafy.product.product.dto.response.ProductResponseDto;
 import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/products")
+@Slf4j
 public class ProductController ***REMOVED***
     private final ProductService productService;
 
@@ -31,7 +33,7 @@ public class ProductController ***REMOVED***
     ***REMOVED***
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> registProduct(@RequestPart ProductRegistRequestDto registRequestDto, @RequestPart List<MultipartFile> images)***REMOVED***
+    public ResponseEntity<ProductResponseDto> registProduct(@RequestPart("product") ProductRegistRequestDto registRequestDto, @RequestPart(value = "image", required = false) List<MultipartFile> images)***REMOVED***
         return ResponseEntity.status(HttpStatus.OK)
                 .body(productService.registProduct(registRequestDto, images));
     ***REMOVED***

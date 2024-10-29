@@ -51,13 +51,16 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     @Transactional
     public ProductResponseDto registProduct(final ProductRegistRequestDto productRegistRequestDto,
                                             final List<MultipartFile> images) ***REMOVED***
+        productImageValidation(images);
+
         Product product = productRepository.save(Product.builder().productRegistRequestDto(productRegistRequestDto).build());
+
         List<ProductImage> productImages = productImageRepository.saveAll(images.stream()
-                        .map(image -> ProductImage.builder()
-                                .imageUrl(s3Uploader.putS3(image))
-                                .product(product)
-                                .build())
-                        .toList());
+                .map(image -> ProductImage.builder()
+                        .imageUrl(s3Uploader.putS3(image))
+                        .product(product)
+                        .build())
+                .toList());
         return ProductResponseDto.registProductResponseDto(product,productImages);
     ***REMOVED***
 
@@ -94,5 +97,12 @@ public class ProductServiceImpl implements ProductService***REMOVED***
                 // TODO : CustomException 구현 후 변경 예정
                 () -> new RuntimeException("해당 상품을 찾을 수 없습니다.")
         );
+    ***REMOVED***
+
+    private void productImageValidation(final List<MultipartFile> images) ***REMOVED***
+        if(images == null || images.isEmpty())***REMOVED***
+            // TODO : CustomExcpetion 적용 후 변경 예정
+            throw new RuntimeException("이미지는 필수 입력값입니다.");
+        ***REMOVED***
     ***REMOVED***
 ***REMOVED***
