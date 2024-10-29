@@ -33,12 +33,12 @@ const Contract = () => ***REMOVED***
       signature(sign)
     ]);
   ***REMOVED***;
-  
+
   const type = ***REMOVED***
     studio: "촬영",
     dress: "드레스",
     makeup: "메이크업"
-  ***REMOVED***[category as "studio" | "dress" | "makeup"];
+  ***REMOVED*** [category as "studio" | "dress" | "makeup"];
 
   return (
     <div>

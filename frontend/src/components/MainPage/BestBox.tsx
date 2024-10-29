@@ -8,8 +8,6 @@ interface BestBoxProps ***REMOVED***
 ***REMOVED***
 
 const BestBox = (***REMOVED***src, title, price, index***REMOVED***:BestBoxProps) => ***REMOVED***
-  // //== 베스트 ==//
-  // const ***REMOVED*** data: getRankedProductList ***REMOVED*** = useQuery('getRankedProducts', getRankedProducts);
 
   return(
     <div className="flex flex-col relative">

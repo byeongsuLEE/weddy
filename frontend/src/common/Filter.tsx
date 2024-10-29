@@ -1,20 +1,9 @@
 import ***REMOVED*** CaretSortIcon, CheckIcon ***REMOVED*** from "@radix-ui/react-icons"
-import * as React from "react"
-
 import ***REMOVED*** Button ***REMOVED*** from "../components/ui/button"
-import ***REMOVED***
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandList
-***REMOVED*** from "../components/ui/command"
-import ***REMOVED***
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-***REMOVED*** from "../components/ui/popover"
+import ***REMOVED*** Command, CommandEmpty, CommandGroup, CommandItem, CommandList ***REMOVED*** from "../components/ui/command"
+import ***REMOVED*** Popover, PopoverContent, PopoverTrigger ***REMOVED*** from "../components/ui/popover"
 import ***REMOVED*** cn ***REMOVED*** from "@/lib/utils"
+import ***REMOVED*** useState ***REMOVED*** from "react"
 
 interface ComboboxDemoProps ***REMOVED***
   lists: ***REMOVED***
@@ -22,11 +11,19 @@ interface ComboboxDemoProps ***REMOVED***
     label: string
   ***REMOVED***[];
   title: string;
+  onSelect: (selectedValue: string) => void;
 ***REMOVED***
 
-export function ComboboxDemo(***REMOVED*** lists,title ***REMOVED***: ComboboxDemoProps) ***REMOVED***
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+export function ComboboxDemo(***REMOVED*** lists,title, onSelect ***REMOVED***: ComboboxDemoProps) ***REMOVED***
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  const handleSelect = ( currentValue: string ) => ***REMOVED***
+    const newValue = currentValue === value ? "" : currentValue;
+    setValue(newValue);
+    setOpen(false);
+    onSelect(newValue);
+  ***REMOVED***;
 
   return (
     <div className="mb-4">
@@ -53,10 +50,7 @@ export function ComboboxDemo(***REMOVED*** lists,title ***REMOVED***: ComboboxDe
                 <CommandItem
                   key=***REMOVED***list.value***REMOVED***
                   value=***REMOVED***list.value***REMOVED***
-                  onSelect=***REMOVED***(currentValue) => ***REMOVED***
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  ***REMOVED******REMOVED***
+                  onSelect=***REMOVED***handleSelect***REMOVED***
                 >
                   ***REMOVED***list.label***REMOVED***
                   <CheckIcon
