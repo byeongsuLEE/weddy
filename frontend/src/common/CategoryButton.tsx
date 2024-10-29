@@ -8,7 +8,13 @@ const CategoryButton=(***REMOVED*** changeCategory ***REMOVED***: categoryProps)
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
   const handleButtonClick = (buttonName: string) => ***REMOVED***
-    setSelectedButton(buttonName);
+    const category = ***REMOVED***
+      스튜디오: "STUDIO",
+      드레스: "DRESS",
+      메이크업: "MAKEUP",
+    ***REMOVED*** [buttonName as "스튜디오" | "드레스" | "메이크업"];
+
+    setSelectedButton(category);
   ***REMOVED***;
 
   useEffect(() => ***REMOVED***
@@ -22,7 +28,7 @@ const CategoryButton=(***REMOVED*** changeCategory ***REMOVED***: categoryProps)
     <button
     onClick=***REMOVED***() => handleButtonClick('스튜디오')***REMOVED***
     className=***REMOVED***`bg-main3 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 $***REMOVED***
-      selectedButton === '스튜디오' ? 'border-2 border-main6' : ''
+      selectedButton === 'STUDIO' ? 'border-2 border-main6' : ''
     ***REMOVED***`***REMOVED***
   >
     스튜디오
@@ -30,7 +36,7 @@ const CategoryButton=(***REMOVED*** changeCategory ***REMOVED***: categoryProps)
   <button
     onClick=***REMOVED***() => handleButtonClick('드레스')***REMOVED***
     className=***REMOVED***`bg-main1 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 $***REMOVED***
-      selectedButton === '드레스' ? 'border-2 border-main2' : ''
+      selectedButton === 'DRESS' ? 'border-2 border-main2' : ''
     ***REMOVED***`***REMOVED***
   >
     드레스
@@ -38,7 +44,7 @@ const CategoryButton=(***REMOVED*** changeCategory ***REMOVED***: categoryProps)
   <button
     onClick=***REMOVED***() => handleButtonClick('메이크업')***REMOVED***
     className=***REMOVED***`bg-main4 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 $***REMOVED***
-      selectedButton === '메이크업' ? 'border-2 border-main5' : ''
+      selectedButton === 'MAKEUP' ? 'border-2 border-main5' : ''
     ***REMOVED***`***REMOVED***
   >
     메이크업
