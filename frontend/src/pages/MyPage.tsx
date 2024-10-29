@@ -1,12 +1,12 @@
-import ***REMOVED*** getCoupleCode ***REMOVED*** from "@/apis/coupleApi";
-import ***REMOVED*** userInformation ***REMOVED*** from "@/apis/user.type";
-import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/apis/userApi";
+import ***REMOVED*** getCoupleCode ***REMOVED*** from "@/api/coupleApi";
+import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
+import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Mypage = () => ***REMOVED***
-  const [ userInfo, setUserInfo ] = useState<userInformation>(***REMOVED***
+  const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
     name: '',
     phone: '',
     email: '',
@@ -30,7 +30,7 @@ const Mypage = () => ***REMOVED***
 
   //== 상태 업데이트 ==//
   const updateUserInfo = (key: keyof userInformation, value: string) => ***REMOVED***
-    setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value***REMOVED*** ***REMOVED***);
+    setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value ***REMOVED*** ***REMOVED***);
   ***REMOVED***;
 
   //== 커플 코드 조회 ==//
@@ -69,21 +69,21 @@ const Mypage = () => ***REMOVED***
             type="text"
             onChange=***REMOVED***(e) => updateUserInfo('name', e.target.value)***REMOVED***
           />
-          <input 
-            defaultValue=***REMOVED***userInfo.phone***REMOVED*** 
-            className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]" 
-            type="text" 
+          <input
+            defaultValue=***REMOVED***userInfo.phone***REMOVED***
+            className="my-2 p-2 w-[150px] border border-gray-400 rounded-lg h-[30px]"
+            type="text"
             onChange=***REMOVED***(e) => updateUserInfo('phone', e.target.value)***REMOVED***
           />
-          <input 
-            defaultValue=***REMOVED***userInfo.email***REMOVED*** 
-            className="my-2 border p-2 w-[150px] border-gray-400 rounded-lg h-[30px]" 
+          <input
+            defaultValue=***REMOVED***userInfo.email***REMOVED***
+            className="my-2 border p-2 w-[150px] border-gray-400 rounded-lg h-[30px]"
             type="text"
             onChange=***REMOVED***(e) => updateUserInfo('email', e.target.value)***REMOVED***
           />
-          <input 
-            defaultValue=***REMOVED***userInfo.address***REMOVED*** 
-            className="my-2 border p-2 w-[150px] border-gray-400 rounded-lg h-[30px]" 
+          <input
+            defaultValue=***REMOVED***userInfo.address***REMOVED***
+            className="my-2 border p-2 w-[150px] border-gray-400 rounded-lg h-[30px]"
             type="text"
             onChange=***REMOVED***(e) => updateUserInfo('address', e.target.value)***REMOVED***
           />
@@ -93,10 +93,10 @@ const Mypage = () => ***REMOVED***
         <TodoButton title="수정하기" colorId=***REMOVED***1***REMOVED*** />
       </div>
       <div className="flex justify-center">
-      <div className="bg-main1 flex flex-col items-center p-5 h-[150px] w-[310px] mt-12 mb-12 rounded-xl">
-        <h1 className="mb-5">커플 커넥트</h1>
-        <span className="font-bold text-lg">***REMOVED***myCode***REMOVED***</span>
-      </div>
+        <div className="bg-main1 flex flex-col items-center p-5 h-[150px] w-[310px] mt-12 mb-12 rounded-xl">
+          <h1 className="mb-5">커플 커넥트</h1>
+          <span className="font-bold text-lg">***REMOVED***myCode***REMOVED***</span>
+        </div>
       </div>
     </div>
   )

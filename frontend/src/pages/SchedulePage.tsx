@@ -1,11 +1,11 @@
-import CalenderBox from "../components/SchedulePage/CalenderBox";
-import ScheduleBox from "../components/SchedulePage/ScheduleBox";
-import PlusIcon from "../icons/PlusIcon";
-import ***REMOVED*** AlertDialogDemo ***REMOVED*** from "../components/SchedulePage/DrawerBox";
+import ***REMOVED*** GetSchedule ***REMOVED*** from "@/api/schedule.type";
+import ***REMOVED*** getSchedule ***REMOVED*** from "@/api/scheduleApi";
 import ***REMOVED*** useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import ***REMOVED*** getSchedule ***REMOVED*** from "@/apis/scheduleApi";
-import ***REMOVED*** GetSchedule ***REMOVED*** from "@/apis/schedule.type";
+import CalenderBox from "../components/SchedulePage/CalenderBox";
+import ***REMOVED*** AlertDialogDemo ***REMOVED*** from "../components/SchedulePage/DrawerBox";
+import ScheduleBox from "../components/SchedulePage/ScheduleBox";
+import PlusIcon from "../icons/PlusIcon";
 
 const Schedule = () => ***REMOVED***
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,7 @@ const Schedule = () => ***REMOVED***
 
   return (
     <div className="m-5 flex flex-col">
-      <CalenderBox onDateChange=***REMOVED***handleDateChange***REMOVED***/>
+      <CalenderBox onDateChange=***REMOVED***handleDateChange***REMOVED*** />
       <div className="my-5 mx-3 font-bold">
         ***REMOVED***selectedDate.toLocaleDateString("ko-KR", ***REMOVED***
           weekday: "long",
@@ -38,7 +38,7 @@ const Schedule = () => ***REMOVED***
       <div></div>
 
       ***REMOVED***!scheduleList || scheduleList?.length <= 0 ? (
-        <ScheduleBox type="etc" title="일정이 없습니다." /> 
+        <ScheduleBox type="etc" title="일정이 없습니다." />
       ) : (
         scheduleList?.map((schedule: GetSchedule) => ***REMOVED***
           switch (schedule.contractType) ***REMOVED***
@@ -61,7 +61,7 @@ const Schedule = () => ***REMOVED***
         <PlusIcon />
       </div>
 
-        <AlertDialogDemo isOpen=***REMOVED***isOpen***REMOVED*** onClose=***REMOVED***handleCloseDialog***REMOVED*** />
+      <AlertDialogDemo isOpen=***REMOVED***isOpen***REMOVED*** onClose=***REMOVED***handleCloseDialog***REMOVED*** />
     </div>
   )
 ***REMOVED***

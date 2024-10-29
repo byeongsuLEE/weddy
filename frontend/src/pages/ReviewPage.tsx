@@ -1,5 +1,5 @@
-import ***REMOVED*** ReviewData ***REMOVED*** from "@/apis/product.type";
-import ***REMOVED*** submitReview ***REMOVED*** from "@/apis/productApi";
+import ***REMOVED*** ReviewData ***REMOVED*** from "@/api/product.type";
+import ***REMOVED*** submitReview ***REMOVED*** from "@/api/productApi";
 import Separate from "@/common/Separate";
 import TodoButton from "@/common/TodoButton";
 import RatingBox from "@/components/ReviewPage/RatingBox";

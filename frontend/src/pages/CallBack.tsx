@@ -1,4 +1,4 @@
-import ***REMOVED*** getToken ***REMOVED*** from "@/apis/userApi";
+import ***REMOVED*** getToken ***REMOVED*** from "@/api/userApi";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** useLocation, useNavigate ***REMOVED*** from "react-router-dom";
 

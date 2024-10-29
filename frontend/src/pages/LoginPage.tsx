@@ -1,4 +1,4 @@
-import ***REMOVED*** googleLogin, kakaoLogin ***REMOVED*** from "../apis/authApi";
+import ***REMOVED*** googleLogin, kakaoLogin ***REMOVED*** from "../api/authApi";
 
 const Login = () => ***REMOVED***
   return (

@@ -2,8 +2,8 @@ import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
-import ***REMOVED*** allProducts ***REMOVED*** from "@/apis/productApi";
-import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
+import ***REMOVED*** allProducts ***REMOVED*** from "@/api/productApi";
+import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Board = () => ***REMOVED***
@@ -23,7 +23,6 @@ const Board = () => ***REMOVED***
   const handlePriceSelect = (value: string) => ***REMOVED***
     setSelectedPrice(value);
   ***REMOVED***;
-
   //dummy data
   const regions = [
     ***REMOVED***
@@ -104,23 +103,7 @@ const Board = () => ***REMOVED***
           <ComboboxDemo lists=***REMOVED***prices***REMOVED*** title="가격" onSelect=***REMOVED***handlePriceSelect***REMOVED***/>
         </div>
 
-        ***REMOVED***/* 각 탭에 대응하는 콘텐츠를 렌더링 */***REMOVED***
-
         <TabsContent value="studio">
-          <SDMList value="studio" />
-        </TabsContent>
-
-        <TabsContent value="dress">
-          <SDMList value="dress" />
-        </TabsContent>
-
-        <TabsContent value="makeup">
-          <SDMList value="makeup" />
-        </TabsContent>
-
-        ***REMOVED***/* api 연결 */***REMOVED***
-
-        ***REMOVED***/* <TabsContent value="studio">
           <SDMList value="studio" productList=***REMOVED***studioList ?? []***REMOVED***/>
         </TabsContent>
 
@@ -130,7 +113,7 @@ const Board = () => ***REMOVED***
 
         <TabsContent value="makeup">
           <SDMList value="makeup" productList=***REMOVED***makeupList ?? []***REMOVED***/>
-        </TabsContent> */***REMOVED***
+        </TabsContent>
 
       </Tabs>
     </div>

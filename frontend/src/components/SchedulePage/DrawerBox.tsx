@@ -1,5 +1,5 @@
-import ***REMOVED*** Schedule ***REMOVED*** from "@/apis/schedule.type";
-import ***REMOVED*** schedule ***REMOVED*** from "@/apis/scheduleApi";
+import ***REMOVED*** Schedule ***REMOVED*** from "@/api/schedule.type";
+import ***REMOVED*** schedule ***REMOVED*** from "@/api/scheduleApi";
 import CategoryButton from "@/common/CategoryButton";
 import ***REMOVED***
   AlertDialog,
