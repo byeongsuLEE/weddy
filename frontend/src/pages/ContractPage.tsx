@@ -20,7 +20,6 @@ const Contract = () => ***REMOVED***
   //   const day = ('0' + date.getDate()).slice(-2);
   //   return `$***REMOVED***year***REMOVED***년 $***REMOVED***month***REMOVED***월 $***REMOVED***day***REMOVED***일`;
   // ***REMOVED***
-  
 
   // //== 계약서 정보 ==//
   // const ***REMOVED*** data: contracct ***REMOVED*** = useQuery(
