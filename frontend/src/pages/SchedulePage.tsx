@@ -12,8 +12,13 @@ const Schedule = () => ***REMOVED***
   const [isOpen, setIsOpen] = useState(false);
   const [ selectedDate, setSelectedDate ] = useState<Date>(new Date());
   const [ filteredList, setFilteredList ] = useState<GetSchedule[]>([]);
+  console.log(selectedDate);
 
-  const ***REMOVED*** data:scheduleList ***REMOVED*** = useQuery('getSchedule', getSchedule);
+  const ***REMOVED*** data: scheduleList ***REMOVED*** = useQuery(
+    ['getSchedule', selectedDate],
+    () => getSchedule(selectedDate),
+    ***REMOVED*** enabled: !!selectedDate***REMOVED***
+  );
 
   const handleCloseDialog = () => ***REMOVED***
     setIsOpen(false);
