@@ -13,6 +13,9 @@ import com.ssafy.product.product.repository.ProductImageRepository;
 import com.ssafy.product.product.repository.ProductRepository;
 import com.ssafy.product.product.repository.ReviewRepository;
 import com.ssafy.product.util.RedisUtil;
+import com.ssafy.product.util.exception.ImageInvalidException;
+import com.ssafy.product.util.exception.ProductNotFoundExpception;
+import com.ssafy.product.util.response.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,15 +97,13 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     private Product productIsPresent(final Long productId) ***REMOVED***
         return productRepository.findById(productId).orElseThrow(
-                // TODO : CustomException 구현 후 변경 예정
-                () -> new RuntimeException("해당 상품을 찾을 수 없습니다.")
+                () -> new ProductNotFoundExpception(ErrorCode.PRODUCT_NOT_FOUND_EXCEPTION)
         );
     ***REMOVED***
 
     private void productImageValidation(final List<MultipartFile> images) ***REMOVED***
         if(images == null || images.isEmpty())***REMOVED***
-            // TODO : CustomExcpetion 적용 후 변경 예정
-            throw new RuntimeException("이미지는 필수 입력값입니다.");
+            throw new ImageInvalidException(ErrorCode.IMAGE_INVALID_EXCEPTION);
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***
