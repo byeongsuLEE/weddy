@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @Repository
 @RequiredArgsConstructor
 public class RedisUtil ***REMOVED***
-    private final int RANKING_MAX_SIZE = 8;
+    private final int RANKING_MAX_SIZE = 7;
     private final int INCREASE = 1;
     private final String ZSET_KEY = "productRanking";
     private final RedisTemplate<String, Object> redisTemplate;
@@ -78,9 +78,9 @@ public class RedisUtil ***REMOVED***
         // 현재 데이터 개수 확인
         Long size = zSetOps.zCard(ZSET_KEY);
 
-        // 10개 초과 시 가장 낮은 점수의 데이터 삭제
-        if (size != null && size > RANKING_MAX_SIZE) ***REMOVED***
-            zSetOps.removeRange(ZSET_KEY, 0, size - RANKING_MAX_SIZE + 1); // 상위 10개만 유지
+        // 8개 초과 시 가장 낮은 점수의 데이터 삭제
+        if (size != null && size > RANKING_MAX_SIZE + 1) ***REMOVED***
+            zSetOps.removeRange(ZSET_KEY, 1, 1); // 상위 8개만 유지
         ***REMOVED***
     ***REMOVED***
 
