@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> ***REM
     // 아래코드가 mysql에 어떤 코드로 변환되는지 코드로 작성해주시오.
     // select s from  Schedule s  where  s.code = :code and (:date is null   or s.endDate = :date)
     @Query("select s from  Schedule s  where  s.code = :code and (:date is null or s.endDate = :date)")
-    Optional <List<Schedule>> findByCodeAndDate(@Param("code") String code, @Param("date") LocalDateTime date);
+    Optional <List<Schedule>> findByCodeAndDate(@Param("code") String code, @Param("date") LocalDate date);
 
     Optional <Schedule> findById(Long id);
 

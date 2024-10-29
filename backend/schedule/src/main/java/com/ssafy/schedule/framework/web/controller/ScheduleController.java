@@ -44,7 +44,7 @@ public class ScheduleController ***REMOVED***
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<ScheduleOutputDto>>> getSchedules(
-            @RequestParam(value = "date", required = false) LocalDateTime time,
+            @RequestParam(value = "date", required = false) LocalDate time,
             @RequestHeader("Authorization") String token) throws Exception ***REMOVED***
 
         UserInputDto userInputDto = setUserDto(token);
