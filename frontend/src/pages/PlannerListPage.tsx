@@ -15,15 +15,15 @@ const PlannerList = () => ***REMOVED***
 
   const handleValueChange = (value: string) => ***REMOVED***
     setSelectedValue(value);
-    console.log("선택된 값:", value); // 콘솔에 선택된 값 출력
+    console.log("선택된 값:", value);
   ***REMOVED***;
 
   const navigate = useNavigate();
+
   const goPlanner =()=>***REMOVED***
     navigate('/planner')
   ***REMOVED***
   
-
   const dummyList = [
     ***REMOVED***
       src: "/dummy/test1.jpg",
