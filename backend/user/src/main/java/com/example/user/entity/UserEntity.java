@@ -23,4 +23,7 @@ public class UserEntity ***REMOVED***
     private String email;
 
     private String role;
-***REMOVED***
+
+
+//    get authoruity()/?
+//***REMOVED***

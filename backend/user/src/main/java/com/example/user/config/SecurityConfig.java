@@ -4,8 +4,10 @@ package com.example.user.config;
 import com.example.user.OAuth2.CustomSuccessHandler;
 import com.example.user.jwt.JWTFilter;
 import com.example.user.jwt.JWTUtil;
+import com.example.user.jwt.LogFilter;
 import com.example.user.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -30,6 +32,7 @@ public class SecurityConfig ***REMOVED***
         this.customSuccessHandler = customSuccessHandler;
         this.jwtUtil = jwtUtil;
     ***REMOVED***
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception ***REMOVED***
 
         //cors
@@ -64,22 +67,27 @@ public class SecurityConfig ***REMOVED***
         //HTTP Basic 인증 방식 disable
         http
                 .httpBasic((auth) -> auth.disable());
+        //로그필터
+//        http
+//                .addFilterBefore(new LogFilter(), UsernamePasswordAuthenticationFilter.class);
         //JWTFilter 추가
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         //oauth2
+        //api/user/login?
         http
                 .oauth2Login((oAuth2) -> oAuth2
+                        .loginPage("/login")
                         .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
-                                .userService(customOAuth2UserService))
-                                .successHandler(customSuccessHandler))
+                        .userService(customOAuth2UserService))
+                        .successHandler(customSuccessHandler))
                 ;
 
         //경로별 인가 작업
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/","/login","/oauth2/**","/login/**","/api/login/**").permitAll()
                         .anyRequest().authenticated());
 
         //세션 설정 : STATELESS

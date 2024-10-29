@@ -1,8 +1,13 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://34.64.98.78:3306/weddy?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: user1
+    password: 123123123
   application:
     name: weddy
   profiles:
-    active: common
+    active: common, user
   config:
     import: optional:configserver:***REMOVED***:8888
 

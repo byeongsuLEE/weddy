@@ -22,7 +22,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException ***REMOVED***
         OAuth2User oAuth2User = super.loadUser(userRequest);
+
+        if (oAuth2User == null) ***REMOVED***
+            throw new OAuth2AuthenticationException("OAuth2User가 null입니다. 사용자 정보 로딩 실패");
+        ***REMOVED***
+
         System.out.println(oAuth2User);
+        System.out.println("로깅전후");
+        System.out.println("Client Registration: " + userRequest.getClientRegistration());
+        System.out.println("Access Token: " + userRequest.getAccessToken().getTokenValue());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response = null;
@@ -31,9 +39,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
         ***REMOVED*** else if (registrationId == "google") ***REMOVED***
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
         ***REMOVED*** else return null;
-
+        System.out.println("로깅전후2");
         String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
-        UserEntity existData = userRepository.findbyUsername(username);
+        UserEntity existData = userRepository.findByUsername(username);
 
         if (existData == null) ***REMOVED***
             UserEntity userEntity = new UserEntity();

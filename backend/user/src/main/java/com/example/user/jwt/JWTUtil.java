@@ -13,7 +13,7 @@ import java.util.Date;
 public class JWTUtil ***REMOVED***
 
     private SecretKey secretKey;
-    public JWTUtil(@Value("$***REMOVED***spring.jwt.secret***REMOVED***")String secret) ***REMOVED***
+    public JWTUtil(@Value("$***REMOVED***jwt.secret-key***REMOVED***")String secret) ***REMOVED***
         secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     ***REMOVED***
     public String getUsername(String token) ***REMOVED***
