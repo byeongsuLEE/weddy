@@ -1,4 +1,4 @@
-package com.ssafy.product.config;
+package com.ssafy.product.global.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

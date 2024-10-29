@@ -1,4 +1,4 @@
-package com.ssafy.product.util.response;
+package com.ssafy.product.global.config.util.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

@@ -5,7 +5,7 @@ import com.ssafy.product.product.dto.request.ReviewRequestDto;
 import com.ssafy.product.product.dto.response.ProductResponseDto;
 import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.service.ProductService;
-import com.ssafy.product.util.response.ApiResponse;
+import com.ssafy.product.global.config.util.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

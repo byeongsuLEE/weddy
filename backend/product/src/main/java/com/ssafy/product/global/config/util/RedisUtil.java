@@ -1,4 +1,4 @@
-package com.ssafy.product.util;
+package com.ssafy.product.global.config.util;
 
 import com.ssafy.product.product.dto.response.ProductResponseDto;
 import jakarta.annotation.PostConstruct;

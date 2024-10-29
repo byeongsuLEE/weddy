@@ -1,7 +1,7 @@
-package com.ssafy.product.util.exception;
+package com.ssafy.product.global.config.util.exception;
 
-import com.ssafy.product.util.response.ApiResponse;
-import com.ssafy.product.util.response.ErrorCode;
+import com.ssafy.product.global.config.util.response.ApiResponse;
+import com.ssafy.product.global.config.util.response.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
