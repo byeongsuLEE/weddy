@@ -1,8 +1,10 @@
 spring:
+  jpa:
+    show-sql: true
   application:
     name: weddy
   profiles:
-    active: common
+    active: common , schedule
   config:
     import: optional:configserver:***REMOVED***:8888
 

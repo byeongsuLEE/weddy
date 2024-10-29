@@ -3,6 +3,7 @@ package com.ssafy.schedule.application.usecase;
 import com.ssafy.schedule.framework.web.dto.input.UserInputDto;
 import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -11,8 +12,8 @@ import java.util.List;
  * 설명    :
  */
 public interface GetScheduleUsecase ***REMOVED***
-    public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto) throws Exception;
-    public ScheduleOutputDto getSchedule(UserInputDto userInputDto) throws Exception;
+    public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto, LocalDateTime time) throws Exception;
+    public ScheduleOutputDto getSchedule(UserInputDto userInputDto, LocalDateTime localDateTime) throws Exception;
 
 
 ***REMOVED***

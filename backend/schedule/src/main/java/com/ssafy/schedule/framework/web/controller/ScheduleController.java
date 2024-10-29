@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -31,22 +33,23 @@ public class ScheduleController ***REMOVED***
     private final JwtUtil jwtUtil;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ScheduleOutputDto>> createSchedule(@RequestBody CreateScheduleInputDto requestDto,
-                                                                         @RequestHeader("Authorization") String token) ***REMOVED***
+    public ResponseEntity<ApiResponse<ScheduleOutputDto>> createSchedule(@RequestBody CreateScheduleInputDto requestDto, @RequestHeader("Authorization") String token) ***REMOVED***
         Long userId = jwtUtil.extractUserId(token);
         String code = jwtUtil.extractCode(token);
         requestDto.updateUserInfo(userId,code);
 
         ScheduleOutputDto scheduleOutputDto = createScheduleInputPort.createSchedule(requestDto);
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(scheduleOutputDto, "일정 등록 성공하였습니다."));
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(HttpStatus.OK,scheduleOutputDto, "일정 등록 성공하였습니다."));
     ***REMOVED***
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ScheduleOutputDto>>> getSchedules(@RequestHeader("Authorization") String token) throws Exception ***REMOVED***
+    public ResponseEntity<ApiResponse<List<ScheduleOutputDto>>> getSchedules(
+            @RequestParam(value = "date", required = false) LocalDateTime time,
+            @RequestHeader("Authorization") String token) throws Exception ***REMOVED***
 
         UserInputDto userInputDto = setUserDto(token);
-        List<ScheduleOutputDto> scheduleOutputDtoList = getScheduleInputPort.getAllSchedules(userInputDto);
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(scheduleOutputDtoList, "일정 불러오기 성공"));
+        List<ScheduleOutputDto> scheduleOutputDtoList = getScheduleInputPort.getAllSchedules(userInputDto,time);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(HttpStatus.OK, scheduleOutputDtoList, "일정 불러오기 성공"));
     ***REMOVED***
 
 

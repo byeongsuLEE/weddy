@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +26,8 @@ public class GetScheduleInputPort implements GetScheduleUsecase ***REMOVED***
     private final ScheduleOutPutPort scheduleOutPutPort;
 
     @Override
-    public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto) throws Exception ***REMOVED***
-        return scheduleOutPutPort.getSchedules(userInputDto.getCode())
+    public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto, LocalDateTime time) throws Exception ***REMOVED***
+        return scheduleOutPutPort.getSchedules(userInputDto.getCode(),time)
                 .orElseThrow(() -> new RuntimeException("스케줄을 찾을 수 없습니다."))
                 .stream()
                 .map(ScheduleOutputDto::mapToDto)
@@ -34,7 +35,7 @@ public class GetScheduleInputPort implements GetScheduleUsecase ***REMOVED***
     ***REMOVED***
 
     @Override
-    public ScheduleOutputDto getSchedule(UserInputDto userInputDto) throws Exception ***REMOVED***
+    public ScheduleOutputDto getSchedule(UserInputDto userInputDto, LocalDateTime localDateTime) throws Exception ***REMOVED***
         return null;
     ***REMOVED***
 ***REMOVED***
