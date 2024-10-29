@@ -1,6 +1,6 @@
 import ***REMOVED*** useRef ***REMOVED*** from "react";
 import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** signature ***REMOVED*** from "../apis/contractApi";
+import ***REMOVED*** signature ***REMOVED*** from "../api/contractApi";
 import TodoButton from "../common/TodoButton";
 import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
 import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
@@ -47,7 +47,7 @@ const Contract = () => ***REMOVED***
     studio: "촬영",
     dress: "드레스",
     makeup: "메이크업"
-  ***REMOVED*** [category as "studio" | "dress" | "makeup"];
+  ***REMOVED***[category as "studio" | "dress" | "makeup"];
 
   return (
     <div>

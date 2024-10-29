@@ -1,4 +1,4 @@
-import ***REMOVED*** deleteFromCart ***REMOVED*** from "@/apis/productApi";
+import ***REMOVED*** deleteFromCart ***REMOVED*** from "@/api/productApi";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
 
 interface CartBoxProps ***REMOVED***
