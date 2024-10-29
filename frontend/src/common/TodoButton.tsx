@@ -1,7 +1,7 @@
 
 interface TodoButtonProps ***REMOVED***
   title: string;
-  colorId: number;
+  colorId?: number;
 ***REMOVED***
 
 const TodoButton = (***REMOVED*** title, colorId ***REMOVED***: TodoButtonProps) => ***REMOVED***
