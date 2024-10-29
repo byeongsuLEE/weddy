@@ -1,36 +1,27 @@
-import ***REMOVED*** useState ***REMOVED*** from "react";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
-// import ***REMOVED*** allProducts ***REMOVED*** from "@/apis/productApi";
-// import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** allProducts ***REMOVED*** from "@/apis/productApi";
+import ***REMOVED*** Product ***REMOVED*** from "@/apis/product.type";
+import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Board = () => ***REMOVED***
+  const [ productList, setProductList ] = useState<Product[]>([]);
   const [ selectedRegion, setSelectedRegion ] = useState<string>("");
   const [ selectedPrice, setSelectedPrice ] = useState<string>("");
-  // const [ studioList, setStudioList ] = useState<Product[]>([]);
-  // const [ dressList, setDressList ] = useState<Product[]>([]);
-  // const [ makeupList, setMakeupList ] = useState<Product[]>([]);
+  const [ studioList, setStudioList ] = useState<Product[]>([]);
+  const [ dressList, setDressList ] = useState<Product[]>([]);
+  const [ makeupList, setMakeupList ] = useState<Product[]>([]);
 
-  // const ***REMOVED*** data: productList ***REMOVED*** = useQuery(
-  //   ['allProducts', selectedPrice, selectedRegion],
-  //   () => allProducts(selectedPrice, selectedRegion),
-  //   ***REMOVED***
-  //     enabled: !!selectedPrice && !!selectedRegion,
-  //   ***REMOVED***
-  // );
+  const ***REMOVED*** data: allProductList ***REMOVED*** = useQuery('allProducts', allProducts);
 
   const handleregionSelect = (value: string) => ***REMOVED***
     setSelectedRegion(value);
-    console.log(selectedRegion);
-    console.log(value);
   ***REMOVED***;
 
   const handlePriceSelect = (value: string) => ***REMOVED***
     setSelectedPrice(value);
-    console.log(selectedPrice);
-    console.log(value);
   ***REMOVED***;
 
   //dummy data
@@ -79,14 +70,25 @@ const Board = () => ***REMOVED***
       label: "15,000,000",
     ***REMOVED***,
   ];
+
+  useEffect(() => ***REMOVED***
+    if (allProductList) ***REMOVED***
+      setProductList(allProductList);
+    ***REMOVED***
+  ***REMOVED***, [allProductList]);
+
+  useEffect(() => ***REMOVED***
+    const data = productList?.filter((product: Product) => product.address.includes(selectedRegion) && product.price <= selectedPrice);
+    setProductList(data);
+  ***REMOVED***, [selectedPrice, selectedRegion]);
   
-  // useEffect(() => ***REMOVED***
-  //   if (productList) ***REMOVED***
-  //     setStudioList(productList?.filter((product: Product) => product.type === 'studio'));
-  //     setDressList(productList?.filter((product: Product) => product.type === 'dress'));
-  //     setMakeupList(productList?.filter((product: Product) => product.type === 'makeup'));
-  //   ***REMOVED***
-  // ***REMOVED***, [productList]);
+  useEffect(() => ***REMOVED***
+    if (productList) ***REMOVED***
+      setStudioList(productList?.filter((product: Product) => product.type === 'studio'));
+      setDressList(productList?.filter((product: Product) => product.type === 'dress'));
+      setMakeupList(productList?.filter((product: Product) => product.type === 'makeup'));
+    ***REMOVED***
+  ***REMOVED***, [productList]);
 
   return (
     <div className="mb-20 mt-5">
