@@ -17,7 +17,7 @@ public class CreateScheduleInputDto ***REMOVED***
     private LocalDate endDate;
     private ContractType type;
     private String content;
-    private Long contractId;
+    private Long productId;
     private Long userId;
     private String code;
 
@@ -29,7 +29,7 @@ public class CreateScheduleInputDto ***REMOVED***
                 .startDate(schedule.getStartDate())
                 .endDate(schedule.getEndDate())
                 .content(schedule.getContent())
-                .contractId(schedule.getContract_id())
+                .productId(schedule.getProduct_id())
                 .code(schedule.getCode())
                 .contractType(schedule.getType())
                 .build();

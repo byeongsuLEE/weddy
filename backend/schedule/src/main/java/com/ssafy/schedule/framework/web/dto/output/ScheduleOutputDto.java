@@ -18,7 +18,7 @@ public class ScheduleOutputDto ***REMOVED***
     private LocalDate startDate;
     private LocalDate endDate;
     private String content;
-    private Long contractId;
+    private Long productId;
     private String code;
 
     /**
@@ -38,7 +38,7 @@ public class ScheduleOutputDto ***REMOVED***
                 .startDate(schedule.getStartDate())
                 .endDate(schedule.getEndDate())
                 .content(schedule.getContent())
-                .contractId(schedule.getContract_id())
+                .productId(schedule.getProduct_id())
                 .code(schedule.getCode())
                 .build();
     ***REMOVED***

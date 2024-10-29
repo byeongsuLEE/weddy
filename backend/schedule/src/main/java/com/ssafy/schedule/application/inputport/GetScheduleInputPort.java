@@ -2,6 +2,8 @@ package com.ssafy.schedule.application.inputport;
 
 import com.ssafy.schedule.application.outputport.ScheduleOutPutPort;
 import com.ssafy.schedule.application.usecase.GetScheduleUsecase;
+import com.ssafy.schedule.common.exception.ScheduleNotFoundException;
+import com.ssafy.schedule.common.response.ErrorCode;
 import com.ssafy.schedule.framework.web.dto.input.UserInputDto;
 import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +30,7 @@ public class GetScheduleInputPort implements GetScheduleUsecase ***REMOVED***
     @Override
     public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto, LocalDateTime time) throws Exception ***REMOVED***
         return scheduleOutPutPort.getSchedules(userInputDto.getCode(),time)
-                .orElseThrow(() -> new RuntimeException("스케줄을 찾을 수 없습니다."))
+                .orElseThrow(() -> new ScheduleNotFoundException(ErrorCode.SCHEDULE_IS_EMPTY))
                 .stream()
                 .map(ScheduleOutputDto::mapToDto)
                 .collect(Collectors.toList());
