@@ -2,18 +2,15 @@ package com.ssafy.schedule.framework.kafkaadapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.schedule.application.usecase.CreateScheduleUsecase;
+import com.ssafy.schedule.domain.event.PaymentProductInfo;
 import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import javax.naming.NamingEnumeration;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Map;
 
 /**
  *
@@ -36,23 +33,16 @@ public class ScheduleConsumers ***REMOVED***
     public void paymentProduct(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
         log.info("뭐가 되는거지? "+ record.value());
 
-        Map<String, String> event = objectMapper.readValue(record.value(), Map.class);
-        Long productId = Long.valueOf(event.get("productId"));
-        String content = event.get("title");
+        PaymentProductInfo paymentProductInfo = objectMapper.readValue(record.value(), PaymentProductInfo.class);
 
-        // DTO 생성
-        CreateScheduleInputDto dto = CreateScheduleInputDto.builder()
-                .productId(productId)
-                .content(content)
-                .startDate(LocalDate.now())  // 시작일을 현재 날짜로 설정 (예시)
-                .endDate(LocalDate.now().plusDays(30))  // 종료일을 30일 후로 설정 (예시)
-                .contractType()  // 기본 계약 타입 설정 (예시)
-                .build();
-
+        log.info(paymentProductInfo.toString());
+        //prododcut로 일정 생성
+        CreateScheduleInputDto dto = CreateScheduleInputDto.createScheduleInputDto(paymentProductInfo);
         // UseCase를 통해 일정 생성
-        createScheduleUseCase.create(dto);
+        createScheduleUsecase.createSchedule(dto);
+
     ***REMOVED***
-    ***REMOVED***
+
 
 ***REMOVED***
 

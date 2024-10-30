@@ -1,5 +1,6 @@
 package com.ssafy.schedule.framework.web.dto.input;
 
+import com.ssafy.schedule.domain.event.PaymentProductInfo;
 import com.ssafy.schedule.domain.model.ContractType;
 import com.ssafy.schedule.domain.model.Schedule;
 import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
@@ -12,7 +13,6 @@ import java.time.LocalDate;
 @Builder
 public class CreateScheduleInputDto ***REMOVED***
 
-    private ContractType contractType;
     private LocalDate startDate;
     private LocalDate endDate;
     private ContractType type;
@@ -20,6 +20,29 @@ public class CreateScheduleInputDto ***REMOVED***
     private Long productId;
     private Long userId;
     private String code;
+
+    public static CreateScheduleInputDto  createScheduleInputDto(LocalDate startDate, LocalDate endDate, String content, Long productId, Long userId, String code) ***REMOVED***
+        return CreateScheduleInputDto.builder()
+                .startDate(startDate)
+                .endDate(endDate)
+                .content(content)
+                .productId(productId)
+                .userId(userId)
+                .code(code)
+                .build();
+    ***REMOVED***
+
+    public static CreateScheduleInputDto createScheduleInputDto(PaymentProductInfo paymentProductInfo)
+    ***REMOVED***
+        return CreateScheduleInputDto.builder()
+                .startDate(paymentProductInfo.getStartDate())
+                .endDate(paymentProductInfo.getEndDate())
+                .content(paymentProductInfo.getContent())
+                .productId(paymentProductInfo.getProductId())
+                .userId(paymentProductInfo.getUserId())
+                .code(paymentProductInfo.getCode())
+                .build();
+    ***REMOVED***
 
     public ScheduleOutputDto mapToDto(Schedule schedule) ***REMOVED***
         return ScheduleOutputDto.builder()
