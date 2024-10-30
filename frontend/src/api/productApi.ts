@@ -87,13 +87,12 @@ export const getReviewList = async (productId?: string): Promise<ReviewData[]> =
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data.data);
-  return [***REMOVED*** content: '너무 좋아요', date: '2021-09-01', score: 5 ***REMOVED***, ***REMOVED*** content: '너무 좋아요', date: '2021-09-01', score: 5 ***REMOVED***];
   return response.data.data;
 ***REMOVED***;
 
 //== 리뷰 등록 ==//
 export const submitReview = async (reviewData: ReviewData, productId?: string): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
     headers: ***REMOVED***
@@ -101,5 +100,4 @@ export const submitReview = async (reviewData: ReviewData, productId?: string): 
     ***REMOVED***,
     data: reviewData
   ***REMOVED***);
-  console.log(response.data);
 ***REMOVED***;

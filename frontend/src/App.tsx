@@ -29,7 +29,7 @@ function AppContent() ***REMOVED***
       ***REMOVED***currentPath !== "login" && <Navbar />***REMOVED***
       <Routes>
         <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
-        <Route path="/review" element=***REMOVED***<Review />***REMOVED*** />
+        <Route path="/review/:productId" element=***REMOVED***<Review />***REMOVED*** />
         <Route path="/cart" element=***REMOVED***<Cart />***REMOVED*** />
         <Route path="/login" element=***REMOVED***<Login />***REMOVED*** />
         <Route path="/board" element=***REMOVED***<Board />***REMOVED*** />
