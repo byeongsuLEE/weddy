@@ -78,7 +78,7 @@ export const getCartItems = async (): Promise<Product[]> => ***REMOVED***
 ***REMOVED***;
 
 //== 리뷰 조회 ==//
-export const getReviewList = async (productId?: string): Promise<void> => ***REMOVED***
+export const getReviewList = async (productId?: string): Promise<ReviewData[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
@@ -86,7 +86,9 @@ export const getReviewList = async (productId?: string): Promise<void> => ***REM
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data);
+  console.log(response.data.data);
+  return [***REMOVED*** content: '너무 좋아요', date: '2021-09-01', score: 5 ***REMOVED***, ***REMOVED*** content: '너무 좋아요', date: '2021-09-01', score: 5 ***REMOVED***];
+  return response.data.data;
 ***REMOVED***;
 
 //== 리뷰 등록 ==//
