@@ -1,10 +1,10 @@
-// import ***REMOVED*** Review ***REMOVED*** from "@/apis/product.type";
+import ***REMOVED*** ReviewData ***REMOVED*** from "@/api/product.type";
 
-// interface BoardReviewProp ***REMOVED***
-//   reviewList: Review[]
-// ***REMOVED***;
+interface BoardReviewProp ***REMOVED***
+  reviewList: ReviewData[]
+***REMOVED***;
 
-const BoardReview = () => ***REMOVED***
+const BoardReview = (***REMOVED*** reviewList ***REMOVED***: BoardReviewProp) => ***REMOVED***
   return (
     <div className="m-5">리뷰 페이지</div>
   )
