@@ -85,7 +85,6 @@ export const getReviewList = async (productId?: string): Promise<ReviewData[]> =
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data.data);
   return response.data.data;
 ***REMOVED***;
 

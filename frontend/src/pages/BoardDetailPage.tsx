@@ -30,13 +30,6 @@ const BoardDetail = () => ***REMOVED***
     ***REMOVED*** enabled: !!productId ***REMOVED***
   );
 
-  // const dummyData = [
-  //   "/dummy/test1.jpg",
-  //   "/dummy/test2.jpg",
-  //   "/dummy/test1.jpg",
-  //   "/dummy/test2.jpg",
-  // ];
-
   return (
     <div>
       <MainCarousel imageList=***REMOVED***productDetail?.images***REMOVED*** />
@@ -47,18 +40,6 @@ const BoardDetail = () => ***REMOVED***
           <TabsTrigger value="ask">문의 정보</TabsTrigger>
         </TabsList>
 
-        ***REMOVED***/* 각 탭에 대응하는 콘텐츠를 렌더링 */***REMOVED***
-        ***REMOVED***/* <TabsContent value="info">
-          <BoardContent />
-        </TabsContent>
-        <TabsContent value="review">
-          <BoardReview />
-        </TabsContent>
-        <TabsContent value="ask">
-          <BoardAsk />
-        </TabsContent> */***REMOVED***
-
-        ***REMOVED***/* api 연결 후 */***REMOVED***
         <TabsContent value="info">
           <BoardContent product=***REMOVED***productDetail***REMOVED*** />
         </TabsContent>

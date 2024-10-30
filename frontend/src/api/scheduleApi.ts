@@ -12,7 +12,7 @@ export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REM
     headers: ***REMOVED***
       Authorization: `Bearer $***REMOVED***token***REMOVED***`,
     ***REMOVED***,
-    data: scheduleData,
+    data: scheduleData
   ***REMOVED***);
 ***REMOVED***;
 
