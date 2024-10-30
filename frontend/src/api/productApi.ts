@@ -12,8 +12,7 @@ export const allProducts = async (): Promise<Product[]> => ***REMOVED***
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data);
-  return response.data;
+  return response.data.data;
 ***REMOVED***;
 
 //== 상품 랭킹 ==//
@@ -25,8 +24,7 @@ export const getRankedProducts = async (): Promise<Product[]> => ***REMOVED***
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data);
-  return response.data;
+  return response.data.data;
 ***REMOVED***;
 
 //== 상품 상세 조회 ==//
@@ -38,8 +36,7 @@ export const detailProduct = async (productId?: string): Promise<Product> => ***
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data);
-  return response.data;
+  return response.data.data;
 ***REMOVED***;
 
 //== 상품 담기 ==//
@@ -80,7 +77,7 @@ export const getCartItems = async (): Promise<Product[]> => ***REMOVED***
 ***REMOVED***;
 
 //== 리뷰 조회 ==//
-export const getReviewList = async (productId?: string): Promise<void> => ***REMOVED***
+export const getReviewList = async (productId?: string): Promise<ReviewData[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
@@ -88,12 +85,13 @@ export const getReviewList = async (productId?: string): Promise<void> => ***REM
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data);
+  console.log(response.data.data);
+  return response.data.data;
 ***REMOVED***;
 
 //== 리뷰 등록 ==//
 export const submitReview = async (reviewData: ReviewData, productId?: string): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
     headers: ***REMOVED***
@@ -101,5 +99,4 @@ export const submitReview = async (reviewData: ReviewData, productId?: string): 
     ***REMOVED***,
     data: reviewData
   ***REMOVED***);
-  console.log(response.data);
 ***REMOVED***;
