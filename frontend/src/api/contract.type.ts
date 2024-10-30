@@ -1,7 +1,7 @@
 export interface ContractData ***REMOVED***
   id: number;
-  productName: string;
-  customer: string;
+  productName?: string;
+  customer?: string;
   type: string;
   status: string;
   totalMount: string;
