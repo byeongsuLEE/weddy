@@ -1,14 +1,17 @@
+import ***REMOVED*** aiRecommend ***REMOVED*** from "@/api/ai";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
+// import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const Prompt = () => ***REMOVED***
   const [placeholder, setPlaceholder] = useState("");
   const text = "모던한 분위기의 500만원대 스튜디오 추천해줘";
   const [inputValue, setInputValue] = useState("");
 
-  const navigate = useNavigate();
-  const toPlanner = () => ***REMOVED***
-    navigate("/planner");
+  // const navigate = useNavigate();
+
+  const toPlanner = async () => ***REMOVED***
+    await aiRecommend(inputValue);
+    // navigate("/planner");
   ***REMOVED***
 
   useEffect(() => ***REMOVED***
@@ -25,10 +28,10 @@ const Prompt = () => ***REMOVED***
           setTimeout(() => ***REMOVED***
             index = 0;
             setPlaceholder("");
-            startTyping(); // 타이핑 애니메이션을 다시 시작
-          ***REMOVED***, 1000); // 타이핑 완료 후 1초 대기
+            startTyping();
+          ***REMOVED***, 1000);
         ***REMOVED***
-      ***REMOVED***, 150); // 타이핑 속도 조절
+      ***REMOVED***, 150);
     ***REMOVED***;
 
     startTyping();
@@ -38,7 +41,6 @@ const Prompt = () => ***REMOVED***
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => ***REMOVED***
     setInputValue(e.target.value);
-    console.log(e.target.value);
   ***REMOVED***;
 
   return (
