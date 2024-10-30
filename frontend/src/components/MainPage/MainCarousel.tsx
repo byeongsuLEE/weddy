@@ -36,7 +36,7 @@ export const MainCarousel = (***REMOVED*** imageList ***REMOVED***: MainCarousel
           <CarouselItem key=***REMOVED***index***REMOVED***>
             <Card>
               <CardContent>
-                <a href=***REMOVED***index === 0 ? '/board' : index === 1 ? '/schedule' : '/contract/list'***REMOVED***>
+                <a href=***REMOVED***index === 0 ? '/board' : index === 1 ? '/schedule' : index === 2 ?'/contract/list': '/prompt'***REMOVED***>
                   <img
                     className="w-full h-full object-cover"
                     src=***REMOVED***typeof item === 'string' ? item : item.imageUrl***REMOVED***
