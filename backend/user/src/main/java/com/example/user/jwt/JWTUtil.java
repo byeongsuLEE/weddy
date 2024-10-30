@@ -31,11 +31,20 @@ public class JWTUtil ***REMOVED***
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     ***REMOVED***
 
-    public String createJwt(String username, String role, Long expiredMs) ***REMOVED***
+    public String createAccessToken(String userId, String role, Long expiredMs) ***REMOVED***
 
         return Jwts.builder()
-                .claim("username", username)
+                .claim("username", userId)
                 .claim("role", role)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expiredMs))
+                .signWith(secretKey)
+                .compact();
+    ***REMOVED***
+
+    public String createRefreshToken(String userId, Long expiredMs) ***REMOVED***
+        return Jwts.builder()
+                .setSubject(userId)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs))
                 .signWith(secretKey)

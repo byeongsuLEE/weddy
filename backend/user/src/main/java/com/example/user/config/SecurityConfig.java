@@ -56,6 +56,18 @@ public class SecurityConfig ***REMOVED***
                         return configuration;
                     ***REMOVED***
                 ***REMOVED***));
+        //경로별 인가 작업
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers(
+                                "/**",
+                                "/api/login",
+                                "/api/oauth2/**",
+                                "/api/login/**",
+                                "/api/api/login/**",
+                                "/users/reissue",
+                                "/api/users/reissue/**").permitAll()  // 모든 요청에 /api 추가
+                        .anyRequest().authenticated());
         //csrf disable
         http
                 .csrf((auth) -> auth.disable());
@@ -84,11 +96,7 @@ public class SecurityConfig ***REMOVED***
                         .successHandler(customSuccessHandler))
                 ;
 
-        //경로별 인가 작업
-        http
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/","/login","/oauth2/**","/login/**","/api/login/**").permitAll()
-                        .anyRequest().authenticated());
+
 
         //세션 설정 : STATELESS
         http

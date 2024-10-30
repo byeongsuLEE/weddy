@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 public class JWTFilter extends OncePerRequestFilter ***REMOVED***
 
@@ -26,7 +27,19 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) ***REMOVED***
         String path = request.getRequestURI();
-        return path.startsWith("/login") || path.startsWith("/oauth2") || path.startsWith("/api/login");
+
+        // 제외할 경로를 리스트로 정의
+        List<String> excludedPaths = List.of(
+                "/**",
+                "/login",
+                "/oauth2",
+                "/api/login",
+                "/api/users/reissue",
+                "/api/users/reissue/**"
+                );
+
+        // 경로 리스트에 포함된 항목이 요청 경로의 접두사인지 확인
+        return excludedPaths.stream().anyMatch(path::startsWith);
     ***REMOVED***
 
     @Override
@@ -59,7 +72,7 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
 
         //userDTO를 생성하여 값 set
         UserDTO userDTO = new UserDTO();
-        userDTO.setUsername(username);
+        userDTO.setUserId(username);
         userDTO.setRole(role);
 
         //UserDetails에 회원 정보 객체 담기

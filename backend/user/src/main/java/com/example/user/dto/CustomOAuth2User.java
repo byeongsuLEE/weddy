@@ -38,6 +38,6 @@ public class CustomOAuth2User implements OAuth2User ***REMOVED***
     ***REMOVED***
 
     public String getUsername()***REMOVED***
-        return userDTO.getUsername();
+        return userDTO.getUserId();
     ***REMOVED***
 ***REMOVED***

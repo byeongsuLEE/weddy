@@ -35,27 +35,23 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
         OAuth2Response oAuth2Response = null;
         System.out.println(registrationId);
         if (registrationId.equals("naver")) ***REMOVED***
-            System.out.println("네이버입니다");
             oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
-            System.out.println("네이버입니다");
         ***REMOVED*** else if (registrationId.equals("google")) ***REMOVED***
-            System.out.println("구글입니다");
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
-            System.out.println("구글입니다");
         ***REMOVED*** else return null;
-        String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
-        UserEntity existData = userRepository.findByUsername(username);
+        String userId = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
+        UserEntity existData = userRepository.findByUserId(userId);
 
         if (existData == null) ***REMOVED***
             UserEntity userEntity = new UserEntity();
-            userEntity.setUsername(username);
+            userEntity.setUserId(userId);
             userEntity.setName(oAuth2Response.getName());
             userEntity.setEmail(oAuth2Response.getEmail());
             userEntity.setRole("ROLE_USER");
 
             userRepository.save(userEntity);
             UserDTO userDTO = new UserDTO();
-            userDTO.setUsername(username);
+            userDTO.setUserId(userId);
             userDTO.setName(oAuth2Response.getName());
             userDTO.setRole("ROLE_USER");
 
@@ -68,7 +64,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
             userRepository.save(existData);
 
             UserDTO userDTO = new UserDTO();
-            userDTO.setUsername(existData.getUsername());
+            userDTO.setUserId(existData.getUserId());
             userDTO.setName(oAuth2Response.getName());
             userDTO.setRole(existData.getRole());
 

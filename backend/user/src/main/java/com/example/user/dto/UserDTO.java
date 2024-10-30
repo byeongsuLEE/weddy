@@ -8,5 +8,5 @@ import lombok.Setter;
 public class UserDTO ***REMOVED***
     private String role;
     private String name;
-    private String username;
+    private String userId;
 ***REMOVED***

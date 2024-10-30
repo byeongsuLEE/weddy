@@ -18,6 +18,7 @@ public class MainController ***REMOVED***
         return "login";
     ***REMOVED***
     @GetMapping("/api/auth")
+    @ResponseBody
     public String auth()***REMOVED***
         return "auth";
     ***REMOVED***

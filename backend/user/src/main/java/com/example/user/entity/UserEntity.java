@@ -16,7 +16,7 @@ public class UserEntity ***REMOVED***
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String userId;
 
     private String name;
 
