@@ -33,7 +33,7 @@ function AppContent() ***REMOVED***
         <Route path="/cart" element=***REMOVED***<Cart />***REMOVED*** />
         <Route path="/login" element=***REMOVED***<Login />***REMOVED*** />
         <Route path="/board" element=***REMOVED***<Board />***REMOVED*** />
-        <Route path="/board/detail" element=***REMOVED***<BoardDetail />***REMOVED*** />
+        <Route path="/board/detail/:productId" element=***REMOVED***<BoardDetail />***REMOVED*** />
         <Route path="/prompt" element=***REMOVED***<Prompt />***REMOVED*** />
         <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
         <Route path="/planner/list/:category" element=***REMOVED***<PlannerList />***REMOVED*** />

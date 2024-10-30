@@ -1,7 +1,7 @@
 interface SDMProps ***REMOVED***
   src: string;
   name: string;
-  price: number;
+  price: string;
 ***REMOVED***
 
 const SDMBox = (***REMOVED*** src, name, price ***REMOVED***: SDMProps) => ***REMOVED***

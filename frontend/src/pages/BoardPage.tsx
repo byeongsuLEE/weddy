@@ -83,10 +83,11 @@ const Board = () => ***REMOVED***
   
   useEffect(() => ***REMOVED***
     if (productList) ***REMOVED***
-      setStudioList(productList?.filter((product: Product) => product.type === 'studio'));
-      setDressList(productList?.filter((product: Product) => product.type === 'dress'));
-      setMakeupList(productList?.filter((product: Product) => product.type === 'makeup'));
+      setStudioList(productList.filter((product: Product) => product.type === '  STUDIO'));
+      setDressList(productList.filter((product: Product) => product.type === 'DRESS'));
+      setMakeupList(productList.filter((product: Product) => product.type === 'MAKEUP'));
     ***REMOVED***
+
   ***REMOVED***, [productList]);
 
   return (
@@ -104,15 +105,15 @@ const Board = () => ***REMOVED***
         </div>
 
         <TabsContent value="studio">
-          <SDMList value="studio" productList=***REMOVED***studioList ?? []***REMOVED***/>
+          <SDMList value="studio" productList=***REMOVED***studioList***REMOVED***/>
         </TabsContent>
 
         <TabsContent value="dress">
-          <SDMList value="dress" productList=***REMOVED***dressList ?? []***REMOVED***/>
+          <SDMList value="dress" productList=***REMOVED***dressList***REMOVED***/>
         </TabsContent>
 
         <TabsContent value="makeup">
-          <SDMList value="makeup" productList=***REMOVED***makeupList ?? []***REMOVED***/>
+          <SDMList value="makeup" productList=***REMOVED***makeupList***REMOVED***/>
         </TabsContent>
 
       </Tabs>
