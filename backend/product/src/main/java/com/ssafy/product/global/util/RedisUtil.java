@@ -8,7 +8,6 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 @Repository
 @RequiredArgsConstructor
@@ -29,11 +28,10 @@ public class RedisUtil ***REMOVED***
      *
      * @param key
      * @param value
-     * @param expiredTime
      */
-    public void setData(String key, String value, Long expiredTime) ***REMOVED***
+    public void setData(String key, Object value) ***REMOVED***
         redisTemplate.opsForValue()
-                .set(key, value, expiredTime, TimeUnit.MILLISECONDS);
+                .set(key, value);
     ***REMOVED***
 
     /**
@@ -42,8 +40,8 @@ public class RedisUtil ***REMOVED***
      * @param key
      * @return
      */
-    public String getData(String key) ***REMOVED***
-        return (String) redisTemplate.opsForValue()
+    public Object getData(String key) ***REMOVED***
+        return redisTemplate.opsForValue()
                 .get(key);
     ***REMOVED***
 
