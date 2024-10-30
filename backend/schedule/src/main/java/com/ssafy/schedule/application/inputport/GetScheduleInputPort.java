@@ -4,6 +4,7 @@ import com.ssafy.schedule.application.outputport.ScheduleOutPutPort;
 import com.ssafy.schedule.application.usecase.GetScheduleUsecase;
 import com.ssafy.schedule.common.exception.ScheduleNotFoundException;
 import com.ssafy.schedule.common.response.ErrorCode;
+import com.ssafy.schedule.domain.model.Schedule;
 import com.ssafy.schedule.framework.web.dto.input.UserInputDto;
 import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +31,17 @@ public class GetScheduleInputPort implements GetScheduleUsecase ***REMOVED***
 
     @Override
     public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto, LocalDate time) throws Exception ***REMOVED***
-        return scheduleOutPutPort.getSchedules(userInputDto.getCode(),time)
-                .orElseThrow(() -> new ScheduleNotFoundException(ErrorCode.SCHEDULE_IS_EMPTY))
-                .stream()
+
+        List<Schedule> schedules = scheduleOutPutPort.getSchedules(userInputDto.getCode(), time);
+
+        if (schedules.isEmpty()) ***REMOVED***
+            throw new ScheduleNotFoundException(ErrorCode.SCHEDULE_IS_EMPTY);
+        ***REMOVED***
+
+        return schedules.stream()
                 .map(ScheduleOutputDto::mapToDto)
                 .collect(Collectors.toList());
+
     ***REMOVED***
 
     @Override

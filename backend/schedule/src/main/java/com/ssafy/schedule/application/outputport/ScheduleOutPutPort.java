@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ScheduleOutPutPort ***REMOVED***
-    Optional<List<Schedule>> getSchedules(String coupleId, LocalDate time);
+    List<Schedule> getSchedules(String coupleId, LocalDate time);
     Optional<Schedule> getSchedule(Long scheduleId);
     Schedule save(Schedule schedule);
 

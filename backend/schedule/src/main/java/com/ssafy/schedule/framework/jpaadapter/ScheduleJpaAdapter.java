@@ -32,7 +32,7 @@ public class ScheduleJpaAdapter implements ScheduleOutPutPort ***REMOVED***
      * @return
      */
     @Override
-    public Optional<List<Schedule>> getSchedules(String coupleCode, LocalDate date) ***REMOVED***
+    public List<Schedule> getSchedules(String coupleCode, LocalDate date) ***REMOVED***
         return scheduleRepository.findByCodeAndDate(coupleCode,date);
     ***REMOVED***
 
