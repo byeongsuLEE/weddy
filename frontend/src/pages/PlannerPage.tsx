@@ -30,9 +30,13 @@ const Planner = () => ***REMOVED***
   return (
     <div className="relative">
       <div className="m-5 flex flex-col items-center">
-        <h1 className="my-3 text-main2">WEDDY 플래너</h1>
-        <div className="flex items-center">
-        <span className="text-sm">WEDDY 플래너가 추천하는 상품</span>
+        ***REMOVED***/* <h1 className="my-3 text-main2">WEDDY 플래너</h1> */***REMOVED***
+        <div className="flex items-center mt-5">
+        <span className="text-sm">
+          <span className="text-main2 font-bold">
+          WEDDY 플래너
+          </span>
+          가 추천하는 상품</span>
           <GiftIcon/>
         </div>
         ***REMOVED***dummyList.map((dummy, index) => (
