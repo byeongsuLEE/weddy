@@ -24,8 +24,7 @@ export const getRankedProducts = async (): Promise<Product[]> => ***REMOVED***
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data);
-  return response.data;
+  return response.data.data;
 ***REMOVED***;
 
 //== 상품 상세 조회 ==//

@@ -54,9 +54,8 @@ const Board = () => ***REMOVED***
     if (productList) ***REMOVED***
       const filtered = productList.filter((product: Product) => ***REMOVED***
         const matchesRegion = selectedRegion ? product.address.includes(selectedRegion) : true;
-        const matchesPrice = selectedPrice 
-          ? Number(product.price) <= selectedPrice
-          : true;
+        const matchesPrice = selectedPrice ? Number(product.price) <= selectedPrice : true;
+        
         return matchesRegion && matchesPrice;
       ***REMOVED***);
       setFilteredProductList(filtered);
