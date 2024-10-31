@@ -89,7 +89,7 @@ public class SecurityConfig ***REMOVED***
         //api/user/login?
         http
                 .oauth2Login((oAuth2) -> oAuth2
-                        .loginPage("/login")
+                        .loginPage("http://localhost:5173/login")
                         .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                         .userService(customOAuth2UserService))
                         .successHandler(customSuccessHandler))

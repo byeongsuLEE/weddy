@@ -40,7 +40,7 @@ public class TokenController ***REMOVED***
     ***REMOVED***
 
     @GetMapping("/super")
-    public ResponseEntity<Map<String, String>> supperReissue(@RequestParam Long id) ***REMOVED***
+    public ResponseEntity<Map<String, String>> supperReissue(@RequestParam("id") Long id) ***REMOVED***
         UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
