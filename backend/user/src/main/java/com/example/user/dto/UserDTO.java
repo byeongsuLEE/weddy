@@ -6,7 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO ***REMOVED***
-    private String role;
+    private Long id;
+    private String code;
     private String name;
-    private String userId;
+    private String socialId;
+    private String adress;
+    private String phone;
 ***REMOVED***

@@ -21,15 +21,16 @@ public class CustomOAuth2User implements OAuth2User ***REMOVED***
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() ***REMOVED***
-        Collection<GrantedAuthority> collection = new ArrayList<>();
-
-        collection.add(new GrantedAuthority() ***REMOVED***
-            @Override
-            public String getAuthority() ***REMOVED***
-                return userDTO.getRole();
-            ***REMOVED***
-        ***REMOVED***);
-        return collection;
+//        Collection<GrantedAuthority> collection = new ArrayList<>();
+//
+//        collection.add(new GrantedAuthority() ***REMOVED***
+//            @Override
+//            public String getAuthority() ***REMOVED***
+//                return userDTO.getRole();
+//            ***REMOVED***
+//        ***REMOVED***);
+//        return collection;
+        return new ArrayList<>();
     ***REMOVED***
 
     @Override
@@ -37,7 +38,11 @@ public class CustomOAuth2User implements OAuth2User ***REMOVED***
         return userDTO.getName();
     ***REMOVED***
 
-    public String getUsername()***REMOVED***
-        return userDTO.getUserId();
+    public Long getUserId()***REMOVED***
+        return userDTO.getId();
+    ***REMOVED***
+
+    public String getCode()***REMOVED***
+        return userDTO.getCode();
     ***REMOVED***
 ***REMOVED***
