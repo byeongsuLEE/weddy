@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     @Override
     public List<ProductResponseDto> getList() ***REMOVED***
-        return mapper.convertValue(redisUtil.getAllHashValues(KeyType.PRODUCT).values(), new TypeReference<List<ProductResponseDto>>()***REMOVED******REMOVED***);
+        return mapper.convertValue(redisUtil.getAllHashValues(KeyType.PRODUCT.name()).values(), new TypeReference<List<ProductResponseDto>>()***REMOVED******REMOVED***);
     ***REMOVED***
 
     @Override
@@ -75,9 +75,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     @Override
     public List<ReviewResponseDto> reviewList(final Long productId) ***REMOVED***
-        Object hashValue = redisUtil.getHashValue(KeyType.REVIEW,productId);
-        log.info("value : ***REMOVED******REMOVED***", hashValue);
-        return mapper.convertValue(hashValue, new TypeReference<List<ReviewResponseDto>>() ***REMOVED******REMOVED***);
+        return mapper.convertValue(redisUtil.getAllHashValues(KeyType.REVIEW.name() + ":" + productId).values(), new TypeReference<List<ReviewResponseDto>>() ***REMOVED******REMOVED***);
 
     ***REMOVED***
 
