@@ -2,16 +2,15 @@ package com.example.user.contract.domain;
 
 import com.example.user.contract.constant.ContractStatus;
 import com.example.user.contract.constant.ProductType;
+import com.example.user.contract.dto.response.CreateContractResponseDto;
 import com.example.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 /**
  * 작성자   : 이병수
@@ -32,7 +31,7 @@ public class Contract ***REMOVED***
     private ProductType type;
     private ContractStatus status;
     private Long totalMount;
-    private Long prePayment;
+    private Long downPayment;
     private Long finalPayment;
 
     @Column(length = 30)
@@ -53,5 +52,24 @@ public class Contract ***REMOVED***
     private UserEntity user;
 
 
+    public CreateContractResponseDto mapToCreateContractResponseDto(Contract contract) ***REMOVED***
+        //TODO: CreateContractResponseDto 매핑
+        return CreateContractResponseDto.builder()
+                .id(contract.getId())
+                .type(contract.getType())
+                .status(contract.getStatus())
+                .totalMount(contract.getTotalMount())
+                .downPayment(contract.getDownPayment())
+                .finalPayment(contract.getFinalPayment())
+                .companyName(contract.getCompanyName())
+                .additionalTerms(contract.getAdditionalTerms())
+                .startDate(contract.getStartDate())
+                .endDate(contract.getEndDate())
+                .code(contract.getCode())
+                .product(contract.getProduct())
+                .user(contract.getUser())
+                .build();
+
+    ***REMOVED***
 ***REMOVED***
 

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 /**
  * 작성자   : user
  * 작성날짜 : 2024-10-30
@@ -16,5 +18,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CreateContractRequestDto ***REMOVED***
+
+    private Long userId;
+    private Long productId;
+    private Long totalMount;
+    private Long downPayment;
+    private Long FinalPayment;
+    private String companyName;
+    private String additionalTerms;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
 ***REMOVED***

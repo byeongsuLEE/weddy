@@ -1,5 +1,8 @@
 package com.example.user.contract.service;
 
+import com.example.user.contract.domain.Contract;
+import com.example.user.contract.dto.request.CreateContractRequestDto;
+
 /**
  * 작성자   : user
  * 작성날짜 : 2024-10-30
@@ -8,4 +11,5 @@ package com.example.user.contract.service;
 public interface ContractService ***REMOVED***
 
 
+    Contract createContract(Long userId, CreateContractRequestDto createContractRequestDto);
 ***REMOVED***
