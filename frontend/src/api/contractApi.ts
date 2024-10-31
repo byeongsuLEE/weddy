@@ -1,7 +1,7 @@
 import axios from "axios"
 import ***REMOVED*** ContractData ***REMOVED*** from "./contract.type";
 
-const BASE_URL = 'http://localhost:8080/api/product/contracts'
+const BASE_URL = 'http://localhost:8080/api/contracts'
 
 //== 계약서 상세 조회 ==//
 export const contractInfo = async (contractId?: string): Promise<ContractData> => ***REMOVED***
