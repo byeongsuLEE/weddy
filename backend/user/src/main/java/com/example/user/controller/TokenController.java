@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/users/reissue")  // @RequestMapping으로 경로 지정
+@RequestMapping("/users/token")  // @RequestMapping으로 경로 지정
 public class TokenController ***REMOVED***
 
     private final JWTUtil jwtUtil;
