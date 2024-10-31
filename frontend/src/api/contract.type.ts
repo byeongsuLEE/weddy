@@ -3,7 +3,7 @@ export interface ContractData ***REMOVED***
   productName?: string;
   customer?: string;
   type: string;
-  status: "CONTRACT_REQUEST" | "CONTRACT_PENDING" | "SIGN_PENDING" | "PAYMENT_PENDING" | "PAYMENT_COMPLETED";
+  status: "CONTRACT_PENDING" | "SIGN_PENDING" | "PAYMENT_PENDING" | "PAYMENT_COMPLETED";
   totalMount: string;
   downPayment: string;
   finalPayment: string;

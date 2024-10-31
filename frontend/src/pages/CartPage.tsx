@@ -1,6 +1,6 @@
-import ***REMOVED*** useState, useEffect ***REMOVED*** from 'react';
 import TodoButton from "@/common/TodoButton";
 import CartBox from "@/components/CartPage/CartBox";
+import ***REMOVED*** useState ***REMOVED*** from 'react';
 
 interface dummyProps ***REMOVED***
   product: string;
