@@ -1,48 +1,60 @@
-import ***REMOVED*** deleteFromCart ***REMOVED*** from "@/api/productApi";
-import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
+import ***REMOVED*** useState, useEffect ***REMOVED*** from 'react';
+import ***REMOVED*** Checkbox ***REMOVED*** from "@/components/ui/checkbox";
+
+interface dummyProps ***REMOVED***
+  product: string;
+  totalMount: number;
+  company: string;
+  type: string;
+***REMOVED***
 
 interface CartBoxProps ***REMOVED***
   title: string;
-  // product: Product;
+  type: string;
+  cartItem: dummyProps[];
+  onAmountChange: (type: string, amount: number) => void;
 ***REMOVED***
 
-const CartBox = (***REMOVED*** title ***REMOVED***: CartBoxProps) => ***REMOVED***
-  const handleDelete = async () => ***REMOVED***
-    await deleteFromCart();
+const CartBox = (***REMOVED*** title, type, cartItem, onAmountChange ***REMOVED***: CartBoxProps) => ***REMOVED***
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const handleCheckboxChange = (index: number) => ***REMOVED***
+    setSelectedIndex(selectedIndex === index ? null : index);
   ***REMOVED***;
 
-  return (
-    <Accordion
-      sx=***REMOVED******REMOVED***
-        boxShadow: "none",
-        border: "none",
-        borderRadius: "8px",
-        marginY: 3,
-        "&:before": ***REMOVED***
-          display: "none",
-        ***REMOVED***,
-      ***REMOVED******REMOVED***>
-      <AccordionSummary
-        aria-controls="panel1-content"
-        id="panel1-header"
-        className="w-[350px] h-[100px]"
-        sx=***REMOVED******REMOVED***
-          boxShadow: "none",
-          borderBottom: "none",
-          padding: "16px",
-          margin: 0,
-        ***REMOVED******REMOVED***
-      >
-        <div className="flex justify-between w-full">
-          <h1 className="font-bold mx-4">***REMOVED***title***REMOVED***</h1>
-          <button className="w-[50px] h-[25px] text-sm bg-main2 rounded-lg" onClick=***REMOVED***handleDelete***REMOVED***>삭제</button>
-        </div>
+  useEffect(() => ***REMOVED***
+    const selectedAmount = selectedIndex !== null ? cartItem[selectedIndex].totalMount : 0;
+    onAmountChange(type, selectedAmount);
+  ***REMOVED***, [selectedIndex, cartItem, type, onAmountChange]);
 
-      </AccordionSummary>
-      <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
-        상품 세부 정보
-      </AccordionDetails>
-    </Accordion>
-  )
-***REMOVED***
+  return (
+    <div className="m-5">
+      <h2 className="font-bold text-lg mb-3">***REMOVED***title***REMOVED***</h2>
+      ***REMOVED***cartItem.map((item, index) => (
+        <div
+          key=***REMOVED***index***REMOVED***
+          className="mx-1 my-5 bg-white h-[70px] w-auto rounded-lg px-5 py-3 flex justify-between"
+        >
+          <div className="flex items-center">
+            <Checkbox
+              checked=***REMOVED***selectedIndex === index***REMOVED***
+              onCheckedChange=***REMOVED***() => handleCheckboxChange(index)***REMOVED***
+            />
+            <div className="flex flex-col ml-3">
+              <span className="font-bold">***REMOVED***item.product***REMOVED***</span>
+              <span className="text-sm text-gray-600">***REMOVED***item.company***REMOVED***</span>
+            </div>
+          </div>
+          <div>
+            ***REMOVED***item.totalMount.toLocaleString()***REMOVED***원
+          </div>
+          <div>
+            <button className="text-sm">삭제</button>
+          </div>
+        </div>
+      ))***REMOVED***
+    </div>
+  );
+***REMOVED***;
+
 export default CartBox;

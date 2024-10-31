@@ -6,7 +6,7 @@ export interface Product ***REMOVED***
   address: string;
   vendorName: string;
   vendorId: string;
-  images: any[];
+  images: string[];
 ***REMOVED***
 
 export interface ReviewData ***REMOVED***
