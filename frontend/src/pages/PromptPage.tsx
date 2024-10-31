@@ -1,4 +1,4 @@
-import ***REMOVED*** aiRecommend ***REMOVED*** from "@/api/ai";
+import ***REMOVED*** aiRecommend ***REMOVED*** from "@/api/aiApi";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 // import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
