@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class SyncServiceImpl implements SyncService ***REMOVED***
     private final RedisUtil redisUtil;
-
     @Override
     @Async
     @Retryable(
@@ -38,8 +37,7 @@ public class SyncServiceImpl implements SyncService ***REMOVED***
         log.error(e.getMessage());
     ***REMOVED***
 
-    private void saveToReadDataBase(ProductResponseDto productResponseDto) ***REMOVED***
-        redisUtil.setData("productList",productResponseDto);
-
+    private void saveToReadDataBase(ProductResponseDto products) ***REMOVED***
+        redisUtil.addToHashSet(products);
     ***REMOVED***
 ***REMOVED***

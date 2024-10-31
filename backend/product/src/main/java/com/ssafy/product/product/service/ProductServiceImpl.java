@@ -18,6 +18,7 @@ import com.ssafy.product.product.repository.ProductImageRepository;
 import com.ssafy.product.product.repository.ProductRepository;
 import com.ssafy.product.product.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService***REMOVED***
     private final String REDIS_LIST_KEY = "productList";
     private final ProductRepository productRepository;
@@ -35,17 +37,13 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     private final ReviewRepository reviewRepository;
     private final RedisUtil redisUtil;
     private final SyncService syncService;
+    private final ObjectMapper mapper;
 
     @Override
     public List<ProductResponseDto> getList() ***REMOVED***
-        if(redisUtil.getData(REDIS_LIST_KEY) != null) ***REMOVED***
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.convertValue(redisUtil.getData(REDIS_LIST_KEY), new TypeReference<List<ProductResponseDto>>()***REMOVED******REMOVED***);
-        ***REMOVED***
 
-        return productRepository.findAll().stream()
-                .map(product -> product.getProduct(product))
-                .toList();
+
+        return mapper.convertValue(redisUtil.getAllProducts().values(), new TypeReference<List<ProductResponseDto>>()***REMOVED******REMOVED***);
     ***REMOVED***
 
     @Override
@@ -55,7 +53,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
         ProductResponseDto productResponse = product.getProduct(product);
         redisUtil.addToSortedSet(productResponse);
 
-        return productResponse;
+        return mapper.convertValue(redisUtil.getProduct(productResponse.id()), ProductResponseDto.class);
     ***REMOVED***
 
     @Override
@@ -63,7 +61,6 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     public ProductResponseDto registProduct(final ProductRegistRequestDto productRegistRequestDto,
                                             final List<MultipartFile> images) ***REMOVED***
         productImageValidation(images);
-
         Product product = productRepository.save(Product.builder().productRegistRequestDto(productRegistRequestDto).build());
 
         List<ProductImage> productImages = productImageRepository.saveAll(images.stream()
@@ -72,10 +69,10 @@ public class ProductServiceImpl implements ProductService***REMOVED***
                         .product(product)
                         .build())
                 .toList());
-        ProductResponseDto productResponseDto = ProductResponseDto.registProductResponseDto(product,productImages);
-        syncService.syncToReadDatabaseAsync(productResponseDto);
 
-        return productResponseDto;
+        ProductResponseDto productResponse = ProductResponseDto.registProductResponseDto(product,productImages);
+        syncService.syncToReadDatabaseAsync(productResponse);
+        return productResponse;
     ***REMOVED***
 
     @Override
