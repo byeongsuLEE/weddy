@@ -26,7 +26,7 @@ public class UserEntity ***REMOVED***
 
     private String email;
 
-    private String adress;
+    private String address;
 
 
 ***REMOVED***
