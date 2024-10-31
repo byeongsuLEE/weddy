@@ -32,4 +32,17 @@ public class TokenService ***REMOVED***
 
         return tokens;
     ***REMOVED***
+    public Map<String, String> generateSuperTokens(UserEntity userEntity) ***REMOVED***
+        String accessToken = jwtUtil.createAccessToken(userEntity.getName(), userEntity.getId(), userEntity.getCode(), 30 * 24 * 60 * 60 * 60L);
+        String refreshToken = jwtUtil.createRefreshToken(userEntity.getName(), userEntity.getId(), 300 * 24 * 60 * 60 * 60L);
+
+        // Redis에 Refresh Token 저장
+        redisTemplate.opsForValue().set("userid:" + userEntity.getId(), refreshToken, 1, TimeUnit.DAYS);
+
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("accessToken", "Bearer " + accessToken);
+        tokens.put("refreshToken", "Bearer " + refreshToken);
+
+        return tokens;
+    ***REMOVED***
 ***REMOVED***

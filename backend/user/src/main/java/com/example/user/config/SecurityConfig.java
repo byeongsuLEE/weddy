@@ -68,7 +68,7 @@ public class SecurityConfig ***REMOVED***
                                 "/api/login/**",
                                 "/api/api/login/**",
                                 "/users/reissue",
-                                "/api/users/reissue/**").permitAll()  // 모든 요청에 /api 추가
+                                "/users/reissue/**").permitAll()  // 모든 요청에 /api 추가
                         .anyRequest().authenticated());
         //csrf disable
         http

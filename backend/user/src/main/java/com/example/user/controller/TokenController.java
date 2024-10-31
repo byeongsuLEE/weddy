@@ -38,4 +38,14 @@ public class TokenController ***REMOVED***
 
         return ResponseEntity.ok(tokens);  // HTTP 상태 200 OK로 응답
     ***REMOVED***
+
+    @GetMapping("/super")
+    public ResponseEntity<Map<String, String>> supperReissue(@RequestParam Long id) ***REMOVED***
+        UserEntity userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Map<String, String> tokens = tokenService.generateSuperTokens(userEntity);
+
+        return ResponseEntity.ok(tokens);  // HTTP 상태 200 OK로 응답
+    ***REMOVED***
 ***REMOVED***
