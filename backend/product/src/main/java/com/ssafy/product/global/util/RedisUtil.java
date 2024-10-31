@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
 import java.util.Set;
 
 @Repository
@@ -89,5 +90,30 @@ public class RedisUtil ***REMOVED***
         return zSetOps.reverseRange(ZSET_KEY, 0, RANKING_MAX_SIZE); // 높은 점수 순으로 정렬
     ***REMOVED***
 
+
+    /**
+     * HashSet 자료구조 사용 데이터 저장
+     * @param product
+     */
+    public void addToHashSet(final ProductResponseDto product) ***REMOVED***
+        redisTemplate.opsForHash().put("product", product.id(), product);
+    ***REMOVED***
+
+    /**
+     * HashSet 단일 데이터 조회
+     * @param id
+     * @return
+     */
+    public Object getProduct(Long id) ***REMOVED***
+        return redisTemplate.opsForHash().get("product", id);
+    ***REMOVED***
+
+    /**
+     * HashSet 전체 데이터 조회
+     * @return
+     */
+    public Map<Object, Object> getAllProducts() ***REMOVED***
+        return redisTemplate.opsForHash().entries("product");
+    ***REMOVED***
 
 ***REMOVED***
