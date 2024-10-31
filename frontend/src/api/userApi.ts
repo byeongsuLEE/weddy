@@ -1,15 +1,19 @@
 import axios from "axios";
 import ***REMOVED*** userInformation ***REMOVED*** from "./user.type";
 
-const BASE_URL = "http://localhost:8080/api/users/reissue";
+const BASE_URL = "http://localhost:8080/api/users/token/super";
 
 //== 토큰 정보 ==//
 export const getToken = async (userId: string | null): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***userId***REMOVED***`,
+    url: BASE_URL,
+    params: ***REMOVED***
+      id: userId
+    ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
+  window.localStorage.setItem("token", response.data.accessToken);
 ***REMOVED***;
 
 //== 회원 정보 ==//
