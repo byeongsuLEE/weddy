@@ -1,6 +1,5 @@
 package com.example.global.util;
 
-import com.ssafy.product.product.dto.response.ProductResponseDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,7 +1,7 @@
 package com.example.global.util.exception;
 
-import com.ssafy.product.global.util.response.ApiResponse;
-import com.ssafy.product.global.util.response.ErrorCode;
+import com.example.global.util.response.ApiResponse;
+import com.example.global.util.response.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +17,9 @@ import java.util.Objects;
 @RestControllerAdvice
 public class CustomExceptionHandler ***REMOVED***
 
-    @ExceptionHandler(ImageInvalidException.class)
-    public ResponseEntity<ApiResponse<String>> imageInvalidException(ImageInvalidException e) ***REMOVED***
-        ErrorCode errorCode = e.getErrorCode();
-        return ResponseEntity.status(errorCode.getStatus())
-                .body(ApiResponse.error(errorCode));
-    ***REMOVED***
 
-    @ExceptionHandler(ProductNotFoundExpception.class)
-    public ResponseEntity<ApiResponse<String>> productNotFoundException(ProductNotFoundExpception e) ***REMOVED***
+    @ExceptionHandler(ContractNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> contractNotFoundException(ContractNotFoundException e) ***REMOVED***
         ErrorCode errorCode = e.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode));

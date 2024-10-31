@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/users/reissue")  // @RequestMapping으로 경로 지정
+@RequestMapping("/users/token")  // @RequestMapping으로 경로 지정
 public class TokenController ***REMOVED***
 
     private final JWTUtil jwtUtil;
@@ -30,7 +30,7 @@ public class TokenController ***REMOVED***
     ***REMOVED***
 
     @GetMapping
-    public ResponseEntity<Map<String, String>> reissue(@RequestParam Long id) ***REMOVED***
+    public ResponseEntity<Map<String, String>> reissue(@RequestParam("id") Long id) ***REMOVED***
         UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -40,7 +40,7 @@ public class TokenController ***REMOVED***
     ***REMOVED***
 
     @GetMapping("/super")
-    public ResponseEntity<Map<String, String>> supperReissue(@RequestParam Long id) ***REMOVED***
+    public ResponseEntity<Map<String, String>> supperReissue(@RequestParam("id") Long id) ***REMOVED***
         UserEntity userEntity = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 

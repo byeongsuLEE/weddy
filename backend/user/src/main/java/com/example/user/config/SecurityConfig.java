@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 @EnableWebSecurity
@@ -44,16 +45,12 @@ public class SecurityConfig ***REMOVED***
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) ***REMOVED***
 
                         CorsConfiguration configuration = new CorsConfiguration();
-
-                        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-                        configuration.setAllowedMethods(Collections.singletonList("*"));
+                        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:5174"));
+                        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                        configuration.setAllowedHeaders(List.of("*"));
                         configuration.setAllowCredentials(true);
-                        configuration.setAllowedHeaders(Collections.singletonList("*"));
                         configuration.setMaxAge(3600L);
-
-                        configuration.setExposedHeaders(Collections.singletonList("Set-Cookie"));
-                        configuration.setExposedHeaders(Collections.singletonList("Authorization"));
-
+                        configuration.setExposedHeaders(List.of("Set-Cookie", "Authorization"));
                         return configuration;
                     ***REMOVED***
                 ***REMOVED***));
@@ -67,8 +64,8 @@ public class SecurityConfig ***REMOVED***
                                 "/api/oauth2/**",
                                 "/api/login/**",
                                 "/api/api/login/**",
-                                "/users/reissue",
-                                "/users/reissue/**").permitAll()  // 모든 요청에 /api 추가
+                                "/users/token",
+                                "/users/token/**").permitAll()  // 모든 요청에 /api 추가
                         .anyRequest().authenticated());
         //csrf disable
         http
@@ -92,7 +89,7 @@ public class SecurityConfig ***REMOVED***
         //api/user/login?
         http
                 .oauth2Login((oAuth2) -> oAuth2
-                        .loginPage("/login")
+                        .loginPage("http://localhost:5173/login")
                         .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                         .userService(customOAuth2UserService))
                         .successHandler(customSuccessHandler))
