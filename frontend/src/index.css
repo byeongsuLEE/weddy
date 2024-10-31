@@ -129,6 +129,7 @@ footer ***REMOVED***
 
 @layer base ***REMOVED***
   :root ***REMOVED***
+    --color-main1: #F9F9F4; /* main1 색상 코드 */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
