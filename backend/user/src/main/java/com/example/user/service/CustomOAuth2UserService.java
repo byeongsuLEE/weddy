@@ -9,6 +9,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import java.security.SecureRandom;
+
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED***
@@ -39,21 +41,25 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
         ***REMOVED*** else if (registrationId.equals("google")) ***REMOVED***
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
         ***REMOVED*** else return null;
-        String userId = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
-        UserEntity existData = userRepository.findByUserId(userId);
+        String socialId = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
+        UserEntity existData = userRepository.findBySocialId(socialId);
 
         if (existData == null) ***REMOVED***
+
+            String randomCode = generateRandomCode(6);
+
             UserEntity userEntity = new UserEntity();
-            userEntity.setUserId(userId);
+            userEntity.setSocialId(socialId);
             userEntity.setName(oAuth2Response.getName());
             userEntity.setEmail(oAuth2Response.getEmail());
-            userEntity.setRole("ROLE_USER");
+            userEntity.setCode(randomCode);
 
             userRepository.save(userEntity);
             UserDTO userDTO = new UserDTO();
-            userDTO.setUserId(userId);
+            userDTO.setId(userEntity.getId());
+            userDTO.setSocialId(socialId);
             userDTO.setName(oAuth2Response.getName());
-            userDTO.setRole("ROLE_USER");
+            userDTO.setCode(randomCode);
 
             return new CustomOAuth2User(userDTO);
         ***REMOVED*** else ***REMOVED***
@@ -64,12 +70,25 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
             userRepository.save(existData);
 
             UserDTO userDTO = new UserDTO();
-            userDTO.setUserId(existData.getUserId());
+            userDTO.setId(existData.getId());
+            userDTO.setSocialId(existData.getSocialId());
             userDTO.setName(oAuth2Response.getName());
-            userDTO.setRole(existData.getRole());
 
             return new CustomOAuth2User(userDTO);
         ***REMOVED***
 
     ***REMOVED***
+    public static String generateRandomCode(int length) ***REMOVED***
+        SecureRandom random = new SecureRandom();
+        StringBuilder code = new StringBuilder();
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (int i = 0; i < length; i++) ***REMOVED***
+            int index = random.nextInt(characters.length());
+            code.append(characters.charAt(index));
+        ***REMOVED***
+
+        return code.toString();
+    ***REMOVED***
+
 ***REMOVED***

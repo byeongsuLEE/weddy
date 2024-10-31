@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserEntity,Long> ***REMOVED***
 
-    UserEntity findByUserId(String UserId);
-
+    UserEntity findBySocialId(String socialId);
 ***REMOVED***

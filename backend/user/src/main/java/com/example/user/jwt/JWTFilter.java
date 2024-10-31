@@ -3,6 +3,8 @@ package com.example.user.jwt;
 
 import com.example.user.dto.CustomOAuth2User;
 import com.example.user.dto.UserDTO;
+import com.example.user.entity.UserEntity;
+import com.example.user.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -19,9 +21,10 @@ import java.util.List;
 public class JWTFilter extends OncePerRequestFilter ***REMOVED***
 
     private final JWTUtil jwtUtil;
+    private final UserRepository userRepository;
 
-    public JWTFilter(JWTUtil jwtUtil) ***REMOVED***
-
+    public JWTFilter(JWTUtil jwtUtil, UserRepository userRepository) ***REMOVED***
+        this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
     ***REMOVED***
     @Override
@@ -30,12 +33,10 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
 
         // 제외할 경로를 리스트로 정의
         List<String> excludedPaths = List.of(
-                "/**",
                 "/login",
                 "/oauth2",
                 "/api/login",
-                "/api/users/reissue",
-                "/api/users/reissue/**"
+                "/api/users/reissue"
                 );
 
         // 경로 리스트에 포함된 항목이 요청 경로의 접두사인지 확인
@@ -66,20 +67,24 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
             return;
         ***REMOVED***
 
-        //토큰에서 username과 role 획득
+        //토큰에서 username과 code 획득
         String username = jwtUtil.getUsername(token);
-        String role = jwtUtil.getRole(token);
+        String code = jwtUtil.getCode(token);
+        Long id = jwtUtil.getUserId(token);
+
+        UserEntity userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         //userDTO를 생성하여 값 set
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(username);
-        userDTO.setRole(role);
+        userDTO.setId(id);
+        userDTO.setCode(code);
 
         //UserDetails에 회원 정보 객체 담기
         CustomOAuth2User customOAuth2User = new CustomOAuth2User(userDTO);
 
         //스프링 시큐리티 인증 토큰 생성
-        Authentication authToken = new UsernamePasswordAuthenticationToken(customOAuth2User, null, customOAuth2User.getAuthorities());
+        Authentication authToken = new UsernamePasswordAuthenticationToken(userEntity, null, customOAuth2User.getAuthorities());
         //세션에 사용자 등록
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
