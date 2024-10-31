@@ -15,4 +15,4 @@ management:
 
 ## 나중에 바꿔야함
 server:
-  port: 8081
+  port: 8080
