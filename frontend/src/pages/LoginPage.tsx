@@ -13,7 +13,18 @@ const Login = () => ***REMOVED***
       </button>
 
       <button
-        className="flex bg-yellow-300 my-2 items-center justify-center w-72 h-14 rounded-xl"
+        className="flex bg-naver my-4 items-center font-bold justify-center w-72 h-14 text-white rounded-xl"
+        onClick=***REMOVED***kakaoLogin***REMOVED***
+      >
+        <img
+          className="w-11 h-10 mr-3"
+          src="icons/naver.png"
+          alt="카카오로 시작하기"
+        />
+        네이버로 시작하기
+      </button>
+      ***REMOVED***/* <button
+        className="flex bg-yellow-400 my-2 items-center justify-center w-72 h-14 rounded-xl"
         onClick=***REMOVED***kakaoLogin***REMOVED***
       >
         <img
@@ -22,7 +33,7 @@ const Login = () => ***REMOVED***
           alt="카카오로 시작하기"
         />
         카카오로 시작하기
-      </button>
+      </button> */***REMOVED***
     </div>
   )
 ***REMOVED***
