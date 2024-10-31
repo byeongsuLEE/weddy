@@ -12,8 +12,19 @@ export const getToken = async (userId: string | null): Promise<void> => ***REMOV
       id: userId
     ***REMOVED***
   ***REMOVED***);
-  
+
   window.localStorage.setItem("token", response.data.accessToken);
+***REMOVED***;
+
+//== 로그아웃 ==//
+export const logout = () => ***REMOVED***
+  axios(***REMOVED***
+    method: 'post',
+    url: `$***REMOVED***BASE_URL***REMOVED***/logout`,
+    headers: ***REMOVED***
+      Authorization: `Bearer `
+    ***REMOVED***
+  ***REMOVED***);
 ***REMOVED***;
 
 //== 회원 정보 ==//
