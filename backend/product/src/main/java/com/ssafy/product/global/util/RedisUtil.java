@@ -1,14 +1,18 @@
 package com.ssafy.product.global.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.ssafy.product.product.constant.KeyType;
 import com.ssafy.product.product.dto.response.ProductResponseDto;
+import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 @Repository
 @RequiredArgsConstructor
@@ -29,11 +33,10 @@ public class RedisUtil ***REMOVED***
      *
      * @param key
      * @param value
-     * @param expiredTime
      */
-    public void setData(String key, String value, Long expiredTime) ***REMOVED***
+    public void setData(String key, Object value) ***REMOVED***
         redisTemplate.opsForValue()
-                .set(key, value, expiredTime, TimeUnit.MILLISECONDS);
+                .set(key, value);
     ***REMOVED***
 
     /**
@@ -42,8 +45,8 @@ public class RedisUtil ***REMOVED***
      * @param key
      * @return
      */
-    public String getData(String key) ***REMOVED***
-        return (String) redisTemplate.opsForValue()
+    public Object getData(String key) ***REMOVED***
+        return redisTemplate.opsForValue()
                 .get(key);
     ***REMOVED***
 
@@ -74,14 +77,6 @@ public class RedisUtil ***REMOVED***
     public void addToSortedSet(final ProductResponseDto product) ***REMOVED***
         // 새로운 데이터 추가 및 기존데이터 score 증가
         zSetOps.incrementScore(ZSET_KEY, product, INCREASE);
-
-        // 현재 데이터 개수 확인
-        Long size = zSetOps.zCard(ZSET_KEY);
-
-        // 8개 초과 시 가장 낮은 점수의 데이터 삭제
-        if (size != null && size > RANKING_MAX_SIZE + 1) ***REMOVED***
-            zSetOps.removeRange(ZSET_KEY, 1, 1); // 상위 8개만 유지
-        ***REMOVED***
     ***REMOVED***
 
     /**
@@ -89,6 +84,39 @@ public class RedisUtil ***REMOVED***
      */
     public Set<Object> getTopRanked() ***REMOVED***
         return zSetOps.reverseRange(ZSET_KEY, 0, RANKING_MAX_SIZE); // 높은 점수 순으로 정렬
+    ***REMOVED***
+
+
+    /**
+     * HashSet 자료구조 사용 데이터 저장
+     */
+    public void addToHashSet(final KeyType keyType , final Long id, final Object object) ***REMOVED***
+        if(object instanceof ReviewResponseDto) ***REMOVED***
+            ObjectMapper objectMapper = new ObjectMapper();
+            // Java 8 날짜/시간 타입 지원 모듈 등록
+            objectMapper.registerModule(new JavaTimeModule());
+            ReviewResponseDto review = objectMapper.convertValue(object, ReviewResponseDto.class);
+            redisTemplate.opsForHash().put(keyType.name() + ":" + id, review.id(), object);
+            return;
+        ***REMOVED***
+        redisTemplate.opsForHash().put(keyType.name(), id, object);
+    ***REMOVED***
+
+    /**
+     * HashSet 단일 데이터 조회
+     * @param id
+     * @return
+     */
+    public Object getHashValue(final KeyType keyType, final Long id) ***REMOVED***
+        return redisTemplate.opsForHash().get(keyType.name(), id);
+    ***REMOVED***
+
+    /**
+     * HashSet 전체 데이터 조회
+     * @return
+     */
+    public Map<Object, Object> getAllHashValues(String keyType) ***REMOVED***
+        return redisTemplate.opsForHash().entries(keyType);
     ***REMOVED***
 
 

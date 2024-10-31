@@ -11,6 +11,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
@@ -46,6 +47,7 @@ public class RedisConfig ***REMOVED***
         redisTemplate.setValueSerializer(jsonSerializer); // 값을 JSON으로 직렬화
         redisTemplate.setHashKeySerializer(stringSerializer); // 해시 키를 문자열로 직렬화
         redisTemplate.setHashValueSerializer(jsonSerializer); // 해시 값을 JSON으로 직렬화
+        redisTemplate.setHashKeySerializer(new GenericToStringSerializer<>(Long.class)); // 키를 문자열이 아닌 숫자로 저장할 수 있도록 설정
 
         redisTemplate.afterPropertiesSet();
         return redisTemplate; // 설정이 완료된 RedisTemplate 인스턴스를 반환
