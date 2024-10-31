@@ -2,7 +2,7 @@ package com.ssafy.product.product.service;
 
 import com.ssafy.product.global.util.RedisUtil;
 import com.ssafy.product.global.util.exception.SyncException;
-import com.ssafy.product.product.dto.response.ProductResponseDto;
+import com.ssafy.product.product.constant.KeyType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SyncServiceImpl implements SyncService ***REMOVED***
+public class SyncServiceImpl<T>implements SyncService<T> ***REMOVED***
     private final RedisUtil redisUtil;
     @Override
     @Async
@@ -23,11 +23,11 @@ public class SyncServiceImpl implements SyncService ***REMOVED***
             maxAttempts = 3,                 // 최대 재시도 횟수
             backoff = @Backoff(delay = 2000) // 재시도 간격 (밀리초)
     )
-    public void syncToReadDatabaseAsync(ProductResponseDto productResponseDto) ***REMOVED***
+    public void syncToReadDatabaseAsync(final KeyType keyType,final Long id, final T responseData) ***REMOVED***
         try***REMOVED***
-            saveToReadDataBase(productResponseDto);
+            saveToReadDataBase(keyType, id, responseData);
         ***REMOVED***catch(Exception e)***REMOVED***
-            throw new SyncException(productResponseDto.id());
+            throw new SyncException(id);
         ***REMOVED***
     ***REMOVED***
 
@@ -37,7 +37,7 @@ public class SyncServiceImpl implements SyncService ***REMOVED***
         log.error(e.getMessage());
     ***REMOVED***
 
-    private void saveToReadDataBase(ProductResponseDto products) ***REMOVED***
-        redisUtil.addToHashSet(products);
+    private void saveToReadDataBase(final KeyType keyType, final Long id, final Object object) ***REMOVED***
+        redisUtil.addToHashSet(keyType,id,object);
     ***REMOVED***
 ***REMOVED***

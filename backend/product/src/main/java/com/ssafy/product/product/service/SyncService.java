@@ -1,8 +1,8 @@
 package com.ssafy.product.product.service;
 
-import com.ssafy.product.product.dto.response.ProductResponseDto;
+import com.ssafy.product.product.constant.KeyType;
 
-public interface SyncService ***REMOVED***
-    void syncToReadDatabaseAsync(final ProductResponseDto products);
+public interface SyncService<T> ***REMOVED***
+    void syncToReadDatabaseAsync(final KeyType keyType, final Long id, final T responseData);
     void recover(final Exception e);
 ***REMOVED***

@@ -7,6 +7,7 @@ import com.ssafy.product.global.util.RedisUtil;
 import com.ssafy.product.global.util.exception.ImageInvalidException;
 import com.ssafy.product.global.util.exception.ProductNotFoundExpception;
 import com.ssafy.product.global.util.response.ErrorCode;
+import com.ssafy.product.product.constant.KeyType;
 import com.ssafy.product.product.domain.Product;
 import com.ssafy.product.product.domain.ProductImage;
 import com.ssafy.product.product.domain.Review;
@@ -30,7 +31,6 @@ import java.util.List;
 @Service
 @Slf4j
 public class ProductServiceImpl implements ProductService***REMOVED***
-    private final String REDIS_LIST_KEY = "productList";
     private final ProductRepository productRepository;
     private final ProductImageRepository productImageRepository;
     private final S3Uploader s3Uploader;
@@ -41,9 +41,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     @Override
     public List<ProductResponseDto> getList() ***REMOVED***
-
-
-        return mapper.convertValue(redisUtil.getAllProducts().values(), new TypeReference<List<ProductResponseDto>>()***REMOVED******REMOVED***);
+        return mapper.convertValue(redisUtil.getAllHashValues(KeyType.PRODUCT).values(), new TypeReference<List<ProductResponseDto>>()***REMOVED******REMOVED***);
     ***REMOVED***
 
     @Override
@@ -53,7 +51,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
         ProductResponseDto productResponse = product.getProduct(product);
         redisUtil.addToSortedSet(productResponse);
 
-        return mapper.convertValue(redisUtil.getProduct(productResponse.id()), ProductResponseDto.class);
+        return mapper.convertValue(redisUtil.getHashValue(KeyType.PRODUCT,productResponse.id()), ProductResponseDto.class);
     ***REMOVED***
 
     @Override
@@ -71,18 +69,16 @@ public class ProductServiceImpl implements ProductService***REMOVED***
                 .toList());
 
         ProductResponseDto productResponse = ProductResponseDto.registProductResponseDto(product,productImages);
-        syncService.syncToReadDatabaseAsync(productResponse);
+        syncService.syncToReadDatabaseAsync(KeyType.PRODUCT,productResponse.id(),productResponse);
         return productResponse;
     ***REMOVED***
 
     @Override
     public List<ReviewResponseDto> reviewList(final Long productId) ***REMOVED***
-        Product product = productIsPresent(productId);
-        List<Review> reviews = reviewRepository.findByProductId(productId);
+        Object hashValue = redisUtil.getHashValue(KeyType.REVIEW,productId);
+        log.info("value : ***REMOVED******REMOVED***", hashValue);
+        return mapper.convertValue(hashValue, new TypeReference<List<ReviewResponseDto>>() ***REMOVED******REMOVED***);
 
-        return reviews.stream()
-                .map(review -> review.getReview(review,product))
-                .toList();
     ***REMOVED***
 
     @Override
@@ -90,7 +86,8 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     public ReviewResponseDto registerReview(final ReviewRequestDto reviewRequestDto, final Long productId) ***REMOVED***
         Product product = productIsPresent(productId);
         Review review = reviewRepository.save(Review.builder().reviewRequestDto(reviewRequestDto).product(product).build());
-
+        ReviewResponseDto reviewResponse = review.getReview(review,product);
+        syncService.syncToReadDatabaseAsync(KeyType.REVIEW, productId,reviewResponse);
         return review.getReview(review,product);
     ***REMOVED***
 
