@@ -15,7 +15,7 @@ const ContractList = () => ***REMOVED***
       id: 1,
       productName: "STUDIO Package",
       type: "STUDIO",
-      status: "CONTRACT_PENDING",
+      status: "PAYMENT_PENDING",
       totalMount: "2000000",
       downPayment: "1000000",
       finalPayment: "1000000",

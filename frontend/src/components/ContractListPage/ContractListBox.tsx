@@ -33,9 +33,6 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
             <GotoIcon />
           </div>
 
-          ***REMOVED***contractInfo.status === "CONTRACT_REQUEST" && (
-            <TodoButton title="계약 요청" colorId=***REMOVED***1***REMOVED*** />
-          )***REMOVED***
           ***REMOVED***contractInfo.status === "CONTRACT_PENDING" && (
             <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** />
           )***REMOVED***
