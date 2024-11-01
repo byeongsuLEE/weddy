@@ -22,7 +22,7 @@ public class JWTUtil ***REMOVED***
     ***REMOVED***
 
     public String getCode(String token) ***REMOVED***
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("code", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("coupleCode", String.class);
     ***REMOVED***
     public Long getUserId(String token) ***REMOVED***
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("id", Long.class);
@@ -33,12 +33,12 @@ public class JWTUtil ***REMOVED***
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     ***REMOVED***
 
-    public String createAccessToken(String username,Long id, String code, Long expiredMs) ***REMOVED***
+    public String createAccessToken(String username,Long id, String coupleCode, Long expiredMs) ***REMOVED***
 
         return Jwts.builder()
                 .claim("id",id)
                 .claim("userName", username)
-                .claim("code", code)
+                .claim("coupleCode", coupleCode)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiredMs*1000))
                 .signWith(secretKey)

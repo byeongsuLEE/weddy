@@ -9,7 +9,7 @@ import lombok.Getter;
 @Builder
 public class UserResponseDTO ***REMOVED***
     private Long id;
-    private String code;
+    private String coupleCode;
     private String name;
     private String socialId;
     private String adress;

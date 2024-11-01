@@ -20,7 +20,7 @@ public class TokenService ***REMOVED***
     ***REMOVED***
 
     public Map<String, String> generateTokens(UserEntity userEntity) ***REMOVED***
-        String accessToken = jwtUtil.createAccessToken(userEntity.getName(), userEntity.getId(), userEntity.getCode(), 5 * 60 * 60L);
+        String accessToken = jwtUtil.createAccessToken(userEntity.getName(), userEntity.getId(), userEntity.getCoupleCode(), 5 * 60 * 60L);
         String refreshToken = jwtUtil.createRefreshToken(userEntity.getName(), userEntity.getId(), 24 * 5 * 60 * 60L);
 
         // Redis에 Refresh Token 저장
@@ -34,7 +34,7 @@ public class TokenService ***REMOVED***
     ***REMOVED***
     public Map<String, String> generateSuperTokens(UserEntity userEntity) ***REMOVED***
         System.out.println(30 * 24 * 60 * 60 * 60L);
-        String accessToken = jwtUtil.createAccessToken(userEntity.getName(), userEntity.getId(), userEntity.getCode(), 30 * 24 * 60 * 60L);
+        String accessToken = jwtUtil.createAccessToken(userEntity.getName(), userEntity.getId(), userEntity.getCoupleCode(), 30 * 24 * 60 * 60L);
         String refreshToken = jwtUtil.createRefreshToken(userEntity.getName(), userEntity.getId(), 300 * 24 * 60 * 60L);
 
         // Redis에 Refresh Token 저장

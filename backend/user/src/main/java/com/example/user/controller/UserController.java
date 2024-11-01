@@ -6,6 +6,7 @@ import com.example.user.entity.UserEntity;
 import com.example.user.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,12 +25,18 @@ public class UserController ***REMOVED***
         return response;
     ***REMOVED***
 
-    @GetMapping("/users/couple-code")
+    @GetMapping("/couple-code")
     public APIResponse getCoupleCode(@AuthenticationPrincipal UserEntity user) ***REMOVED***
-        UserResponseDTO userResponseDTO = userService.coupleCode(user.getCode());
+        UserResponseDTO userResponseDTO = userService.coupleCode(user.getCoupleCode());
         APIResponse apiResponse = APIResponse.builder()
                 .status(200)
                 .data(userResponseDTO)
                 .build();
+        return  apiResponse;
     ***REMOVED***
+
+//    @PatchMapping
+//    public APIResponse updateUser(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+//        UserResponseDTO userResponseDTO = userService.
+//    ***REMOVED***
 ***REMOVED***

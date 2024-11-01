@@ -52,14 +52,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
             userEntity.setSocialId(socialId);
             userEntity.setName(oAuth2Response.getName());
             userEntity.setEmail(oAuth2Response.getEmail());
-            userEntity.setCode(randomCode);
+            userEntity.setCoupleCode(randomCode);
 
             userRepository.save(userEntity);
             UserDTO userDTO = new UserDTO();
             userDTO.setId(userEntity.getId());
             userDTO.setSocialId(socialId);
             userDTO.setName(oAuth2Response.getName());
-            userDTO.setCode(randomCode);
+            userDTO.setCoupleCode(randomCode);
 
             return new CustomOAuth2User(userDTO);
         ***REMOVED*** else ***REMOVED***

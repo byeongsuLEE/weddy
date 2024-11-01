@@ -26,7 +26,7 @@ public class UserService ***REMOVED***
 
     public UserResponseDTO coupleCode(String coupleCode)***REMOVED***
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
-                .code(coupleCode)
+                .coupleCode(coupleCode)
                 .build();
 
         return userResponseDTO;
