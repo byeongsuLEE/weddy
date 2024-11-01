@@ -7,7 +7,7 @@ import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 interface PlannerBoxProps ***REMOVED***
   title: string;
   company: string;
-  price: number;
+  price: string;
   content:string;
 ***REMOVED***
 

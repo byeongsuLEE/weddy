@@ -8,6 +8,7 @@ export interface Product ***REMOVED***
   name: string;
   price: string;
   address: string;
+  content: string;
   vendorName: string;
   vendorId: string;
   images: Image[];
