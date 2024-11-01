@@ -1,9 +1,9 @@
-package com.example.contract.dto.response;
+package com.example.user.contract.dto.response;
 
 
-import com.example.contract.constant.ContractStatus;
-import com.example.contract.constant.ProductType;
-import com.example.contract.domain.Product;
+import com.example.user.contract.constant.ContractStatus;
+import com.example.user.contract.constant.ProductType;
+import com.example.user.contract.domain.Product;
 import lombok.Builder;
 import lombok.Getter;
 

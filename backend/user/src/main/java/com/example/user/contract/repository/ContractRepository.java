@@ -1,12 +1,15 @@
-package com.example.contract.repository;
+package com.example.user.contract.repository;
 
-import com.example.contract.domain.Contract;
+import com.example.user.contract.domain.Contract;
 import com.example.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+
+@Repository
 public interface ContractRepository extends JpaRepository<Contract, Long> ***REMOVED***
     Optional<Contract> findByIdAndUser(Long contractId, UserEntity userEntity);
 

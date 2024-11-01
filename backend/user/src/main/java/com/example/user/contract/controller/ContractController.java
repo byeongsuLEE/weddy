@@ -1,11 +1,12 @@
-package com.example.contract.controller;
+package com.example.user.contract.controller;
 
-import com.example.contract.dto.request.CreateContractRequestDto;
-import com.example.contract.service.ContractService;
-import com.example.contract.domain.Contract;
-import com.example.contract.dto.response.ContractResponseDto;
+import com.example.user.contract.domain.Contract;
+import com.example.user.contract.dto.request.CreateContractRequestDto;
+import com.example.user.contract.dto.response.ContractResponseDto;
+import com.example.user.contract.service.ContractService;
 import com.example.global.util.response.ApiResponse;
 import com.example.user.entity.UserEntity;
+import com.example.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
 public class ContractController ***REMOVED***
 
     private final ContractService contractService;
+    private final UserRepository userRepository;
 
 
     /**
@@ -63,24 +66,6 @@ public class ContractController ***REMOVED***
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(contractResponseDto, "계약서 상태가 변경되었습니다."));
     ***REMOVED***
 
-
-    /**
-     *
-     * @ 작성자   : 이병수
-     * @ 작성일   : 2024-10-31
-     * @ 설명     : 계약서 상세조회 api
-
-     * @param contractId
-     * @param userEntity
-     * @return
-     */
-    @GetMapping("/***REMOVED***contractId***REMOVED***")
-    public ResponseEntity<ApiResponse<ContractResponseDto>> getContract(@PathVariable Long contractId,@AuthenticationPrincipal UserEntity userEntity) ***REMOVED***
-        Contract contract = contractService.getContract(contractId);
-        ContractResponseDto contractResponseDto = contract.mapToCreateContractResponseDto(contract);
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(contractResponseDto, "계약서 상세조회 성공"));
-    ***REMOVED***
-
     /**
      *
      * @ 작성자   : 이병수
@@ -102,6 +87,24 @@ public class ContractController ***REMOVED***
      *
      * @ 작성자   : 이병수
      * @ 작성일   : 2024-10-31
+     * @ 설명     : 계약서 상세조회 api
+
+     * @param contractId
+     * @param userEntity
+     * @return
+     */
+    @GetMapping("/***REMOVED***contractId***REMOVED***")
+    public ResponseEntity<ApiResponse<ContractResponseDto>> getContract(@PathVariable Long contractId,@AuthenticationPrincipal UserEntity userEntity) ***REMOVED***
+        Contract contract = contractService.getContract(contractId);
+        ContractResponseDto contractResponseDto = contract.mapToCreateContractResponseDto(contract);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(contractResponseDto, "계약서 상세조회 성공"));
+    ***REMOVED***
+
+
+    /**
+     *
+     * @ 작성자   : 이병수
+     * @ 작성일   : 2024-10-31
      * @ 설명     :
 
      * @param contract
@@ -110,9 +113,8 @@ public class ContractController ***REMOVED***
     public  List<ContractResponseDto> mapToCreateContractResponseDtoList(List<Contract> contract) ***REMOVED***
         //TODO: CreateContractResponseDto 매핑
         return contract.stream()
-                .map((contract1) -> com.example.contract.dto.response.ContractResponseDto.builder()
+                .map((contract1) -> ContractResponseDto.builder()
                         .id(contract1.getId())
-                        .type(contract1.getType())
                         .status(contract1.getStatus())
                         .totalMount(contract1.getTotalMount())
                         .downPayment(contract1.getDownPayment())

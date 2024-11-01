@@ -1,6 +1,6 @@
-package com.example.contract.dto.request;
+package com.example.user.contract.dto.request;
 
-import com.example.contract.domain.Product;
+import com.example.user.contract.domain.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

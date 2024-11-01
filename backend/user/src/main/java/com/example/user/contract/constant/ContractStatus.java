@@ -1,4 +1,4 @@
-package com.example.contract.constant;
+package com.example.user.contract.constant;
 
 /**
  * 작성자   : user

@@ -1,6 +1,6 @@
-package com.example.contract.domain;
+package com.example.user.contract.domain;
 
-import com.example.contract.constant.ProductType;
+import com.example.user.contract.constant.ProductType;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

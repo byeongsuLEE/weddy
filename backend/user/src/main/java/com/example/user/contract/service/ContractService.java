@@ -1,7 +1,7 @@
-package com.example.contract.service;
+package com.example.user.contract.service;
 
-import com.example.contract.domain.Contract;
-import com.example.contract.dto.request.CreateContractRequestDto;
+import com.example.user.contract.domain.Contract;
+import com.example.user.contract.dto.request.CreateContractRequestDto;
 import com.example.user.entity.UserEntity;
 
 import java.util.List;

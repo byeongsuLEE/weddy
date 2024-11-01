@@ -1,10 +1,10 @@
-package com.example.contract.service;
+package com.example.user.contract.service;
 
 
-import com.example.contract.constant.ContractStatus;
-import com.example.contract.domain.Contract;
-import com.example.contract.dto.request.CreateContractRequestDto;
-import com.example.contract.repository.ContractRepository;
+import com.example.user.contract.constant.ContractStatus;
+import com.example.user.contract.domain.Contract;
+import com.example.user.contract.dto.request.CreateContractRequestDto;
+import com.example.user.contract.repository.ContractRepository;
 import com.example.global.util.exception.ContractNotFoundException;
 import com.example.user.entity.UserEntity;
 import com.example.global.util.response.ErrorCode;
@@ -57,7 +57,6 @@ public class ContractServiceImpl implements ContractService ***REMOVED***
 
         List<Contract> contractList = createContractRequestListDto.stream()
                 .map((request) -> Contract.builder()
-                        .type(request.getProduct().getType())
                         .status(ContractStatus.CONTRACT_PENDING)
                         .totalMount(request.getTotalMount())
                         .downPayment(request.getDownPayment())

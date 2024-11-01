@@ -1,9 +1,7 @@
-package com.example.contract.domain;
+package com.example.user.contract.domain;
 
-import com.example.contract.constant.ContractStatus;
-import com.example.contract.constant.ProductType;
-import com.example.contract.dto.request.CreateContractRequestDto;
-import com.example.contract.dto.response.ContractResponseDto;
+import com.example.user.contract.dto.response.ContractResponseDto;
+import com.example.user.contract.constant.ContractStatus;
 import com.example.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,8 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 작성자   : 이병수
@@ -31,7 +27,6 @@ public class Contract ***REMOVED***
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private ProductType type;
     private ContractStatus status;
     private Long totalMount;
     private Long downPayment;
@@ -60,7 +55,6 @@ public class Contract ***REMOVED***
         //TODO: CreateContractResponseDto 매핑
         return ContractResponseDto.builder()
                         .id(contract.getId())
-                        .type(contract.getType())
                         .status(contract.getStatus())
                         .totalMount(contract.getTotalMount())
                         .downPayment(contract.getDownPayment())
