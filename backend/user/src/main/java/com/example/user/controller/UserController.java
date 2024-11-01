@@ -1,6 +1,7 @@
 package com.example.user.controller;
 
 import com.example.user.dto.APIResponse;
+import com.example.user.dto.response.UserResponseDTO;
 import com.example.user.entity.UserEntity;
 import com.example.user.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,15 +19,17 @@ public class UserController ***REMOVED***
     ***REMOVED***
 
     @GetMapping
-    public String getUsers() ***REMOVED***
-        //APIResponse response = userService.userInfo(user.getId());
-        System.out.println("1");
-        return "Hello World";
+    public APIResponse getUsers(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+        APIResponse response = userService.userInfo(user.getId());
+        return response;
     ***REMOVED***
 
-    @GetMapping("/test")
-    public String test() ***REMOVED***
-        System.out.println("유저");
-        return "test";
+    @GetMapping("/users/couple-code")
+    public APIResponse getCoupleCode(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+        UserResponseDTO userResponseDTO = userService.coupleCode(user.getCode());
+        APIResponse apiResponse = APIResponse.builder()
+                .status(200)
+                .data(userResponseDTO)
+                .build();
     ***REMOVED***
 ***REMOVED***
