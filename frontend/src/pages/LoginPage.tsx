@@ -1,4 +1,4 @@
-import ***REMOVED*** googleLogin, kakaoLogin ***REMOVED*** from "../api/authApi";
+import ***REMOVED*** googleLogin, naverLogin ***REMOVED*** from "../api/authApi";
 
 const Login = () => ***REMOVED***
   return (
@@ -14,15 +14,12 @@ const Login = () => ***REMOVED***
 
       <button
         className="flex bg-naver my-4 items-center font-bold justify-center w-72 h-14 text-white rounded-xl"
-        onClick=***REMOVED***kakaoLogin***REMOVED***
+        onClick=***REMOVED***naverLogin***REMOVED***
       >
-        <img
-          className="w-11 h-10 mr-3"
-          src="icons/naver.png"
-          alt="카카오로 시작하기"
-        />
+        <img className="w-11 h-10 mr-3" src="icons/naver.png" alt="naver" />
         네이버로 시작하기
       </button>
+
       ***REMOVED***/* <button
         className="flex bg-yellow-400 my-2 items-center justify-center w-72 h-14 rounded-xl"
         onClick=***REMOVED***kakaoLogin***REMOVED***
@@ -35,6 +32,6 @@ const Login = () => ***REMOVED***
         카카오로 시작하기
       </button> */***REMOVED***
     </div>
-  )
-***REMOVED***
+  );
+***REMOVED***;
 export default Login;
