@@ -1,16 +1,23 @@
 // import ***REMOVED*** aiRecommend ***REMOVED*** from "@/api/recommendApi";
-// import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
+import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
-// import ***REMOVED*** useSetRecoilState ***REMOVED*** from "recoil";
+import ***REMOVED*** useRecoilState ***REMOVED*** from "recoil";
 
 const Prompt = () => ***REMOVED***
   const [placeholder, setPlaceholder] = useState("");
   const text = "모던한 분위기의 500만원대 스튜디오 추천해줘";
   const [ inputValue, setInputValue] = useState("");
-  // const setRecommendList = useSetRecoilState(recommendState);
+  const [recommendList, setRecommendList] = useRecoilState(recommendState);
 
   const navigate = useNavigate();
+
+  //== 스토어에 값이 저장되어있으면 바로 planner로 이동 ==//
+  useEffect(() => ***REMOVED***
+    if (recommendList.length > 0) ***REMOVED***
+      navigate("/planner");
+    ***REMOVED***
+  ***REMOVED***, []);
 
   const toPlanner = async () => ***REMOVED***
     console.log(inputValue);
