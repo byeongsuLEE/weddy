@@ -1,3 +1,7 @@
+interface Image ***REMOVED***
+  imageUrl: string;
+***REMOVED***
+
 export interface Product ***REMOVED***
   id: string;
   type: string;
@@ -6,8 +10,10 @@ export interface Product ***REMOVED***
   address: string;
   vendorName: string;
   vendorId: string;
-  images: string[];
+  images: Image[];
 ***REMOVED***
+
+
 
 export interface ReviewData ***REMOVED***
   content: string;

@@ -30,7 +30,7 @@ const SDMList = (***REMOVED*** value, productList ***REMOVED***: SDMListProps) =
           filteredList && filteredList.length > 0 ? (
             filteredList.map((product: Product) => (
               <Link to=***REMOVED***`board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
-                <SDMBox src=***REMOVED***product.images[0]?.imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
+                <SDMBox src=***REMOVED***product.images[0].imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
               </Link>
             ))
           ) : (
@@ -39,7 +39,7 @@ const SDMList = (***REMOVED*** value, productList ***REMOVED***: SDMListProps) =
         ) : productList && productList.length > 0 ? (
           productList.map((product: Product) => (
             <Link to=***REMOVED***`/board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
-              <SDMBox src=***REMOVED***product.images[0]?.imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
+              <SDMBox src=***REMOVED***product.images[0].imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
             </Link>
           ))
         ) : (

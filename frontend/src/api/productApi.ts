@@ -12,6 +12,7 @@ export const allProducts = async (): Promise<Product[]> => ***REMOVED***
       Authorization: `Bearer `
     ***REMOVED***
   ***REMOVED***);
+  console.log(response.data.data);
   return response.data.data;
 ***REMOVED***;
 
