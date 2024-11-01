@@ -1,13 +1,13 @@
-package com.example.user.dto;
+package com.example.user.dto.response;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Data
 @Builder
-public class UserDTO ***REMOVED***
+public class UserResponseDTO ***REMOVED***
     private Long id;
     private String code;
     private String name;
