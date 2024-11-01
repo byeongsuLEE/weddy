@@ -36,7 +36,8 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
                 "/login",
                 "/oauth2",
                 "/api/login",
-                "/api/users/reissue"
+                "/api/users/reissue",
+                "/api/users/reissue/**"
                 );
 
         // 경로 리스트에 포함된 항목이 요청 경로의 접두사인지 확인
@@ -78,7 +79,7 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
         //userDTO를 생성하여 값 set
         UserDTO userDTO = new UserDTO();
         userDTO.setId(id);
-        userDTO.setCode(code);
+        userDTO.setCoupleCode(code);
 
         //UserDetails에 회원 정보 객체 담기
         CustomOAuth2User customOAuth2User = new CustomOAuth2User(userDTO);
