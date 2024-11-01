@@ -31,4 +31,8 @@ public class UserService ***REMOVED***
 
         return userResponseDTO;
     ***REMOVED***
+
+    public void patchUser(UserEntity userEntity)***REMOVED***
+        userRepository.save(userEntity);
+    ***REMOVED***
 ***REMOVED***
