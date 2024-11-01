@@ -37,8 +37,6 @@ public class Contract ***REMOVED***
     private String additionalTerms;
     private LocalDate startDate;
     private LocalDate endDate;
-    @Column(nullable = false, length = 10)
-    private String code;
 
     //product 외부 상품서비스 정보 등록
 
@@ -66,7 +64,6 @@ public class Contract ***REMOVED***
                         .product(contract.getProduct())
                         .userId(contract.getUser().getId())
                         .userName(contract.getUser().getName())
-                         .code(contract.getCode())
                         .build();
     ***REMOVED***
 

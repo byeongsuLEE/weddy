@@ -29,7 +29,6 @@ import java.util.stream.Collectors;
 public class ContractController ***REMOVED***
 
     private final ContractService contractService;
-    private final UserRepository userRepository;
 
 
     /**
@@ -115,6 +114,11 @@ public class ContractController ***REMOVED***
         return contract.stream()
                 .map((contract1) -> ContractResponseDto.builder()
                         .id(contract1.getId())
+                        .title(contract1.getProduct().getProduct_name())
+                        .content(contract1.getProduct().getProduct_content())
+                        .type(contract1.getProduct().getType())
+                        .code(contract1.getUser().getCode())
+                        .userName(contract1.getUser().getName())
                         .status(contract1.getStatus())
                         .totalMount(contract1.getTotalMount())
                         .downPayment(contract1.getDownPayment())
