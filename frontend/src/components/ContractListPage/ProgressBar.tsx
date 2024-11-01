@@ -1,7 +1,7 @@
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** Progress ***REMOVED*** from "@/components/ui/progress";
 
-// 계약대기:0 서명:40 결제:65 결제완료:100
+// 계약대기:0 서명:40 결제:65 결제완료:100 
 interface ProgressBarProps ***REMOVED***
   status: "CONTRACT_PENDING" | "SIGN_PENDING" | "PAYMENT_PENDING" | "PAYMENT_COMPLETED";
 ***REMOVED***
