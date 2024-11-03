@@ -117,7 +117,7 @@ public class ContractController ***REMOVED***
                         .title(contract1.getProduct().getProduct_name())
                         .content(contract1.getProduct().getProduct_content())
                         .type(contract1.getProduct().getType())
-                        .code(contract1.getUser().getCode())
+                        .code(contract1.getUser().getCoupleCode())
                         .userName(contract1.getUser().getName())
                         .status(contract1.getStatus())
                         .totalMount(contract1.getTotalMount())
