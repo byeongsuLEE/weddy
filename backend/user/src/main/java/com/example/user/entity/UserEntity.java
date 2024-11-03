@@ -20,7 +20,7 @@ public class UserEntity ***REMOVED***
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String code;
+    private String coupleCode;
 
     private String socialId;
 

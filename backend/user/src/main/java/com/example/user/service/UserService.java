@@ -26,9 +26,13 @@ public class UserService ***REMOVED***
 
     public UserResponseDTO coupleCode(String coupleCode)***REMOVED***
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
-                .code(coupleCode)
+                .coupleCode(coupleCode)
                 .build();
 
         return userResponseDTO;
+    ***REMOVED***
+
+    public void patchUser(UserEntity userEntity)***REMOVED***
+        userRepository.save(userEntity);
     ***REMOVED***
 ***REMOVED***

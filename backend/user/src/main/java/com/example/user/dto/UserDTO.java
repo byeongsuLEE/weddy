@@ -1,15 +1,12 @@
 package com.example.user.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@Builder
 public class UserDTO ***REMOVED***
     private Long id;
-    private String code;
+    private String coupleCode;
     private String name;
     private String socialId;
     private String adress;
