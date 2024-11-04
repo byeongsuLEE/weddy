@@ -35,4 +35,19 @@ public class UserService ***REMOVED***
     public void patchUser(UserEntity userEntity)***REMOVED***
         userRepository.save(userEntity);
     ***REMOVED***
+
+    public void updateUserInfo(Long id, String phone, String name, String address) ***REMOVED***
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        userEntity.setPhone(phone);
+        userEntity.setName(name);
+        userEntity.setAddress(address);
+        userRepository.save(userEntity);
+
+    ***REMOVED***
+
+    public void patchCoupleCode(String coupleCode,Long id)***REMOVED***
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        userEntity.setCoupleCode(coupleCode);
+        userRepository.save(userEntity);
+    ***REMOVED***
 ***REMOVED***

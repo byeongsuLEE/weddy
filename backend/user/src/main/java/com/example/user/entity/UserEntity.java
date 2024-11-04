@@ -30,5 +30,5 @@ public class UserEntity ***REMOVED***
 
     private String address;
 
-
+    private String phone;
 ***REMOVED***
