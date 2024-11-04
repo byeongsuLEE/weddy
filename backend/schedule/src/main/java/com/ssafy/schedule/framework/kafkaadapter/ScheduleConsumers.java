@@ -1,5 +1,6 @@
 package com.ssafy.schedule.framework.kafkaadapter;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.schedule.application.usecase.CreateScheduleUsecase;
 import com.ssafy.schedule.domain.event.PaymentProductInfo;

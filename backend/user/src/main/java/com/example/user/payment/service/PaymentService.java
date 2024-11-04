@@ -4,6 +4,7 @@ package com.example.user.payment.service;
 import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.service.ContractService;
 import com.example.user.payment.dto.request.ContractInfoRequestDto;
+import com.example.user.payment.dto.request.PaymentProductInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class PaymentService ***REMOVED***
     @Value(value = "$***REMOVED***producers.topic1.name***REMOVED***")
     private String TOPIC_PAYMENT;
 
-    private final KafkaTemplate<String ,Object> kafkaTemplate;
+    private final KafkaTemplate<String ,PaymentProductInfo> kafkaTemplate;
     private final ContractService contractService;
     /**
      * 결제 성공 후 게약서 상태 정보 변경 및 카프카를 통해 일정 자동 등록 이벤트 발생
@@ -40,7 +41,9 @@ public class PaymentService ***REMOVED***
     ***REMOVED***
 
     public void occurPaymentEvent(ContractInfoRequestDto contractInfoRequestDto)  ***REMOVED***
-        CompletableFuture<SendResult<String, Object>> send = kafkaTemplate.send(TOPIC_PAYMENT, contractInfoRequestDto);
+        PaymentProductInfo paymentProductInfo = createPaymentProductInfo(contractInfoRequestDto);
+
+        CompletableFuture<SendResult<String, PaymentProductInfo>> send = kafkaTemplate.send(TOPIC_PAYMENT, paymentProductInfo);
         send.whenComplete((sendResult,ex)->***REMOVED***
             if(ex!=null)***REMOVED***
 
@@ -49,12 +52,30 @@ public class PaymentService ***REMOVED***
                 // 보상함수 실행 ;
                 // 결제 보상;
             ***REMOVED***else***REMOVED***
-                ContractInfoRequestDto value = (ContractInfoRequestDto) sendResult.getProducerRecord().value();
+                PaymentProductInfo value = (PaymentProductInfo) sendResult.getProducerRecord().value();
                 log.info("이벤트 처리완료");
 
 
             ***REMOVED***
         ***REMOVED***);
+    ***REMOVED***
+
+    private PaymentProductInfo createPaymentProductInfo(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
+        return PaymentProductInfo.builder()
+                .id(contractInfoRequestDto.getId())
+                .title(contractInfoRequestDto.getTitle())
+                .content(contractInfoRequestDto.getContent())
+                .status(contractInfoRequestDto.getStatus())
+                .userId(contractInfoRequestDto.getUserId())
+                .code(contractInfoRequestDto.getCode())
+                .userName(contractInfoRequestDto.getUserName())
+                .totalMount(contractInfoRequestDto.getTotalMount())
+                .companyName(contractInfoRequestDto.getCompanyName())
+                .additionalTerms(contractInfoRequestDto.getAdditionalTerms())
+                .startDate(contractInfoRequestDto.getStartDate())
+                .endDate(contractInfoRequestDto.getEndDate())
+                .product(contractInfoRequestDto.getProduct())
+                .build();
     ***REMOVED***
 
 ***REMOVED***
