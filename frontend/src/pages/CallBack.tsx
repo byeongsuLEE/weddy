@@ -10,12 +10,9 @@ const CallBack = () => ***REMOVED***
   //== 토큰 정보 ==//
   useQuery(
     ['getToken', userId],
-    () => getToken(userId),
+    () => getToken(userId ?? undefined),
     ***REMOVED***
-      enabled: !!userId,
-      onSuccess: () => ***REMOVED***
-        navigate('/');
-      ***REMOVED***,
+      enabled: !!userId
     ***REMOVED***
   );
 

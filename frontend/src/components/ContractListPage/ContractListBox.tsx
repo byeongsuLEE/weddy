@@ -3,13 +3,17 @@ import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
 import ProgressBar from "./ProgressBar";
+import ***REMOVED*** requestPayment ***REMOVED*** from "@/api/paymentApi";
 
 interface ContractListBoxProps ***REMOVED***
   type: string;
   contractInfo: ContractData;
 ***REMOVED***
-
 const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+
+  const handlePayment = () => ***REMOVED***
+    requestPayment(contractInfo);
+  ***REMOVED***;
 
   return (
     <>
@@ -32,7 +36,9 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
              </Link>
           )***REMOVED***
           ***REMOVED***contractInfo.status === "PAYMENT_PENDING" && (
-            <TodoButton title="결제 하기" colorId=***REMOVED***1***REMOVED*** />
+            <div onClick=***REMOVED***handlePayment***REMOVED***>
+              <TodoButton title="결제 하기" colorId=***REMOVED***1***REMOVED*** />
+            </div>
           )***REMOVED***
           ***REMOVED***contractInfo.status === "PAYMENT_COMPLETED" && (
             <Link to='/review'>
