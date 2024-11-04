@@ -1,5 +1,5 @@
 import ***REMOVED*** ContractData ***REMOVED*** from "@/api/contract.type";
-import ***REMOVED*** Link, useNavigate ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
 import ProgressBar from "./ProgressBar";
@@ -10,17 +10,6 @@ interface ContractListBoxProps ***REMOVED***
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
-  const navigate = useNavigate();
-
-  const toDetail = () => ***REMOVED***
-    navigate("/board/detail");
-  ***REMOVED***;
-
-  // const category = ***REMOVED***
-  //   STUDIO: "studio",
-  //   DRESS: "dress",
-  //   MAKEUP: "makeup"
-  // ***REMOVED***[type];
 
   return (
     <>
@@ -28,16 +17,17 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
         <ProgressBar status=***REMOVED***contractInfo.status***REMOVED*** />
 
         <div className="flex justify-between mt-10">
-          <div className="flex items-center" onClick=***REMOVED***toDetail***REMOVED***>
-            <h1 className="font-bold mr-4">***REMOVED***type***REMOVED***</h1>
-            <GotoIcon />
-          </div>
-
+        <Link to=***REMOVED***`/board/detail/$***REMOVED***contractInfo.product.product_id***REMOVED***`***REMOVED***>
+            <div className="flex items-center">
+              <h1 className="font-bold mr-4">***REMOVED***type***REMOVED***</h1>
+              <GotoIcon />
+            </div>
+          </Link>
           ***REMOVED***contractInfo.status === "CONTRACT_PENDING" && (
             <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** />
           )***REMOVED***
           ***REMOVED***contractInfo.status === "SIGN_PENDING" && (
-             <Link to='/contract'>
+             <Link to=***REMOVED***`/contract/$***REMOVED***contractInfo.type***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***>
                <TodoButton title="서명 하기" colorId=***REMOVED***1***REMOVED*** />
              </Link>
           )***REMOVED***

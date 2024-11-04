@@ -1,8 +1,16 @@
+interface ContractProduct ***REMOVED***
+  product_id: string;
+  product_name: string;
+  product_content: string;
+  type: string;
+***REMOVED***
+
 export interface ContractData ***REMOVED***
   id: number;
-  productName?: string;
+  product: ContractProduct;
   customer?: string;
   type: string;
+  content: string;
   status: "CONTRACT_PENDING" | "SIGN_PENDING" | "PAYMENT_PENDING" | "PAYMENT_COMPLETED";
   totalMount: string;
   downPayment: string;
@@ -10,4 +18,6 @@ export interface ContractData ***REMOVED***
   companyName: string;
   startDate: Date;
   endDate: Date;
+  title: string;
+  userName: string;
 ***REMOVED***;
