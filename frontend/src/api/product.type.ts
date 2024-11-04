@@ -14,8 +14,6 @@ export interface Product ***REMOVED***
   images: Image[];
 ***REMOVED***
 
-
-
 export interface ReviewData ***REMOVED***
   content: string;
   date: string;
