@@ -40,24 +40,24 @@ public class UserController ***REMOVED***
         return  apiResponse;
     ***REMOVED***
 
-    @PatchMapping
-    public APIResponse updateUser(@AuthenticationPrincipal UserEntity user) ***REMOVED***
-        APIResponse apiResponse;
-        try ***REMOVED***
-            userService.patchUser(user);
-            apiResponse = APIResponse.builder()
-                    .status(200)
-                    .message("회원 정보 수정 완료")
-                    .build();
-        ***REMOVED***
-        catch (Exception e) ***REMOVED***
-            apiResponse = APIResponse.builder()
-                    .status(500)
-                    .message("회원 정보 수정 에러")
-                    .build();
-        ***REMOVED***
-        return  apiResponse;
-    ***REMOVED***
+//    @PatchMapping
+//    public APIResponse updateUser(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+//        APIResponse apiResponse;
+//        try ***REMOVED***
+//            userService.patchUser(user);
+//            apiResponse = APIResponse.builder()
+//                    .status(200)
+//                    .message("회원 정보 수정 완료")
+//                    .build();
+//        ***REMOVED***
+//        catch (Exception e) ***REMOVED***
+//            apiResponse = APIResponse.builder()
+//                    .status(500)
+//                    .message("회원 정보 수정 에러")
+//                    .build();
+//        ***REMOVED***
+//        return  apiResponse;
+//    ***REMOVED***
 
     @PostMapping("/logout")
     public APIResponse logoutUser (@AuthenticationPrincipal UserEntity user,@RequestHeader("Authorization") String authorizationHeader) ***REMOVED***

@@ -32,9 +32,9 @@ public class UserService ***REMOVED***
         return userResponseDTO;
     ***REMOVED***
 
-    public void patchUser(UserEntity userEntity)***REMOVED***
-        userRepository.save(userEntity);
-    ***REMOVED***
+//    public void patchUser(UserEntity userEntity)***REMOVED***
+//        userRepository.save(userEntity);
+//    ***REMOVED***
 
     public void updateUserInfo(Long id, String phone, String name, String address) ***REMOVED***
         UserEntity userEntity = userRepository.findById(id).orElse(null);
