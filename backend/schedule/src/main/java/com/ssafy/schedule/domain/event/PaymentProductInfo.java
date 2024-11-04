@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentProductInfo ***REMOVED***
+
+
     private Long productId;
     private String title;
     private LocalDate startDate;
