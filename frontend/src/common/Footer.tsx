@@ -58,7 +58,6 @@ const Footer = () => ***REMOVED***
         <Link to='/mypage'>
           <MyIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
         </Link>
-
       )***REMOVED***
 
     </footer>

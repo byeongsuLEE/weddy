@@ -3,4 +3,5 @@ export interface userInformation ***REMOVED***
   phone: string;
   email: string;
   address: string;
+  dateofWedding: string;
 ***REMOVED***;
