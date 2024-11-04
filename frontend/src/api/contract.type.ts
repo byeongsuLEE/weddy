@@ -22,11 +22,10 @@ export interface ContractData ***REMOVED***
   content: string;
   status: "CONTRACT_PENDING" | "SIGN_PENDING" | "PAYMENT_PENDING" | "PAYMENT_COMPLETED";
   totalMount: string;
-  downPayment: string;
-  finalPayment: string;
   companyName: string;
   startDate: Date;
   endDate: Date;
   title: string;
   userName: string;
+  code: string;
 ***REMOVED***;
