@@ -40,7 +40,7 @@ const CartBox = (***REMOVED*** title, type, cartItem, onAmountChange ***REMOVED*
             </div>
           </div>
           <div>
-            ***REMOVED***item.price.toLocaleString()***REMOVED***원
+            ***REMOVED***Number(item.price).toLocaleString()***REMOVED***원
           </div>
           <div>
             <button className="text-sm">삭제</button>

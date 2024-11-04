@@ -1,9 +1,14 @@
+import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+// import ***REMOVED*** getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import CartBox from "@/components/CartPage/CartBox";
 import ***REMOVED*** useState ***REMOVED*** from 'react';
+// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const CartPage = () => ***REMOVED***
+  // const [ cartList, setCartList ] = useQuery('getCartItems', getCartItems);
+
   const dummyData: Product[] = [
     ***REMOVED***
       id: "1",
@@ -78,17 +83,22 @@ const CartPage = () => ***REMOVED***
     ***REMOVED***));
   
     setSelectedList((prev) => ***REMOVED***
-      if (!selectedCartItem) return prev; // 선택된 항목이 없으면 현재 리스트를 반환
+      if (!selectedCartItem) return prev;
   
       const exists = prev.some((item) => item.id === selectedCartItem.id);
       if (exists) ***REMOVED***
-        // 이미 리스트에 있으면 현재 리스트를 반환
         return prev;
       ***REMOVED***
-  
-      // 선택된 항목을 리스트에 추가
+
       return [...prev, selectedCartItem];
     ***REMOVED***);
+  ***REMOVED***;
+
+  //== 계약서 정보 생성 후 API 호출 ==//
+  const handleCreateContract = () => ***REMOVED***
+    selectedList.map((item: Product) => ***REMOVED***
+      createContract(item);
+    ***REMOVED***)
   ***REMOVED***;
 
   const studio = dummyData.filter((item: Product) => item.type === 'STUDIO');
@@ -117,7 +127,7 @@ const CartPage = () => ***REMOVED***
       />
       <div className="flex justify-between mt-10 mx-10">
         <span className="text-lg font-bold">총 합계: ***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
-        <div>
+        <div onClick=***REMOVED***handleCreateContract***REMOVED***>
           <TodoButton title="계약 요청" />
         </div>
       </div>

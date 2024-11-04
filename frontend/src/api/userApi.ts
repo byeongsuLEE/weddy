@@ -4,7 +4,7 @@ import ***REMOVED*** userInformation ***REMOVED*** from "./user.type";
 const BASE_URL = "http://localhost:8080/api/users";
 
 //== 토큰 정보 ==//
-export const getToken = async (userId: string | null): Promise<void> => ***REMOVED***
+export const getToken = async (userId?: string): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
     url: `$***REMOVED***BASE_URL***REMOVED***/token/super`,
@@ -12,8 +12,12 @@ export const getToken = async (userId: string | null): Promise<void> => ***REMOV
       id: userId,
     ***REMOVED***
   ***REMOVED***);
-  sessionStorage.setItem("token", response.data.accessToken);
-  sessionStorage.setItem("refreshToken", response.data.refreshToken);
+
+  if (userId) ***REMOVED***
+    sessionStorage.setItem("userId", userId);
+    sessionStorage.setItem("token", response.data.accessToken);
+    sessionStorage.setItem("refreshToken", response.data.refreshToken);
+  ***REMOVED***;
 ***REMOVED***;
 
 //== 로그아웃 ==//

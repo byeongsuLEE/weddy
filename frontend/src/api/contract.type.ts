@@ -1,8 +1,17 @@
-interface ContractProduct ***REMOVED***
+export interface ContractProduct ***REMOVED***
   product_id: string;
   product_name: string;
   product_content: string;
+***REMOVED***
+
+export interface SentContractType ***REMOVED***
+  userId: string;
+  totalMount: string;
+  companyName: string;
+  startDate: string;
+  endDate: string;
   type: string;
+  product: ContractProduct;
 ***REMOVED***
 
 export interface ContractData ***REMOVED***
