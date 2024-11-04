@@ -7,7 +7,7 @@ const token = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwidXNlck5hbWUiOiJb6rSR7KO8XzHrsJhf
 
 //== 계약 리스트 ==//
 export const myContract = async (): Promise<ContractData[]> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  const response = await axios(***REMOVED*** 
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
