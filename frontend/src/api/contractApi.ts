@@ -12,7 +12,10 @@ export const myContract = async (): Promise<ContractData[]> => ***REMOVED***
     url: BASE_URL,
     headers: ***REMOVED***
       Authorization: `Bearer $***REMOVED***token***REMOVED***`
-    ***REMOVED***
+    ***REMOVED***,
+    // headers: ***REMOVED***
+    //   Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
+    // ***REMOVED***
   ***REMOVED***);
   return response.data.data;
 ***REMOVED***;
@@ -25,6 +28,9 @@ export const contractInfo = async (contractId?: string): Promise<ContractData> =
     headers: ***REMOVED***
       Authorization: `Bearer $***REMOVED***token***REMOVED***`
     ***REMOVED***
+    // headers: ***REMOVED***
+    //   Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
+    // ***REMOVED***
   ***REMOVED***);
   return response.data.data;
 ***REMOVED***;
@@ -37,6 +43,9 @@ export const signature = async (signature: string): Promise<void> => ***REMOVED*
     headers: ***REMOVED***
       Authorization: `Bearer $***REMOVED***token***REMOVED***`
     ***REMOVED***,
+    // headers: ***REMOVED***
+    //   Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`
+    // ***REMOVED***,
     data: signature
   ***REMOVED***);
   console.log(response.data);
