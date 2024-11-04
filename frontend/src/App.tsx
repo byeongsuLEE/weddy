@@ -18,6 +18,9 @@ import Review from "./pages/ReviewPage";
 import Schedule from './pages/SchedulePage';
 import Sketch from './pages/SketchPage';
 import Prompt from './pages/PromptPage';
+import NFTLoading from "./pages/NFTLoadingPage";
+import RecommendLoading from "./pages/RecommendLoadingPage";
+import UserInfo from "./pages/UserInfoPage";
 
 function AppContent() ***REMOVED***
   const location = useLocation();
@@ -26,12 +29,13 @@ function AppContent() ***REMOVED***
 
   return (
     <>
-      ***REMOVED***currentPath !== "login" && <Navbar />***REMOVED***
+      ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && <Navbar />***REMOVED***
       <Routes>
         <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
         <Route path="/review/:productId" element=***REMOVED***<Review />***REMOVED*** />
         <Route path="/cart" element=***REMOVED***<Cart />***REMOVED*** />
         <Route path="/login" element=***REMOVED***<Login />***REMOVED*** />
+        <Route path="/userinfo" element=***REMOVED***<UserInfo />***REMOVED*** />
         <Route path="/board" element=***REMOVED***<Board />***REMOVED*** />
         <Route path="/board/detail/:productId" element=***REMOVED***<BoardDetail />***REMOVED*** />
         <Route path="/prompt" element=***REMOVED***<Prompt />***REMOVED*** />
@@ -43,8 +47,10 @@ function AppContent() ***REMOVED***
         <Route path="/contract/list" element=***REMOVED***<ContractList />***REMOVED*** />
         <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
         <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
+        <Route path="/nft/loading" element=***REMOVED***<NFTLoading />***REMOVED*** />
+        <Route path="/recommend/loading" element=***REMOVED***<RecommendLoading />***REMOVED*** />
       </Routes>
-      ***REMOVED***(currentPath !== "login") && (currentDetail !== "detail") && <Footer />***REMOVED***
+      ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && (currentDetail !== "detail")  && <Footer />***REMOVED***
     </>
   );
 ***REMOVED***
