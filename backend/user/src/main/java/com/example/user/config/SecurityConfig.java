@@ -2,6 +2,7 @@ package com.example.user.config;
 
 
 import com.example.user.OAuth2.CustomSuccessHandler;
+import com.example.user.jwt.BlackTokenService;
 import com.example.user.jwt.JWTFilter;
 import com.example.user.jwt.JWTUtil;
 import com.example.user.jwt.LogFilter;
@@ -28,11 +29,13 @@ public class SecurityConfig ***REMOVED***
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
     private final JWTUtil jwtUtil;
+    private final BlackTokenService blackTokenService;
 
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomSuccessHandler customSuccessHandler, JWTUtil jwtUtil) ***REMOVED***
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomSuccessHandler customSuccessHandler, JWTUtil jwtUtil, BlackTokenService blackTokenService) ***REMOVED***
         this.customOAuth2UserService = customOAuth2UserService;
         this.customSuccessHandler = customSuccessHandler;
         this.jwtUtil = jwtUtil;
+        this.blackTokenService = blackTokenService;
     ***REMOVED***
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, UserRepository userRepository) throws Exception ***REMOVED***
@@ -83,7 +86,7 @@ public class SecurityConfig ***REMOVED***
 //                .addFilterBefore(new LogFilter(), UsernamePasswordAuthenticationFilter.class);
         //JWTFilter 추가
         http
-                .addFilterBefore(new JWTFilter(jwtUtil,userRepository), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JWTFilter(jwtUtil,userRepository,blackTokenService), UsernamePasswordAuthenticationFilter.class);
 
         //oauth2
         //api/user/login?

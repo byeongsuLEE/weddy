@@ -3,20 +3,23 @@ package com.example.user.controller;
 import com.example.user.dto.APIResponse;
 import com.example.user.dto.response.UserResponseDTO;
 import com.example.user.entity.UserEntity;
+import com.example.user.jwt.BlackTokenService;
+import com.example.user.service.TokenService;
 import com.example.user.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
 public class UserController ***REMOVED***
     private final UserService userService;
+    private final TokenService tokenService;
+    private final BlackTokenService blackTokenService;
 
-    public UserController(UserService userService) ***REMOVED***
+    public UserController(UserService userService, TokenService tokenService, BlackTokenService blackTokenService) ***REMOVED***
         this.userService = userService;
+        this.tokenService = tokenService;
+        this.blackTokenService = blackTokenService;
     ***REMOVED***
 
     @GetMapping
@@ -52,5 +55,25 @@ public class UserController ***REMOVED***
                     .build();
         ***REMOVED***
         return  apiResponse;
+    ***REMOVED***
+
+    @PostMapping("/logout")
+    public APIResponse logoutUser (@AuthenticationPrincipal UserEntity user,@RequestHeader("Authorization") String authorizationHeader) ***REMOVED***
+        APIResponse apiResponse;
+        String token = authorizationHeader.startsWith("Bearer ") ? authorizationHeader.substring(7) : authorizationHeader;
+        try ***REMOVED***
+            blackTokenService.addToBlacklist(token,user.getId());
+            apiResponse = APIResponse.builder()
+                    .status(200)
+                    .message("로그아웃 완료")
+                    .build();
+        ***REMOVED***
+        catch (Exception e) ***REMOVED***
+            apiResponse = APIResponse.builder()
+                    .status(500)
+                    .message("로그아웃 에러")
+                    .build();
+        ***REMOVED***
+        return apiResponse;
     ***REMOVED***
 ***REMOVED***
