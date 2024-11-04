@@ -48,6 +48,9 @@ dependencies ***REMOVED***
 
 	// 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
 	implementation 'weddy:common-lib:1.0.0'
+
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 ***REMOVED***
 
 tasks.named('test') ***REMOVED***
