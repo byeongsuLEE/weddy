@@ -3,7 +3,7 @@ import axios from "axios";
 import * as PortOne from "@portone/browser-sdk/v2";
 import ***REMOVED*** ContractData ***REMOVED*** from "./contract.type";
 
-const BASE_URL = "http://localhost:8080/api/schedules";
+const BASE_URL = "http://localhost:8080/api/payments";
 const PORTONE_CHANNEL_KEY = import.meta.env.VITE_PORTONE_CHANNEL_KEY;
 const PORTONE_STORE_ID = import.meta.env.VITE_PORTONE_STORE_ID;
 
@@ -45,7 +45,7 @@ export const requestPayment = async (contractInfo: ContractData): Promise<void> 
 const sendPaymentSuccessToServer = async (contractInfo: ContractData): Promise<void> => ***REMOVED***
   try ***REMOVED***
     const response = await axios.post(
-      `$***REMOVED***BASE_URL***REMOVED***/payment/success`,
+      `$***REMOVED***BASE_URL***REMOVED***/success`,
       ***REMOVED***
         productId: contractInfo.product.product_id,
         productName: contractInfo.product.product_name,
