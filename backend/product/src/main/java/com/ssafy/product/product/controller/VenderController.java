@@ -3,10 +3,15 @@ package com.ssafy.product.product.controller;
 import com.ssafy.product.product.dto.request.VenderRequestDto;
 import com.ssafy.product.product.dto.response.VenderResponseDto;
 import com.ssafy.product.product.service.VenderService;
+import com.ssafy.product.global.util.response.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -16,8 +21,8 @@ public class VenderController ***REMOVED***
     private final VenderService venderService;
 
     @PostMapping
-    public ResponseEntity<VenderResponseDto> registerVender(@RequestPart VenderRequestDto venderRequestDto, @RequestPart MultipartFile image) ***REMOVED***
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(venderService.registVender(venderRequestDto, image));
+    public ResponseEntity<ApiResponse<VenderResponseDto>> registerVender(@Valid @RequestPart VenderRequestDto venderRequestDto, @RequestPart MultipartFile image) ***REMOVED***
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success(HttpStatus.CREATED,venderService.registVender(venderRequestDto, image),"업체 등록"));
     ***REMOVED***
 ***REMOVED***

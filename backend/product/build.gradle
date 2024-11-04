@@ -43,6 +43,14 @@ dependencies ***REMOVED***
 	//S3
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// AOP
+	implementation 'org.springframework.boot:spring-boot-starter-aop:3.3.2'
 ***REMOVED***
 
 dependencyManagement ***REMOVED***

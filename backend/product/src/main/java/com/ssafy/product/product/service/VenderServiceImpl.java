@@ -1,10 +1,11 @@
 package com.ssafy.product.product.service;
 
-import com.ssafy.product.config.s3.S3Uploader;
+import com.ssafy.product.global.s3.S3Uploader;
 import com.ssafy.product.product.domain.Vender;
 import com.ssafy.product.product.dto.request.VenderRequestDto;
 import com.ssafy.product.product.dto.response.VenderResponseDto;
 import com.ssafy.product.product.repository.VenderRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,7 @@ public class VenderServiceImpl implements VenderService ***REMOVED***
     private final S3Uploader s3Uploader;
 
     @Override
-    public VenderResponseDto registVender(final VenderRequestDto venderRequestDto, final MultipartFile image) ***REMOVED***
+    public VenderResponseDto registVender(@Valid final VenderRequestDto venderRequestDto, final MultipartFile image) ***REMOVED***
         String s3Url = s3Uploader.putS3(image);
         Vender vender = Vender.builder().venderRequestDto(venderRequestDto).s3Url(s3Url).build();
         venderRepository.save(vender);
