@@ -17,9 +17,10 @@ export enum ProductType ***REMOVED***
 
 // 결제 요청 함수
 export const requestPayment = async (contractInfo: ContractData): Promise<void> => ***REMOVED***
+  console.log("PORTONE_CHANNEL_KEY:", PORTONE_CHANNEL_KEY);
+  console.log("PORTONE_STORE_ID:", PORTONE_STORE_ID);
   const ***REMOVED*** title, totalMount ***REMOVED*** = contractInfo;
   const paymentId = generatePaymentId();
-
   const response = await PortOne.requestPayment(***REMOVED***
     storeId: PORTONE_STORE_ID,
     channelKey: PORTONE_CHANNEL_KEY,
@@ -27,7 +28,7 @@ export const requestPayment = async (contractInfo: ContractData): Promise<void> 
     orderName: title, // 상품명으로 주문명 설정
     totalAmount: parseInt(totalMount, 10), // totalMount를 숫자로 변환
     currency: "CURRENCY_KRW", // KRW로 설정 (변경 없음)
-    payMethod: "CARD",
+    payMethod: "EASY_PAY",
   ***REMOVED***);
 
   if (response) ***REMOVED***
@@ -40,17 +41,15 @@ export const requestPayment = async (contractInfo: ContractData): Promise<void> 
   ***REMOVED***
 ***REMOVED***;
 
-
 // 결제 성공 시 서버로 전송하는 함수
-const sendPaymentSuccessToServer = async ( contractInfo: ContractData ): Promise<void> => ***REMOVED***
-
+const sendPaymentSuccessToServer = async (contractInfo: ContractData): Promise<void> => ***REMOVED***
   try ***REMOVED***
     const response = await axios.post(
       `$***REMOVED***BASE_URL***REMOVED***/payment/success`,
       ***REMOVED***
         productId: contractInfo.product.product_id,
         productName: contractInfo.product.product_name,
-        productType: contractInfo.type,
+        productType: contractInfo.product.type,
         startDate: contractInfo.startDate,
         endDate: contractInfo.endDate,
         content: contractInfo.content,

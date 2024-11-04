@@ -2,6 +2,7 @@ export interface ContractProduct ***REMOVED***
   product_id: string;
   product_name: string;
   product_content: string;
+  type: string;
 ***REMOVED***
 
 export interface SentContractType ***REMOVED***
@@ -18,7 +19,6 @@ export interface ContractData ***REMOVED***
   id: number;
   product: ContractProduct;
   customer?: string;
-  type: string;
   content: string;
   status: "CONTRACT_PENDING" | "SIGN_PENDING" | "PAYMENT_PENDING" | "PAYMENT_COMPLETED";
   totalMount: string;
@@ -28,4 +28,4 @@ export interface ContractData ***REMOVED***
   title: string;
   userName: string;
   code: string;
-***REMOVED***;
+***REMOVED***
