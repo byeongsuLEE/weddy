@@ -9,7 +9,7 @@ const token = "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwidXNlck5hbWUiOiJb6rSR7KO8XzHrsJhf
 export const getToken = async (userId: string | null): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
-    url: `$***REMOVED***BASE_URL***REMOVED***//token/super`,
+    url: `$***REMOVED***BASE_URL***REMOVED***/token/super`,
     params: ***REMOVED***
       id: userId,
     ***REMOVED***,
