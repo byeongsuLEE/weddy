@@ -7,7 +7,6 @@ import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
 import ***REMOVED*** makeSignature ***REMOVED*** from "../hooks/signature";
 import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Contract = () => ***REMOVED***
   const ***REMOVED*** category, contractId ***REMOVED*** = useParams();
@@ -23,7 +22,7 @@ const Contract = () => ***REMOVED***
   ***REMOVED***
 
   //== 계약서 정보 ==//
-  const ***REMOVED*** data: contract ***REMOVED*** = useQuery(
+  const ***REMOVED*** data: contract, isLoading ***REMOVED*** = useQuery(
     ['contractInfo', contractId],
     () => contractInfo(contractId),
     ***REMOVED***enabled: !!contractId***REMOVED***
@@ -50,6 +49,10 @@ const Contract = () => ***REMOVED***
     MAKEUP: "메이크업"
   ***REMOVED***[category as "STUDIO" | "DRESS" | "MAKEUP"];
 
+  if (isLoading) ***REMOVED***
+    return <div>로딩중...</div>;
+  ***REMOVED***
+
   return (
     <div>
       <div className="bg-white border rounded-sm p-5 mx-5 mt-5" ref=***REMOVED***pageRef***REMOVED***>
@@ -60,7 +63,6 @@ const Contract = () => ***REMOVED***
           <br />
           <div className="flex font-bold">
             <div>상품명 :</div>
-            ***REMOVED***/* <div className="ml-2">상품명</div> */***REMOVED***
             <div className="ml-2">***REMOVED***contract?.title***REMOVED***</div>
           </div>
           <div className="flex font-bold">
@@ -73,10 +75,8 @@ const Contract = () => ***REMOVED***
           </div>
           <br />
           <span className="text-sm">
-            ***REMOVED***/* <input disabled name="clientName" placeholder="고객" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" /> */***REMOVED***
             <input disabled name="clientName" placeholder="고객" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.userName***REMOVED***/>
             (이하 “갑” 아리 한다.)와
-            ***REMOVED***/* <input disabled name="candidateName" placeholder="업체" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" /> */***REMOVED***
             <input disabled name="candidateName" placeholder="업체" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.companyName***REMOVED***/>
             (이하 “을” 이라 한다.)는 상품명에 명시된 업무작업을 수행하기 위해 다음과 같이 계약을 체결한다.</span>
           <br />
@@ -85,21 +85,17 @@ const Contract = () => ***REMOVED***
           <br />
           <span className="font-bold text-sm">제 2조 [계약기간]</span>
           <span className="text-sm">계약 일시는
-            ***REMOVED***/* <input disabled name="endDate" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" /> */***REMOVED***
             <input disabled name="endDate" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***formatDate(date)***REMOVED***/>
             로 하며, 갑과 을의 합의 하에 본 계약일시는 변경 될 수 있다.</span>
           <br />
           <span className="font-bold text-sm">제 3조 [계약금액]</span>
           <span className="text-sm">총 계약금액은
-            ***REMOVED***/* <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" /> */***REMOVED***
-            <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.totalMount***REMOVED***/>
+            <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***/>
             만원으로 하며, 계약금액 중
-            ***REMOVED***/* <input disabled name="startPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" /> */***REMOVED***
-            <input disabled name="startPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.downPayment***REMOVED***/>
+            <input disabled name="startPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.downPayment) / 10000).toLocaleString()***REMOVED***/>
             만원은 착수시점에 지급하고,
             잔금
-            ***REMOVED***/* <input disabled name="finalPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" /> */***REMOVED***
-            <input disabled name="finalPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.finalPayment***REMOVED***/>
+            <input disabled name="finalPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.finalPayment) / 10000).toLocaleString()***REMOVED***/>
             만원은 작업 완료 시 작업완료납품과 동시에 “갑”은 “을”에게 지급하기로 한다.</span>
           <br />
           <span className="font-bold text-sm">제 4조 [납품]</span>

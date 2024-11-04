@@ -2,7 +2,6 @@ import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ContractListBox from "../components/ContractListPage/ContractListBox";
 import ***REMOVED*** ContractData ***REMOVED*** from "@/api/contract.type";
 import ***REMOVED*** myContract ***REMOVED*** from "@/api/contractApi";
-import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 
 const ContractList = () => ***REMOVED***
   const ***REMOVED*** data: contractList ***REMOVED*** = useQuery("myContract", myContract);
@@ -54,7 +53,7 @@ const ContractList = () => ***REMOVED***
       ))***REMOVED*** */***REMOVED***
 
       ***REMOVED***contractList?.map((contract: ContractData) => (
-        <ContractListBox type=***REMOVED***contract.type***REMOVED*** contractInfo=***REMOVED***contract***REMOVED*** />
+        <ContractListBox key=***REMOVED***contract.id***REMOVED*** type=***REMOVED***contract.type***REMOVED*** contractInfo=***REMOVED***contract***REMOVED*** />
       ))***REMOVED***
     </div>
   );
