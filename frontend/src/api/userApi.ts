@@ -13,6 +13,7 @@ export const getToken = async (userId: string | null): Promise<void> => ***REMOV
     ***REMOVED***
   ***REMOVED***);
   sessionStorage.setItem("token", response.data.accessToken);
+  sessionStorage.setItem("refreshToken", response.data.refreshToken);
 ***REMOVED***;
 
 //== 로그아웃 ==//
