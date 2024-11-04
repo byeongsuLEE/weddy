@@ -25,7 +25,7 @@ import java.io.IOException;
 @Slf4j
 public class ScheduleConsumers ***REMOVED***
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper ;
     private final CreateScheduleUsecase createScheduleUsecase;
 
 
