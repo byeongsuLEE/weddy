@@ -1,6 +1,6 @@
+import TodoButton from "@/common/TodoButton";
 import PlannerBox from "@/components/PlannerPage/PlannerBox";
 // import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
-import GiftIcon from "@/icons/GiftIcon";
 // import ***REMOVED*** useRecoilValue ***REMOVED*** from "recoil";
 // import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 // import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
@@ -16,7 +16,7 @@ const Planner = () => ***REMOVED***
   //     const studios: Product[] = [];
   //     const dresses: Product[] = [];
   //     const makeups: Product[] = [];
-  
+
   //     recommendList.forEach((product) => ***REMOVED***
   //       switch (product.type) ***REMOVED***
   //         case "STUDIO":
@@ -32,7 +32,7 @@ const Planner = () => ***REMOVED***
   //           break;
   //       ***REMOVED***
   //     ***REMOVED***);
-  
+
   //     setStudioList(studios);
   //     setDressList(dresses);
   //     setMakeupList(makeups);
@@ -64,16 +64,15 @@ const Planner = () => ***REMOVED***
 
 
   return (
-    <div className="relative">
+    <div className="flex flex-col relative">
       <div className="m-5 flex flex-col items-center">
         ***REMOVED***/* <h1 className="my-3 text-main2">WEDDY 플래너</h1> */***REMOVED***
         <div className="flex items-center mt-5">
-        <span className="text-sm">
-          <span className="text-main2 font-bold">
-          WEDDY 플래너
-          </span>
-          가 추천하는 상품</span>
-          <GiftIcon/>
+          <span className="text-sm">
+            <span className="text-main2 font-bold">
+              WEDDY 플래너&nbsp;
+            </span>
+            추천 상품</span>
         </div>
         ***REMOVED***dummyList.map((dummy, index) => (
           <PlannerBox key=***REMOVED***index***REMOVED*** title=***REMOVED***dummy.category***REMOVED*** company=***REMOVED***dummy.company***REMOVED*** price=***REMOVED***dummy.price***REMOVED*** content=***REMOVED***dummy.content***REMOVED*** />
@@ -92,7 +91,7 @@ const Planner = () => ***REMOVED***
         ))***REMOVED*** */***REMOVED***
 
       </div>
-      <div className="flex justify-end mr-10 mt-20 mb-24">
+      <div className="flex justify-end mr-10 mt-14">
         <div className="flex flex-col mr-3">
           ***REMOVED***dummyList.map((dummy, index) => (
             <span key=***REMOVED***index***REMOVED*** className="my-1">
@@ -109,6 +108,9 @@ const Planner = () => ***REMOVED***
             ***REMOVED***totalPrice.toLocaleString()***REMOVED***원
           </span>
         </div>
+      </div>
+      <div className="flex justify-end mr-10 mt-5 mb-24">
+        <TodoButton title="계약 요청" />
       </div>
     </div>
   )
