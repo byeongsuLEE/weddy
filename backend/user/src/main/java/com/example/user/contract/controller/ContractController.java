@@ -4,9 +4,8 @@ import com.example.user.contract.domain.Contract;
 import com.example.user.contract.dto.request.CreateContractRequestDto;
 import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.service.ContractService;
-import com.example.global.util.response.ApiResponse;
+import com.example.user.contract.global.util.response.ApiResponse;
 import com.example.user.entity.UserEntity;
-import com.example.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.global.util.response;
+package com.example.user.contract.global.util.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

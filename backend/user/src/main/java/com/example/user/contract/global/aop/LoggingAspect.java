@@ -1,4 +1,4 @@
-package com.example.global.aop;
+package com.example.user.contract.global.aop;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

@@ -6,9 +6,9 @@ import com.example.user.contract.domain.Contract;
 import com.example.user.contract.dto.request.CreateContractRequestDto;
 import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.repository.ContractRepository;
-import com.example.global.util.exception.ContractNotFoundException;
+import com.example.user.contract.global.util.exception.ContractNotFoundException;
 import com.example.user.entity.UserEntity;
-import com.example.global.util.response.ErrorCode;
+import com.example.user.contract.global.util.response.ErrorCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,17 +23,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class ContractServiceImpl implements ContractService ***REMOVED***
-    // 나중에 제거해야함
-    @Value(value = "$***REMOVED***producers.topic1.name***REMOVED***")
-    private String TOPIC_PAYMENT;
-
-    private final KafkaTemplate<String , List<CreateContractRequestDto>> kafkaTemplate;
-
-    public void occurPaymentEvent(List<CreateContractRequestDto> paidProducts) throws JsonProcessingException ***REMOVED***
-        kafkaTemplate.send(TOPIC_PAYMENT, paidProducts);
-    ***REMOVED***
-
-
 
     private final ContractRepository contractRepository;
 

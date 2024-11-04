@@ -1,8 +1,7 @@
-package com.example.global.util.exception;
+package com.example.user.contract.global.util.exception;
 
-import com.example.global.util.response.ErrorCode;
+import com.example.user.contract.global.util.response.ErrorCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class ContractNotFoundException extends RuntimeException ***REMOVED***

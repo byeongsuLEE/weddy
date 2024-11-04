@@ -1,4 +1,4 @@
-package com.example.global.config;
+package com.example.user.contract.global.config;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -28,7 +28,7 @@ public class KafkaConfig ***REMOVED***
 
 
     @Bean
-    public ProducerFactory<String, String> kafkaProducerFactory() ***REMOVED***
+    public ProducerFactory<String, Object> kafkaProducerFactory() ***REMOVED***
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -41,7 +41,7 @@ public class KafkaConfig ***REMOVED***
 
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() ***REMOVED***
+    public KafkaTemplate<String, Object> kafkaTemplate() ***REMOVED***
         return new KafkaTemplate<>(kafkaProducerFactory());
     ***REMOVED***
 
