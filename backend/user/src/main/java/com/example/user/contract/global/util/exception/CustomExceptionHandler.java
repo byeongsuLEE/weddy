@@ -18,6 +18,13 @@ import java.util.Objects;
 public class CustomExceptionHandler ***REMOVED***
 
 
+    @ExceptionHandler(PaymentNotValidateException.class)
+    public ResponseEntity<ApiResponse<String>> paymentNotValidateException(PaymentNotValidateException e) ***REMOVED***
+        ErrorCode errorCode = e.getErrorCode();
+        return ResponseEntity.status(errorCode.getStatus())
+                .body(ApiResponse.error(errorCode));
+    ***REMOVED***
+
     @ExceptionHandler(ContractNotFoundException.class)
     public ResponseEntity<ApiResponse<String>> contractNotFoundException(ContractNotFoundException e) ***REMOVED***
         ErrorCode errorCode = e.getErrorCode();
