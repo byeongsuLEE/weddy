@@ -60,4 +60,20 @@ public class Product ***REMOVED***
         this.price = productRegistRequestDto.price();
         this.address = productRegistRequestDto.address();
     ***REMOVED***
+
+    public ProductResponseDto registProductResponseDto(Product product, List<ProductImage> images) ***REMOVED***
+        List<ProductImageResponseDto> imagesDto = images.stream()
+                .map(image -> ProductImageResponseDto.builder()
+                        .imageUrl(image.getImageUrl())
+                        .build())
+                .toList();
+        return ProductResponseDto.builder()
+                .id(product.getId())
+                .type(product.getType())
+                .address(product.getAddress())
+                .name(product.getName())
+                .price(product.getPrice())
+                .images(imagesDto)
+                .build();
+    ***REMOVED***
 ***REMOVED***

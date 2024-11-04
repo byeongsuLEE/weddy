@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
                         .build())
                 .toList());
 
-        ProductResponseDto productResponse = ProductResponseDto.registProductResponseDto(product,productImages);
+        ProductResponseDto productResponse = product.registProductResponseDto(product,productImages);
         syncService.syncToReadDatabaseAsync(KeyType.PRODUCT,productResponse.id(),productResponse);
         return productResponse;
     ***REMOVED***
