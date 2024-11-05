@@ -1,4 +1,3 @@
-import ***REMOVED*** getCoupleCode ***REMOVED*** from "@/api/coupleApi";
 import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
 import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
@@ -55,9 +54,6 @@ const Mypage = () => ***REMOVED***
   const updateUserInfo = (key: keyof userInformation, value: string) => ***REMOVED***
     setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value ***REMOVED*** ***REMOVED***);
   ***REMOVED***;
-  
-  //== 커플 코드 조회 ==//
-  const ***REMOVED*** data: myCode ***REMOVED*** = useQuery('getCoupleCode', getCoupleCode);
 
   // //== 커플 코드 연결 ==//
   // const handleConnect = async (code: string) => ***REMOVED***
@@ -102,7 +98,7 @@ const Mypage = () => ***REMOVED***
               </div>
             ) : (
               <>
-                <span className="font-bold text-lg mb-2">***REMOVED***myCode***REMOVED***</span>
+                <span className="font-bold text-lg mb-2">***REMOVED***userData?.coupleCode***REMOVED***</span>
                 <span className="text-sm text-gray-500">상대방과 커플코드를 공유하세요!</span>
               </>
             )***REMOVED***
