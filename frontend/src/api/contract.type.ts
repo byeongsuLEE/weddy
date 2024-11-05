@@ -15,7 +15,7 @@ export interface ContractProduct ***REMOVED***
   ***REMOVED***
   
   export interface ContractData ***REMOVED***
-    id: number;
+    id: string;
     product: ContractProduct;
     customer?: string;
     content: string;

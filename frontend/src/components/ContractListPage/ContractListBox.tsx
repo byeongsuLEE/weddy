@@ -4,12 +4,17 @@ import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
 import ProgressBar from "./ProgressBar";
 import ***REMOVED*** requestPayment ***REMOVED*** from "@/api/paymentApi";
+import ***REMOVED*** changeStatus ***REMOVED*** from "@/api/contractApi";
 
 interface ContractListBoxProps ***REMOVED***
   type: string;
   contractInfo: ContractData;
 ***REMOVED***
 const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+
+  const handleChangeStatus = () => ***REMOVED***
+    changeStatus(contractInfo.id);
+  ***REMOVED***;
 
   const handlePayment = () => ***REMOVED***
     requestPayment(contractInfo);
@@ -28,7 +33,9 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
             </div>
           </Link>
           ***REMOVED***contractInfo.status === "CONTRACT_PENDING" && (
-            <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** />
+            <div onClick=***REMOVED***handleChangeStatus***REMOVED***>
+              <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** />
+            </div>
           )***REMOVED***
           ***REMOVED***contractInfo.status === "SIGN_PENDING" && (
              <Link to=***REMOVED***`/contract/$***REMOVED***contractInfo.product.type***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***>
