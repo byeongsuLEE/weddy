@@ -1,6 +1,7 @@
 package com.example.user.controller;
 
 import com.example.user.dto.APIResponse;
+import com.example.user.dto.UserDTO;
 import com.example.user.dto.response.UserResponseDTO;
 import com.example.user.entity.UserEntity;
 import com.example.user.jwt.BlackTokenService;
@@ -105,11 +106,13 @@ public class UserController ***REMOVED***
     @PatchMapping("/couple-connect")
     public APIResponse connectCouple(@AuthenticationPrincipal UserEntity user, @RequestBody Map<String, String> codeRequest) ***REMOVED***
         String code = codeRequest.get("code");
+        UserDTO userDTO;
         try ***REMOVED***
-            userService.patchCoupleCode(code,user.getId());
+            userDTO = userService.connectCoupleCode(code,user.getId());
             return APIResponse.builder()
                     .status(200)
                     .message("커플코드 수정 완료")
+                    .data(userDTO)
                     .build();
         ***REMOVED*** catch (Exception e) ***REMOVED***
             return APIResponse.builder()
