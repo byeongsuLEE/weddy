@@ -57,7 +57,7 @@ export const contractInfo = async (contractId?: string): Promise<ContractData> =
 export const changeStatus = async (contractId?: string): Promise<void> => ***REMOVED***
    const response = await axios(***REMOVED***
     method: 'patch',
-    url: `$***REMOVED***BASE_URL***REMOVED***/5`,
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
     headers: ***REMOVED***
       Authorization: `Bearer $***REMOVED***token***REMOVED***`
     ***REMOVED***
