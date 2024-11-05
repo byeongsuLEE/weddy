@@ -91,7 +91,7 @@ const Contract = () => ***REMOVED***
           <span className="font-bold text-sm">제 3조 [계약금액]</span>
           <span className="text-sm">총 계약금액은
             <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***/>
-            만원은 착수시점에 “갑”은 “을”에게 지급하기로 한다.</span>
+            만원을 착수시점에 “갑”은 “을”에게 지급하기로 한다.</span>
           <br />
           <span className="font-bold text-sm">제 4조 [납품]</span>
           <span className="text-sm">“을”은 작업 진행 중 중간 완료된 성과물을 1회에 걸쳐 중간 납품을 하며, 최종 자료는 검토 및 수정 후 완성품으로 납품하기로 한다.</span>
