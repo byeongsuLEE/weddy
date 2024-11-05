@@ -57,4 +57,5 @@ const BoardDetail = () => ***REMOVED***
     </div>
   );
 ***REMOVED***;
+
 export default BoardDetail;
