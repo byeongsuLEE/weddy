@@ -42,7 +42,7 @@ const Contract = () => ***REMOVED***
       changeStatus(contractId)
     ]);
 
-    navigate("/contract");
+    navigate("/contract/list");
   ***REMOVED***;
 
   const type = ***REMOVED***
@@ -77,9 +77,11 @@ const Contract = () => ***REMOVED***
           </div>
           <br />
           <span className="text-sm">
-            <input disabled name="clientName" placeholder="고객" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.userName***REMOVED***/>
+            ***REMOVED***/* <input disabled name="clientName" placeholder="고객" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.userName***REMOVED***/> */***REMOVED***
+            <strong>***REMOVED***contract?.userName***REMOVED***</strong>
             (이하 “갑” 아리 한다.)와
-            <input disabled name="candidateName" placeholder="업체" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.companyName***REMOVED***/>
+            ***REMOVED***/* <input disabled name="candidateName" placeholder="업체" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.companyName***REMOVED***/> */***REMOVED***
+            <strong>***REMOVED***contract?.companyName***REMOVED***</strong>
             (이하 “을” 이라 한다.)는 상품명에 명시된 업무작업을 수행하기 위해 다음과 같이 계약을 체결한다.</span>
           <br />
           <span className="font-bold text-sm">제 1조[목적]</span>
@@ -87,12 +89,14 @@ const Contract = () => ***REMOVED***
           <br />
           <span className="font-bold text-sm">제 2조 [계약기간]</span>
           <span className="text-sm">계약 일시는
-            <input disabled name="endDate" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***formatDate(date)***REMOVED***/>
+            ***REMOVED***/* <input disabled name="endDate" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***formatDate(date)***REMOVED***/> */***REMOVED***
+            <strong>***REMOVED***formatDate(date)***REMOVED***</strong>
             로 하며, 갑과 을의 합의 하에 본 계약일시는 변경 될 수 있다.</span>
           <br />
           <span className="font-bold text-sm">제 3조 [계약금액]</span>
           <span className="text-sm">총 계약금액은
-            <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***/>
+            ***REMOVED***/* <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***/> */***REMOVED***
+            <strong>***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***</strong>
             만원을 착수시점에 “갑”은 “을”에게 지급하기로 한다.</span>
           <br />
           <span className="font-bold text-sm">제 4조 [납품]</span>
