@@ -40,6 +40,16 @@ public class PaymentService ***REMOVED***
         occurPaymentEvent(contractInfoRequestDto);
     ***REMOVED***
 
+
+
+    /**
+     * 일정 등록 이벤트 발생
+     * @ 작성자   : 이병수
+     * @ 작성일   : 2024-11-05
+     * @ 설명     :
+
+     * @param contractInfoRequestDto
+     */
     public void occurPaymentEvent(ContractInfoRequestDto contractInfoRequestDto)  ***REMOVED***
         PaymentProductInfo paymentProductInfo = createPaymentProductInfo(contractInfoRequestDto);
 

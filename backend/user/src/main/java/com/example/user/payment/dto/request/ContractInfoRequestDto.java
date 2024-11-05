@@ -35,5 +35,5 @@ public class ContractInfoRequestDto***REMOVED***
     private LocalDate startDate;
     private LocalDate endDate;
     private Product product;
-
+    private String paymentId;
 ***REMOVED***
