@@ -11,12 +11,9 @@ spring:
     gateway:
       routes:
         - id: user-service
-#          uri: http://localhost:8080  # user-service? ??
-          uri: https://www.naver.com  # user-service? ??
+          uri: http://localhost:8080  # user-service? ??
           predicates:
-            - Path=/api/users, /api/users/**
-          filters:
-            - StripPrefix=2
+            - Path=/api/users, /api/users/**, /api/login, /api/login/**
 
 
 #        - id: order-service

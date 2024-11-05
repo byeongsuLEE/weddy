@@ -4,6 +4,7 @@ import com.example.user.dto.APIResponse;
 import com.example.user.dto.response.UserResponseDTO;
 import com.example.user.entity.UserEntity;
 import com.example.user.jwt.BlackTokenService;
+import com.example.user.repository.UserRepository;
 import com.example.user.service.TokenService;
 import com.example.user.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,11 +18,13 @@ public class UserController ***REMOVED***
     private final UserService userService;
     private final TokenService tokenService;
     private final BlackTokenService blackTokenService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService, TokenService tokenService, BlackTokenService blackTokenService) ***REMOVED***
+    public UserController(UserService userService, TokenService tokenService, BlackTokenService blackTokenService, UserRepository userRepository) ***REMOVED***
         this.userService = userService;
         this.tokenService = tokenService;
         this.blackTokenService = blackTokenService;
+        this.userRepository = userRepository;
     ***REMOVED***
 
     @GetMapping
@@ -112,6 +115,20 @@ public class UserController ***REMOVED***
             return APIResponse.builder()
                     .status(500)
                     .message("커플코드 수정 에러")
+                    .build();
+        ***REMOVED***
+    ***REMOVED***
+
+    @GetMapping("/test")
+    public APIResponse test(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+        try ***REMOVED***
+            return APIResponse.builder()
+                    .data(user)
+                    .build();
+        ***REMOVED***catch (Exception e)***REMOVED***
+            return APIResponse.builder()
+                    .status(500)
+                    .message("에러")
                     .build();
         ***REMOVED***
     ***REMOVED***
