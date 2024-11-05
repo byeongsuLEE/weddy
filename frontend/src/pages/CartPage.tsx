@@ -1,4 +1,5 @@
-import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
+import ***REMOVED*** ContractProduct ***REMOVED*** from "@/api/contract.type";
+import ***REMOVED*** requestContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 // import ***REMOVED*** getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
@@ -95,10 +96,28 @@ const CartPage = () => ***REMOVED***
   ***REMOVED***;
 
   //== 계약서 정보 생성 후 API 호출 ==//
-  const handleCreateContract = () => ***REMOVED***
-    selectedList.map((item: Product) => ***REMOVED***
-      createContract(item);
-    ***REMOVED***)
+  const handleCreateContract = async () => ***REMOVED***
+    const contracts = selectedList.map((item: Product) => ***REMOVED***
+      const date = new Date().toISOString().slice(0, 10);
+
+      const contractProduct: ContractProduct = ***REMOVED***
+        productId: item.id,
+        productName: item.name,
+        productContent: item.content,
+        type: item.type
+      ***REMOVED***;
+
+      return ***REMOVED***
+        userId: "5",
+        totalMount: item.price,
+        companyName: item.vendorName,
+        startDate: date,
+        endDate: date,
+        product: contractProduct
+      ***REMOVED***;
+    ***REMOVED***);
+
+    await requestContract(contracts);
   ***REMOVED***;
 
   const studio = dummyData.filter((item: Product) => item.type === 'STUDIO');

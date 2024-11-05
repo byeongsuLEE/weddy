@@ -21,7 +21,7 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
         <ProgressBar status=***REMOVED***contractInfo.status***REMOVED*** />
 
         <div className="flex justify-between mt-10">
-        <Link to=***REMOVED***`/board/detail/$***REMOVED***contractInfo.product.product_id***REMOVED***`***REMOVED***>
+        <Link to=***REMOVED***`/board/detail/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>
             <div className="flex items-center">
               <h1 className="font-bold mr-4">***REMOVED***type***REMOVED***</h1>
               <GotoIcon />
@@ -31,7 +31,7 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
             <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** />
           )***REMOVED***
           ***REMOVED***contractInfo.status === "SIGN_PENDING" && (
-             <Link to=***REMOVED***`/contract/$***REMOVED***contractInfo.type***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***>
+             <Link to=***REMOVED***`/contract/$***REMOVED***contractInfo.product.type***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***>
                <TodoButton title="서명 하기" colorId=***REMOVED***1***REMOVED*** />
              </Link>
           )***REMOVED***
