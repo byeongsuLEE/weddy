@@ -34,4 +34,8 @@ public class GoogleResponse implements OAuth2Response***REMOVED***
 
         return attribute.get("name").toString();
     ***REMOVED***
+
+    public String getPicture()***REMOVED***
+        return attribute.get("picture").toString();
+    ***REMOVED***
 ***REMOVED***

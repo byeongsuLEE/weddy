@@ -14,12 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
 
 @Slf4j
+@Component
 public class JWTFilter extends OncePerRequestFilter ***REMOVED***
 
     private final JWTUtil jwtUtil;
@@ -38,10 +40,14 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
         // 제외할 경로를 리스트로 정의
         List<String> excludedPaths = List.of(
                 "/login",
+                "/login/**",
                 "/oauth2",
                 "/api/login",
-                "/api/users/reissue",
-                "/api/users/reissue/**"
+                "/api/login/**",
+                "/users/token",
+                "/users/token/**",
+                "/api/users/token",
+                "/api/users/token/**"
                 );
 
         // 경로 리스트에 포함된 항목이 요청 경로의 접두사인지 확인
@@ -51,31 +57,9 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException ***REMOVED***
 
-
         String authorization = request.getHeader("Authorization");
 
-        //Authorization 헤더 검증
-        if (authorization == null || !authorization.startsWith("Bearer ")) ***REMOVED***
-            //System.out.println("token null or invalid format");
-            filterChain.doFilter(request, response);
-            return;
-        ***REMOVED***
         String token = authorization.substring(7);
-
-        if (blackTokenService.isBlacklisted(token))***REMOVED***
-            log.info("토큰블랙리스트");
-            return;
-        ***REMOVED***
-
-        //토큰 소멸 시간 검증
-        if (jwtUtil.isExpired(token)) ***REMOVED***
-
-            System.out.println("token expired");
-            filterChain.doFilter(request, response);
-
-            //조건이 해당되면 메소드 종료 (필수)
-            return;
-        ***REMOVED***
 
         //토큰에서 username과 code 획득
         String username = jwtUtil.getUsername(token);
@@ -97,7 +81,7 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
         Authentication authToken = new UsernamePasswordAuthenticationToken(userEntity, null, customOAuth2User.getAuthorities());
         //세션에 사용자 등록
         SecurityContextHolder.getContext().setAuthentication(authToken);
-
+        log.info("user filter 완료");
         filterChain.doFilter(request, response);
     ***REMOVED***
 ***REMOVED***

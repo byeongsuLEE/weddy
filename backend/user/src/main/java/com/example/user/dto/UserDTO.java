@@ -4,6 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@Builder
 public class UserDTO ***REMOVED***
     private Long id;
     private String coupleCode;
@@ -11,4 +12,5 @@ public class UserDTO ***REMOVED***
     private String socialId;
     private String adress;
     private String phone;
+    private String picture;
 ***REMOVED***

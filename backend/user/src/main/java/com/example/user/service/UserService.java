@@ -32,7 +32,27 @@ public class UserService ***REMOVED***
         return userResponseDTO;
     ***REMOVED***
 
-    public void patchUser(UserEntity userEntity)***REMOVED***
+//    public void patchUser(UserEntity userEntity)***REMOVED***
+//        userRepository.save(userEntity);
+//    ***REMOVED***
+
+    public void updateUserInfo(Long id, String phone, String name, String address) ***REMOVED***
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        userEntity.setPhone(phone);
+        userEntity.setName(name);
+        userEntity.setAddress(address);
         userRepository.save(userEntity);
+
+    ***REMOVED***
+
+    public UserDTO connectCoupleCode(String coupleCode,Long id)***REMOVED***
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        assert userEntity != null;
+        userEntity.setCoupleCode(coupleCode);
+        userRepository.save(userEntity);
+        return UserDTO.builder()
+                .name(userEntity.getName())
+                .picture(userEntity.getPicture())
+                .build();
     ***REMOVED***
 ***REMOVED***
