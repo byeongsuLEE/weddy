@@ -1,12 +1,15 @@
 package com.example.user.service;
 
+import com.example.user.common.service.GCSImageService;
 import com.example.user.dto.APIResponse;
 import com.example.user.dto.UserDTO;
 import com.example.user.dto.response.UserResponseDTO;
 import com.example.user.entity.UserEntity;
 import com.example.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -14,8 +17,10 @@ import java.util.Map;
 public class UserService ***REMOVED***
 
     private final UserRepository userRepository;
-    public UserService(UserRepository userRepository)***REMOVED***
+    private final GCSImageService gcsImageService;
+    public UserService(UserRepository userRepository, GCSImageService gcsImageService)***REMOVED***
         this.userRepository = userRepository;
+        this.gcsImageService = gcsImageService;
     ***REMOVED***
 
     public APIResponse<UserEntity> userInfo(Long userId)***REMOVED***
@@ -64,8 +69,14 @@ public class UserService ***REMOVED***
             userEntity.setEmail(info.get("email").toString());
         ***REMOVED***
 
-        if (info.get("picture") != null && !info.get("picture").toString().trim().isEmpty()) ***REMOVED***
-            userEntity.setPicture(info.get("picture").toString());
+        if (info.get("picture") != null && info.get("picture") instanceof MultipartFile) ***REMOVED***
+            MultipartFile pictureFile = (MultipartFile) info.get("picture");
+            try ***REMOVED***
+                String pictureUrl = gcsImageService.uploadImage(pictureFile); // GCS에 업로드하고 URL 반환
+                userEntity.setPicture(pictureUrl); // URL을 picture 필드에 저장
+            ***REMOVED*** catch (IOException e) ***REMOVED***
+                throw new RuntimeException("Failed to upload picture", e);
+            ***REMOVED***
         ***REMOVED***
 
         if (info.get("Date") != null && !info.get("Date").toString().trim().isEmpty()) ***REMOVED***

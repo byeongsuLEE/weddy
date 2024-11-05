@@ -10,6 +10,13 @@ spring:
     active: common, user
   config:
     import: optional:configserver:***REMOVED***:8888
+  cloud:
+    gcp:
+      storage:
+        bucket: weddy-bucket-01
+        credentials:
+          location: classpath:***REMOVED***
+          project-id: rational-genius-434702-v8
 
   jpa:
     show-sql: false
