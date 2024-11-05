@@ -1,5 +1,5 @@
 import ***REMOVED*** useRef ***REMOVED*** from "react";
-import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** useNavigate, useParams ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** changeStatus, contractInfo ***REMOVED*** from "../api/contractApi";
 import TodoButton from "../common/TodoButton";
 import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
@@ -10,6 +10,7 @@ import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Contract = () => ***REMOVED***
   const ***REMOVED*** category, contractId ***REMOVED*** = useParams();
+  const navigate = useNavigate();
   const pageRef = useRef<HTMLDivElement>(null);
 
   const date = new Date();
@@ -32,15 +33,16 @@ const Contract = () => ***REMOVED***
   const handleSignature = async () => ***REMOVED***
     const contractImage = await makeImage(pageRef);
 
-    const [hash] = await Promise.all([
-      uploadToPinata(contractImage, category)
-    ]);
+    await makeSignature();
+
+    const hash = await uploadToPinata(contractImage, category);
 
     await Promise.all([
-      makeSignature(),
       mintNFT(hash),
       changeStatus(contractId)
     ]);
+
+    navigate("/contract");
   ***REMOVED***;
 
   const type = ***REMOVED***
@@ -63,7 +65,7 @@ const Contract = () => ***REMOVED***
           <br />
           <div className="flex font-bold">
             <div>상품명 :</div>
-            <div className="ml-2">***REMOVED***contract?.title***REMOVED***</div>
+            <div className="ml-2">***REMOVED***contract?.product.productName***REMOVED***</div>
           </div>
           <div className="flex font-bold">
             <div>예식 :</div>

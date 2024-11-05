@@ -11,9 +11,10 @@ interface ContractListBoxProps ***REMOVED***
   contractInfo: ContractData;
 ***REMOVED***
 const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
-
-  const handleChangeStatus = () => ***REMOVED***
-    changeStatus(contractInfo.id);
+  
+  const handleChangeStatus = async () => ***REMOVED***
+    await changeStatus(contractInfo.id);
+    window.location.reload();
   ***REMOVED***;
 
   const handlePayment = () => ***REMOVED***
@@ -34,7 +35,7 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
           </Link>
           ***REMOVED***contractInfo.status === "CONTRACT_PENDING" && (
             <div onClick=***REMOVED***handleChangeStatus***REMOVED***>
-              <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** />
+              <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** cursor='default' />
             </div>
           )***REMOVED***
           ***REMOVED***contractInfo.status === "SIGN_PENDING" && (
@@ -48,7 +49,7 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
             </div>
           )***REMOVED***
           ***REMOVED***contractInfo.status === "PAYMENT_COMPLETED" && (
-            <Link to='/review'>
+            <Link to=***REMOVED***`/review/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>
               <TodoButton title="리뷰 쓰기" colorId=***REMOVED***1***REMOVED*** />
             </Link>
           )***REMOVED***

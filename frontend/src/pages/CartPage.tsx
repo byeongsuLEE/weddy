@@ -1,15 +1,11 @@
 import ***REMOVED*** ContractProduct ***REMOVED*** from "@/api/contract.type";
 import ***REMOVED*** requestContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-// import ***REMOVED*** getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import CartBox from "@/components/CartPage/CartBox";
 import ***REMOVED*** useState ***REMOVED*** from 'react';
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const CartPage = () => ***REMOVED***
-  // const [ cartList, setCartList ] = useQuery('getCartItems', getCartItems);
-
   const dummyData: Product[] = [
     ***REMOVED***
       id: "1",
@@ -68,13 +64,17 @@ const CartPage = () => ***REMOVED***
     ***REMOVED***,
   ];
 
-  const [ selectedList, setSelectedList ] = useState<Product[]>([]);
-  const [ selectedAmounts, setSelectedAmounts ] = useState<***REMOVED*** [key: string]: number ***REMOVED***>(***REMOVED***
+  const [selectedList, setSelectedList] = useState<***REMOVED*** [type: string]: Product | null ***REMOVED***>(***REMOVED***
+    studio: null,
+    dress: null,
+    makeup: null,
+  ***REMOVED***);
+  const [selectedAmounts, setSelectedAmounts] = useState<***REMOVED*** [key: string]: number ***REMOVED***>(***REMOVED***
     studio: 0,
     dress: 0,
     makeup: 0,
   ***REMOVED***);
-  
+
   const totalAmount = Object.values(selectedAmounts).reduce((acc, amount) => acc + amount, 0);
 
   const handleAmountChange = (type: string, selectedCartItem: Product | null) => ***REMOVED***
@@ -82,68 +82,50 @@ const CartPage = () => ***REMOVED***
       ...prev,
       [type]: selectedCartItem ? parseInt(selectedCartItem.price) : 0,
     ***REMOVED***));
-  
-    setSelectedList((prev) => ***REMOVED***
-      if (!selectedCartItem) return prev;
-  
-      const exists = prev.some((item) => item.id === selectedCartItem.id);
-      if (exists) ***REMOVED***
-        return prev;
-      ***REMOVED***
 
-      return [...prev, selectedCartItem];
-    ***REMOVED***);
+    setSelectedList((prev) => (***REMOVED***
+      ...prev,
+      [type]: selectedCartItem,
+    ***REMOVED***));
   ***REMOVED***;
 
-  //== 계약서 정보 생성 후 API 호출 ==//
   const handleCreateContract = async () => ***REMOVED***
-    const contracts = selectedList.map((item: Product) => ***REMOVED***
-      const date = new Date().toISOString().slice(0, 10);
+    const contractItems = Object.values(selectedList).filter(
+      (item): item is Product => item !== null
+    );
 
+    const contracts = contractItems.map((item) => ***REMOVED***
+      const date = new Date().toISOString().slice(0, 10);
+  
       const contractProduct: ContractProduct = ***REMOVED***
         productId: item.id,
         productName: item.name,
         productContent: item.content,
-        type: item.type
+        type: item.type,
       ***REMOVED***;
-
+  
       return ***REMOVED***
         userId: "5",
         totalMount: item.price,
         companyName: item.vendorName,
         startDate: date,
         endDate: date,
-        product: contractProduct
+        product: contractProduct,
       ***REMOVED***;
     ***REMOVED***);
-
+  
     await requestContract(contracts);
   ***REMOVED***;
 
-  const studio = dummyData.filter((item: Product) => item.type === 'STUDIO');
-  const dress = dummyData.filter((item: Product) => item.type === 'DRESS');
-  const makeup = dummyData.filter((item: Product) => item.type === 'MAKEUP');
+  const studio = dummyData.filter((item) => item.type === "STUDIO");
+  const dress = dummyData.filter((item) => item.type === "DRESS");
+  const makeup = dummyData.filter((item) => item.type === "MAKEUP");
 
   return (
-    <div className='mt-10'>
-      <CartBox
-        title="STUDIO"
-        type="studio"
-        cartItem=***REMOVED***studio***REMOVED***
-        onAmountChange=***REMOVED***handleAmountChange***REMOVED***
-      />
-      <CartBox
-        title="DRESS"
-        type="dress"
-        cartItem=***REMOVED***dress***REMOVED***
-        onAmountChange=***REMOVED***handleAmountChange***REMOVED***
-      />
-      <CartBox
-        title="MAKEUP"
-        type="makeup"
-        cartItem=***REMOVED***makeup***REMOVED***
-        onAmountChange=***REMOVED***handleAmountChange***REMOVED***
-      />
+    <div className="mt-10">
+      <CartBox title="STUDIO" type="studio" cartItem=***REMOVED***studio***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+      <CartBox title="DRESS" type="dress" cartItem=***REMOVED***dress***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+      <CartBox title="MAKEUP" type="makeup" cartItem=***REMOVED***makeup***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
       <div className="flex justify-between mt-10 mx-10">
         <span className="text-lg font-bold">총 합계: ***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
         <div onClick=***REMOVED***handleCreateContract***REMOVED***>
