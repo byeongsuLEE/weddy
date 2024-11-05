@@ -20,6 +20,10 @@
     "lib": ["dom", "esnext", "webworker"],
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
   ***REMOVED***
 ***REMOVED***
