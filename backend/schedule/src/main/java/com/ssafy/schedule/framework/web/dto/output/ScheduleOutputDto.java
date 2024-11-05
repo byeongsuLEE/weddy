@@ -38,7 +38,7 @@ public class ScheduleOutputDto ***REMOVED***
                 .startDate(schedule.getStartDate())
                 .endDate(schedule.getEndDate())
                 .content(schedule.getContent())
-                .productId(schedule.getProduct_id())
+                .productId(schedule.getProductId())
                 .code(schedule.getCode())
                 .build();
     ***REMOVED***

@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Embeddable
 public class Product ***REMOVED***
-    private Long product_id;
-    private String product_content;
-    private String product_name;
+    private Long productId;
+    private String productContent;
+    private String productName;
     private ProductType type;
 ***REMOVED***

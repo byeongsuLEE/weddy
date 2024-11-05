@@ -9,10 +9,7 @@ import com.example.user.contract.repository.ContractRepository;
 import com.example.user.contract.global.util.exception.ContractNotFoundException;
 import com.example.user.entity.UserEntity;
 import com.example.user.contract.global.util.response.ErrorCode;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,8 +83,8 @@ public class ContractServiceImpl implements ContractService ***REMOVED***
         return contract.stream()
                 .map((contract1) -> ContractResponseDto.builder()
                         .id(contract1.getId())
-                        .title(contract1.getProduct().getProduct_name())
-                        .content(contract1.getProduct().getProduct_content())
+                        .title(contract1.getProduct().getProductName())
+                        .content(contract1.getProduct().getProductContent())
                         .type(contract1.getProduct().getType())
                         .code(contract1.getUser().getCoupleCode())
                         .userName(contract1.getUser().getName())
