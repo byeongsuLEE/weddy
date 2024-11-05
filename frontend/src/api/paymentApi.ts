@@ -7,12 +7,11 @@ const BASE_URL = "http://localhost:8080/api/payments";
 const PORTONE_CHANNEL_KEY = import.meta.env.VITE_PORTONE_CHANNEL_KEY;
 const PORTONE_STORE_ID = import.meta.env.VITE_PORTONE_STORE_ID;
 const redirectUrl = import.meta.env.VITE_PUBLIC_URL;
-// ProductType 및 ContractInfo 타입 정의
+
 export enum ProductType ***REMOVED***
   STUDIO = "STUDIO",
   DRESS = "DRESS",
   MAKEUP = "MAKEUP",
-  // 필요한 다른 ProductType 추가
 ***REMOVED***
 
 // 결제 요청 함수

@@ -13,4 +13,4 @@ export const connectCoupleCode = async (code: string): Promise<void> => ***REMOV
     data: code
   ***REMOVED***);
   console.log(response.data);
-***REMOVED***
+***REMOVED***;

@@ -130,4 +130,5 @@ const Contract = () => ***REMOVED***
     </div>
   )
 ***REMOVED***
+
 export default Contract;

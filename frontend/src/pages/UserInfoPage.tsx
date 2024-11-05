@@ -125,6 +125,6 @@ const UserInfo = () => ***REMOVED***
       </div>
     </div>
   )
-
 ***REMOVED***
+
 export default UserInfo;

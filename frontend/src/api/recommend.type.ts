@@ -5,4 +5,3 @@ export interface recommendData ***REMOVED***
   price: string;
   address: string;
 ***REMOVED***
-

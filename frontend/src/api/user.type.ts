@@ -5,4 +5,4 @@ export interface userInformation ***REMOVED***
   address: string;
   coupleCode?: string;
   dateofWedding: string;
-***REMOVED***;
+***REMOVED***
