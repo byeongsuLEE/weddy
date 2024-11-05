@@ -54,6 +54,10 @@ dependencies ***REMOVED***
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+    // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-storage
+    implementation group: 'com.google.cloud', name: 'google-cloud-storage', version: '2.44.1'
+
 ***REMOVED***
 
 dependencyManagement ***REMOVED***
