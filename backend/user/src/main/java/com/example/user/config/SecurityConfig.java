@@ -49,7 +49,7 @@ public class SecurityConfig ***REMOVED***
 
                         CorsConfiguration configuration = new CorsConfiguration();
                         configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:5174"));
-                        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
                         configuration.setAllowedHeaders(List.of("*"));
                         configuration.setAllowCredentials(true);
                         configuration.setMaxAge(3600L);
