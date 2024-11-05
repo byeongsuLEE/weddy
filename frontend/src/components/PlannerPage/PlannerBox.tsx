@@ -13,10 +13,10 @@ interface PlannerBoxProps ***REMOVED***
 
 const PlannerBox = ((***REMOVED*** title, company, price, content ***REMOVED***: PlannerBoxProps) => ***REMOVED***
   const category = ***REMOVED***
-    스튜디오: 'studio',
-    드레스: 'dress',
-    메이크업: 'makeup',
-  ***REMOVED***[title];
+    스튜디오: 'STUDIO',
+    드레스: 'DRESS',
+    메이크업: 'MAKEUP',
+  ***REMOVED*** [title];
 
   const navigate = useNavigate()
   const goRecommend = () => ***REMOVED***
@@ -78,22 +78,31 @@ const PlannerBox = ((***REMOVED*** title, company, price, content ***REMOVED***:
         </div>
 
       </AccordionSummary>
-      <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
-        <div className="flex justify-between items-center">
-        <div className="flex flex-col">
-          <span className="font-bold text-lg text-main2">
-            ***REMOVED***company***REMOVED***
-          </span>
-          <span>
-            ***REMOVED***content***REMOVED***
-          </span>
-          <span className="font-bold">
-            ***REMOVED***price.toLocaleString()***REMOVED***원
-          </span>
-        </div>
-        <button className="mr-3 rounded-full w-[35px] h-[35px] bg-gray-100">삭제</button>
-        </div>
-      </AccordionDetails>
+      ***REMOVED***isChecked ? (
+        <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
+          <div className="flex justify-between items-center">
+            <div className="flex flex-col">
+              <span className="font-bold text-lg text-main2">
+                ***REMOVED***company***REMOVED***
+              </span>
+              <span>
+                ***REMOVED***content***REMOVED***
+              </span>
+              <span className="font-bold">
+                ***REMOVED***price.toLocaleString()***REMOVED***원
+              </span>
+            </div>
+            <button className="mr-3 rounded-full w-[35px] h-[35px] bg-gray-100">삭제</button>
+          </div>
+        </AccordionDetails>
+      ) : (
+        <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
+          <div className="flex justify-center items-center">
+            <p>상품이 없습니다.</p>
+          </div>
+        </AccordionDetails>
+      )***REMOVED***
+      
     </Accordion>
   );
 ***REMOVED***);

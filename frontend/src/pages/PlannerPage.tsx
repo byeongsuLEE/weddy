@@ -58,10 +58,9 @@ const Planner = () => ***REMOVED***
       price: '0',
       content: ''
     ***REMOVED***,
-  ]
+  ];
 
   const totalPrice = dummyList.reduce((acc, dummy) => acc + Number(dummy.price), 0);
-
 
   return (
     <div className="flex flex-col relative">

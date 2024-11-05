@@ -4,7 +4,6 @@ import ***REMOVED*** RadioGroup ***REMOVED*** from "@/components/ui/radio-group"
 import ***REMOVED*** useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate, useParams ***REMOVED*** from 'react-router-dom';
 
-
 const PlannerList = () => ***REMOVED***
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -15,17 +14,16 @@ const PlannerList = () => ***REMOVED***
 
   const category = useParams().category ?? '';
   const renderCategory = ***REMOVED***
-    'studio': '스튜디오',
-    'dress': '드레스',
-    'makeup': '메이크업',
+    'STUDIO': '스튜디오',
+    'DRSS': '드레스',
+    'MAKEUP': '메이크업',
   ***REMOVED***[category];
 
   const navigate = useNavigate();
 
   const goPlanner = () => ***REMOVED***
-    navigate('/planner')
-  ***REMOVED***
-
+    navigate('/planner');
+  ***REMOVED***;
 
   const dummyList = [
     ***REMOVED***
@@ -48,7 +46,8 @@ const PlannerList = () => ***REMOVED***
       name: "업체4",
       price: 100000
     ***REMOVED***,
-  ]
+  ];
+
   return (
     <RadioGroup >
       <h1 className="text-center mt-10">***REMOVED***renderCategory***REMOVED***</h1>
