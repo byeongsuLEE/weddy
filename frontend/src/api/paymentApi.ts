@@ -6,7 +6,7 @@ import ***REMOVED*** ContractData ***REMOVED*** from "./contract.type";
 const BASE_URL = "http://localhost:8080/api/payments";
 const PORTONE_CHANNEL_KEY = import.meta.env.VITE_PORTONE_CHANNEL_KEY;
 const PORTONE_STORE_ID = import.meta.env.VITE_PORTONE_STORE_ID;
-
+const redirectUrl = import.meta.env.VITE_PUBLIC_URL;
 // ProductType 및 ContractInfo 타입 정의
 export enum ProductType ***REMOVED***
   STUDIO = "STUDIO",
@@ -16,7 +16,9 @@ export enum ProductType ***REMOVED***
 ***REMOVED***
 
 // 결제 요청 함수
-export const requestPayment = async (contractInfo: ContractData): Promise<void> => ***REMOVED***
+export const requestPayment = async (
+  contractInfo: ContractData
+): Promise<void> => ***REMOVED***
   console.log("PORTONE_CHANNEL_KEY:", PORTONE_CHANNEL_KEY);
   console.log("PORTONE_STORE_ID:", PORTONE_STORE_ID);
   const ***REMOVED*** title, totalMount ***REMOVED*** = contractInfo;
@@ -29,6 +31,11 @@ export const requestPayment = async (contractInfo: ContractData): Promise<void> 
     totalAmount: parseInt(totalMount, 10), // totalMount를 숫자로 변환
     currency: "CURRENCY_KRW", // KRW로 설정 (변경 없음)
     payMethod: "EASY_PAY",
+    windowType: ***REMOVED***
+      pc: "IFRAME",
+      mobile: "REDIRECTION",
+    ***REMOVED***,
+    redirectUrl: redirectUrl, // 결제 완료 후 리다이렉트될 URL
   ***REMOVED***);
 
   if (response) ***REMOVED***
@@ -42,7 +49,9 @@ export const requestPayment = async (contractInfo: ContractData): Promise<void> 
 ***REMOVED***;
 
 // 결제 성공 시 서버로 전송하는 함수
-const sendPaymentSuccessToServer = async (contractInfo: ContractData): Promise<void> => ***REMOVED***
+const sendPaymentSuccessToServer = async (
+  contractInfo: ContractData
+): Promise<void> => ***REMOVED***
   try ***REMOVED***
     const response = await axios.post(
       `$***REMOVED***BASE_URL***REMOVED***/success`,
