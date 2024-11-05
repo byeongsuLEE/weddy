@@ -1,5 +1,6 @@
 package com.ssafy.schedule.framework.kafkaadapter;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.schedule.application.usecase.CreateScheduleUsecase;
 import com.ssafy.schedule.domain.event.PaymentProductInfo;
@@ -24,7 +25,7 @@ import java.io.IOException;
 @Slf4j
 public class ScheduleConsumers ***REMOVED***
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper ;
     private final CreateScheduleUsecase createScheduleUsecase;
 
 

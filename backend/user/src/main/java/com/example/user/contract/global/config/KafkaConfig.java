@@ -1,5 +1,6 @@
 package com.example.user.contract.global.config;
 
+import com.example.user.payment.dto.request.PaymentProductInfo;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,7 @@ public class KafkaConfig ***REMOVED***
 
 
     @Bean
-    public ProducerFactory<String, Object> kafkaProducerFactory() ***REMOVED***
+    public ProducerFactory<String, PaymentProductInfo> kafkaProducerFactory() ***REMOVED***
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -41,7 +42,7 @@ public class KafkaConfig ***REMOVED***
 
 
     @Bean
-    public KafkaTemplate<String, Object> kafkaTemplate() ***REMOVED***
+    public KafkaTemplate<String, PaymentProductInfo> kafkaTemplate() ***REMOVED***
         return new KafkaTemplate<>(kafkaProducerFactory());
     ***REMOVED***
 

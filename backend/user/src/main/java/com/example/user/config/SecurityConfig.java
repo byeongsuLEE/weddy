@@ -1,7 +1,12 @@
 package com.example.user.config;
 
+
 import com.example.user.OAuth2.CustomSuccessHandler;
+import com.example.user.jwt.BlackTokenService;
 import com.example.user.jwt.JWTFilter;
+import com.example.user.jwt.JWTUtil;
+import com.example.user.jwt.LogFilter;
+import com.example.user.repository.UserRepository;
 import com.example.user.service.CustomOAuth2UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -31,7 +37,7 @@ public class SecurityConfig ***REMOVED***
     ***REMOVED***
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception ***REMOVED***
+    public SecurityFilterChain filterChain(HttpSecurity http, UserRepository userRepository) throws Exception ***REMOVED***
 
         // CORS 설정
         http.cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() ***REMOVED***
@@ -39,7 +45,7 @@ public class SecurityConfig ***REMOVED***
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) ***REMOVED***
                 CorsConfiguration configuration = new CorsConfiguration();
                 configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:5174"));
-                configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
                 configuration.setAllowedHeaders(List.of("*"));
                 configuration.setAllowCredentials(true);
                 configuration.setMaxAge(3600L);
