@@ -5,13 +5,20 @@ import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.service.ContractService;
 import com.example.user.payment.dto.request.ContractInfoRequestDto;
 import com.example.user.payment.dto.request.PaymentProductInfo;
+import io.jsonwebtoken.Header;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.common.header.Headers;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -22,7 +29,10 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 public class PaymentService ***REMOVED***
 
-
+    @Value(value = "$***REMOVED***portone.api-key***REMOVED***")
+    private String API_SECRET_KEY;
+    @Value(value = "$***REMOVED***portone.store-id***REMOVED***")
+    private String STORE_ID;
     @Value(value = "$***REMOVED***producers.topic1.name***REMOVED***")
     private String TOPIC_PAYMENT;
 
@@ -38,6 +48,33 @@ public class PaymentService ***REMOVED***
     public void paymentSuccess(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
         contractService.changeContractStatus(contractInfoRequestDto.getId());
         occurPaymentEvent(contractInfoRequestDto);
+
+        String reason = "일정 생성 오류 ";
+        paymentCancel(contractInfoRequestDto.getPaymentId(), reason);
+    ***REMOVED***
+
+    public void paymentCancel(String paymentId, String reason) ***REMOVED***
+        // 결제 취소 로직
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String url =  "https://api.portone.io/payments/"+paymentId+"/cancel";
+        HttpHeaders headers  = new HttpHeaders();
+        headers.add("Authorization", API_SECRET_KEY);
+        HttpEntity<String > entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response  =  restTemplate.exchange(
+                url,
+                HttpMethod.POST,
+                entity,
+                String.class
+        );
+
+        if(response.getStatusCode().is2xxSuccessful())***REMOVED***
+            log.info("결제 취소 성공");
+        ***REMOVED***else***REMOVED***
+            log.info("결제 취소 실패");
+        ***REMOVED***
     ***REMOVED***
 
 
