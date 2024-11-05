@@ -1,6 +1,6 @@
 import ***REMOVED*** useRef ***REMOVED*** from "react";
 import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** contractInfo, signature ***REMOVED*** from "../api/contractApi";
+import ***REMOVED*** changeStatus, contractInfo ***REMOVED*** from "../api/contractApi";
 import TodoButton from "../common/TodoButton";
 import ***REMOVED*** makeImage ***REMOVED*** from "../hooks/makeImage";
 import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
@@ -32,14 +32,14 @@ const Contract = () => ***REMOVED***
   const handleSignature = async () => ***REMOVED***
     const contractImage = await makeImage(pageRef);
 
-    const [sign, hash] = await Promise.all([
-      makeSignature(),
+    const [hash] = await Promise.all([
       uploadToPinata(contractImage, category)
     ]);
 
     await Promise.all([
+      makeSignature(),
       mintNFT(hash),
-      signature(sign)
+      changeStatus(contractId)
     ]);
   ***REMOVED***;
 
@@ -91,12 +91,7 @@ const Contract = () => ***REMOVED***
           <span className="font-bold text-sm">제 3조 [계약금액]</span>
           <span className="text-sm">총 계약금액은
             <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***/>
-            만원으로 하며, 계약금액 중
-            <input disabled name="startPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.downPayment) / 10000).toLocaleString()***REMOVED***/>
-            만원은 착수시점에 지급하고,
-            잔금
-            <input disabled name="finalPayment" placeholder="0" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.finalPayment) / 10000).toLocaleString()***REMOVED***/>
-            만원은 작업 완료 시 작업완료납품과 동시에 “갑”은 “을”에게 지급하기로 한다.</span>
+            만원은 착수시점에 “갑”은 “을”에게 지급하기로 한다.</span>
           <br />
           <span className="font-bold text-sm">제 4조 [납품]</span>
           <span className="text-sm">“을”은 작업 진행 중 중간 완료된 성과물을 1회에 걸쳐 중간 납품을 하며, 최종 자료는 검토 및 수정 후 완성품으로 납품하기로 한다.</span>

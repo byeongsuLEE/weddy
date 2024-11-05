@@ -11,12 +11,12 @@ const ContractList = () => ***REMOVED***
     ***REMOVED***
       id: 1,
       product: ***REMOVED***
-        product_id: "P001",
-        product_name: "STUDIO Package",
-        product_content: "Comprehensive studio package including photo and video sessions"
+        productId: "P001",
+        productName: "STUDIO Package",
+        productContent: "Comprehensive studio package including photo and video sessions",
+        type: "STUDIO",
       ***REMOVED***,
       customer: "Customer 1",
-      type: "STUDIO",
       content: "Detailed contract for studio package",
       status: "PAYMENT_PENDING",
       totalMount: "2000000",
@@ -30,12 +30,12 @@ const ContractList = () => ***REMOVED***
     ***REMOVED***
       id: 2,
       product: ***REMOVED***
-        product_id: "P002",
-        product_name: "Dress Rental",
-        product_content: "Rental of formal dresses for special events"
+        productId: "P002",
+        productName: "Dress Rental",
+        productContent: "Rental of formal dresses for special events",
+        type: "DRESS",
       ***REMOVED***,
       customer: "Customer 2",
-      type: "DRESS",
       content: "Contract for dress rental service",
       status: "SIGN_PENDING",
       totalMount: "1500000",
@@ -49,12 +49,12 @@ const ContractList = () => ***REMOVED***
     ***REMOVED***
       id: 3,
       product: ***REMOVED***
-        product_id: "P003",
-        product_name: "Makeup Service",
-        product_content: "Professional makeup service for events"
+        productId: "P003",
+        productName: "Makeup Service",
+        productContent: "Professional makeup service for events",
+        type: "MAKEUP",
       ***REMOVED***,
       customer: "Customer 3",
-      type: "MAKEUP",
       content: "Contract for makeup service",
       status: "PAYMENT_COMPLETED",
       totalMount: "1000000",
@@ -70,7 +70,7 @@ const ContractList = () => ***REMOVED***
   return (
     <div className="my-12 mx-5">
       ***REMOVED***contracts.map((contract) => (
-        <ContractListBox key=***REMOVED***contract.id***REMOVED*** type=***REMOVED***contract.type***REMOVED*** contractInfo=***REMOVED***contract***REMOVED*** />
+        <ContractListBox key=***REMOVED***contract.id***REMOVED*** type=***REMOVED***contract.product.type***REMOVED*** contractInfo=***REMOVED***contract***REMOVED*** />
       ))***REMOVED***
 
       ***REMOVED***/* ***REMOVED***contractList?.map((contract: ContractData) => (
