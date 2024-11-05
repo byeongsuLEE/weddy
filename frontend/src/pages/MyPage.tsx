@@ -7,7 +7,7 @@ import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Mypage = () => ***REMOVED***
-  const [isConneted, ] = useState<boolean>(true);
+  const [isConneted,] = useState<boolean>(true);
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png")
   function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) ***REMOVED***
     const files = event.target.files;
@@ -63,32 +63,60 @@ const Mypage = () => ***REMOVED***
   // const handleConnect = async (code: string) => ***REMOVED***
   //   await connectCoupleCode(code);
   // ***REMOVED***;
+  const today = new Date();
+  const targetDate = new Date('2024-11-19');
+
+  const differenceInTime = targetDate.getTime() - today.getTime(); // 밀리초 단위 차이
+  const dDay = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24)); // 일 단위로 변환 후 올림
 
   return (
-    <div className="m-5 bg-white h-auto rounded-xl p-5 mb-20">
-      <div className="relative inline-block">
-        <img
-          className="bg-main1 rounded-full h-[100px] w-[100px] mt-10"
-          src=***REMOVED***imageSrc***REMOVED***
-          alt="profile image"
-        />
-        <label htmlFor="profile-image">
-          <img
-            className="h-[30px] w-[30px] absolute bottom-0 right-0"
-            src="/icons/camera.png"
-            alt="camera image"
-          />
-          <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
-        </label>
+    <div className="m-5 bg-white h-[700px] rounded-xl p-5">
+      <h1 className="text-center mt-5">마이페이지</h1>
+      <div className="flex justify-between">
+        <div className="flex flex-col items-center">
+          <div className="bg-main1 flex flex-col p-5 h-[200px] w-[300px] mx-3 mt-10 rounded-xl">
+            <span className="font-bold text-2xl text-main2">D-***REMOVED***dDay***REMOVED***</span>
+            <span className="text-sm mt-1">2024-11-19</span>
+            ***REMOVED***isConneted ? (
+              <div className="flex items-center justify-center">
+                <div>
+                  <img
+                    className="bg-main1 rounded-full h-[70px] w-[70px] mt-5"
+                    src=***REMOVED***imageSrc***REMOVED***
+                    alt="profile image"
+                  />
+                  <div className="text-xs mt-1 text-blue-400">
+                    <label htmlFor="profile-image">
+                      <span>이미지 변경</span>
+                      <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
+                    </label>
+                  </div>
+                </div>
+                <RingIcon />
+                <img
+                  className="bg-main1 rounded-full h-[70px] w-[70px] "
+                  src="/icons/profile.png"
+                  alt="profile image"
+                />
+              </div>
+            ) : (
+              <>
+                <span className="font-bold text-lg mb-2">***REMOVED***myCode***REMOVED***</span>
+                <span className="text-sm text-gray-500">상대방과 커플코드를 공유하세요!</span>
+              </>
+            )***REMOVED***
+          </div>
+        </div>
       </div>
-      <div className="flex justify-between ml-3 mr-10">
-        <div className="flex flex-col mt-10">
+
+      <div className="flex justify-between ml-3 mr-10 mt-10">
+        <div className="flex flex-col">
           <span className="my-2 text-gray-600">이름</span>
           <span className="my-3 text-gray-600">전화번호</span>
           <span className="my-3 text-gray-600">이메일</span>
           <span className="my-3 text-gray-600">주소</span>
         </div>
-        <div className="flex flex-col mt-10">
+        <div className="flex flex-col">
           <input
             defaultValue=***REMOVED***userInfo.name***REMOVED***
             className="my-2 p-2 w-[180px] border border-gray-400 rounded-lg h-[30px]"
@@ -115,26 +143,10 @@ const Mypage = () => ***REMOVED***
           />
         </div>
       </div>
-      <div className="flex justify-end mt-10 mr-3" onClick=***REMOVED***handleUpdate***REMOVED***>
+      <div className="flex justify-end mt-10 mb-10 mr-3" onClick=***REMOVED***handleUpdate***REMOVED***>
         <TodoButton title="수정하기" colorId=***REMOVED***1***REMOVED*** />
       </div>
-      <div className="flex flex-col items-center">
-        <div className="bg-main1 flex flex-col justify-center items-center p-5 h-[150px] w-[310px] mt-20 mb-14 rounded-xl">
-          <div className=" text-main2 font-bold mb-3">커플 커넥트</div>
-          ***REMOVED***isConneted ? (
-            <div className="flex items-center">
-              <span className="">이호영</span>
-              <RingIcon />
-              <span>이채연</span>
-            </div>
-          ) : (
-            <>
-              <span className="font-bold text-lg mb-2">***REMOVED***myCode***REMOVED***</span>
-              <span className="text-sm text-gray-500">상대방과 커플코드를 공유하세요!</span>
-            </>
-          )***REMOVED***
-        </div>
-      </div>
+
     </div>
   )
 ***REMOVED***
