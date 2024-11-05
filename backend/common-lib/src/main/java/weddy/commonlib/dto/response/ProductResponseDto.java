@@ -1,15 +1,21 @@
 package weddy.commonlib.dto.response;
 
-import lombok.Builder;
+import lombok.*;
 import weddy.commonlib.constant.ProductType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-public record ProductResponseDto(Long id,
-                                 String name,
-                                 ProductType type,
-                                 int price,
-                                 String address,
-                                 List<ProductImageResponseDto> images) ***REMOVED***
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class ProductResponseDto ***REMOVED***
+    private Long id;
+    private String name;
+    private ProductType type;
+    private int price;
+    private String address;
+    private List<ProductImageResponseDto> images = new ArrayList<>();
 ***REMOVED***
