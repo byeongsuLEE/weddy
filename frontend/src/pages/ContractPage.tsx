@@ -77,25 +77,22 @@ const Contract = () => ***REMOVED***
           </div>
           <br />
           <span className="text-sm">
-            ***REMOVED***/* <input disabled name="clientName" placeholder="고객" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.userName***REMOVED***/> */***REMOVED***
             <strong>***REMOVED***contract?.userName***REMOVED***</strong>
             (이하 “갑” 아리 한다.)와
-            ***REMOVED***/* <input disabled name="candidateName" placeholder="업체" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***contract?.companyName***REMOVED***/> */***REMOVED***
             <strong>***REMOVED***contract?.companyName***REMOVED***</strong>
-            (이하 “을” 이라 한다.)는 상품명에 명시된 업무작업을 수행하기 위해 다음과 같이 계약을 체결한다.</span>
+            (이하 “을” 이라 한다.)는 상품명에 명시된 업무작업을 수행하기 위해 다음과 같이 계약을 체결한다.
+          </span>
           <br />
           <span className="font-bold text-sm">제 1조[목적]</span>
           <span className="text-sm">본 계약을 “갑”이 “을”에게 의뢰한 업무를 “갑”에게 공급함에 있어 “갑”과 “을" 사이에 필요한 사항을 정하는 것을 목적으로 한다.</span>
           <br />
           <span className="font-bold text-sm">제 2조 [계약기간]</span>
           <span className="text-sm">계약 일시는
-            ***REMOVED***/* <input disabled name="endDate" className="border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***formatDate(date)***REMOVED***/> */***REMOVED***
             <strong>***REMOVED***formatDate(date)***REMOVED***</strong>
             로 하며, 갑과 을의 합의 하에 본 계약일시는 변경 될 수 있다.</span>
           <br />
           <span className="font-bold text-sm">제 3조 [계약금액]</span>
           <span className="text-sm">총 계약금액은
-            ***REMOVED***/* <input disabled name="deposit" className="text-end border p-2 border-mainGreen rounded-md h-[25px] m-1" type="text" defaultValue=***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***/> */***REMOVED***
             <strong>***REMOVED***(Number(contract?.totalMount) / 10000).toLocaleString()***REMOVED***</strong>
             만원을 착수시점에 “갑”은 “을”에게 지급하기로 한다.</span>
           <br />
@@ -111,7 +108,8 @@ const Contract = () => ***REMOVED***
             <br />
             (1) 정당한 이유 없이 작업 진행이 이루어지지 않을 때 <br />
             (2) 정당한 이유 없이 계약기간에 작업완료가 불가능하다고 판단될 때 <br />
-            (3) “갑”이 계약금을 지급하지 않았을 경우</span>
+            (3) “갑”이 계약금을 지급하지 않았을 경우
+          </span>
           <br />
           <span className="font-bold text-sm">제 7조 [손해배상]</span>
           <span className="text-sm">“을”의 귀책사유로 인하여 본 계약이 불이행되었을 경우 “을”은 “갑”이 제시한 손해배상의 책임을 진다.</span>

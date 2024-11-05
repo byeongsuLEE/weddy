@@ -8,7 +8,7 @@ export const aiRecommend = async (data: string): Promise<Product[]> => ***REMOVE
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***,
     data: ***REMOVED***
       message: data

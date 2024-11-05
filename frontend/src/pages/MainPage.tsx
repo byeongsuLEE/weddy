@@ -11,7 +11,6 @@ const Main = () => ***REMOVED***
     '/main/main2.png',
     '/main/main3.png',
     '/main/main4.png',
-
   ];
 
   //== 베스트 ==//

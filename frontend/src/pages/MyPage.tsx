@@ -55,7 +55,7 @@ const Mypage = () => ***REMOVED***
   const updateUserInfo = (key: keyof userInformation, value: string) => ***REMOVED***
     setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value ***REMOVED*** ***REMOVED***);
   ***REMOVED***;
-
+  
   //== 커플 코드 조회 ==//
   const ***REMOVED*** data: myCode ***REMOVED*** = useQuery('getCoupleCode', getCoupleCode);
 
@@ -63,11 +63,12 @@ const Mypage = () => ***REMOVED***
   // const handleConnect = async (code: string) => ***REMOVED***
   //   await connectCoupleCode(code);
   // ***REMOVED***;
+
   const today = new Date();
   const targetDate = new Date('2024-11-19');
 
-  const differenceInTime = targetDate.getTime() - today.getTime(); // 밀리초 단위 차이
-  const dDay = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24)); // 일 단위로 변환 후 올림
+  const differenceInTime = targetDate.getTime() - today.getTime();
+  const dDay = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
 
   return (
     <div className="m-5 bg-white h-[700px] rounded-xl p-5">
@@ -119,25 +120,25 @@ const Mypage = () => ***REMOVED***
         <div className="flex flex-col">
           <input
             defaultValue=***REMOVED***userInfo.name***REMOVED***
-            className="my-2 p-2 w-[180px] border border-gray-400 rounded-lg h-[30px]"
+            className="my-2 p-2 w-[190px] border border-gray-400 rounded-lg h-[30px]"
             type="text"
             onChange=***REMOVED***(e) => updateUserInfo('name', e.target.value)***REMOVED***
           />
           <input
             defaultValue=***REMOVED***userInfo.phone***REMOVED***
-            className="my-2 p-2 w-[180px] border border-gray-400 rounded-lg h-[30px]"
+            className="my-2 p-2 w-[190px] border border-gray-400 rounded-lg h-[30px]"
             type="text"
             onChange=***REMOVED***(e) => updateUserInfo('phone', e.target.value)***REMOVED***
           />
           <input
             defaultValue=***REMOVED***userInfo.email***REMOVED***
-            className="my-2 border p-2 w-[180px] border-gray-400 rounded-lg h-[30px]"
+            className="my-2 border p-2 w-[190px] border-gray-400 rounded-lg h-[30px]"
             type="text"
             onChange=***REMOVED***(e) => updateUserInfo('email', e.target.value)***REMOVED***
           />
           <input
             defaultValue=***REMOVED***userInfo.address***REMOVED***
-            className="my-2 border p-2 w-[180px] border-gray-400 rounded-lg h-[30px]"
+            className="my-2 border p-2 w-[190px] border-gray-400 rounded-lg h-[30px]"
             type="text"
             onChange=***REMOVED***(e) => updateUserInfo('address', e.target.value)***REMOVED***
           />

@@ -3,22 +3,18 @@ import ***REMOVED*** GetSchedule, Schedule ***REMOVED*** from "./schedule.type";
 
 const BASE_URL = "http://localhost:8080/api/schedules";
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidXNlcklkIjoxLCJjb2RlIjoidXNlcjEiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.LItYgsUBpk903SstXRFKs08_mKnd7vr7hZm-TEaRYZQ';
-
 //== 일정 등록 ==//
 export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: "post",
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***token***REMOVED***`,
+      Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
-    // headers: ***REMOVED***
-    //   Authorization: sessionStorage.getItem("token"),
-    // ***REMOVED***,
     data: scheduleData
   ***REMOVED***);
-  console.log(response.data);
+
+  alert("일정이 등록되었습니다.");
 ***REMOVED***;
 
 //== 일정 조회 ==//
@@ -27,11 +23,8 @@ export const getSchedule = async (selectedDate: string): Promise<GetSchedule[]> 
     method: "get",
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***token***REMOVED***`,
+      Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
-    // headers: ***REMOVED***
-    //   Authorization: sessionstorage.getItem("token"),
-    // ***REMOVED***,
     params: ***REMOVED***
       date: selectedDate
     ***REMOVED***
