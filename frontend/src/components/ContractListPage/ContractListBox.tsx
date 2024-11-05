@@ -11,7 +11,6 @@ interface ContractListBoxProps ***REMOVED***
   contractInfo: ContractData;
 ***REMOVED***
 const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
-  
   const handleChangeStatus = async () => ***REMOVED***
     await changeStatus(contractInfo.id);
     window.location.reload();
@@ -27,7 +26,7 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
         <ProgressBar status=***REMOVED***contractInfo.status***REMOVED*** />
 
         <div className="flex justify-between mt-10">
-        <Link to=***REMOVED***`/board/detail/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>
+          <Link to=***REMOVED***`/board/detail/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>
             <div className="flex items-center">
               <h1 className="font-bold mr-4">***REMOVED***type***REMOVED***</h1>
               <GotoIcon />
@@ -35,13 +34,15 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
           </Link>
           ***REMOVED***contractInfo.status === "CONTRACT_PENDING" && (
             <div onClick=***REMOVED***handleChangeStatus***REMOVED***>
-              <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** cursor='default' />
+              <TodoButton title="계약 대기중" colorId=***REMOVED***2***REMOVED*** cursor="default" />
             </div>
           )***REMOVED***
           ***REMOVED***contractInfo.status === "SIGN_PENDING" && (
-             <Link to=***REMOVED***`/contract/$***REMOVED***contractInfo.product.type***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***>
-               <TodoButton title="서명 하기" colorId=***REMOVED***1***REMOVED*** />
-             </Link>
+            <Link
+              to=***REMOVED***`/contract/$***REMOVED***contractInfo.product.type***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***
+            >
+              <TodoButton title="서명 하기" colorId=***REMOVED***1***REMOVED*** />
+            </Link>
           )***REMOVED***
           ***REMOVED***contractInfo.status === "PAYMENT_PENDING" && (
             <div onClick=***REMOVED***handlePayment***REMOVED***>
