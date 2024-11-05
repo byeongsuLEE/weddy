@@ -40,10 +40,14 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
         // 제외할 경로를 리스트로 정의
         List<String> excludedPaths = List.of(
                 "/login",
+                "/login/**",
                 "/oauth2",
                 "/api/login",
-                "/api/users/reissue",
-                "/api/users/reissue/**"
+                "/api/login/**",
+                "/users/token",
+                "/users/token/**",
+                "/api/users/token",
+                "/api/users/token/**"
                 );
 
         // 경로 리스트에 포함된 항목이 요청 경로의 접두사인지 확인
@@ -77,7 +81,7 @@ public class JWTFilter extends OncePerRequestFilter ***REMOVED***
         Authentication authToken = new UsernamePasswordAuthenticationToken(userEntity, null, customOAuth2User.getAuthorities());
         //세션에 사용자 등록
         SecurityContextHolder.getContext().setAuthentication(authToken);
-
+        log.info("user filter 완료");
         filterChain.doFilter(request, response);
     ***REMOVED***
 ***REMOVED***

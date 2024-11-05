@@ -29,7 +29,15 @@ public class SecurityConfig ***REMOVED***
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)  // CSRF 비활성화
                 .authorizeExchange(exchange -> exchange
-                        .pathMatchers("/auth/**", "/api/login", "/api/oauth2/**").permitAll() // 인증 및 OAuth2 경로 허용
+                        .pathMatchers(
+                                "/auth/**",
+                                "/api/login",
+                                "/api/oauth2/**",
+                                "/api/login/**",
+                                "/api/users",
+                                "/api/users/**"
+
+                        ).permitAll() // 인증 및 OAuth2 경로 허용
                         .anyExchange().authenticated()) // 나머지 요청은 인증 필요
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .addFilterAt(new JWTFilter(jwtUtil), SecurityWebFiltersOrder.AUTHENTICATION) // JWTFilter를 추가

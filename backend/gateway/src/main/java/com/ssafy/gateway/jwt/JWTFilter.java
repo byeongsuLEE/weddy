@@ -28,7 +28,12 @@ public class JWTFilter implements WebFilter ***REMOVED***
 
         // 제외할 경로 설정
         List<String> excludedPaths = List.of(
-                "/login", "/oauth2", "/api/login", "/api/users/reissue", "/api/users/reissue/**"
+                "/login",
+                "/oauth2", "/api/login",
+                "/users/token",
+                "/users/token/**",
+                "/api/users/token",
+                "/api/users/token/**"
         );
 
         // 제외할 경로인 경우 다음 필터로 이동
@@ -56,7 +61,7 @@ public class JWTFilter implements WebFilter ***REMOVED***
 
         // 간단한 인증 객체 생성 및 SecurityContext에 설정
         Authentication authToken = new UsernamePasswordAuthenticationToken(username, null, List.of());
-
+        log.info("필터인증완료");
         return chain.filter(exchange)
                 .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authToken));
     ***REMOVED***

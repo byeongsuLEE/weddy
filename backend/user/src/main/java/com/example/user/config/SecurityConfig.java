@@ -55,7 +55,9 @@ public class SecurityConfig ***REMOVED***
                         "/login",
                         "/login/**",
                         "/users/token",
-                        "/users/token/**").permitAll()
+                        "/users/token/**",
+                        "/api/users/token",
+                        "/api/users/token/**").permitAll()
                 .anyRequest().authenticated());
 
         // CSRF 비활성화
