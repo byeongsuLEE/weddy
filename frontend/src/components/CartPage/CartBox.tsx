@@ -1,4 +1,4 @@
-import ***REMOVED*** useState, useEffect ***REMOVED*** from 'react';
+import ***REMOVED*** useState ***REMOVED*** from 'react';
 import ***REMOVED*** Checkbox ***REMOVED*** from "@/components/ui/checkbox";
 import ***REMOVED*** Product ***REMOVED*** from '@/api/product.type';
 
@@ -13,20 +13,17 @@ const CartBox = (***REMOVED*** title, type, cartItem, onAmountChange ***REMOVED*
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleCheckboxChange = (index: number) => ***REMOVED***
-    setSelectedIndex(selectedIndex === index ? null : index);
+    const newIndex = selectedIndex === index ? null : index;
+    setSelectedIndex(newIndex);
+    onAmountChange(type, newIndex !== null ? cartItem[newIndex] : null);
   ***REMOVED***;
-
-  useEffect(() => ***REMOVED***
-    const selectedProduct = selectedIndex !== null ? cartItem[selectedIndex] : null;
-    onAmountChange(type, selectedProduct);
-  ***REMOVED***, [selectedIndex, cartItem, type, onAmountChange]);
 
   return (
     <div className="m-5">
       <h2 className="font-bold text-lg mb-3">***REMOVED***title***REMOVED***</h2>
       ***REMOVED***cartItem.map((item, index) => (
         <div
-          key=***REMOVED***index***REMOVED***
+          key=***REMOVED***item.id***REMOVED***
           className="mx-1 my-5 bg-white h-[70px] w-auto rounded-lg px-5 py-3 flex justify-between"
         >
           <div className="flex items-center">
