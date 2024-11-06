@@ -1,7 +1,7 @@
 package com.example.user.contract.repository;
 
 import com.example.user.contract.domain.Contract;
-import com.example.user.entity.UserEntity;
+import com.example.user.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

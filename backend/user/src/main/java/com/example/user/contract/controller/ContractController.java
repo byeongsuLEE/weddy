@@ -5,7 +5,7 @@ import com.example.user.contract.dto.request.CreateContractRequestDto;
 import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.service.ContractService;
 import com.example.user.contract.global.util.response.ApiResponse;
-import com.example.user.entity.UserEntity;
+import com.example.user.user.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

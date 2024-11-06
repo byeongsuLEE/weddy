@@ -2,7 +2,7 @@ package com.example.user.contract.service;
 
 import com.example.user.contract.domain.Contract;
 import com.example.user.contract.dto.request.CreateContractRequestDto;
-import com.example.user.entity.UserEntity;
+import com.example.user.user.entity.UserEntity;
 
 import java.util.List;
 

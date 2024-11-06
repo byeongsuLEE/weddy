@@ -7,7 +7,7 @@ import com.example.user.contract.dto.request.CreateContractRequestDto;
 import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.repository.ContractRepository;
 import com.example.user.contract.global.util.exception.ContractNotFoundException;
-import com.example.user.entity.UserEntity;
+import com.example.user.user.entity.UserEntity;
 import com.example.user.contract.global.util.response.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
