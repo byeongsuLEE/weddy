@@ -1,7 +1,7 @@
 package com.example.user.user.service;
 
+import com.example.user.common.dto.ApiResponse;
 import com.example.user.common.service.GCSImageService;
-import com.example.user.common.dto.APIResponse;
 import com.example.user.common.dto.UserDTO;
 import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
@@ -22,14 +22,29 @@ public class UserService ***REMOVED***
         this.gcsImageService = gcsImageService;
     ***REMOVED***
 
-    public APIResponse<UserEntity> userInfo(Long userId)***REMOVED***
-        APIResponse response = APIResponse.builder()
-                .status(200)
-                .data(userRepository.findById(userId)
-                        .orElseThrow(()->new RuntimeException("user not found")))
+    public UserResponseDTO userInfo(Long userId) ***REMOVED***
+        UserEntity userEntity = userRepository.findById(userId).orElse(null);
+
+        if (userEntity == null) ***REMOVED***
+            // 원하는 방식으로 예외를 처리하거나 null을 반환할 수 있습니다.
+            return null;
+        ***REMOVED***
+
+        UserResponseDTO response = UserResponseDTO.builder()
+                .id(userEntity.getId())
+                .coupleCode(userEntity.getCoupleCode())
+                .socialId(userEntity.getSocialId())
+                .name(userEntity.getName())
+                .email(userEntity.getEmail())
+                .address(userEntity.getAddress())
+                .phone(userEntity.getPhone())
+                .picture(userEntity.getPicture())
+                .date(userEntity.getDate())
                 .build();
+
         return response;
     ***REMOVED***
+
 
     public UserResponseDTO coupleCode(String coupleCode)***REMOVED***
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
@@ -80,14 +95,33 @@ public class UserService ***REMOVED***
     ***REMOVED***
 
 
-    public UserDTO connectCoupleCode(String coupleCode,Long id)***REMOVED***
+    public UserResponseDTO connectCoupleCode(String coupleCode, Long id) ***REMOVED***
         UserEntity userEntity = userRepository.findById(id).orElse(null);
-        assert userEntity != null;
+        UserEntity otheruserEntity = userRepository.findByCoupleCode(coupleCode).orElse(null);
+
+        // userEntity가 null일 경우 예외 처리나 반환 방식 결정
+        if (userEntity == null || otheruserEntity == null) ***REMOVED***
+            // 예외를 던지거나 null을 반환하는 등의 처리
+            return null;
+        ***REMOVED***
+
+        // coupleCode 업데이트 및 저장
         userEntity.setCoupleCode(coupleCode);
         userRepository.save(userEntity);
-        return UserDTO.builder()
-                .name(userEntity.getName())
-                .picture(userEntity.getPicture())
+
+
+        // UserResponseDTO 빌드 및 반환
+        return UserResponseDTO.builder()
+                .id(otheruserEntity.getId())
+                .coupleCode(otheruserEntity.getCoupleCode())
+                .socialId(otheruserEntity.getSocialId())
+                .name(otheruserEntity.getName())
+                .email(otheruserEntity.getEmail())
+                .address(otheruserEntity.getAddress())
+                .phone(otheruserEntity.getPhone())
+                .picture(otheruserEntity.getPicture())
+                .date(otheruserEntity.getDate())
                 .build();
     ***REMOVED***
+
 ***REMOVED***

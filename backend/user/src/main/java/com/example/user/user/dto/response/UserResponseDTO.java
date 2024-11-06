@@ -4,14 +4,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 @Getter
 @Data
 @Builder
 public class UserResponseDTO ***REMOVED***
     private Long id;
     private String coupleCode;
-    private String name;
     private String socialId;
-    private String adress;
+    private String name;
+    private String email;
+    private String address;
     private String phone;
+    private String picture;
+    private LocalDate date;
 ***REMOVED***
