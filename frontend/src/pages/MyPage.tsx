@@ -1,3 +1,4 @@
+// import ***REMOVED*** connectCoupleCode ***REMOVED*** from "@/api/coupleApi";
 import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
 import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
@@ -10,7 +11,8 @@ import ***REMOVED*** useRecoilValue ***REMOVED*** from 'recoil';
 
 const Mypage = () => ***REMOVED***
   const token = useRecoilValue(firebaseTokenState);
-  const [isConneted,] = useState<boolean>(true);
+  const [ isConneted, ] = useState<boolean>(false);
+  const [ code, setCode ] = useState<string>("");
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png")
   function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) ***REMOVED***
     const files = event.target.files;
@@ -59,10 +61,11 @@ const Mypage = () => ***REMOVED***
     setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value ***REMOVED*** ***REMOVED***);
   ***REMOVED***;
 
-  // //== 커플 코드 연결 ==//
-  // const handleConnect = async (code: string) => ***REMOVED***
-  //   await connectCoupleCode(code);
-  // ***REMOVED***;
+  //== 커플 코드 연결 ==//
+  const handleConnect = async () => ***REMOVED***
+    console.log(code);
+    // await connectCoupleCode(code);
+  ***REMOVED***;
 
   const today = new Date();
   const targetDate = new Date('2024-11-19');
@@ -104,6 +107,8 @@ const Mypage = () => ***REMOVED***
               <>
                 <span className="font-bold text-lg mb-2">***REMOVED***userData?.coupleCode***REMOVED***</span>
                 <span className="text-sm text-gray-500">상대방과 커플코드를 공유하세요!</span>
+                <input type="text" className="my-2 p-2 w-[250px] border border-gray-400 rounded-lg h-[30px]" onChange=***REMOVED***(e) => setCode(e.target.value)***REMOVED***/>
+                <button onClick=***REMOVED***handleConnect***REMOVED***>연결</button>
               </>
             )***REMOVED***
           </div>
@@ -147,7 +152,6 @@ const Mypage = () => ***REMOVED***
       <div className="flex justify-end mt-10 mb-10 mr-3" onClick=***REMOVED***handleUpdate***REMOVED***>
         <TodoButton title="수정하기" colorId=***REMOVED***1***REMOVED*** />
       </div>
-
     </div>
   )
 ***REMOVED***
