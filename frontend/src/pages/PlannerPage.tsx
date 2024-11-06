@@ -79,7 +79,7 @@ const Planner = () => ***REMOVED***
     setMakeupList(cartList.filter((item: Product) => item.type === "MAKEUP"));
   ***REMOVED***, []);
 
-  const totalPrice = cartList.reduce((acc, item) => acc + Number(item.price), 0);
+  const totalAmount = Object.values(selectedList).reduce((acc, item) => acc + (Number(item?.price) || 0), 0).toLocaleString();
 
   const handleProductChange = (category: string, product: Product | null) => ***REMOVED***
     setSelectedList((prev) => (***REMOVED***
@@ -91,12 +91,12 @@ const Planner = () => ***REMOVED***
   return (
     <div className="flex flex-col relative">
       <div className="m-5 flex flex-col items-center">
-        <div className="flex items-center mt-5">
+        ***REMOVED***/* <div className="flex items-center mt-5">
           <span className="text-sm">
             <span className="text-main2 font-bold">WEDDY 플래너&nbsp;</span>
             추천 상품
           </span>
-        </div>
+        </div> */***REMOVED***
 
         <PlannerListBox
           category="STUDIO"
@@ -120,20 +120,24 @@ const Planner = () => ***REMOVED***
       
       <div className="flex justify-end mr-10 mt-14">
         <div className="flex flex-col mr-3">
-          ***REMOVED***cartList.map((item: Product) => (
-            <span key=***REMOVED***item.id***REMOVED*** className="my-1">
-              ***REMOVED***item.vendorName ? item.vendorName : "상품 없음"***REMOVED***
+        ***REMOVED***Object.entries(selectedList).map(([category, item]) =>
+          item?.name ? (
+            <span key=***REMOVED***category***REMOVED*** className="my-1">
+              ***REMOVED***item.name***REMOVED***
             </span>
-          ))***REMOVED***
+          ) : null
+        )***REMOVED***
           <span className="font-bold mt-2">총 가격: </span>
         </div>
         <div className="flex flex-col text-end">
-          ***REMOVED***cartList.map((item: Product) => (
-            <span key=***REMOVED***item.id***REMOVED*** className="my-1">
+        ***REMOVED***Object.entries(selectedList).map(([category, item]) =>
+          item?.price ? (
+            <span key=***REMOVED***category***REMOVED*** className="my-1">
               ***REMOVED***Number(item.price).toLocaleString()***REMOVED***원
             </span>
-          ))***REMOVED***
-          <span className="font-bold">***REMOVED***totalPrice.toLocaleString()***REMOVED***원</span>
+          ) : null
+        )***REMOVED***
+          <span className="font-bold mt-2">***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
         </div>
       </div>
       
