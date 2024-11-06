@@ -57,16 +57,19 @@ const sendPaymentSuccessToServer = async (
     const response = await axios.post(
       `$***REMOVED***BASE_URL***REMOVED***/success`,
       ***REMOVED***
-        productId: contractInfo.product.productId,
-        productName: contractInfo.product.productName,
-        productType: contractInfo.product.type,
+        id: contractInfo.id,
+        title: contractInfo.title,
+        product: contractInfo.product,
         startDate: contractInfo.startDate,
         endDate: contractInfo.endDate,
         content: contractInfo.content,
-        userId: contractInfo.customer,
+        userId: contractInfo.userId,
+        userName: contractInfo.userName,
         code: contractInfo.code,
         totalMount: contractInfo.totalMount,
-        payment: paymentId,
+        paymentId: paymentId,
+        companyName: contractInfo.companyName,
+        status: contractInfo.status,
       ***REMOVED***,
       ***REMOVED***
         headers: ***REMOVED***
