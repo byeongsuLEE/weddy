@@ -10,7 +10,9 @@ interface ContractListBoxProps ***REMOVED***
   type: string;
   contractInfo: ContractData;
 ***REMOVED***
+
 const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+  console.log("계약서 정보 ", contractInfo);
   const handleChangeStatus = async () => ***REMOVED***
     await changeStatus(contractInfo.id);
     window.location.reload();

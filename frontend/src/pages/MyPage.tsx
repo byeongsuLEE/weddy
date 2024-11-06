@@ -2,14 +2,14 @@ import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
 import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
 import RingIcon from "@/icons/RingIcon";
+import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 import ***REMOVED*** useRecoilValue ***REMOVED*** from 'recoil';
-import ***REMOVED*** tokenState ***REMOVED*** from '@/store/token';
 
 const Mypage = () => ***REMOVED***
-  const token = useRecoilValue(tokenState);
+  const token = useRecoilValue(firebaseTokenState);
   const [isConneted,] = useState<boolean>(true);
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png")
   function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) ***REMOVED***
@@ -69,7 +69,6 @@ const Mypage = () => ***REMOVED***
 
   const differenceInTime = targetDate.getTime() - today.getTime();
   const dDay = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
-
   return (
     <div className="m-5 bg-white h-[700px] rounded-xl p-5">
       <h1 className="text-center mt-5">마이페이지</h1>
