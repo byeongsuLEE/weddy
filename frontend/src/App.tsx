@@ -25,9 +25,8 @@ import UserInfo from "./pages/UserInfoPage";
 import ***REMOVED*** useSetRecoilState ***REMOVED*** from 'recoil';
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from './store/firebaseToken.ts';
 
-import ***REMOVED*** onMessage ***REMOVED*** from 'firebase/messaging';
 import ***REMOVED*** useEffect ***REMOVED*** from 'react';
-import ***REMOVED*** messaging, requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
+import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
 
 function AppContent() ***REMOVED***
   const location = useLocation();
@@ -70,10 +69,10 @@ function App() ***REMOVED***
     if ('serviceWorker' in navigator) ***REMOVED***
       navigator.serviceWorker.getRegistrations().then((registrations) => ***REMOVED***
         // 기존 등록된 서비스 워커가 있는지 확인
-        const isRegistered = registrations.some((registration) => 
+        const isRegistered = registrations.some((registration) =>
           registration.active && registration.scope === '/firebase-messaging-sw.js'
         );
-  
+
         if (!isRegistered) ***REMOVED***
           // 서비스 워커가 등록되지 않았을 경우에만 등록
           navigator.serviceWorker.register('/firebase-messaging-sw.js')
@@ -94,7 +93,7 @@ function App() ***REMOVED***
     // 푸시 알림 요청 및 토큰 처리
     const requestPermissionsAndToken = async () => ***REMOVED***
       await requestNotificationPermission();
-      
+
       const token = await requestForToken();
       if (token) ***REMOVED***
         console.log("Token received:", token);
