@@ -4,25 +4,30 @@ import GotoIcon from "@/icons/Goto";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
-import PlannerListBox from "./PlannerBox";
+import PlannerBox from "./PlannerBox";
 
-interface PlannerBoxProps ***REMOVED***
+interface PlannerListBoxProps ***REMOVED***
   category: string;
   productList: Product[];
+  selectedList: ***REMOVED*** [type: string]: Product | null ***REMOVED***;
+  onProductChange: (category: string, product: Product | null) => void;
 ***REMOVED***
 
-const PlannerBox = ((***REMOVED*** category, productList ***REMOVED***: PlannerBoxProps) => ***REMOVED***
-
-  const navigate = useNavigate()
+const PlannerListBox = (***REMOVED*** category, productList, selectedList, onProductChange ***REMOVED***: PlannerListBoxProps) => ***REMOVED***
+  const navigate = useNavigate();
   const goRecommend = () => ***REMOVED***
     navigate(`/planner/list/$***REMOVED***category***REMOVED***`);
-  ***REMOVED***
+  ***REMOVED***;
 
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => ***REMOVED***
     setIsChecked(!!productList.length);
   ***REMOVED***, [productList]);
+
+  const handleProductSelect = (product: Product | null) => ***REMOVED***
+    onProductChange(category, product);
+  ***REMOVED***;
 
   return (
     <Accordion
@@ -34,7 +39,8 @@ const PlannerBox = ((***REMOVED*** category, productList ***REMOVED***: PlannerB
         "&:before": ***REMOVED***
           display: "none",
         ***REMOVED***,
-      ***REMOVED******REMOVED***>
+      ***REMOVED******REMOVED***
+    >
       <AccordionSummary
         aria-controls="panel1-content"
         id="panel1-header"
@@ -58,27 +64,28 @@ const PlannerBox = ((***REMOVED*** category, productList ***REMOVED***: PlannerB
             <h1 className="font-bold mx-4">***REMOVED***category***REMOVED***</h1>
           </div>
 
-          ***REMOVED***isChecked == true ?(
+          ***REMOVED***isChecked ? (
             <div className="flex items-center">
-            <DropdownIcon />
+              <DropdownIcon />
             </div>
-          ):
-          (
+          ) : (
             <div onClick=***REMOVED***goRecommend***REMOVED*** className="flex items-center">
               <p className="mr-1">상품 보러가기</p>
               <GotoIcon />
             </div>
           )***REMOVED***
         </div>
-
       </AccordionSummary>
       ***REMOVED***isChecked ? (
-        productList.map((item: Product) => (
-          <div key=***REMOVED***item.id***REMOVED***>
-            <PlannerListBox item=***REMOVED***item***REMOVED***/>
+        productList.map((item: Product, index) => (
+          <div key=***REMOVED***index***REMOVED***>
+            <PlannerBox
+              item=***REMOVED***item***REMOVED***
+              isSelected=***REMOVED***selectedList[category]?.id === item.id***REMOVED***
+              onProductSelect=***REMOVED***handleProductSelect***REMOVED***
+            />
           </div>
         ))
-        
       ) : (
         <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
           <div className="flex justify-center items-center">
@@ -86,9 +93,8 @@ const PlannerBox = ((***REMOVED*** category, productList ***REMOVED***: PlannerB
           </div>
         </AccordionDetails>
       )***REMOVED***
-      
     </Accordion>
   );
-***REMOVED***);
+***REMOVED***;
 
-export default PlannerBox;
+export default PlannerListBox;

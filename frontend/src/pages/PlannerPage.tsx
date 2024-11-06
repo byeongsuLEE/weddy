@@ -1,14 +1,17 @@
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-// import ***REMOVED*** getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
-import PlannerBox from "@/components/PlannerPage/PlannerListBox";
+import PlannerListBox from "@/components/PlannerPage/PlannerListBox";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Planner = () => ***REMOVED***
-  const [ studioList, setStudioList ] = useState<Product[]>([]);
-  const [ dressList, setDressList ] = useState<Product[]>([]);
-  const [ makeupList, setMakeupList] = useState<Product[]>([]);
+  const [studioList, setStudioList] = useState<Product[]>([]);
+  const [dressList, setDressList] = useState<Product[]>([]);
+  const [makeupList, setMakeupList] = useState<Product[]>([]);
+  const [selectedList, setSelectedList] = useState<***REMOVED*** [type: string]: Product | null ***REMOVED***>(***REMOVED***
+    STUDIO: null,
+    DRESS: null,
+    MAKEUP: null,
+  ***REMOVED***);
 
   // const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
 
@@ -78,10 +81,16 @@ const Planner = () => ***REMOVED***
 
   const totalPrice = cartList.reduce((acc, item) => acc + Number(item.price), 0);
 
+  const handleProductChange = (category: string, product: Product | null) => ***REMOVED***
+    setSelectedList((prev) => (***REMOVED***
+      ...prev,
+      [category]: product,
+    ***REMOVED***));
+  ***REMOVED***;
+
   return (
     <div className="flex flex-col relative">
       <div className="m-5 flex flex-col items-center">
-        ***REMOVED***/* <h1 className="my-3 text-main2">WEDDY 플래너</h1> */***REMOVED***
         <div className="flex items-center mt-5">
           <span className="text-sm">
             <span className="text-main2 font-bold">WEDDY 플래너&nbsp;</span>
@@ -89,11 +98,26 @@ const Planner = () => ***REMOVED***
           </span>
         </div>
 
-        <PlannerBox category="STUDIO" productList=***REMOVED***studioList***REMOVED*** />
-        <PlannerBox category="DRESS" productList=***REMOVED***dressList***REMOVED*** />
-        <PlannerBox category="MAKEUP" productList=***REMOVED***makeupList***REMOVED*** />
-
+        <PlannerListBox
+          category="STUDIO"
+          productList=***REMOVED***studioList***REMOVED***
+          selectedList=***REMOVED***selectedList***REMOVED***
+          onProductChange=***REMOVED***handleProductChange***REMOVED***
+        />
+        <PlannerListBox
+          category="DRESS"
+          productList=***REMOVED***dressList***REMOVED***
+          selectedList=***REMOVED***selectedList***REMOVED***
+          onProductChange=***REMOVED***handleProductChange***REMOVED***
+        />
+        <PlannerListBox
+          category="MAKEUP"
+          productList=***REMOVED***makeupList***REMOVED***
+          selectedList=***REMOVED***selectedList***REMOVED***
+          onProductChange=***REMOVED***handleProductChange***REMOVED***
+        />
       </div>
+      
       <div className="flex justify-end mr-10 mt-14">
         <div className="flex flex-col mr-3">
           ***REMOVED***cartList.map((item: Product) => (
@@ -112,6 +136,7 @@ const Planner = () => ***REMOVED***
           <span className="font-bold">***REMOVED***totalPrice.toLocaleString()***REMOVED***원</span>
         </div>
       </div>
+      
       <div className="flex justify-end mr-10 mt-5 mb-24">
         <TodoButton title="계약 요청" />
       </div>
