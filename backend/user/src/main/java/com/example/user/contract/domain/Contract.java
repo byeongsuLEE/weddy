@@ -71,11 +71,12 @@ public class Contract ***REMOVED***
     ***REMOVED***
 
 
-    public void validation(Long totalMount)***REMOVED***
+    public boolean validation(Long totalMount)***REMOVED***
         if(this.totalMount != totalMount)***REMOVED***
-            throw new PaymentNotValidateException(ErrorCode.PAYMENT_NOT_VALIDATE);
+            return false;
         ***REMOVED***
 
+        return true;
     ***REMOVED***
 
 
