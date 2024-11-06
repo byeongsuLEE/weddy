@@ -2,40 +2,49 @@ package com.example.user.common.service;
 
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.channels.Channels;
 import java.util.UUID;
 
-@Component
+@Slf4j
+@Service
 public class GCSImageService ***REMOVED***
 
-    @Autowired
-    Storage storage;
+    private final Storage storage;
 
-    @Value("$***REMOVED***spring.cloud.gcp.storage.bucket***REMOVED***") // application.yml에 써둔 bucket 이름
+    @Value("$***REMOVED***spring.cloud.gcp.storage.bucket***REMOVED***")
     private String bucketName;
 
-    public String uploadImage(MultipartFile file) throws IOException ***REMOVED***
-        // 고유한 파일 이름 생성
+    public GCSImageService(Storage storage) ***REMOVED***
+        this.storage = storage;
+    ***REMOVED***
+
+    public String uploadImage(MultipartFile imageFile) ***REMOVED***
+        String originalName = imageFile.getOriginalFilename();
+        String ext = imageFile.getContentType();
         String uuid = UUID.randomUUID().toString();
-        // 파일 확장자 추출
-        String ext = file.getContentType().split("/")[1]; // 예: image/jpeg에서 jpeg 추출
-        // 확장자를 포함한 파일 이름 생성
-        String fileName = uuid + "." + ext;
+        String fileName = uuid + "_" + originalName;
+        String uploadPath = "https://storage.googleapis.com/" + bucketName + "/" + uuid;
 
-        // BlobInfo 설정 및 파일 업로드
-        BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, fileName)
-                .setContentType(file.getContentType()) // 파일의 ContentType 설정
+        // BlobInfo 생성
+        BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, uuid)
+                .setContentType(ext)
                 .build();
-        storage.create(blobInfo, file.getInputStream());
 
-        // 파일의 GCS URL 생성
-        String imageUrl = String.format("https://storage.googleapis.com/%s/%s", bucketName, fileName);
+        try ***REMOVED***
+            // InputStream을 사용해 GCS에 이미지 업로드
+            storage.create(blobInfo, imageFile.getInputStream());
+            log.info("Image uploaded successfully. URL: ***REMOVED******REMOVED***", uploadPath);
+            return uploadPath;
 
-        return imageUrl; // 업로드된 이미지의 URL 반환
+        ***REMOVED*** catch (IOException e) ***REMOVED***
+            log.error("Failed to upload image to GCS", e);
+            return null;
+        ***REMOVED***
     ***REMOVED***
 ***REMOVED***

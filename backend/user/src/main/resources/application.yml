@@ -14,9 +14,10 @@ spring:
     gcp:
       storage:
         bucket: weddy-bucket-01
+        project-id: rational-genius-434702-v8
         credentials:
           location: classpath:***REMOVED***
-          project-id: rational-genius-434702-v8
+
 
   jpa:
     show-sql: false

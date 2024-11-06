@@ -34,8 +34,8 @@ public class SecurityConfig ***REMOVED***
                                 "/api/login",
                                 "/api/oauth2/**",
                                 "/api/login/**",
-                                "/api/users",
-                                "/api/users/**"
+                                "/api/users/token",
+                                "/api/users/token/**"
 
                         ).permitAll() // 인증 및 OAuth2 경로 허용
                         .anyExchange().authenticated()) // 나머지 요청은 인증 필요
