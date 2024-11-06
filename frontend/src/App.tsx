@@ -28,6 +28,7 @@ import ***REMOVED*** tokenState ***REMOVED*** from './store/token';
 import ***REMOVED*** MessagePayload ***REMOVED*** from 'firebase/messaging';
 import ***REMOVED*** useEffect ***REMOVED*** from 'react';
 import ***REMOVED*** onMessageListener, requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
+import Test from "./pages/test.tsx";
 
 function AppContent() ***REMOVED***
   const location = useLocation();
@@ -56,6 +57,7 @@ function AppContent() ***REMOVED***
         <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
         <Route path="/nft/loading" element=***REMOVED***<NFTLoading />***REMOVED*** />
         <Route path="/recommend/loading" element=***REMOVED***<RecommendLoading />***REMOVED*** />
+        <Route path="/test" element=***REMOVED***<Test />***REMOVED*** />
       </Routes>
       ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && (currentDetail !== "detail") && <Footer />***REMOVED***
     </>

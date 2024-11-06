@@ -1,14 +1,14 @@
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 // import ***REMOVED*** getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
-import PlannerBox from "@/components/PlannerPage/PlannerBox";
+import PlannerBox from "@/components/PlannerPage/PlannerListBox";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 // import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Planner = () => ***REMOVED***
-  const [ studio, setStudio ] = useState<Product | undefined>();
-  const [ dress, setDress ] = useState<Product | undefined>();
-  const [ makeup, setMakeup] = useState<Product | undefined>();
+  const [ studioList, setStudioList ] = useState<Product[]>([]);
+  const [ dressList, setDressList ] = useState<Product[]>([]);
+  const [ makeupList, setMakeupList] = useState<Product[]>([]);
 
   // const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
 
@@ -35,23 +35,45 @@ const Planner = () => ***REMOVED***
       vendorId: "vendor2",
       images: [],
     ***REMOVED***,
-    // ***REMOVED***
-    //   id: "3",
-    //   type: "MAKEUP",
-    //   name: "본식 메이크업",
-    //   price: "100000",
-    //   address: "서울 종로구",
-    //   content: "본식 메이크업 서비스로 최고의 하루를 준비하세요.",
-    //   vendorName: "Wedding Palace",
-    //   vendorId: "vendor3",
-    //   images: [],
-    // ***REMOVED***
+    ***REMOVED***
+      id: "3",
+      type: "MAKEUP",
+      name: "본식 메이크업",
+      price: "100000",
+      address: "서울 종로구",
+      content: "본식 메이크업 서비스로 최고의 하루를 준비하세요.",
+      vendorName: "Wedding Palace",
+      vendorId: "vendor3",
+      images: [],
+    ***REMOVED***,
+    ***REMOVED***
+      id: "4",
+      type: "STUDIO",
+      name: "꽃 장식 서비스",
+      price: "2000000",
+      address: "서울 서초구",
+      content: "아름다운 꽃 장식으로 예식을 더욱 빛나게 만들어드립니다.",
+      vendorName: "Blooming Flora",
+      vendorId: "vendor4",
+      images: [],
+    ***REMOVED***,
+    ***REMOVED***
+      id: "5",
+      type: "DRESS",
+      name: "본식+피로연 드레스",
+      price: "500000",
+      address: "서울 강남구",
+      content: "본식과 피로연에서 입을 수 있는 드레스 대여 서비스입니다.",
+      vendorName: "Gourmet Delight",
+      vendorId: "vendor5",
+      images: [],
+    ***REMOVED***,
   ];
 
   useEffect(() => ***REMOVED***
-    setStudio(cartList.find((item: Product) => item.type === "STUDIO"));
-    setDress(cartList.find((item: Product) => item.type === "DRESS"));
-    setMakeup(cartList.find((item: Product) => item.type === "MAKEUP"));
+    setStudioList(cartList.filter((item: Product) => item.type === "STUDIO"));
+    setDressList(cartList.filter((item: Product) => item.type === "DRESS"));
+    setMakeupList(cartList.filter((item: Product) => item.type === "MAKEUP"));
   ***REMOVED***, []);
 
   const totalPrice = cartList.reduce((acc, item) => acc + Number(item.price), 0);
@@ -67,9 +89,9 @@ const Planner = () => ***REMOVED***
           </span>
         </div>
 
-        <PlannerBox category="STUDIO" item=***REMOVED***studio***REMOVED*** />
-        <PlannerBox category="DRESS" item=***REMOVED***dress***REMOVED*** />
-        <PlannerBox category="MAKEUP" item=***REMOVED***makeup***REMOVED*** />
+        <PlannerBox category="STUDIO" productList=***REMOVED***studioList***REMOVED*** />
+        <PlannerBox category="DRESS" productList=***REMOVED***dressList***REMOVED*** />
+        <PlannerBox category="MAKEUP" productList=***REMOVED***makeupList***REMOVED*** />
 
       </div>
       <div className="flex justify-end mr-10 mt-14">
