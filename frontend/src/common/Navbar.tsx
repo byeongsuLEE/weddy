@@ -67,7 +67,7 @@ const Navbar = () => ***REMOVED***
       )***REMOVED***
 
       ***REMOVED***location != "contract" && (
-        <Link className="cartIcon" to='/planner'>
+        <Link className="cartIcon" to='/cart'>
           <CartIcon />
         </Link>
       )***REMOVED***

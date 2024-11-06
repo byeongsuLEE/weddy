@@ -4,9 +4,9 @@ import GotoIcon from "@/icons/Goto";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
-import PlannerBox from "./PlannerBox";
+import CartBox from "./CartBox";
 
-interface PlannerListBoxProps ***REMOVED***
+interface CartListBoxProps ***REMOVED***
   category: string;
   productList: Product[];
   selectedList: ***REMOVED*** [type: string]: Product | null ***REMOVED***;
@@ -14,7 +14,7 @@ interface PlannerListBoxProps ***REMOVED***
   onRemove: (category: string, id: string) => void;
 ***REMOVED***
 
-const PlannerListBox = (***REMOVED*** category, productList, selectedList, onProductChange, onRemove ***REMOVED***: PlannerListBoxProps) => ***REMOVED***
+const CartListBox = (***REMOVED*** category, productList, selectedList, onProductChange, onRemove ***REMOVED***: CartListBoxProps) => ***REMOVED***
   const navigate = useNavigate();
   const goRecommend = () => ***REMOVED***
     navigate(`/planner/list/$***REMOVED***category***REMOVED***`);
@@ -80,7 +80,7 @@ const PlannerListBox = (***REMOVED*** category, productList, selectedList, onPro
       ***REMOVED***isChecked ? (
         productList.map((item: Product, index) => (
           <div key=***REMOVED***index***REMOVED***>
-            <PlannerBox
+            <CartBox
               item=***REMOVED***item***REMOVED***
               isSelected=***REMOVED***selectedList[category]?.id === item.id***REMOVED***
               onProductSelect=***REMOVED***handleProductSelect***REMOVED***
@@ -99,4 +99,4 @@ const PlannerListBox = (***REMOVED*** category, productList, selectedList, onPro
   );
 ***REMOVED***;
 
-export default PlannerListBox;
+export default CartListBox;
