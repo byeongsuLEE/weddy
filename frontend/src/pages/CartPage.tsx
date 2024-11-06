@@ -1,5 +1,5 @@
+import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-// import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import CartBox from "@/components/CartPage/CartBox";
 // import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
@@ -15,7 +15,7 @@ const CartPage = () => ***REMOVED***
   const [dressList, setDressList] = useState<Product[]>([]);
   const [makeupList, setMakeupList] = useState<Product[]>([]);
 
-  const dummyData: Product[] = [
+  const recommendList: Product[] = [
     ***REMOVED***
       id: "1",
       type: "DRESS",
@@ -94,30 +94,16 @@ const CartPage = () => ***REMOVED***
     setSelectedList((prev) => (***REMOVED*** ...prev, [type]: selectedCartItem ***REMOVED***));
   ***REMOVED***;
 
-  // const handleCreateContract = async () => ***REMOVED***
-  //   const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
-  //   const contracts = await createContract(contractItems);
-  //   await requestContract(contracts);
-  // ***REMOVED***;
-
-  const addToCart = async () => ***REMOVED***
-    const products = Object.values(selectedList).filter((product): product is Product => product !== null);
-  
-    if (products.length === 0) ***REMOVED***
-      alert("상품을 선택해주세요.");
-    ***REMOVED*** else ***REMOVED***
-      for (const product of products) ***REMOVED***
-        console.log(product);
-        // await addProductToCart(product.id);
-      ***REMOVED***
-      navigate("/planner");
-    ***REMOVED***
+  const handleCreateContract = async () => ***REMOVED***
+    const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
+    await createContract(contractItems);
+    navigate("/contract/list");
   ***REMOVED***;
   
   useEffect(() => ***REMOVED***
-    setStudioList(dummyData.filter((product: Product) => product.type === "STUDIO"));
-    setDressList(dummyData.filter((product: Product) => product.type === "DRESS"));
-    setMakeupList(dummyData.filter((product: Product) => product.type === "MAKEUP"));
+    setStudioList(recommendList.filter((product: Product) => product.type === "STUDIO"));
+    setDressList(recommendList.filter((product: Product) => product.type === "DRESS"));
+    setMakeupList(recommendList.filter((product: Product) => product.type === "MAKEUP"));
   ***REMOVED***, []);
 
   return (
@@ -136,7 +122,7 @@ const CartPage = () => ***REMOVED***
         <CartBox title="MAKEUP" type="makeup" cartItem=***REMOVED***makeupList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
         <div className="flex justify-between mt-10 mx-10">
           <span className="text-lg font-bold">총 합계: ***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
-          <div onClick=***REMOVED***addToCart***REMOVED***>
+          <div onClick=***REMOVED***handleCreateContract***REMOVED***>
             <TodoButton title="계약 요청" />
           </div>
         </div>

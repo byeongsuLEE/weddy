@@ -66,12 +66,6 @@ const Planner = () => ***REMOVED***
             추천 상품
           </span>
         </div>
-        ***REMOVED***/* ***REMOVED***cartList.map((item: Product) => (
-          <PlannerBox
-            key=***REMOVED***item.id***REMOVED***
-            item=***REMOVED***item***REMOVED***
-          />
-        ))***REMOVED*** */***REMOVED***
 
         <PlannerBox category="STUDIO" item=***REMOVED***studio***REMOVED*** />
         <PlannerBox category="DRESS" item=***REMOVED***dress***REMOVED*** />
