@@ -11,9 +11,10 @@ interface PlannerListBoxProps ***REMOVED***
   productList: Product[];
   selectedList: ***REMOVED*** [type: string]: Product | null ***REMOVED***;
   onProductChange: (category: string, product: Product | null) => void;
+  onRemove: (category: string, id: string) => void;
 ***REMOVED***
 
-const PlannerListBox = (***REMOVED*** category, productList, selectedList, onProductChange ***REMOVED***: PlannerListBoxProps) => ***REMOVED***
+const PlannerListBox = (***REMOVED*** category, productList, selectedList, onProductChange, onRemove ***REMOVED***: PlannerListBoxProps) => ***REMOVED***
   const navigate = useNavigate();
   const goRecommend = () => ***REMOVED***
     navigate(`/planner/list/$***REMOVED***category***REMOVED***`);
@@ -83,6 +84,7 @@ const PlannerListBox = (***REMOVED*** category, productList, selectedList, onPro
               item=***REMOVED***item***REMOVED***
               isSelected=***REMOVED***selectedList[category]?.id === item.id***REMOVED***
               onProductSelect=***REMOVED***handleProductSelect***REMOVED***
+              onRemove=***REMOVED***() => onRemove(category, item.id)***REMOVED***
             />
           </div>
         ))

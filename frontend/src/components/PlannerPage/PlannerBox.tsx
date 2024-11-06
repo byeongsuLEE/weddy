@@ -7,9 +7,10 @@ interface PlannerBoxProps ***REMOVED***
   item: Product;
   isSelected: boolean;
   onProductSelect: (product: Product | null) => void;
+  onRemove: (id: string) => void;
 ***REMOVED***
 
-const PlannerBox = (***REMOVED*** item, isSelected, onProductSelect ***REMOVED***: PlannerBoxProps) => ***REMOVED***
+const PlannerBox = (***REMOVED*** item, isSelected, onProductSelect, onRemove ***REMOVED***: PlannerBoxProps) => ***REMOVED***
   const handleCheckboxChange = () => ***REMOVED***
     onProductSelect(isSelected ? null : item);
   ***REMOVED***;
@@ -28,7 +29,7 @@ const PlannerBox = (***REMOVED*** item, isSelected, onProductSelect ***REMOVED**
             <span className="font-bold">***REMOVED***Number(item.price).toLocaleString()***REMOVED***원</span>
           </div>
         </Link>
-        <button className="ml-auto mr-3 rounded-full w-[35px] h-[35px] bg-gray-100">
+        <button className="ml-auto mr-3 rounded-full w-[35px] h-[35px] bg-gray-100" onClick=***REMOVED***() => onRemove(item.id)***REMOVED***>
           삭제
         </button>
       </div>

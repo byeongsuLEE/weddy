@@ -33,19 +33,20 @@ export const createContract = async (contractItems: Product[]): Promise<void> =>
 
 //== 계약 요청 ==//
 export const requestContract = async (contractList: SentContractType[]): Promise<void> => ***REMOVED***
-  await axios(***REMOVED***
-    method: 'post',
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem("userId")***REMOVED***`,
-    headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***token***REMOVED***`
-    ***REMOVED***,
-    // url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem("userId")***REMOVED***`,
-    // url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem("userId")***REMOVED***`,
-    // headers: ***REMOVED***
-    //   Authorization: sessionStorage.getItem("token")
-    // ***REMOVED***
-    data: contractList
-  ***REMOVED***);
+  console.log(contractList);
+  // await axios(***REMOVED***
+  //   method: 'post',
+  //   url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem("userId")***REMOVED***`,
+  //   headers: ***REMOVED***
+  //     Authorization: `Bearer $***REMOVED***token***REMOVED***`
+  //   ***REMOVED***,
+  //   // url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem("userId")***REMOVED***`,
+  //   // url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem("userId")***REMOVED***`,
+  //   // headers: ***REMOVED***
+  //   //   Authorization: sessionStorage.getItem("token")
+  //   // ***REMOVED***
+  //   data: contractList
+  // ***REMOVED***);
 ***REMOVED***;
 
 //== 계약 리스트 ==//
