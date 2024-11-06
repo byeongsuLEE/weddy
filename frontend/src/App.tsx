@@ -56,7 +56,6 @@ function AppContent() ***REMOVED***
         <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
         <Route path="/nft/loading" element=***REMOVED***<NFTLoading />***REMOVED*** />
         <Route path="/recommend/loading" element=***REMOVED***<RecommendLoading />***REMOVED*** />
-        <Route path="/test" element=***REMOVED***<Test />***REMOVED*** />
       </Routes>
       ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && (currentDetail !== "detail") && <Footer />***REMOVED***
     </>
