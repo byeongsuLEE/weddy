@@ -10,7 +10,9 @@ import com.example.user.service.TokenService;
 import com.example.user.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -84,8 +86,22 @@ public class UserController ***REMOVED***
     ***REMOVED***
 
     @PatchMapping
-    public APIResponse updateUser(@AuthenticationPrincipal UserEntity user, @RequestBody Map<String, Object> updates) ***REMOVED***
+    public APIResponse updateUser(@AuthenticationPrincipal UserEntity user,
+                                  @RequestParam(required = false) String phone,
+                                  @RequestParam(required = false) String name,
+                                  @RequestParam(required = false) String address,
+                                  @RequestParam(required = false) String email,
+                                  @RequestParam(required = false) String date,
+                                  @RequestParam(required = false) MultipartFile picture) ***REMOVED***
         try ***REMOVED***
+            Map<String, Object> updates = new HashMap<>();
+            if (phone != null) updates.put("phone", phone);
+            if (name != null) updates.put("name", name);
+            if (address != null) updates.put("address", address);
+            if (email != null) updates.put("email", email);
+            if (date != null) updates.put("Date", date);
+            if (picture != null) updates.put("picture", picture);
+
             userService.updateUserInfo(user.getId(), updates);
             return APIResponse.builder()
                     .status(200)
