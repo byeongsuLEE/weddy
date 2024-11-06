@@ -1,4 +1,4 @@
-package com.example.user.contract.global.config;
+package com.example.user.common.config;
 
 import com.example.user.payment.dto.request.PaymentProductInfo;
 import org.apache.kafka.clients.producer.ProducerConfig;

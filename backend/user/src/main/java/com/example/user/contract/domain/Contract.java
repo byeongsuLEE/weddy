@@ -1,9 +1,9 @@
 package com.example.user.contract.domain;
 
+import com.example.user.common.dto.ErrorCode;
 import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.constant.ContractStatus;
 import com.example.user.common.exception.PaymentNotValidateException;
-import com.example.user.contract.global.util.response.ErrorCode;
 import com.example.user.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

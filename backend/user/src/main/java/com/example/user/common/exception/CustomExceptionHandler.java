@@ -1,7 +1,8 @@
 package com.example.user.common.exception;
 
-import com.example.user.contract.global.util.response.ApiResponse;
-import com.example.user.contract.global.util.response.ErrorCode;
+
+import com.example.user.common.dto.ApiResponse;
+import com.example.user.common.dto.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

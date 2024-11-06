@@ -1,6 +1,5 @@
 package com.example.user.common.dto;
 
-import com.example.user.contract.global.util.response.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AccessLevel;

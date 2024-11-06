@@ -1,7 +1,7 @@
 package com.example.user.payment.controller;
 
 
-import com.example.user.contract.global.util.response.ApiResponse;
+import com.example.user.common.dto.ApiResponse;
 import com.example.user.contract.service.ContractService;
 import com.example.user.payment.dto.request.ContractInfoRequestDto;
 import com.example.user.payment.service.PaymentService;

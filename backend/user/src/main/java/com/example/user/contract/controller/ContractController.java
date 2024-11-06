@@ -1,10 +1,10 @@
 package com.example.user.contract.controller;
 
+import com.example.user.common.dto.ApiResponse;
 import com.example.user.contract.domain.Contract;
 import com.example.user.contract.dto.request.CreateContractRequestDto;
 import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.service.ContractService;
-import com.example.user.contract.global.util.response.ApiResponse;
 import com.example.user.user.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

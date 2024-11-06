@@ -1,6 +1,6 @@
 package com.example.user.common.exception;
 
-import com.example.user.contract.global.util.response.ErrorCode;
+import com.example.user.common.dto.ErrorCode;
 import lombok.Getter;
 
 @Getter
