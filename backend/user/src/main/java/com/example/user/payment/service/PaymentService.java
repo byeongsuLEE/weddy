@@ -1,14 +1,11 @@
 package com.example.user.payment.service;
 
 
-import com.example.user.contract.dto.response.ContractResponseDto;
 import com.example.user.contract.service.ContractService;
 import com.example.user.payment.dto.request.ContractInfoRequestDto;
 import com.example.user.payment.dto.request.PaymentProductInfo;
-import io.jsonwebtoken.Header;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.common.header.Headers;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -51,6 +47,9 @@ public class PaymentService ***REMOVED***
         String reason = "일정 생성 오류 ";
         paymentCancel(contractInfoRequestDto.getPaymentId(), reason);
     ***REMOVED***
+
+
+
 
     public void paymentCancel(String paymentId, String reason) ***REMOVED***
         // 결제 취소 로직
@@ -88,26 +87,23 @@ public class PaymentService ***REMOVED***
      * @param contractInfoRequestDto
      */
     public void occurPaymentEvent(ContractInfoRequestDto contractInfoRequestDto)  ***REMOVED***
-        PaymentProductInfo paymentProductInfo = createPaymentProductInfo(contractInfoRequestDto);
-
+        PaymentProductInfo paymentProductInfo = mapToPaymentProductInfo(contractInfoRequestDto);
         CompletableFuture<SendResult<String, PaymentProductInfo>> send = kafkaTemplate.send(TOPIC_PAYMENT, paymentProductInfo);
+        // 이 함수는 이벤트가 전달 됐는지를 확인하는거다.
         send.whenComplete((sendResult,ex)->***REMOVED***
             if(ex!=null)***REMOVED***
+                log.info("결제 이벤트 전달 실패."+ ex.getMessage());
 
-                log.info("결제 실패 하였습니다. 보상함수를 실행합니다."+ ex.getMessage());
-
-                // 보상함수 실행 ;
-                // 결제 보상;
             ***REMOVED***else***REMOVED***
                 PaymentProductInfo value = (PaymentProductInfo) sendResult.getProducerRecord().value();
-                log.info("이벤트 처리완료");
+                log.info("결제 이벤트 전달 완료");
 
 
             ***REMOVED***
         ***REMOVED***);
     ***REMOVED***
 
-    private PaymentProductInfo createPaymentProductInfo(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
+    private PaymentProductInfo mapToPaymentProductInfo(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
         return PaymentProductInfo.builder()
                 .id(contractInfoRequestDto.getId())
                 .title(contractInfoRequestDto.getTitle())
@@ -122,6 +118,7 @@ public class PaymentService ***REMOVED***
                 .startDate(contractInfoRequestDto.getStartDate())
                 .endDate(contractInfoRequestDto.getEndDate())
                 .product(contractInfoRequestDto.getProduct())
+                .paymentId(contractInfoRequestDto.getPaymentId())
                 .build();
     ***REMOVED***
 

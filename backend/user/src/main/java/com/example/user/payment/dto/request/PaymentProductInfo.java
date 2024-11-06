@@ -41,5 +41,5 @@ public class PaymentProductInfo ***REMOVED***
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private Product product;
-
+    private String paymentId;
 ***REMOVED***

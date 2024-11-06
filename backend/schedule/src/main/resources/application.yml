@@ -22,5 +22,6 @@ consumer:
     name: contract_payment
   groupid:
     name: book
+
 server:
   port: 8082
