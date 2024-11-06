@@ -12,18 +12,18 @@ const firebaseConfig = ***REMOVED***
   measurementId: "***REMOVED***"
 ***REMOVED***;
 
+// Firebase 앱 초기화
 const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
+const messaging = getMessaging(app);  // messaging 초기화
 
 // 알림 권한 요청 함수
 export const requestNotificationPermission = async (): Promise<void> => ***REMOVED***
   const permission = await Notification.requestPermission();
-  console.log("Permission result:", permission); // 권한 요청 결과 확인
+  // console.log("Permission result:", permission); // 권한 요청 결과 확인
 
   if (permission === 'granted') ***REMOVED***
-    console.log("Notification permission granted.");
-    // 권한이 허용되었을 때만 토큰 요청
-    await requestForToken();
+    // console.log("Notification permission granted.");
+    await requestForToken(); // 권한이 허용되었을 때만 토큰 요청
   ***REMOVED*** else ***REMOVED***
     console.warn("Notification permission denied.");
   ***REMOVED***
@@ -32,9 +32,10 @@ export const requestNotificationPermission = async (): Promise<void> => ***REMOV
 // FCM 토큰 요청 함수
 export const requestForToken = async (): Promise<string | null> => ***REMOVED***
   try ***REMOVED***
-    const currentToken = await getToken(messaging, ***REMOVED*** vapidKey: "***REMOVED***-s" ***REMOVED***);
-    console.log("Current token:", currentToken); // 토큰이 제대로 생성되는지 확인
-    // alert("Current token: " + currentToken);
+    const currentToken = await getToken(messaging, ***REMOVED***
+      vapidKey: "***REMOVED***-s"
+    ***REMOVED***);
+    // console.log("Current token:", currentToken); // 토큰이 제대로 생성되는지 확인
 
     if (currentToken) ***REMOVED***
       return currentToken; // 토큰 반환
@@ -48,9 +49,9 @@ export const requestForToken = async (): Promise<string | null> => ***REMOVED***
   ***REMOVED***
 ***REMOVED***;
 
-// 메시지 수신 리스너
-export const onMessageListener = () => ***REMOVED***
-  return new Promise<MessagePayload>((resolve) => ***REMOVED***
+// 포그라운드 메시지 수신 리스너
+export const onMessageListener = (): Promise<MessagePayload> => ***REMOVED***
+  return new Promise((resolve) => ***REMOVED***
     onMessage(messaging, (payload: MessagePayload) => ***REMOVED***
       console.log("Message received in foreground:", payload); // 로그 출력
       resolve(payload);
@@ -58,5 +59,5 @@ export const onMessageListener = () => ***REMOVED***
   ***REMOVED***);
 ***REMOVED***;
 
-
-
+// messaging 객체 export
+export ***REMOVED*** messaging ***REMOVED***;
