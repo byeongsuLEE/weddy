@@ -23,7 +23,7 @@ const Prompt = () => ***REMOVED***
     console.log(inputValue);
     // const recommendList = await aiRecommend(inputValue);
     // setRecommendList(recommendList);
-    navigate("/cart");
+    navigate("/planner");
   ***REMOVED***;
 
   useEffect(() => ***REMOVED***
