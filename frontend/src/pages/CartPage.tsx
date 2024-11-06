@@ -1,11 +1,18 @@
-import ***REMOVED*** ContractProduct ***REMOVED*** from "@/api/contract.type";
-import ***REMOVED*** requestContract ***REMOVED*** from "@/api/contractApi";
+import ***REMOVED*** createContract, requestContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import TodoButton from "@/common/TodoButton";
 import CartBox from "@/components/CartPage/CartBox";
-import ***REMOVED*** useState ***REMOVED*** from 'react';
+// import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from 'react';
+// import ***REMOVED*** useRecoilValue ***REMOVED*** from "recoil";
 
 const CartPage = () => ***REMOVED***
+  // const recommendList = useRecoilValue(recommendState);
+
+  const [studioList, setStudioList] = useState<Product[]>([]);
+  const [dressList, setDressList] = useState<Product[]>([]);
+  const [makeupList, setMakeupList] = useState<Product[]>([]);
+
   const dummyData: Product[] = [
     ***REMOVED***
       id: "1",
@@ -79,54 +86,29 @@ const CartPage = () => ***REMOVED***
   const totalAmount = Object.values(selectedAmounts).reduce((acc, amount) => acc + amount, 0);
 
   const handleAmountChange = (type: string, selectedCartItem: Product | null) => ***REMOVED***
-    setSelectedAmounts((prev) => (***REMOVED***
-      ...prev,
-      [type]: selectedCartItem ? parseInt(selectedCartItem.price) : 0,
-    ***REMOVED***));
-
-    setSelectedList((prev) => (***REMOVED***
-      ...prev,
-      [type]: selectedCartItem,
-    ***REMOVED***));
+    const amount = selectedCartItem ? parseInt(selectedCartItem.price) : 0;
+  
+    setSelectedAmounts((prev) => (***REMOVED*** ...prev, [type]: amount ***REMOVED***));
+    setSelectedList((prev) => (***REMOVED*** ...prev, [type]: selectedCartItem ***REMOVED***));
   ***REMOVED***;
 
   const handleCreateContract = async () => ***REMOVED***
-    const contractItems = Object.values(selectedList).filter(
-      (item): item is Product => item !== null
-    );
-
-    const contracts = contractItems.map((item) => ***REMOVED***
-      const date = new Date().toISOString().slice(0, 10);
-  
-      const contractProduct: ContractProduct = ***REMOVED***
-        productId: item.id,
-        productName: item.name,
-        productContent: item.content,
-        type: item.type,
-      ***REMOVED***;
-
-      return ***REMOVED***
-        userId: sessionStorage.getItem("userId") as string,
-        totalMount: item.price,
-        companyName: item.vendorName,
-        startDate: date,
-        endDate: date,
-        product: contractProduct,
-      ***REMOVED***;
-    ***REMOVED***);
-    
+    const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
+    const contracts = await createContract(contractItems);
     await requestContract(contracts);
   ***REMOVED***;
-
-  const studio = dummyData.filter((item) => item.type === "STUDIO");
-  const dress = dummyData.filter((item) => item.type === "DRESS");
-  const makeup = dummyData.filter((item) => item.type === "MAKEUP");
+  
+  useEffect(() => ***REMOVED***
+    setStudioList(dummyData.filter((product: Product) => product.type === "STUDIO"));
+    setDressList(dummyData.filter((product: Product) => product.type === "DRESS"));
+    setMakeupList(dummyData.filter((product: Product) => product.type === "MAKEUP"));
+  ***REMOVED***, []);
 
   return (
     <div className="mt-10">
-      <CartBox title="STUDIO" type="studio" cartItem=***REMOVED***studio***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
-      <CartBox title="DRESS" type="dress" cartItem=***REMOVED***dress***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
-      <CartBox title="MAKEUP" type="makeup" cartItem=***REMOVED***makeup***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+      <CartBox title="STUDIO" type="studio" cartItem=***REMOVED***studioList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+      <CartBox title="DRESS" type="dress" cartItem=***REMOVED***dressList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+      <CartBox title="MAKEUP" type="makeup" cartItem=***REMOVED***makeupList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
       <div className="flex justify-between mt-10 mx-10">
         <span className="text-lg font-bold">총 합계: ***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
         <div onClick=***REMOVED***handleCreateContract***REMOVED***>
