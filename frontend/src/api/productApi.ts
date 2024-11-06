@@ -9,7 +9,7 @@ export const allProducts = async (): Promise<Product[]> => ***REMOVED***
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -21,7 +21,7 @@ export const getRankedProducts = async (): Promise<Product[]> => ***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/ranking`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -33,7 +33,7 @@ export const detailProduct = async (productId?: string): Promise<Product> => ***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -45,7 +45,7 @@ export const addProductToCart = async (productId?: string): Promise<void> => ***
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
@@ -57,7 +57,7 @@ export const deleteFromCart = async (): Promise<void> => ***REMOVED***
     method: 'delete',
     url: `$***REMOVED***BASE_URL***REMOVED***/`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
@@ -69,7 +69,7 @@ export const getCartItems = async (): Promise<Product[]> => ***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/my`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
@@ -82,7 +82,7 @@ export const getReviewList = async (productId?: string): Promise<ReviewData[]> =
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -94,7 +94,7 @@ export const submitReview = async (reviewData: ReviewData, productId?: string): 
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***,
     data: reviewData
   ***REMOVED***);
