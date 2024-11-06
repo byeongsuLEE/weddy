@@ -1,6 +1,7 @@
 import ***REMOVED*** useState ***REMOVED*** from 'react';
 import ***REMOVED*** Checkbox ***REMOVED*** from "@/components/ui/checkbox";
 import ***REMOVED*** Product ***REMOVED*** from '@/api/product.type';
+import ***REMOVED*** Link ***REMOVED*** from 'react-router-dom';
 
 interface CartBoxProps ***REMOVED***
   title: string;
@@ -13,11 +14,13 @@ const CartBox = (***REMOVED*** title, type, cartItem, onAmountChange ***REMOVED*
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleCheckboxChange = (index: number) => ***REMOVED***
-    const newIndex = selectedIndex === index ? null : index;
-    setSelectedIndex(newIndex);
-    onAmountChange(type, newIndex !== null ? cartItem[newIndex] : null);
+    const isSelected = selectedIndex === index;
+    setSelectedIndex(isSelected ? null : index);
+    
+    const selectedItem = isSelected ? null : cartItem[index];
+    onAmountChange(type, selectedItem);
   ***REMOVED***;
-
+  
   return (
     <div className="m-5">
       <h2 className="font-bold text-lg mb-3">***REMOVED***title***REMOVED***</h2>
@@ -31,17 +34,19 @@ const CartBox = (***REMOVED*** title, type, cartItem, onAmountChange ***REMOVED*
               checked=***REMOVED***selectedIndex === index***REMOVED***
               onCheckedChange=***REMOVED***() => handleCheckboxChange(index)***REMOVED***
             />
-            <div className="flex flex-col ml-3">
-              <span className="font-bold">***REMOVED***item.name***REMOVED***</span>
-              <span className="text-sm text-gray-600">***REMOVED***item.vendorName***REMOVED***</span>
-            </div>
+            <Link to=***REMOVED***`/board/detail/$***REMOVED***item.id***REMOVED***`***REMOVED***>
+              <div className="flex flex-col ml-3">
+                <span className="font-bold">***REMOVED***item.name***REMOVED***</span>
+                <span className="text-sm text-gray-600">***REMOVED***item.vendorName***REMOVED***</span>
+              </div>
+            </Link>
           </div>
           <div>
             ***REMOVED***Number(item.price).toLocaleString()***REMOVED***원
           </div>
-          <div>
+          ***REMOVED***/* <div>
             <button className="text-sm">삭제</button>
-          </div>
+          </div> */***REMOVED***
         </div>
       ))***REMOVED***
     </div>

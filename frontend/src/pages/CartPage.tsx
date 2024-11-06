@@ -1,12 +1,14 @@
-import ***REMOVED*** createContract, requestContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+// import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import CartBox from "@/components/CartPage/CartBox";
 // import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from 'react';
+import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 // import ***REMOVED*** useRecoilValue ***REMOVED*** from "recoil";
 
 const CartPage = () => ***REMOVED***
+  const navigate = useNavigate();
   // const recommendList = useRecoilValue(recommendState);
 
   const [studioList, setStudioList] = useState<Product[]>([]);
@@ -92,10 +94,24 @@ const CartPage = () => ***REMOVED***
     setSelectedList((prev) => (***REMOVED*** ...prev, [type]: selectedCartItem ***REMOVED***));
   ***REMOVED***;
 
-  const handleCreateContract = async () => ***REMOVED***
-    const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
-    const contracts = await createContract(contractItems);
-    await requestContract(contracts);
+  // const handleCreateContract = async () => ***REMOVED***
+  //   const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
+  //   const contracts = await createContract(contractItems);
+  //   await requestContract(contracts);
+  // ***REMOVED***;
+
+  const addToCart = async () => ***REMOVED***
+    const products = Object.values(selectedList).filter((product): product is Product => product !== null);
+  
+    if (products.length === 0) ***REMOVED***
+      alert("상품을 선택해주세요.");
+    ***REMOVED*** else ***REMOVED***
+      for (const product of products) ***REMOVED***
+        console.log(product);
+        // await addProductToCart(product.id);
+      ***REMOVED***
+      navigate("/planner");
+    ***REMOVED***
   ***REMOVED***;
   
   useEffect(() => ***REMOVED***
@@ -105,17 +121,27 @@ const CartPage = () => ***REMOVED***
   ***REMOVED***, []);
 
   return (
-    <div className="mt-10">
-      <CartBox title="STUDIO" type="studio" cartItem=***REMOVED***studioList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
-      <CartBox title="DRESS" type="dress" cartItem=***REMOVED***dressList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
-      <CartBox title="MAKEUP" type="makeup" cartItem=***REMOVED***makeupList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
-      <div className="flex justify-between mt-10 mx-10">
-        <span className="text-lg font-bold">총 합계: ***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
-        <div onClick=***REMOVED***handleCreateContract***REMOVED***>
-          <TodoButton title="계약 요청" />
+    <>
+      <div className="m-5 flex flex-col items-center">
+        <div className="flex items-center mt-5">
+          <span className="text-m">
+            <span className="text-main2 font-bold">WEDDY 플래너&nbsp;</span>
+            추천 상품
+          </span>
         </div>
       </div>
-    </div>
+      <div className="mt-10">
+        <CartBox title="STUDIO" type="studio" cartItem=***REMOVED***studioList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+        <CartBox title="DRESS" type="dress" cartItem=***REMOVED***dressList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+        <CartBox title="MAKEUP" type="makeup" cartItem=***REMOVED***makeupList***REMOVED*** onAmountChange=***REMOVED***handleAmountChange***REMOVED*** />
+        <div className="flex justify-between mt-10 mx-10">
+          <span className="text-lg font-bold">총 합계: ***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
+          <div onClick=***REMOVED***addToCart***REMOVED***>
+            <TodoButton title="계약 요청" />
+          </div>
+        </div>
+      </div>
+    </>
   );
 ***REMOVED***;
 
