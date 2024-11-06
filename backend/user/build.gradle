@@ -60,6 +60,7 @@ dependencies ***REMOVED***
     implementation group: 'com.google.cloud', name: 'spring-cloud-gcp-dependencies', version: '5.8.0', ext: 'pom'
     implementation 'com.google.cloud:google-cloud-storage'
 
+
 ***REMOVED***
 
 dependencyManagement ***REMOVED***

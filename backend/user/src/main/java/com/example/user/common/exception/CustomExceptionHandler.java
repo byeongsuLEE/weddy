@@ -1,4 +1,4 @@
-package com.example.user.contract.global.util.exception;
+package com.example.user.common.exception;
 
 import com.example.user.contract.global.util.response.ApiResponse;
 import com.example.user.contract.global.util.response.ErrorCode;
