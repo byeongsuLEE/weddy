@@ -4,7 +4,7 @@ import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 interface RecommendBoxProps ***REMOVED***
   src: string;
   name: string;
-  price: number;
+  price: string;
   isSelected: boolean;
   onSelect: () => void;
 ***REMOVED***
@@ -23,7 +23,7 @@ const RecommendBox = (***REMOVED*** src, name, price, isSelected, onSelect ***RE
         <Link to='/board/detail'>
           <div className="flex flex-col text-end">
             <span className="text-gray-500 mt-2">***REMOVED***name***REMOVED***</span>
-            <span>***REMOVED***price.toLocaleString()***REMOVED***원</span>
+            <span>***REMOVED***Number(price).toLocaleString()***REMOVED***원</span>
           </div>
         </Link>
       </div>

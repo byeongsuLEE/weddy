@@ -9,7 +9,7 @@ export const allProducts = async (): Promise<Product[]> => ***REMOVED***
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -21,7 +21,7 @@ export const getRankedProducts = async (): Promise<Product[]> => ***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/ranking`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -33,7 +33,7 @@ export const detailProduct = async (productId?: string): Promise<Product> => ***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -41,26 +41,28 @@ export const detailProduct = async (productId?: string): Promise<Product> => ***
 
 //== 상품 담기 ==//
 export const addProductToCart = async (productId?: string): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
-    method: 'post',
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
-    headers: ***REMOVED***
-      Authorization: `Bearer `
-    ***REMOVED***
-  ***REMOVED***);
-  console.log(response.data);
+  console.log(productId);
+  // const response = await axios(***REMOVED***
+  //   method: 'post',
+  //   url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
+  //   headers: ***REMOVED***
+  //     Authorization: sessionStorage.getItem('token')
+  //   ***REMOVED***
+  // ***REMOVED***);
+  // console.log(response.data);
 ***REMOVED***;
 
 //== 장바구니 삭제 ==//
-export const deleteFromCart = async (): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
-    method: 'delete',
-    url: `$***REMOVED***BASE_URL***REMOVED***/`,
-    headers: ***REMOVED***
-      Authorization: `Bearer `
-    ***REMOVED***
-  ***REMOVED***);
-  console.log(response.data);
+export const deleteFromCart = async (productId?: string): Promise<void> => ***REMOVED***
+  console.log(productId);
+  // const response = await axios(***REMOVED***
+  //   method: 'delete',
+  //   url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
+  //   headers: ***REMOVED***
+  //     Authorization: sessionStorage.getItem('token')
+  //   ***REMOVED***
+  // ***REMOVED***);
+  // console.log(response.data);
 ***REMOVED***;
 
 //== 장바구니 리스트 조회 ==//
@@ -69,7 +71,7 @@ export const getCartItems = async (): Promise<Product[]> => ***REMOVED***
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/my`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
@@ -82,7 +84,7 @@ export const getReviewList = async (productId?: string): Promise<ReviewData[]> =
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -94,7 +96,7 @@ export const submitReview = async (reviewData: ReviewData, productId?: string): 
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/review`,
     headers: ***REMOVED***
-      Authorization: `Bearer `
+      Authorization: sessionStorage.getItem('token')
     ***REMOVED***,
     data: reviewData
   ***REMOVED***);

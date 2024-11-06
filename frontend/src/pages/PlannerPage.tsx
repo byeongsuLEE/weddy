@@ -1,118 +1,175 @@
+import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
+import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+import ***REMOVED*** deleteFromCart ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
-import PlannerBox from "@/components/PlannerPage/PlannerBox";
-// import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
-// import ***REMOVED*** useRecoilValue ***REMOVED*** from "recoil";
-// import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-// import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+import PlannerListBox from "@/components/PlannerPage/PlannerListBox";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const Planner = () => ***REMOVED***
-  // const recommendList = useRecoilValue(recommendState);
-  // const [ studioList, setStudioList ] = useState<Product[]>([]);
-  // const [ dressList, setDressList ] = useState<Product[]>([]);
-  // const [ makeupList, setMakeupList ] = useState<Product[]>([]);
+  const navigate = useNavigate();
 
-  // useEffect(() => ***REMOVED***
-  //   if (recommendList) ***REMOVED***
-  //     const studios: Product[] = [];
-  //     const dresses: Product[] = [];
-  //     const makeups: Product[] = [];
+  const [studioList, setStudioList] = useState<Product[]>([]);
+  const [dressList, setDressList] = useState<Product[]>([]);
+  const [makeupList, setMakeupList] = useState<Product[]>([]);
 
-  //     recommendList.forEach((product) => ***REMOVED***
-  //       switch (product.type) ***REMOVED***
-  //         case "STUDIO":
-  //           studios.push(product);
-  //           break;
-  //         case "DRESS":
-  //           dresses.push(product);
-  //           break;
-  //         case "MAKEUP":
-  //           makeups.push(product);
-  //           break;
-  //         default:
-  //           break;
-  //       ***REMOVED***
-  //     ***REMOVED***);
+  const [selectedList, setSelectedList] = useState<***REMOVED*** [type: string]: Product | null ***REMOVED***>(***REMOVED***
+    STUDIO: null,
+    DRESS: null,
+    MAKEUP: null,
+  ***REMOVED***);
 
-  //     setStudioList(studios);
-  //     setDressList(dresses);
-  //     setMakeupList(makeups);
-  //   ***REMOVED***
-  // ***REMOVED***, [recommendList]);
+  // const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
 
-  const dummyList = [
+  const cartList: Product[] = [
     ***REMOVED***
-      category: '스튜디오',
-      company: '포에버마인스튜디오',
-      price: '10000000',
-      content: '앨범1권(20P) + 기본 액자 1개'
+      id: "1",
+      type: "DRESS",
+      name: "웨딩 드레스 대여",
+      price: "1500000",
+      address: "서울 강남구",
+      content: "고급스러운 웨딩 드레스 대여 서비스입니다.",
+      vendorName: "Elegant Bridal",
+      vendorId: "vendor1",
+      images: [],
     ***REMOVED***,
     ***REMOVED***
-      category: '드레스',
-      company: '루이즈 블랑',
-      price: '37000000',
-      content: '[촬영+본식] 드레스4벌'
+      id: "2",
+      type: "STUDIO",
+      name: "웨딩 촬영 패키지",
+      price: "3000000",
+      address: "서울 마포구",
+      content: "웨딩 사진 촬영 패키지로 특별한 순간을 담아드립니다.",
+      vendorName: "Studio Bliss",
+      vendorId: "vendor2",
+      images: [],
     ***REMOVED***,
     ***REMOVED***
-      category: '메이크업',
-      company: '',
-      price: '0',
-      content: ''
+      id: "3",
+      type: "MAKEUP",
+      name: "본식 메이크업",
+      price: "100000",
+      address: "서울 종로구",
+      content: "본식 메이크업 서비스로 최고의 하루를 준비하세요.",
+      vendorName: "Wedding Palace",
+      vendorId: "vendor3",
+      images: [],
+    ***REMOVED***,
+    ***REMOVED***
+      id: "4",
+      type: "STUDIO",
+      name: "꽃 장식 서비스",
+      price: "2000000",
+      address: "서울 서초구",
+      content: "아름다운 꽃 장식으로 예식을 더욱 빛나게 만들어드립니다.",
+      vendorName: "Blooming Flora",
+      vendorId: "vendor4",
+      images: [],
+    ***REMOVED***,
+    ***REMOVED***
+      id: "5",
+      type: "DRESS",
+      name: "본식+피로연 드레스",
+      price: "500000",
+      address: "서울 강남구",
+      content: "본식과 피로연에서 입을 수 있는 드레스 대여 서비스입니다.",
+      vendorName: "Gourmet Delight",
+      vendorId: "vendor5",
+      images: [],
     ***REMOVED***,
   ];
 
-  const totalPrice = dummyList.reduce((acc, dummy) => acc + Number(dummy.price), 0);
+  useEffect(() => ***REMOVED***
+    setStudioList(cartList.filter((item: Product) => item.type === "STUDIO"));
+    setDressList(cartList.filter((item: Product) => item.type === "DRESS"));
+    setMakeupList(cartList.filter((item: Product) => item.type === "MAKEUP"));
+  ***REMOVED***, []);
+
+  //== 총 가격 계산 ==//
+  const totalAmount = Object.values(selectedList).reduce((acc, item) => acc + (Number(item?.price) || 0), 0).toLocaleString();
+
+  //== 선택한 상품 변경 ==//
+  const handleProductChange = (category: string, product: Product | null) => ***REMOVED***
+    setSelectedList((prev) => (***REMOVED***
+      ...prev,
+      [category]: product,
+    ***REMOVED***));
+  ***REMOVED***;
+
+  //== 계약서 요청 ==//
+  const handleCreateContract = async () => ***REMOVED***
+    const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
+    await createContract(contractItems);
+    navigate("/contract/list");
+  ***REMOVED***;
+
+  const deleteCartItem = async(category: string, id: string) => ***REMOVED***
+    if (category === 'STUDIO') ***REMOVED***
+      setStudioList(studioList.filter((item) => item.id !== id));
+    ***REMOVED*** else if (category === 'DRESS') ***REMOVED***
+      setDressList(dressList.filter((item) => item.id !== id));
+    ***REMOVED*** else if (category === 'MAKEUP') ***REMOVED***
+      setMakeupList(makeupList.filter((item) => item.id !== id));
+    ***REMOVED***
+
+    await deleteFromCart(id);
+  ***REMOVED***;
 
   return (
     <div className="flex flex-col relative">
       <div className="m-5 flex flex-col items-center">
-        ***REMOVED***/* <h1 className="my-3 text-main2">WEDDY 플래너</h1> */***REMOVED***
-        <div className="flex items-center mt-5">
-          <span className="text-sm">
-            <span className="text-main2 font-bold">
-              WEDDY 플래너&nbsp;
-            </span>
-            추천 상품</span>
-        </div>
-        ***REMOVED***dummyList.map((dummy, index) => (
-          <PlannerBox key=***REMOVED***index***REMOVED*** title=***REMOVED***dummy.category***REMOVED*** company=***REMOVED***dummy.company***REMOVED*** price=***REMOVED***dummy.price***REMOVED*** content=***REMOVED***dummy.content***REMOVED*** />
-        ))***REMOVED***
 
-        ***REMOVED***/* ***REMOVED***studioList.map((product: Product) => (
-          <PlannerBox key=***REMOVED***product.id***REMOVED*** title="스튜디오" company=***REMOVED***product.vendorName***REMOVED*** price=***REMOVED***product.price***REMOVED*** content=***REMOVED***product.content***REMOVED*** />
-        ))***REMOVED***
-
-        ***REMOVED***dressList.map((product: Product) => (
-          <PlannerBox key=***REMOVED***product.id***REMOVED*** title="드레스" company=***REMOVED***product.vendorName***REMOVED*** price=***REMOVED***product.price***REMOVED*** content=***REMOVED***product.content***REMOVED*** />
-        ))***REMOVED***
-
-        ***REMOVED***makeupList.map((product: Product) => (
-          <PlannerBox key=***REMOVED***product.id***REMOVED*** title="메이크업" company=***REMOVED***product.vendorName***REMOVED*** price=***REMOVED***product.price***REMOVED*** content=***REMOVED***product.content***REMOVED*** />
-        ))***REMOVED*** */***REMOVED***
-
+        <PlannerListBox
+          category="STUDIO"
+          productList=***REMOVED***studioList***REMOVED***
+          selectedList=***REMOVED***selectedList***REMOVED***
+          onProductChange=***REMOVED***handleProductChange***REMOVED***
+          onRemove=***REMOVED***deleteCartItem***REMOVED***
+        />
+        <PlannerListBox
+          category="DRESS"
+          productList=***REMOVED***dressList***REMOVED***
+          selectedList=***REMOVED***selectedList***REMOVED***
+          onProductChange=***REMOVED***handleProductChange***REMOVED***
+          onRemove=***REMOVED***deleteCartItem***REMOVED***
+        />
+        <PlannerListBox
+          category="MAKEUP"
+          productList=***REMOVED***makeupList***REMOVED***
+          selectedList=***REMOVED***selectedList***REMOVED***
+          onProductChange=***REMOVED***handleProductChange***REMOVED***
+          onRemove=***REMOVED***deleteCartItem***REMOVED***
+        />
       </div>
+      
       <div className="flex justify-end mr-10 mt-14">
         <div className="flex flex-col mr-3">
-          ***REMOVED***dummyList.map((dummy, index) => (
-            <span key=***REMOVED***index***REMOVED*** className="my-1">
-              ***REMOVED***dummy.company ? dummy.company : "상품 없음"***REMOVED***
+        ***REMOVED***Object.entries(selectedList).map(([category, item]) =>
+          item?.name ? (
+            <span key=***REMOVED***category***REMOVED*** className="my-1">
+              ***REMOVED***item.name***REMOVED***
             </span>
-          ))***REMOVED***
+          ) : null
+        )***REMOVED***
           <span className="font-bold mt-2">총 가격: </span>
         </div>
         <div className="flex flex-col text-end">
-          ***REMOVED***dummyList.map((dummy, index) => (
-            <span key=***REMOVED***index***REMOVED*** className="my-1">***REMOVED***dummy.price.toLocaleString()***REMOVED***원</span>
-          ))***REMOVED***
-          <span className="font-bold">
-            ***REMOVED***totalPrice.toLocaleString()***REMOVED***원
-          </span>
+        ***REMOVED***Object.entries(selectedList).map(([category, item]) =>
+          item?.price ? (
+            <span key=***REMOVED***category***REMOVED*** className="my-1">
+              ***REMOVED***Number(item.price).toLocaleString()***REMOVED***원
+            </span>
+          ) : null
+        )***REMOVED***
+          <span className="font-bold mt-2">***REMOVED***totalAmount.toLocaleString()***REMOVED***원</span>
         </div>
       </div>
-      <div className="flex justify-end mr-10 mt-5 mb-24">
+      
+      <div className="flex justify-end mr-10 mt-5 mb-24" onClick=***REMOVED***handleCreateContract***REMOVED***>
         <TodoButton title="계약 요청" />
       </div>
     </div>
-  )
-***REMOVED***
+  );
+***REMOVED***;
 
 export default Planner;

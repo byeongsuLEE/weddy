@@ -11,7 +11,6 @@ const Navbar = () => ***REMOVED***
     navigate(-1);
   ***REMOVED***;
 
-
   return (
     <nav>
       ***REMOVED***location !== "" && (
@@ -68,7 +67,7 @@ const Navbar = () => ***REMOVED***
       )***REMOVED***
 
       ***REMOVED***location != "contract" && (
-        <Link className="cartIcon" to='/cart'>
+        <Link className="cartIcon" to='/planner'>
           <CartIcon />
         </Link>
       )***REMOVED***

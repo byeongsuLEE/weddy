@@ -1,112 +1,40 @@
-import DropdownIcon from "@/icons/DropdownIcon";
-import GotoIcon from "@/icons/Goto";
-import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+import ***REMOVED*** AccordionDetails ***REMOVED*** from "@mui/material";
+import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** Checkbox ***REMOVED*** from "../ui/checkbox";
 
 interface PlannerBoxProps ***REMOVED***
-  title: string;
-  company: string;
-  price: string;
-  content: string;
+  item: Product;
+  isSelected: boolean;
+  onProductSelect: (product: Product | null) => void;
+  onRemove: (id: string) => void;
 ***REMOVED***
 
-const PlannerBox = ((***REMOVED*** title, company, price, content ***REMOVED***: PlannerBoxProps) => ***REMOVED***
-  const category = ***REMOVED***
-    스튜디오: 'STUDIO',
-    드레스: 'DRESS',
-    메이크업: 'MAKEUP',
-  ***REMOVED*** [title];
-
-  const navigate = useNavigate()
-  const goRecommend = () => ***REMOVED***
-    navigate(`/planner/list/$***REMOVED***category***REMOVED***`)
-  ***REMOVED***
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  // company가 있는 경우 체크 상태를 true로 설정
-  useEffect(() => ***REMOVED***
-    setIsChecked(!!company); // company가 존재하면 true
-  ***REMOVED***, [company]);
+const PlannerBox = (***REMOVED*** item, isSelected, onProductSelect, onRemove ***REMOVED***: PlannerBoxProps) => ***REMOVED***
+  const handleCheckboxChange = () => ***REMOVED***
+    onProductSelect(isSelected ? null : item);
+  ***REMOVED***;
 
   return (
-    <Accordion
-      sx=***REMOVED******REMOVED***
-        boxShadow: "none",
-        border: "none",
-        borderRadius: "8px",
-        marginY: 3,
-        "&:before": ***REMOVED***
-          display: "none",
-        ***REMOVED***,
-      ***REMOVED******REMOVED***>
-      <AccordionSummary
-        aria-controls="panel1-content"
-        id="panel1-header"
-        className="w-[350px] h-[100px]"
-        sx=***REMOVED******REMOVED***
-          boxShadow: "none",
-          borderBottom: "none",
-          padding: "16px",
-          margin: 0,
-        ***REMOVED******REMOVED***
-      >
-        <div className="flex justify-between w-[300px]">
-          <div className="flex items-center">
-            <button
-              className=***REMOVED***`$***REMOVED***isChecked ? 'text-main2 bg-mainbg rounded-full h-[35px] w-[35px]' : 'text-gray-400 bg-gray-100 rounded-full h-[35px] w-[35px]'***REMOVED***`***REMOVED***
-            >
-              <div className="flex items-center justify-center">
-                <span className="font-bold text-xs">WEDDY</span>
-              </div>
-            </button>
-            <h1 className="font-bold mx-4">***REMOVED***title***REMOVED***</h1>
+    <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
+      <div className="flex items-center space-x-4">
+        <Checkbox checked=***REMOVED***isSelected***REMOVED*** onCheckedChange=***REMOVED***handleCheckboxChange***REMOVED*** />
+        <Link
+          to=***REMOVED***`/board/detail/$***REMOVED***item.id***REMOVED***`***REMOVED***
+          className="flex flex-1 justify-between items-center space-x-4"
+        >
+          <div className="flex flex-col space-y-1">
+            <span className="font-bold text-lg text-main2">***REMOVED***item.vendorName***REMOVED***</span>
+            <span>***REMOVED***item.name***REMOVED***</span>
+            <span className="font-bold">***REMOVED***Number(item.price).toLocaleString()***REMOVED***원</span>
           </div>
-
-          ***REMOVED***isChecked == true ?(
-            <div className="flex items-center">
-            <DropdownIcon />
-            </div>
-          ):
-          (
-            <div onClick=***REMOVED***goRecommend***REMOVED*** className="flex items-center">
-              <p className="mr-1">상품 보러가기</p>
-              <GotoIcon />
-            </div>
-          )***REMOVED***
-        </div>
-
-      </AccordionSummary>
-      ***REMOVED***isChecked ? (
-        <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col">
-              <span className="font-bold text-lg text-main2">
-                ***REMOVED***company***REMOVED***
-              </span>
-              <span>
-                ***REMOVED***content***REMOVED***
-              </span>
-              <span className="font-bold">
-                ***REMOVED***price.toLocaleString()***REMOVED***원
-              </span>
-            </div>
-            <button className="mr-3 rounded-full w-[35px] h-[35px] bg-gray-100">삭제</button>
-          </div>
-        </AccordionDetails>
-      ) : (
-        <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
-          <div className="flex justify-center items-center">
-            <p>상품이 없습니다.</p>
-          </div>
-        </AccordionDetails>
-      )***REMOVED***
-      
-    </Accordion>
+        </Link>
+        <button className="ml-auto mr-3 rounded-full w-[35px] h-[35px] bg-gray-100" onClick=***REMOVED***() => onRemove(item.id)***REMOVED***>
+          삭제
+        </button>
+      </div>
+    </AccordionDetails>
   );
-***REMOVED***);
-
-
+***REMOVED***;
 
 export default PlannerBox;

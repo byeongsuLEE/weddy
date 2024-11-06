@@ -1,5 +1,5 @@
 export interface recommendData ***REMOVED***
-  id: number;
+  id: string;
   type: string;
   name: string;
   price: string;
