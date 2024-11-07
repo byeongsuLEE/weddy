@@ -1,5 +1,5 @@
 import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
-import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/api/userApi";
+import ***REMOVED*** editInformation, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
 import DatePick from "@/components/SchedulePage/DatePick";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
@@ -9,8 +9,13 @@ import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 const UserInfo = () => ***REMOVED***
   const navigate = useNavigate();
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png")
+  const [ imageData, setImageData ] = useState<File>();
+
   function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) ***REMOVED***
     const files = event.target.files;
+    if (files && files.length > 0) ***REMOVED***
+      setImageData(files[0]);
+    ***REMOVED***
 
     if (files === null || files.length === 0) ***REMOVED***
       return;
@@ -27,7 +32,7 @@ const UserInfo = () => ***REMOVED***
 
    //== 회원 정보 수정 ==//
    const handleUpdate = async () => ***REMOVED***
-    await editInfomation(userInfo);
+    editInformation(userInfo);
     navigate('/');
   ***REMOVED***;
 
@@ -40,24 +45,27 @@ const UserInfo = () => ***REMOVED***
     email: '',
     address: '',
     date: '',
-    picture: ''
+    coupleCode: ''
   ***REMOVED***);
 
   //== 회원 정보 ==//
-  const ***REMOVED*** data: userData, isSuccess ***REMOVED*** = useQuery('getUserInfo', getUserInfo);
+  const ***REMOVED*** data: userData, isSuccess, isLoading ***REMOVED*** = useQuery('getUserInfo', getUserInfo);
 
   //== 상태 업데이트 ==//
   const updateUserInfo = (key: keyof userInformation, value: string) => ***REMOVED***
     setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value ***REMOVED*** ***REMOVED***);
   ***REMOVED***;
 
-
   //== userdata 업데이트 후 userInfo 업데이트 ==//
   useEffect(() => ***REMOVED***
     if (isSuccess && userData) ***REMOVED***
-      setUserInfo(userData);
+      setUserInfo(userData[0]);
     ***REMOVED***
   ***REMOVED***, [isSuccess, userData]);
+
+  if (isLoading) ***REMOVED***
+    return <div>로딩중...</div>
+  ***REMOVED***
 
   return (
     <div className="flex flex-col items-center mt-16">
@@ -125,7 +133,6 @@ const UserInfo = () => ***REMOVED***
         <div className="flex justify-end mt-10 mr-3" onClick=***REMOVED***handleUpdate***REMOVED***>
           <TodoButton title="저장" colorId=***REMOVED***2***REMOVED*** />
         </div>
-        
       </div>
     </div>
   )

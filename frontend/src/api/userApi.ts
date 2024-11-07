@@ -32,7 +32,7 @@ export const logout = () => ***REMOVED***
 ***REMOVED***;
 
 //== 회원 정보 ==//
-export const getUserInfo = async (): Promise<userInformation> => ***REMOVED***
+export const getUserInfo = async (): Promise<userInformation[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
     url: BASE_URL,
@@ -44,9 +44,25 @@ export const getUserInfo = async (): Promise<userInformation> => ***REMOVED***
   return response.data.data;
 ***REMOVED***;
 
+//== 회원 프로필 수정 ==//
+export const editProfile = async (file: FormData): Promise<void> => ***REMOVED***
+  console.log(file);
+  const response = await axios(***REMOVED***
+    method: "patch",
+    url: BASE_URL,
+    headers: ***REMOVED***
+      Authorization: sessionStorage.getItem("token"),
+    ***REMOVED***,
+    data: ***REMOVED***
+      picture: file
+    ***REMOVED***
+    ***REMOVED***);
+    console.log(response);
+  ***REMOVED***;
+
 //== 회원 정보 수정 ==//
-export const editInfomation = async ( userInfo?: userInformation ): Promise<void> => ***REMOVED***
-  await axios(***REMOVED***
+export const editInformation = async ( userInfo?: userInformation ): Promise<void> => ***REMOVED***
+  const response = await axios(***REMOVED***
     method: "patch",
     url: BASE_URL,
     headers: ***REMOVED***
@@ -54,4 +70,5 @@ export const editInfomation = async ( userInfo?: userInformation ): Promise<void
     ***REMOVED***,
     data: userInfo
   ***REMOVED***);
+  console.log(response);
 ***REMOVED***;
