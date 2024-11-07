@@ -3,16 +3,15 @@ import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
 import ***REMOVED*** editInfomation, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
 import RingIcon from "@/icons/RingIcon";
-import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
+// import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
+import CoupleCodeModal from "@/components/MyPage/CoupleCodeModal";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
-import ***REMOVED*** useRecoilValue ***REMOVED*** from 'recoil';
-
 const Mypage = () => ***REMOVED***
-  const token = useRecoilValue(firebaseTokenState);
-  const [ isConneted, ] = useState<boolean>(false);
-  const [ code, setCode ] = useState<string>("");
+
+  // const token = useRecoilValue(firebaseTokenState);
+  const [isConneted,] = useState<boolean>(false);
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png")
   function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) ***REMOVED***
     const files = event.target.files;
@@ -39,7 +38,7 @@ const Mypage = () => ***REMOVED***
     email: '',
     address: '',
     date: '',
-    picture: ''
+    picture: '',
   ***REMOVED***);
 
   //== 회원 정보 ==//
@@ -62,11 +61,7 @@ const Mypage = () => ***REMOVED***
     setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value ***REMOVED*** ***REMOVED***);
   ***REMOVED***;
 
-  //== 커플 코드 연결 ==//
-  const handleConnect = async () => ***REMOVED***
-    console.log(code);
-    // await connectCoupleCode(code);
-  ***REMOVED***;
+ 
 
   const today = new Date();
   const targetDate = new Date('2024-11-19');
@@ -76,43 +71,44 @@ const Mypage = () => ***REMOVED***
   return (
     <div className="m-5 bg-white h-[700px] rounded-xl p-5">
       <h1 className="text-center mt-5">마이페이지</h1>
-      <div>***REMOVED***token***REMOVED***</div>
+      ***REMOVED***/* <div>***REMOVED***token***REMOVED***</div> */***REMOVED***
       <div className="flex justify-between">
-        <div className="flex flex-col items-center">
-          <div className="bg-main1 flex flex-col p-5 h-[200px] w-[300px] mx-3 mt-10 rounded-xl">
-            <span className="font-bold text-2xl text-main2">D-***REMOVED***dDay***REMOVED***</span>
-            <span className="text-sm mt-1">2024-11-19</span>
-            ***REMOVED***isConneted ? (
-              <div className="flex items-center justify-center">
-                <div>
-                  <img
-                    className="bg-main1 rounded-full h-[70px] w-[70px] mt-5"
-                    src=***REMOVED***imageSrc***REMOVED***
-                    alt="profile image"
-                  />
-                  <div className="text-xs mt-1 text-blue-400">
-                    <label htmlFor="profile-image">
-                      <span>이미지 변경</span>
-                      <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
-                    </label>
-                  </div>
-                </div>
-                <RingIcon />
+        <div className="bg-main1 flex flex-col items-center p-5 h-[200px] w-[300px] mx-3 mt-10 rounded-xl">
+          <span className="font-bold text-3xl text-main2">D-***REMOVED***dDay***REMOVED***</span>
+          <span className="text-gray-400 text-sm">2024.11.19</span>
+
+          ***REMOVED***isConneted ? (
+            <div className="flex items-center justify-center">
+              <div>
                 <img
-                  className="bg-main1 rounded-full h-[70px] w-[70px] "
-                  src="/icons/profile.png"
+                  className="bg-main1 rounded-full h-[70px] w-[70px] mt-5"
+                  src=***REMOVED***imageSrc***REMOVED***
                   alt="profile image"
                 />
+                <div className="text-xs text-center mt-1 text-blue-400">
+                  <label htmlFor="profile-image">
+                    <span>이미지 변경</span>
+                    <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
+                  </label>
+                </div>
               </div>
-            ) : (
-              <>
-                <span className="font-bold text-lg mb-2">***REMOVED***userData?.coupleCode***REMOVED***</span>
-                <span className="text-sm text-gray-500">상대방과 커플코드를 공유하세요!</span>
-                <input type="text" className="my-2 p-2 w-[250px] border border-gray-400 rounded-lg h-[30px]" onChange=***REMOVED***(e) => setCode(e.target.value)***REMOVED***/>
-                <button onClick=***REMOVED***handleConnect***REMOVED***>연결</button>
-              </>
-            )***REMOVED***
-          </div>
+              <RingIcon />
+              <img
+                className="bg-main1 rounded-full h-[70px] w-[70px] "
+                src="/icons/profile.png"
+                alt="profile image"
+              />
+            </div>
+          ) : (
+            <>
+              <span className="font-bold text-lg mb-2">***REMOVED***userData?.coupleCode***REMOVED***</span>
+              <span className="text-sm text-gray-500">상대방과 커플코드를 공유하세요!</span>
+              <span className="my-3 font-bold">abcdefg12345678</span>
+              <CoupleCodeModal />
+
+            </>
+
+          )***REMOVED***
         </div>
       </div>
 
