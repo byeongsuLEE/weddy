@@ -70,8 +70,6 @@ public class UserController ***REMOVED***
         return ResponseEntity.ok(ApiResponse.success("회원 정보 수정 완료"));
     ***REMOVED***
 
-
-
     @PatchMapping("/couple-connect")
     public ResponseEntity<ApiResponse<UserResponseDTO>> connectCouple(@AuthenticationPrincipal UserEntity user, @RequestBody Map<String, String> codeRequest) ***REMOVED***
         String code = codeRequest.get("code");
@@ -79,17 +77,4 @@ public class UserController ***REMOVED***
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userResponseDTO,"커플코드 연결 성공"));
     ***REMOVED***
 
-//    @GetMapping("/test")
-//    public APIResponse test(@AuthenticationPrincipal UserEntity user) ***REMOVED***
-//        try ***REMOVED***
-//            return APIResponse.builder()
-//                    .data(user)
-//                    .build();
-//        ***REMOVED***catch (Exception e)***REMOVED***
-//            return APIResponse.builder()
-//                    .status(500)
-//                    .message("에러")
-//                    .build();
-//        ***REMOVED***
-//    ***REMOVED***
 ***REMOVED***

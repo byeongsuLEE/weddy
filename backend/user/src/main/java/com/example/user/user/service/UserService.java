@@ -6,6 +6,7 @@ import com.example.user.common.dto.UserDTO;
 import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.user.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class UserService ***REMOVED***
 
     private final UserRepository userRepository;
@@ -56,6 +58,7 @@ public class UserService ***REMOVED***
 
     public void updateUserInfo(Long id, Map<String, Object> info) ***REMOVED***
         UserEntity userEntity = userRepository.findById(id).orElse(null);
+        log.info("Received update info: ***REMOVED******REMOVED***", info);
 
         if (userEntity == null) ***REMOVED***
             throw new RuntimeException("User not found");
@@ -87,8 +90,9 @@ public class UserService ***REMOVED***
             ***REMOVED***
         ***REMOVED***
 
-        if (info.get("Date") != null && !info.get("Date").toString().trim().isEmpty()) ***REMOVED***
-            userEntity.setDate(LocalDate.parse(info.get("Date").toString()));
+        if (info.get("date") != null && !info.get("date").toString().trim().isEmpty()) ***REMOVED***
+            log.info(info.get("date").toString());
+            userEntity.setDate(LocalDate.parse(info.get("date").toString()));
         ***REMOVED***
 
         userRepository.save(userEntity);
