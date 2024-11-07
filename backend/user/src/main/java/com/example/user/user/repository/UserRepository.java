@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserEntity,Long> ***REMOVED***
 
     UserEntity findBySocialId(String socialId);
+    Optional<UserEntity> findByOtherId(Long otherId);
     List<UserEntity> findByCoupleCode(String coupleCode);
 ***REMOVED***

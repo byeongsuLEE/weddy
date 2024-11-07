@@ -35,9 +35,9 @@ public class UserController ***REMOVED***
     ***REMOVED***
 
     @GetMapping
-    public ResponseEntity<ApiResponse<UserResponseDTO>> getUsers(@AuthenticationPrincipal UserEntity user) ***REMOVED***
-        UserResponseDTO userResponseDTO = userService.userInfo(user.getId());
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userResponseDTO,"유저 정보 호출 성공"));
+    public ResponseEntity<ApiResponse<List<UserResponseDTO>>> getUsers(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+        List<UserResponseDTO> userResponseDTOList = userService.userInfo(user);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userResponseDTOList,"유저 정보 호출 성공"));
     ***REMOVED***
 
     @GetMapping("/couple-code")
@@ -52,10 +52,11 @@ public class UserController ***REMOVED***
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("로그아웃 성공"));
     ***REMOVED***
 
-    @PatchMapping
+    @PatchMapping(consumes = "multipart/form-data")
     public ResponseEntity<ApiResponse<Void>> updateUser(
             @AuthenticationPrincipal UserEntity user,
-            @RequestBody UserRequestDTO userRequestDTO) ***REMOVED***
+            @RequestPart("userRequestDTO") UserRequestDTO userRequestDTO,
+            @RequestPart(value = "picture", required = false) MultipartFile picture) ***REMOVED***
 
         Map<String, Object> updates = new HashMap<>();
         if (userRequestDTO.getPhone() != null) updates.put("phone", userRequestDTO.getPhone());
@@ -63,7 +64,11 @@ public class UserController ***REMOVED***
         if (userRequestDTO.getAddress() != null) updates.put("address", userRequestDTO.getAddress());
         if (userRequestDTO.getEmail() != null) updates.put("email", userRequestDTO.getEmail());
         if (userRequestDTO.getDate() != null) updates.put("date", userRequestDTO.getDate());
-        if (userRequestDTO.getPicture() != null) updates.put("picture", userRequestDTO.getPicture());
+
+        // picture 파일이 존재하면 추가
+        if (picture != null && !picture.isEmpty()) ***REMOVED***
+            updates.put("picture", picture);
+        ***REMOVED***
 
         userService.updateUserInfo(user.getId(), updates);
 
