@@ -40,12 +40,13 @@ export const getUserInfo = async (): Promise<userInformation> => ***REMOVED***
       Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
   ***REMOVED***);
+  console.log(response.data.data);
   return response.data.data;
 ***REMOVED***;
 
 //== 회원 정보 수정 ==//
 export const editInfomation = async ( userInfo?: userInformation ): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: "patch",
     url: BASE_URL,
     headers: ***REMOVED***
@@ -53,5 +54,4 @@ export const editInfomation = async ( userInfo?: userInformation ): Promise<void
     ***REMOVED***,
     data: userInfo
   ***REMOVED***);
-  console.log(response.data);
 ***REMOVED***;

@@ -4,8 +4,10 @@ import TodoButton from "@/common/TodoButton";
 import DatePick from "@/components/SchedulePage/DatePick";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const UserInfo = () => ***REMOVED***
+  const navigate = useNavigate();
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png")
   function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) ***REMOVED***
     const files = event.target.files;
@@ -26,6 +28,7 @@ const UserInfo = () => ***REMOVED***
    //== 회원 정보 수정 ==//
    const handleUpdate = async () => ***REMOVED***
     await editInfomation(userInfo);
+    navigate('/');
   ***REMOVED***;
 
   useEffect(() => ***REMOVED***
@@ -36,7 +39,8 @@ const UserInfo = () => ***REMOVED***
     phone: '',
     email: '',
     address: '',
-    dateofWedding: '',
+    date: '',
+    picture: ''
   ***REMOVED***);
 
   //== 회원 정보 ==//
@@ -88,7 +92,7 @@ const UserInfo = () => ***REMOVED***
             <DatePick
               type="start"
               title="예식 예정일"
-              changeDate=***REMOVED***(newDate) => updateUserInfo('dateofWedding', newDate.toISOString().slice(0, 10))***REMOVED***
+              changeDate=***REMOVED***(newDate) => updateUserInfo('date', newDate.toISOString().slice(0, 10))***REMOVED***
             />
             <input
               defaultValue=***REMOVED***userInfo.name***REMOVED***

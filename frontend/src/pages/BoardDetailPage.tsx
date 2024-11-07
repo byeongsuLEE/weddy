@@ -17,18 +17,18 @@ const BoardDetail = () => ***REMOVED***
     () => detailProduct(productId),
     ***REMOVED*** enabled: !!productId ***REMOVED***
   );
-
-  //== 장바구니 담기 ==//
-  const addToCart = async () => ***REMOVED***
-    await addProductToCart(productId);
-  ***REMOVED***;
-
+  
   //== 리뷰 리스트 ==//
   const ***REMOVED*** data: reviewList ***REMOVED*** = useQuery(
     ["getReviewList", productId],
     () => getReviewList(productId),
     ***REMOVED*** enabled: !!productId ***REMOVED***
   );
+
+  //== 장바구니 담기 ==//
+  const addToCart = async () => ***REMOVED***
+    await addProductToCart(productId);
+  ***REMOVED***;
 
   return (
     <div>

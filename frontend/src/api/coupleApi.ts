@@ -10,7 +10,9 @@ export const connectCoupleCode = async (code: string): Promise<void> => ***REMOV
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
-    data: code
+    data: ***REMOVED***
+      "code": code
+    ***REMOVED***
   ***REMOVED***);
   console.log(response.data);
 ***REMOVED***;
