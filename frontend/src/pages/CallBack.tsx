@@ -28,12 +28,12 @@ const CallBack = () => ***REMOVED***
   ***REMOVED***);
 
   useEffect(() => ***REMOVED***
-    if (userInfo?.date) ***REMOVED***
+    if (userInfo && userInfo[0]?.date != null) ***REMOVED***
       navigate('/');
-    ***REMOVED*** else ***REMOVED***
+    ***REMOVED*** else if (userInfo) ***REMOVED***
       navigate('/userInfo');
     ***REMOVED***
-  ***REMOVED***, [userInfo]);
+  ***REMOVED***, [userInfo, navigate]);
 
   return null;
 ***REMOVED***
