@@ -1,6 +1,6 @@
 package com.example.user.cart.controller;
 
-import com.example.user.cart.dto.response.CartResponseDTO;
+import com.example.user.cart.dto.response.CartResponseDto;
 import com.example.user.cart.service.CartService;
 import com.example.user.common.dto.ApiResponse;
 import com.example.user.user.entity.UserEntity;
@@ -23,8 +23,8 @@ public class CartController ***REMOVED***
     ***REMOVED***
 
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse<CartResponseDTO>> addCart(@RequestBody Long id, @AuthenticationPrincipal UserEntity user)***REMOVED***
-        CartResponseDTO cartResponseDTO = cartService.addCart(id,user);
+    public ResponseEntity<ApiResponse<CartResponseDto>> addCart(@RequestBody Long id, @AuthenticationPrincipal UserEntity user)***REMOVED***
+        CartResponseDto cartResponseDTO = cartService.addCart(id,user);
         return null;
     ***REMOVED***
 ***REMOVED***

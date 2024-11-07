@@ -52,10 +52,11 @@ public class UserController ***REMOVED***
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("로그아웃 성공"));
     ***REMOVED***
 
-    @PatchMapping
+    @PatchMapping(consumes = "multipart/form-data")
     public ResponseEntity<ApiResponse<Void>> updateUser(
             @AuthenticationPrincipal UserEntity user,
-            @RequestBody UserRequestDTO userRequestDTO) ***REMOVED***
+            @RequestPart("userRequestDTO") UserRequestDTO userRequestDTO,
+            @RequestPart(value = "picture", required = false) MultipartFile picture) ***REMOVED***
 
         Map<String, Object> updates = new HashMap<>();
         if (userRequestDTO.getPhone() != null) updates.put("phone", userRequestDTO.getPhone());
@@ -63,13 +64,18 @@ public class UserController ***REMOVED***
         if (userRequestDTO.getAddress() != null) updates.put("address", userRequestDTO.getAddress());
         if (userRequestDTO.getEmail() != null) updates.put("email", userRequestDTO.getEmail());
         if (userRequestDTO.getDate() != null) updates.put("date", userRequestDTO.getDate());
-        if (userRequestDTO.getPicture() != null) updates.put("picture", userRequestDTO.getPicture());
+
+        // picture 파일이 존재하면 추가
+        if (picture != null && !picture.isEmpty()) ***REMOVED***
+            updates.put("picture", picture);
+        ***REMOVED***
 
         userService.updateUserInfo(user.getId(), updates);
 
         // 성공 응답
         return ResponseEntity.ok(ApiResponse.success("회원 정보 수정 완료"));
     ***REMOVED***
+
 
     @PatchMapping("/couple-connect")
     public ResponseEntity<ApiResponse<UserResponseDTO>> connectCouple(@AuthenticationPrincipal UserEntity user, @RequestBody Map<String, String> codeRequest) ***REMOVED***
