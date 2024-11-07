@@ -11,6 +11,7 @@ import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,8 @@ public class ScheduleConsumers ***REMOVED***
 
     private final ScheduleEventProducer eventProducer;
 
+    private final RedisTemplate redisTemplate;
+
     @KafkaListener(topics = "$***REMOVED***consumer.topic1.name***REMOVED***",groupId = "$***REMOVED***consumer.groupid.name***REMOVED***")
     public void paymentProduct(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
 
@@ -46,9 +49,13 @@ public class ScheduleConsumers ***REMOVED***
 
             log.info(paymentProductInfo.toString());
             //prododcut로 일정 생성
-            CreateScheduleInputDto dto = CreateScheduleInputDto.createScheduleInputDto(paymentProductInfo);
+            CreateScheduleInputDto scheduleInfo = CreateScheduleInputDto.createScheduleInputDto(paymentProductInfo);
             // UseCase를 통해 일정 생성
-            createScheduleUsecase.createSchedule(dto);
+            createScheduleUsecase.createSchedule(scheduleInfo);
+
+
+            //푸시알림전송
+            redisTemplate.opsForHash().put("schedule:"+ scheduleInfo.getStartDate(), scheduleInfo.getCode(),scheduleInfo.getContent(),scheduleInfo.getUserCoupleToken().getMyFcmToken());
 
             // 성공 시 이벤트 발생
             eventResult.updateIsSuccess(true);
