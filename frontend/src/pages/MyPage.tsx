@@ -1,4 +1,3 @@
-// import ***REMOVED*** connectCoupleCode ***REMOVED*** from "@/api/coupleApi";
 import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
 import ***REMOVED*** editInformation, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
