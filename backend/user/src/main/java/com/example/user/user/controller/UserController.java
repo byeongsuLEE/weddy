@@ -13,6 +13,7 @@ import com.example.user.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -87,9 +88,15 @@ public class UserController ***REMOVED***
     ***REMOVED***
 
     @GetMapping("/fcm-token/***REMOVED***code***REMOVED***")
-    public ResponseEntity<ApiResponse<UserCoupleTokenDto>> getFcmToken(@AuthenticationPrincipal UserEntity user)***REMOVED***
-        UserCoupleTokenDto userCoupleTokenDto = userService.getFcmToken(user.getCoupleCode(),user.getId());
+    public ResponseEntity<ApiResponse<UserCoupleTokenDto>> getFcmToken(@AuthenticationPrincipal UserEntity user, @PathVariable String code)***REMOVED***
+        UserCoupleTokenDto userCoupleTokenDto = userService.getFcmToken(code,user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userCoupleTokenDto,"FCM 토큰 조회 성공"));
+    ***REMOVED***
+
+    @PatchMapping("/fcm-token/***REMOVED***userId***REMOVED***")
+    public ResponseEntity<ApiResponse<String>> setFcmToken(@AuthenticationPrincipal UserEntity user, @PathVariable Long userId, @RequestBody String fcmToken)***REMOVED***
+        userService.setFcmToken(userId,fcmToken);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("FCM 토큰 저장 성공"));
     ***REMOVED***
 
 //    @GetMapping("/test")

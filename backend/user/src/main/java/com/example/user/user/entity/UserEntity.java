@@ -43,7 +43,7 @@ public class UserEntity ***REMOVED***
 
     private String fcmToken;
 
-    private void updateFcmToken(String fcmToken) ***REMOVED***
+    public void updateFcmToken(String fcmToken) ***REMOVED***
         this.fcmToken = fcmToken;
     ***REMOVED***
 ***REMOVED***
