@@ -1,9 +1,9 @@
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import DropdownIcon from "@/icons/DropdownIcon";
-import GotoIcon from "@/icons/Goto";
+// import GotoIcon from "@/icons/Goto";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
+// import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 import CartBox from "./CartBox";
 
 interface CartListBoxProps ***REMOVED***
@@ -15,10 +15,10 @@ interface CartListBoxProps ***REMOVED***
 ***REMOVED***
 
 const CartListBox = (***REMOVED*** category, productList, selectedList, onProductChange, onRemove ***REMOVED***: CartListBoxProps) => ***REMOVED***
-  const navigate = useNavigate();
-  const goRecommend = () => ***REMOVED***
-    navigate(`/planner/list/$***REMOVED***category***REMOVED***`);
-  ***REMOVED***;
+  // const navigate = useNavigate();
+  // const goRecommend = () => ***REMOVED***
+  //   navigate(`/planner/list/$***REMOVED***category***REMOVED***`);
+  // ***REMOVED***;
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -70,10 +70,11 @@ const CartListBox = (***REMOVED*** category, productList, selectedList, onProduc
               <DropdownIcon />
             </div>
           ) : (
-            <div onClick=***REMOVED***goRecommend***REMOVED*** className="flex items-center">
-              <p className="mr-1">상품 보러가기</p>
-              <GotoIcon />
-            </div>
+            // <div onClick=***REMOVED***goRecommend***REMOVED*** className="flex items-center">
+            //   <p className="mr-1">상품 보러가기</p>
+            //   <GotoIcon />
+            // </div>
+            <></>
           )***REMOVED***
         </div>
       </AccordionSummary>
