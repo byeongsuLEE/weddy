@@ -4,5 +4,6 @@ export interface userInformation ***REMOVED***
   email: string;
   address: string;
   coupleCode?: string;
-  dateofWedding: string;
+  date: string;
+  picture: string;
 ***REMOVED***

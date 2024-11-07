@@ -1,9 +1,10 @@
 import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-import ***REMOVED*** deleteFromCart ***REMOVED*** from "@/api/productApi";
+import ***REMOVED*** deleteFromCart, getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import CartListBox from "@/components/CartPage/CartListBox";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const CartPage = () => ***REMOVED***
@@ -19,71 +20,15 @@ const CartPage = () => ***REMOVED***
     MAKEUP: null,
   ***REMOVED***);
 
-  // const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
-
-  const cartList: Product[] = [
-    ***REMOVED***
-      id: "1",
-      type: "DRESS",
-      name: "웨딩 드레스 대여",
-      price: "1500000",
-      address: "서울 강남구",
-      content: "고급스러운 웨딩 드레스 대여 서비스입니다.",
-      vendorName: "Elegant Bridal",
-      vendorId: "vendor1",
-      images: [],
-    ***REMOVED***,
-    ***REMOVED***
-      id: "2",
-      type: "STUDIO",
-      name: "웨딩 촬영 패키지",
-      price: "3000000",
-      address: "서울 마포구",
-      content: "웨딩 사진 촬영 패키지로 특별한 순간을 담아드립니다.",
-      vendorName: "Studio Bliss",
-      vendorId: "vendor2",
-      images: [],
-    ***REMOVED***,
-    ***REMOVED***
-      id: "3",
-      type: "MAKEUP",
-      name: "본식 메이크업",
-      price: "100000",
-      address: "서울 종로구",
-      content: "본식 메이크업 서비스로 최고의 하루를 준비하세요.",
-      vendorName: "Wedding Palace",
-      vendorId: "vendor3",
-      images: [],
-    ***REMOVED***,
-    ***REMOVED***
-      id: "4",
-      type: "STUDIO",
-      name: "꽃 장식 서비스",
-      price: "2000000",
-      address: "서울 서초구",
-      content: "아름다운 꽃 장식으로 예식을 더욱 빛나게 만들어드립니다.",
-      vendorName: "Blooming Flora",
-      vendorId: "vendor4",
-      images: [],
-    ***REMOVED***,
-    ***REMOVED***
-      id: "5",
-      type: "DRESS",
-      name: "본식+피로연 드레스",
-      price: "500000",
-      address: "서울 강남구",
-      content: "본식과 피로연에서 입을 수 있는 드레스 대여 서비스입니다.",
-      vendorName: "Gourmet Delight",
-      vendorId: "vendor5",
-      images: [],
-    ***REMOVED***,
-  ];
+  const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
 
   useEffect(() => ***REMOVED***
-    setStudioList(cartList.filter((item: Product) => item.type === "STUDIO"));
-    setDressList(cartList.filter((item: Product) => item.type === "DRESS"));
-    setMakeupList(cartList.filter((item: Product) => item.type === "MAKEUP"));
-  ***REMOVED***, []);
+    if (Array.isArray(cartList)) ***REMOVED***
+      setStudioList(cartList.filter((item: Product) => item.type === "STUDIO"));
+      setDressList(cartList.filter((item: Product) => item.type === "DRESS"));
+      setMakeupList(cartList.filter((item: Product) => item.type === "MAKEUP"));
+    ***REMOVED***
+  ***REMOVED***, [cartList]);
 
   //== 총 가격 계산 ==//
   const totalAmount = Object.values(selectedList).reduce((acc, item) => acc + (Number(item?.price) || 0), 0).toLocaleString();
