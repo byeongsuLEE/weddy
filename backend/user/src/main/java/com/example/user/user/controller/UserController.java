@@ -3,6 +3,7 @@ package com.example.user.user.controller;
 import com.example.user.common.dto.ApiResponse;
 import com.example.user.common.dto.UserDTO;
 import com.example.user.user.dto.request.UserRequestDTO;
+import com.example.user.user.dto.response.UserCoupleTokenDto;
 import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.security.jwt.BlackTokenService;
@@ -77,6 +78,12 @@ public class UserController ***REMOVED***
         String code = codeRequest.get("code");
         UserResponseDTO userResponseDTO = userService.connectCoupleCode(code,user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userResponseDTO,"커플코드 연결 성공"));
+    ***REMOVED***
+
+    @GetMapping("/fcm-token/***REMOVED***code***REMOVED***")
+    public ResponseEntity<ApiResponse<UserCoupleTokenDto>> getFcmToken(@AuthenticationPrincipal UserEntity user)***REMOVED***
+        UserCoupleTokenDto userCoupleTokenDto = userService.getFcmToken(user.getCoupleCode(),user.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userCoupleTokenDto,"FCM 토큰 조회 성공"));
     ***REMOVED***
 
 //    @GetMapping("/test")

@@ -1,8 +1,9 @@
 package com.example.user.user.service;
 
-import com.example.user.common.dto.ApiResponse;
+import com.example.user.common.dto.ErrorCode;
+import com.example.user.common.exception.UserTokenNotFoundException;
 import com.example.user.common.service.GCSImageService;
-import com.example.user.common.dto.UserDTO;
+import com.example.user.user.dto.response.UserCoupleTokenDto;
 import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.user.repository.UserRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -124,4 +127,29 @@ public class UserService ***REMOVED***
                 .build();
     ***REMOVED***
 
+    public UserCoupleTokenDto getFcmToken(String coupleCode, Long myUserId) ***REMOVED***
+
+        List<UserEntity> userEntity = userRepository.findByCoupleCode(coupleCode);
+        if (userEntity == null) ***REMOVED***
+             throw new UserTokenNotFoundException(ErrorCode.USER_TOKEN_NOT_FOUND);
+        ***REMOVED***
+
+        String myToken = null;
+        String coupleToken =null ;
+
+        for(UserEntity user : userEntity)***REMOVED***
+            if(user.getId().equals(myUserId))***REMOVED***
+                myToken = user.getFcmToken();
+            ***REMOVED***else***REMOVED***
+                coupleToken= user.getFcmToken();
+            ***REMOVED***
+        ***REMOVED***
+
+        return UserCoupleTokenDto.builder()
+                .myFcmToken(myToken)
+                .coupleFcmToken(coupleToken)
+                .build();
+
+
+    ***REMOVED***
 ***REMOVED***
