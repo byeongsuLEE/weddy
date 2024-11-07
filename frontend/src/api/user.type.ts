@@ -3,7 +3,7 @@ export interface userInformation ***REMOVED***
   phone: string;
   email: string;
   address: string;
-  coupleCode?: string;
+  coupleCode: string;
   date: string;
-  picture: string;
+  picture?: string;
 ***REMOVED***
