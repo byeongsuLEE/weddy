@@ -111,7 +111,7 @@ public class UserService ***REMOVED***
 
     public UserResponseDTO connectCoupleCode(String coupleCode, Long id) ***REMOVED***
         UserEntity userEntity = userRepository.findById(id).orElse(null);
-        UserEntity otheruserEntity = userRepository.findByCoupleCode(coupleCode).orElse(null);
+        UserEntity otheruserEntity = userRepository.findByCoupleCode(coupleCode).get(0); // 이부분 내가 바꿨으니 확인 해보셈
 
         if (userEntity == null || otheruserEntity == null) ***REMOVED***
             throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
