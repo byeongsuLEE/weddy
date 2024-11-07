@@ -52,12 +52,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
 
             String randomCode = generateRandomCode(6);
 
-            UserEntity userEntity = new UserEntity();
-            userEntity.setSocialId(socialId);
-            userEntity.setName(oAuth2Response.getName());
-            userEntity.setEmail(oAuth2Response.getEmail());
-            userEntity.setPicture(oAuth2Response.getPicture());
-            userEntity.setCoupleCode(randomCode);
+            UserEntity userEntity = UserEntity.builder()
+                    .socialId(socialId)
+                    .name(oAuth2Response.getName())
+                    .email(oAuth2Response.getEmail())
+                    .picture(oAuth2Response.getPicture())
+                    .coupleCode(randomCode)
+                    .build();
 
             userRepository.save(userEntity);
             UserDTO userDTO = new UserDTO();
@@ -70,8 +71,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
             return new CustomOAuth2User(userDTO);
         ***REMOVED*** else ***REMOVED***
 
-            existData.setEmail(oAuth2Response.getEmail());
-            existData.setName(oAuth2Response.getName());
+            existData.toBuilder()
+                    .email(oAuth2Response.getEmail())
+                    .name(oAuth2Response.getName())
+                    .build();
 
             userRepository.save(existData);
 
