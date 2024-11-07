@@ -53,12 +53,12 @@ public class UserController ***REMOVED***
     @PatchMapping
     public ResponseEntity<ApiResponse<Void>> updateUser(
             @AuthenticationPrincipal UserEntity user,
-            @RequestParam(required = false) String phone,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String address,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String date,
-            @RequestParam(required = false) MultipartFile picture) ***REMOVED***
+            @RequestBody(required = false) String phone,
+            @RequestBody(required = false) String name,
+            @RequestBody(required = false) String address,
+            @RequestBody(required = false) String email,
+            @RequestBody(required = false) String date,
+            @RequestBody(required = false) MultipartFile picture) ***REMOVED***
 
         Map<String, Object> updates = new HashMap<>();
         if (phone != null) updates.put("phone", phone);
