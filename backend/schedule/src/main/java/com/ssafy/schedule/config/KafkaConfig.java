@@ -1,5 +1,6 @@
 package com.ssafy.schedule.config;
 
+import com.ssafy.schedule.domain.event.EventResult;
 import com.ssafy.schedule.domain.event.PaymentProductInfo;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -29,7 +30,7 @@ public class KafkaConfig ***REMOVED***
 
 
     @Bean
-    public ProducerFactory<String, PaymentProductInfo> kafkaProducerFactory() ***REMOVED***
+    public ProducerFactory<String, EventResult> kafkaProducerFactory() ***REMOVED***
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -42,7 +43,7 @@ public class KafkaConfig ***REMOVED***
 
 
     @Bean
-    public KafkaTemplate<String, PaymentProductInfo> kafkaTemplate() ***REMOVED***
+    public KafkaTemplate<String, EventResult> kafkaTemplate() ***REMOVED***
         return new KafkaTemplate<>(kafkaProducerFactory());
     ***REMOVED***
 
