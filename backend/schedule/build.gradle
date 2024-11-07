@@ -54,6 +54,10 @@ dependencies ***REMOVED***
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.apache.kafka:kafka-clients'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+    //localDate 직렬화
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
 ***REMOVED***
 
 dependencyManagement ***REMOVED***

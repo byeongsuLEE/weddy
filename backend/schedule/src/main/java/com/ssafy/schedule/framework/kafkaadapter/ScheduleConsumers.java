@@ -1,9 +1,13 @@
 package com.ssafy.schedule.framework.kafkaadapter;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.schedule.application.usecase.CreateScheduleUsecase;
+import com.ssafy.schedule.domain.event.EventResult;
+import com.ssafy.schedule.domain.event.EventType;
 import com.ssafy.schedule.domain.event.PaymentProductInfo;
 import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
+import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -24,22 +28,41 @@ import java.io.IOException;
 @Slf4j
 public class ScheduleConsumers ***REMOVED***
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper ;
     private final CreateScheduleUsecase createScheduleUsecase;
 
-
+    private final ScheduleEventProducer eventProducer;
 
     @KafkaListener(topics = "$***REMOVED***consumer.topic1.name***REMOVED***",groupId = "$***REMOVED***consumer.groupid.name***REMOVED***")
     public void paymentProduct(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
-        log.info("뭐가 되는거지? "+ record.value());
 
         PaymentProductInfo paymentProductInfo = objectMapper.readValue(record.value(), PaymentProductInfo.class);
+        EventResult eventResult = EventResult.createEventResult(paymentProductInfo);
+        try***REMOVED***
 
-        log.info(paymentProductInfo.toString());
-        //prododcut로 일정 생성
-        CreateScheduleInputDto dto = CreateScheduleInputDto.createScheduleInputDto(paymentProductInfo);
-        // UseCase를 통해 일정 생성
-        createScheduleUsecase.createSchedule(dto);
+            log.info("뭐가 되는거지? "+ record.value());
+
+
+
+            log.info(paymentProductInfo.toString());
+            //prododcut로 일정 생성
+            CreateScheduleInputDto dto = CreateScheduleInputDto.createScheduleInputDto(paymentProductInfo);
+            // UseCase를 통해 일정 생성
+            createScheduleUsecase.createSchedule(dto);
+
+            // 성공 시 이벤트 발생
+            eventResult.updateIsSuccess(true);
+
+        ***REMOVED***
+        catch(Exception e)***REMOVED***
+            eventResult.updateIsSuccess(false);
+
+        ***REMOVED***
+//        eventProducer.occurEvent(event);
+
+
+
+
 
     ***REMOVED***
 
