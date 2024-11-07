@@ -1,6 +1,8 @@
 package com.example.user.user.service;
 
 import com.example.user.common.dto.ApiResponse;
+import com.example.user.common.dto.ErrorCode;
+import com.example.user.common.exception.UserNotFoundException;
 import com.example.user.common.service.GCSImageService;
 import com.example.user.common.dto.UserDTO;
 import com.example.user.user.dto.response.UserResponseDTO;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,28 +28,30 @@ public class UserService ***REMOVED***
         this.gcsImageService = gcsImageService;
     ***REMOVED***
 
-    public UserResponseDTO userInfo(Long userId) ***REMOVED***
-        UserEntity userEntity = userRepository.findById(userId).orElse(null);
-
-        if (userEntity == null) ***REMOVED***
-            // 원하는 방식으로 예외를 처리하거나 null을 반환할 수 있습니다.
-            return null;
+    public List<UserResponseDTO> userInfo(UserEntity user) ***REMOVED***
+        // userEntity와 otherUserEntity를 각각 조회하며, 없으면 UserNotFoundException 발생
+        UserEntity userEntity = userRepository.findById(user.getId())
+                .orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
+        UserEntity otherUserEntity = null;
+        if(user.getOtherId() != null)***REMOVED***
+            otherUserEntity = userRepository.findByOtherId(user.getOtherId())
+                    .orElse(null); // otherUserEntity는 없을 수 있으므로 예외를 발생시키지 않고 null을 허용
         ***REMOVED***
 
-        UserResponseDTO response = UserResponseDTO.builder()
-                .id(userEntity.getId())
-                .coupleCode(userEntity.getCoupleCode())
-                .socialId(userEntity.getSocialId())
-                .name(userEntity.getName())
-                .email(userEntity.getEmail())
-                .address(userEntity.getAddress())
-                .phone(userEntity.getPhone())
-                .picture(userEntity.getPicture())
-                .date(userEntity.getDate())
-                .build();
+        List<UserResponseDTO> responseList = new ArrayList<>();
 
-        return response;
+        // userEntity는 항상 존재하므로 리스트에 추가
+        responseList.add(UserResponseDTO.fromEntity(userEntity));
+
+        // otherUserEntity가 존재할 경우에만 리스트에 추가
+        if (otherUserEntity != null) ***REMOVED***
+            responseList.add(UserResponseDTO.fromEntity(otherUserEntity));
+        ***REMOVED***
+
+        return responseList;
     ***REMOVED***
+
+
 
 
     public UserResponseDTO coupleCode(String coupleCode)***REMOVED***
@@ -103,15 +109,16 @@ public class UserService ***REMOVED***
         UserEntity userEntity = userRepository.findById(id).orElse(null);
         UserEntity otheruserEntity = userRepository.findByCoupleCode(coupleCode).orElse(null);
 
-        // userEntity가 null일 경우 예외 처리나 반환 방식 결정
         if (userEntity == null || otheruserEntity == null) ***REMOVED***
-            // 예외를 던지거나 null을 반환하는 등의 처리
-            return null;
+            throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
         ***REMOVED***
 
         // coupleCode 업데이트 및 저장
         userEntity.setCoupleCode(coupleCode);
+        userEntity.setOtherId(otheruserEntity.getId());
         userRepository.save(userEntity);
+        otheruserEntity.setOtherId(userEntity.getId());
+        userRepository.save(otheruserEntity);
 
 
         // UserResponseDTO 빌드 및 반환

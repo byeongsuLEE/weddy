@@ -19,4 +19,5 @@ public class UserRequestDTO ***REMOVED***
     private String phone;
     private String picture;
     private LocalDate date;
+    private Long otherId;
 ***REMOVED***

@@ -10,4 +10,5 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> ***REMOVE
 
     UserEntity findBySocialId(String socialId);
     Optional<UserEntity> findByCoupleCode(String coupleCode);
+    Optional<UserEntity> findByOtherId(Long otherId);
 ***REMOVED***

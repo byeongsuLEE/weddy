@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -34,9 +35,9 @@ public class UserController ***REMOVED***
     ***REMOVED***
 
     @GetMapping
-    public ResponseEntity<ApiResponse<UserResponseDTO>> getUsers(@AuthenticationPrincipal UserEntity user) ***REMOVED***
-        UserResponseDTO userResponseDTO = userService.userInfo(user.getId());
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userResponseDTO,"유저 정보 호출 성공"));
+    public ResponseEntity<ApiResponse<List<UserResponseDTO>>> getUsers(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+        List<UserResponseDTO> userResponseDTOList = userService.userInfo(user);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userResponseDTOList,"유저 정보 호출 성공"));
     ***REMOVED***
 
     @GetMapping("/couple-code")
