@@ -38,7 +38,8 @@ const Mypage = () => ***REMOVED***
     phone: '',
     email: '',
     address: '',
-    dateofWedding: '',
+    date: '',
+    picture: ''
   ***REMOVED***);
 
   //== 회원 정보 ==//

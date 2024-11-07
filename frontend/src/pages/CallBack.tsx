@@ -28,7 +28,7 @@ const CallBack = () => ***REMOVED***
   ***REMOVED***);
 
   useEffect(() => ***REMOVED***
-    if (userInfo?.dateofWedding) ***REMOVED***
+    if (userInfo?.date) ***REMOVED***
       navigate('/');
     ***REMOVED*** else ***REMOVED***
       navigate('/userInfo');
