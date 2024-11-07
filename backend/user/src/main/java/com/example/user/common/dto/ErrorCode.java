@@ -14,7 +14,8 @@ public enum ErrorCode ***REMOVED***
     FILE_TOO_LARGE(HttpStatus.PAYLOAD_TOO_LARGE,"파일의 최대용량이 초과되었습니다."),
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED,"HTTP METHOD를 확인해주세요."),
     CONTRACT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 계약서를 찾을 수 없습니다."),
-    PAYMENT_NOT_VALIDATE(HttpStatus.BAD_REQUEST,"결제 정보가 일치하지 않습니다.");
+    PAYMENT_NOT_VALIDATE(HttpStatus.BAD_REQUEST,"결제 정보가 일치하지 않습니다."),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND,"유저 정보를 찾을 수 없습니다.");
     private HttpStatus status;
     private String message;
 ***REMOVED***
