@@ -1,10 +1,9 @@
 package com.example.user.payment.service;
 
 
+import com.example.user.common.dto.ErrorCode;
+import com.example.user.common.exception.PaymentNotValidateException;
 import com.example.user.contract.domain.Contract;
-import com.example.user.contract.global.util.exception.ContractNotFoundException;
-import com.example.user.contract.global.util.exception.PaymentNotValidateException;
-import com.example.user.contract.global.util.response.ErrorCode;
 import com.example.user.contract.repository.ContractRepository;
 import com.example.user.contract.service.ContractService;
 import com.example.user.payment.dto.request.ContractInfoRequestDto;
