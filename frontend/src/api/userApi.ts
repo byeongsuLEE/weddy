@@ -40,6 +40,7 @@ export const getUserInfo = async (): Promise<userInformation> => ***REMOVED***
       Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
   ***REMOVED***);
+  console.log(response.data.data);
   return response.data.data;
 ***REMOVED***;
 
