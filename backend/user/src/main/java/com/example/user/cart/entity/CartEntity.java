@@ -13,4 +13,5 @@ public class CartEntity ***REMOVED***
 
     private Long productId;
 
+    private Long userId;
 ***REMOVED***

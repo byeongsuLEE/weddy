@@ -2,6 +2,7 @@ package com.example.user.user.controller;
 
 import com.example.user.common.dto.ApiResponse;
 import com.example.user.common.dto.UserDTO;
+import com.example.user.user.dto.request.UserRequestDTO;
 import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.security.jwt.BlackTokenService;
@@ -53,26 +54,22 @@ public class UserController ***REMOVED***
     @PatchMapping
     public ResponseEntity<ApiResponse<Void>> updateUser(
             @AuthenticationPrincipal UserEntity user,
-            @RequestBody(required = false) String phone,
-            @RequestBody(required = false) String name,
-            @RequestBody(required = false) String address,
-            @RequestBody(required = false) String email,
-            @RequestBody(required = false) String date,
-            @RequestBody(required = false) MultipartFile picture) ***REMOVED***
+            @RequestBody UserRequestDTO userRequestDTO) ***REMOVED***
 
         Map<String, Object> updates = new HashMap<>();
-        if (phone != null) updates.put("phone", phone);
-        if (name != null) updates.put("name", name);
-        if (address != null) updates.put("address", address);
-        if (email != null) updates.put("email", email);
-        if (date != null) updates.put("date", date);
-        if (picture != null) updates.put("picture", picture);
+        if (userRequestDTO.getPhone() != null) updates.put("phone", userRequestDTO.getPhone());
+        if (userRequestDTO.getName() != null) updates.put("name", userRequestDTO.getName());
+        if (userRequestDTO.getAddress() != null) updates.put("address", userRequestDTO.getAddress());
+        if (userRequestDTO.getEmail() != null) updates.put("email", userRequestDTO.getEmail());
+        if (userRequestDTO.getDate() != null) updates.put("date", userRequestDTO.getDate());
+        if (userRequestDTO.getPicture() != null) updates.put("picture", userRequestDTO.getPicture());
 
         userService.updateUserInfo(user.getId(), updates);
 
         // 성공 응답
         return ResponseEntity.ok(ApiResponse.success("회원 정보 수정 완료"));
     ***REMOVED***
+
 
 
     @PatchMapping("/couple-connect")

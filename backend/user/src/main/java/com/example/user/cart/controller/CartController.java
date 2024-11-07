@@ -3,7 +3,9 @@ package com.example.user.cart.controller;
 import com.example.user.cart.dto.response.CartResponseDTO;
 import com.example.user.cart.service.CartService;
 import com.example.user.common.dto.ApiResponse;
+import com.example.user.user.entity.UserEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,8 @@ public class CartController ***REMOVED***
     ***REMOVED***
 
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse<CartResponseDTO>> addCart(@RequestBody Long id)***REMOVED***
-        CartResponseDTO cartResponseDTO = cartService.addCart(id);
+    public ResponseEntity<ApiResponse<CartResponseDTO>> addCart(@RequestBody Long id, @AuthenticationPrincipal UserEntity user)***REMOVED***
+        CartResponseDTO cartResponseDTO = cartService.addCart(id,user);
         return null;
     ***REMOVED***
 ***REMOVED***
