@@ -7,29 +7,28 @@ import * as THREE from 'three';
 function WeddingDress() ***REMOVED***
   const ***REMOVED*** scene ***REMOVED*** = useGLTF('../assets/dress_merge.glb');
 
-  // Leva UI 컨트롤 정의
-  const ***REMOVED***
-    metalness, roughness, emissiveIntensity,
-    sleeveLength, dressLength, dressWidth, neckHeight, neckWidth,
-    showArms, showSkirt, showLaceShirt, showTop, showSkirt2,
-    showDress3, showTop3, showShoulder2
-  ***REMOVED*** = useControls(***REMOVED***
+  // 상의에 대한 Leva 컨트롤 정의
+  const upperControls = useControls('상의', ***REMOVED***
     metalness: ***REMOVED*** value: 0.05, min: 0, max: 1, step: 0.01, label: '메탈니스' ***REMOVED***,
     roughness: ***REMOVED*** value: 0.3, min: 0, max: 1, step: 0.01, label: '거칠기' ***REMOVED***,
     emissiveIntensity: ***REMOVED*** value: 0.4, min: 0, max: 2, step: 0.1, label: '밝기' ***REMOVED***,
     sleeveLength: ***REMOVED*** value: 1, min: 0.5, max: 1.5, step: 0.01, label: '소매 길이' ***REMOVED***,
-    dressLength: ***REMOVED*** value: 0.5, min: 0.5, max: 1, step: 0.01, label: '드레스 넓이' ***REMOVED***,
-    dressWidth: ***REMOVED*** value: 1, min: 0.5, max: 2, step: 0.01, label: '드레스 폭' ***REMOVED***,
     neckHeight: ***REMOVED*** value: 1, min: 0.8, max: 3, step: 0.01, label: '목 높이' ***REMOVED***,
     neckWidth: ***REMOVED*** value: 1, min: 0.8, max: 1.5, step: 0.01, label: '목 넓이' ***REMOVED***,
     showArms: ***REMOVED*** value: false, label: 'Arms Visible' ***REMOVED***,
-    showSkirt: ***REMOVED*** value: false, label: 'Skirt Visible' ***REMOVED***,
     showLaceShirt: ***REMOVED*** value: false, label: 'Lace Shirt Visible' ***REMOVED***,
     showTop: ***REMOVED*** value: false, label: 'Top Visible' ***REMOVED***,
+    showShoulder2: ***REMOVED*** value: false, label: 'Shoulder2 Visible' ***REMOVED***
+  ***REMOVED***);
+
+  // 하의에 대한 Leva 컨트롤 정의
+  const lowerControls = useControls('하의', ***REMOVED***
+    dressLength: ***REMOVED*** value: 0.5, min: 0.5, max: 1, step: 0.01, label: '드레스 넓이' ***REMOVED***,
+    dressWidth: ***REMOVED*** value: 1, min: 0.5, max: 2, step: 0.01, label: '드레스 폭' ***REMOVED***,
+    showSkirt: ***REMOVED*** value: false, label: 'Skirt Visible' ***REMOVED***,
     showSkirt2: ***REMOVED*** value: false, label: 'Skirt2 Visible' ***REMOVED***,
     showDress3: ***REMOVED*** value: false, label: 'Dress3 Visible' ***REMOVED***,
-    showTop3: ***REMOVED*** value: false, label: 'Top3 Visible' ***REMOVED***,
-    showShoulder2: ***REMOVED*** value: false, label: 'Shoulder2 Visible' ***REMOVED***
+    showTop3: ***REMOVED*** value: false, label: 'Top3 Visible' ***REMOVED***
   ***REMOVED***);
 
   useEffect(() => ***REMOVED***
@@ -37,55 +36,43 @@ function WeddingDress() ***REMOVED***
       if ((child as THREE.Mesh).isMesh) ***REMOVED***
         const mesh = child as THREE.Mesh;
         if (mesh.material) ***REMOVED***
-          (mesh.material as THREE.MeshStandardMaterial).metalness = metalness;
-          (mesh.material as THREE.MeshStandardMaterial).roughness = roughness;
-          (mesh.material as THREE.MeshStandardMaterial).emissive = new THREE.Color(0x888888);
-          (mesh.material as THREE.MeshStandardMaterial).emissiveIntensity = emissiveIntensity;
-          (mesh.material as THREE.MeshStandardMaterial).side = THREE.DoubleSide;
+          const material = mesh.material as THREE.MeshStandardMaterial;
+          material.metalness = upperControls.metalness;
+          material.roughness = upperControls.roughness;
+          material.emissive = new THREE.Color(0x888888);
+          material.emissiveIntensity = upperControls.emissiveIntensity;
+          material.side = THREE.DoubleSide;
         ***REMOVED***
 
-        switch (mesh.name) ***REMOVED***
-          case 'left_arm':
-          case 'right_arm':
-            mesh.visible = showArms;
-            mesh.scale.x = sleeveLength;
-            break;
-          case 'skirt':
-            mesh.visible = showSkirt;
-            mesh.scale.z = dressWidth;
-            mesh.scale.x = dressLength;
-            break;
-          case 'skirt2':
-            mesh.visible = showSkirt2;
-            mesh.scale.z = dressWidth;
-            mesh.scale.x = dressLength;
-            break;
-          case 'lace_shirt':
-            mesh.visible = showLaceShirt;
-            mesh.scale.y = neckHeight;
-            mesh.scale.z = neckWidth;
-            break;
-          case 'top2':
-            mesh.visible = showTop;
-            break;
-          case 'dress_3':
-            mesh.visible = showDress3;
-            break;
-          case 'top_3':
-            mesh.visible = showTop3;
-            break;
-          case 'shorder_2':
-            mesh.visible = showShoulder2;
-            break;
+        // 상의 속성 조정
+        if (['left_arm', 'right_arm'].includes(mesh.name)) ***REMOVED***
+          mesh.visible = upperControls.showArms;
+          mesh.scale.x = upperControls.sleeveLength;
         ***REMOVED***
+        if (mesh.name === 'lace_shirt') ***REMOVED***
+          mesh.visible = upperControls.showLaceShirt;
+          mesh.scale.y = upperControls.neckHeight;
+          mesh.scale.z = upperControls.neckWidth;
+        ***REMOVED***
+        if (mesh.name === 'top2') mesh.visible = upperControls.showTop;
+        if (mesh.name === 'shorder_2') mesh.visible = upperControls.showShoulder2;
+
+        // 하의 속성 조정
+        if (mesh.name === 'skirt') ***REMOVED***
+          mesh.visible = lowerControls.showSkirt;
+          mesh.scale.z = lowerControls.dressWidth;
+          mesh.scale.x = lowerControls.dressLength;
+        ***REMOVED***
+        if (mesh.name === 'skirt2') ***REMOVED***
+          mesh.visible = lowerControls.showSkirt2;
+          mesh.scale.z = lowerControls.dressWidth;
+          mesh.scale.x = lowerControls.dressLength;
+        ***REMOVED***
+        if (mesh.name === 'dress_3') mesh.visible = lowerControls.showDress3;
+        if (mesh.name === 'top_3') mesh.visible = lowerControls.showTop3;
       ***REMOVED***
     ***REMOVED***);
-  ***REMOVED***, [
-    scene, metalness, roughness, emissiveIntensity,
-    sleeveLength, dressLength, dressWidth, neckHeight, neckWidth,
-    showArms, showSkirt, showLaceShirt, showTop, showSkirt2,
-    showDress3, showTop3, showShoulder2
-  ]);
+  ***REMOVED***, [scene, upperControls, lowerControls]);
 
   return <primitive object=***REMOVED***scene***REMOVED*** />;
 ***REMOVED***
@@ -126,7 +113,9 @@ const Sketch: React.FC = () => ***REMOVED***
         <CameraSettings />
         <OrbitControls target=***REMOVED***[0, 1, 0]***REMOVED*** enablePan=***REMOVED***false***REMOVED*** />
       </Canvas>
-      <Leva collapsed=***REMOVED***false***REMOVED*** />
+
+      <Leva collapsed=***REMOVED***true***REMOVED*** oneLineLabels=***REMOVED***true***REMOVED*** />
+      
     </div>
   );
 ***REMOVED***;
