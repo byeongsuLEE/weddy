@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    show-sql: true
+  application:
+    name: weddy
+  profiles:
+    active: common , schedule
+  config:
+    import: optional:configserver:***REMOVED***:8888
+
+
+management:
+endpoints:
+    web:
+      exposure:
+        include: refresh
+
+
+
+consumer:
+  topic1:
+    name: contract_payment
+  groupid:
+    name: book
+
+server:
+  port: 8082

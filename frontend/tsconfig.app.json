@@ -24,7 +24,7 @@
     "esModuleInterop": true,
   ***REMOVED***,
   "include": [
-    // "src",
+    "src",
     "postcss.config.js",
     "public/firebase-messaging-sw.js"
   ]
