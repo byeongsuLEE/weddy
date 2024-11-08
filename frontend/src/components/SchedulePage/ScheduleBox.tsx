@@ -1,5 +1,5 @@
 interface ScheduleProps ***REMOVED***
-  type: "studio" | "dress" | "makeup" | "etc";
+  type: "studio" | "dress" | "makeup" | "wedding" |"etc";
   title: string;
 ***REMOVED***
 
@@ -8,6 +8,7 @@ const ScheduleBox = (***REMOVED*** type,title ***REMOVED***: ScheduleProps) => *
     studio: "bg-main3",
     dress: "bg-main1",
     makeup: "bg-main4",
+    wedding: "bg-red-500",
     etc: "bg-gray-200",
   ***REMOVED***[type];
 
