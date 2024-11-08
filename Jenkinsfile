@@ -23,7 +23,7 @@ pipeline ***REMOVED***
         GITOPS_REPO = 'git@github.com:zion0425/weddy_gitops.git' 
 
         // Credentials
-        GITOPS_CREDENTIALS = credentials('gitops_pk') // Jenkins에 등록된 GitOps 배포 키의 Credential ID
+        GITOPS_CREDENTIALS = 'gitops_pk' // Jenkins에 등록된 GitOps 배포 키의 Credential ID
         GITLAB_CREDENTIALS = 'gitlab' // GitLab 자격 증명 ID
     ***REMOVED***
 
@@ -131,7 +131,7 @@ pipeline ***REMOVED***
         stage('Update GitOps Repo') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    sshagent ([GITOPS_CREDENTIALS]) ***REMOVED***
+                    sshagent (credentials: [GITOPS_CREDENTIALS]) ***REMOVED***
                         dir('gitops') ***REMOVED***
                             // GitOps 저장소 클론
                             sh 'git clone -b main git@github.com:zion0425/weddy_gitops.git .'
