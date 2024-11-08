@@ -121,10 +121,6 @@ const Mypage = () => ***REMOVED***
                   alt="profile image"
                 />
                 <div className="text-xs text-center mt-1">
-                  ***REMOVED***/* <label htmlFor="profile-image">
-                    <span>이미지 변경</span>
-                    <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
-                  </label> */***REMOVED***
                   <span>***REMOVED***userInfo.name***REMOVED***</span>
                 </div>
               </div>
