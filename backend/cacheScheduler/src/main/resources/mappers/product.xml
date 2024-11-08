@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ssafy.cachescheduler.mapper.ProductMapper">
+
+    <resultMap id="ProductResultMap" type="weddy.commonlib.dto.response.ProductResponseDto">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="type" column="type" />
+        <result property="price" column="price" />
+        <result property="address" column="address" />
+        <collection property="images" column="id" ofType="weddy.commonlib.dto.response.ProductImageResponseDto" select="findProductImages" />
+    </resultMap>
+
+    <select id="getAllProducts" resultMap="ProductResultMap">
+        SELECT
+            p.id,
+            p.name,
+            p.type,
+            p.price,
+            p.address
+        FROM
+            Product p
+    </select>
+
+    <select id="findProductImages" resultType="weddy.commonlib.dto.response.ProductImageResponseDto">
+        SELECT
+            imageUrl
+        FROM
+            ProductImage
+        WHERE
+            product_id = #***REMOVED***id***REMOVED***
+    </select>
+</mapper>
+
