@@ -40,13 +40,12 @@ export const getUserInfo = async (): Promise<userInformation[]> => ***REMOVED***
       Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
   ***REMOVED***);
-  console.log(response.data.data);
   return response.data.data;
 ***REMOVED***;
 
 //== 회원 프로필 수정 ==//
 export const editProfile = async (file: FormData): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: "patch",
     url: `$***REMOVED***BASE_URL***REMOVED***/picture`,
     headers: ***REMOVED***
@@ -54,7 +53,8 @@ export const editProfile = async (file: FormData): Promise<void> => ***REMOVED**
     ***REMOVED***,
     data: file
     ***REMOVED***);
-    console.log(response.data);
+
+    alert("프로필 사진이 변경되었습니다.");
   ***REMOVED***;
 
 //== 회원 정보 수정 ==//
@@ -67,6 +67,7 @@ export const editInformation = async ( userInfo?: userInformation ): Promise<voi
     ***REMOVED***,
     data: userInfo
   ***REMOVED***);
+  alert("회원 정보가 수정되었습니다.");
 ***REMOVED***;
 
 //fcm 토큰 저장

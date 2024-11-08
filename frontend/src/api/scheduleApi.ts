@@ -7,7 +7,6 @@ const token = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwidXNlck5hbWUiOiJb6rSR7KO8XzHrsJhf
 
 //== 일정 등록 ==//
 export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REMOVED***
-  console.log(scheduleData);
   const response = await axios(***REMOVED***
     method: "post",
     url: BASE_URL,
@@ -37,6 +36,5 @@ export const getSchedule = async (selectedDate: string): Promise<GetSchedule[]> 
       date: selectedDate
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data.data);
   return response.data.data;
 ***REMOVED***;
