@@ -30,22 +30,28 @@ export function AlertDialogDemo(***REMOVED*** isOpen, onClose ***REMOVED***: Ale
     startDate: null,
     endDate: null,
     content: '',
-    contractType: '',
+    type: '',
   ***REMOVED***);
+
+  function formatDate(date: Date): string ***REMOVED***
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  
+  return `$***REMOVED***year***REMOVED***-$***REMOVED***month***REMOVED***-$***REMOVED***day***REMOVED***`;
+***REMOVED***
 
   const updateScheduleInfo = (key: keyof Schedule, value: any) => ***REMOVED***
     setScheduleInfo((prev) => ***REMOVED***
       const formattedValue =
         (key === "startDate" || key === "endDate") && value instanceof Date
-          ? value.toISOString().slice(0, 19)
+          ? formatDate(value)
           : value;
-
+  
       return ***REMOVED*** ...prev, [key]: formattedValue ***REMOVED***;
     ***REMOVED***);
   ***REMOVED***;
-
-
-
+  
   const updateSchedule = async () => ***REMOVED***
     await schedule(scheduleInfo);
     onClose();
@@ -77,7 +83,7 @@ export function AlertDialogDemo(***REMOVED*** isOpen, onClose ***REMOVED***: Ale
             />
           </FlexCenterWrapper>
           <FlexCenterWrapper>
-            <CategoryButton changeCategory=***REMOVED***(category) => updateScheduleInfo("contractType", category)***REMOVED*** />
+            <CategoryButton changeCategory=***REMOVED***(category) => updateScheduleInfo("type", category)***REMOVED*** />
           </FlexCenterWrapper>
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -45,11 +45,10 @@ const UserInfo = () => ***REMOVED***
 
   //== 결혼 예정일 등록 ==//
   const weddingSchedule: Schedule = ***REMOVED***
-    contractType: "WEDDING",
+    type: "WEDDING",
     startDate: userInfo.date,
     endDate: userInfo.date,
-    content: "결혼식",
-    productId: "1",
+    content: "결혼식"
   ***REMOVED***
 
    //== 회원 정보 수정 ==//
