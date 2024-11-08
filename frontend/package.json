@@ -41,6 +41,7 @@
     "embla-carousel-react": "^8.3.0",
     "ethers": "^6.13.4",
     "firebase": "^11.0.1",
+    "firebase-admin": "^12.7.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
     "leva": "^0.9.35",

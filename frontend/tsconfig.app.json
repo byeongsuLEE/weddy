@@ -19,10 +19,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    // "types": ["firebase"] // 추가
+    "esModuleInterop": true,
   ***REMOVED***,
   "include": [
-    "src",
-    "postcss.config.js"
-, "public/firebase-messaging-sw.js"  ]
+    // "src",
+    "postcss.config.js",
+    "public/firebase-messaging-sw.js"
+  ]
 ***REMOVED***
