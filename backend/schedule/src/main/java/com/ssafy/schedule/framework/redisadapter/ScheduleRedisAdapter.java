@@ -2,6 +2,7 @@ package com.ssafy.schedule.framework.redisadapter;
 
 import com.ssafy.schedule.application.outputport.ScheduleOutPutPort;
 import com.ssafy.schedule.application.outputport.ScheduleRedisCacheOutputPort;
+import com.ssafy.schedule.common.util.RedisUtil;
 import com.ssafy.schedule.domain.model.Schedule;
 import com.ssafy.schedule.framework.jpaadapter.ScheduleRepository;
 import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Repository;
+import weddy.commonlib.constant.KeyType;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,21 +26,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ScheduleRedisAdapter implements ScheduleRedisCacheOutputPort ***REMOVED***
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisUtil redisUtil;
 
 
     @Override
     public void saveScheduleToCache(CreateScheduleInputDto createScheduleInputDto) ***REMOVED***
-
-        String key = "schedule:"+ createScheduleInputDto.getStartDate();
-        String myFcmToken = createScheduleInputDto.getUserCoupleToken().getMyFcmToken();
-        String coupleFcmToken = createScheduleInputDto.getUserCoupleToken().getCoupleFcmToken();
-
-        if(myFcmToken !=null)
-            redisTemplate.opsForHash().put(key,myFcmToken,createScheduleInputDto);
-
-        if(coupleFcmToken !=null)
-         redisTemplate.opsForHash().put(key,coupleFcmToken,createScheduleInputDto);
-
+        redisUtil.addToHashSet(KeyType.SCHEDULE,createScheduleInputDto);
     ***REMOVED***
 ***REMOVED***

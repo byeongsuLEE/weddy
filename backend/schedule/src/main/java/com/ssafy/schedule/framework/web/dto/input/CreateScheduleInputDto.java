@@ -1,6 +1,7 @@
 package com.ssafy.schedule.framework.web.dto.input;
 
 import com.ssafy.schedule.domain.event.PaymentProductInfo;
+import com.ssafy.schedule.domain.event.ProductType;
 import com.ssafy.schedule.domain.event.UserCoupleTokenDto;
 import com.ssafy.schedule.domain.model.ContractType;
 import com.ssafy.schedule.domain.model.Schedule;
@@ -17,7 +18,7 @@ public class CreateScheduleInputDto ***REMOVED***
 
     private LocalDate startDate;
     private LocalDate endDate;
-    private ContractType type;
+    private ProductType type;
     private String content;
     private Long productId;
     private Long userId;
@@ -46,6 +47,7 @@ public class CreateScheduleInputDto ***REMOVED***
                 .userId(paymentProductInfo.getUserId())
                 .code(paymentProductInfo.getCode())
                 .userCoupleToken(paymentProductInfo.getUserCoupleToken())
+                .type(paymentProductInfo.getProduct().getType())
                 .build();
     ***REMOVED***
 

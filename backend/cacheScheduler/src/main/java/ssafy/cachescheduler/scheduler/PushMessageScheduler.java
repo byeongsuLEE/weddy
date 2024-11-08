@@ -1,11 +1,15 @@
 package ssafy.cachescheduler.scheduler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
@@ -27,11 +31,11 @@ import java.time.LocalDate;
 @EnableAsync
 @RequiredArgsConstructor
 public class PushMessageScheduler ***REMOVED***
-    private final RedisUtil redisUtil;
-    private final ProductMapper productMapper;
-    private final ReviewMapper reviewMapper;
-
+    @Autowired
+    @Qualifier("redisScheduleTemplate")
     private final RedisTemplate<String,Object> redisTemplate;
+
+    private final ObjectMapper objectMapper;
 
     /**
      * 푸시알림 해당날짜
@@ -51,7 +55,7 @@ public class PushMessageScheduler ***REMOVED***
 
         // 현재 로컬 날짜 얻어봐
         LocalDate localDate = LocalDate.now();
-        String key = "schedule:"+localDate;
+        String key = "SCHEDULE:"+localDate;
         // 해당 날짜에 등록된 스케쥴이 있는지 확인
 //        redisTemplate.opsForHash(key).entries()
 
@@ -59,15 +63,16 @@ public class PushMessageScheduler ***REMOVED***
         redisTemplate.opsForHash().entries(key).forEach((k,v)->***REMOVED***
             log.info("key : "+k+" value : "+v.toString());
             String token = k.toString();
-            CreateScheduleInputDto createScheduleInputDto = (CreateScheduleInputDto) v;
+
+            CreateScheduleInputDto createScheduleInputDto = objectMapper.convertValue(v, CreateScheduleInputDto.class);;
             log.info("createScheduleInputDto : "+createScheduleInputDto.toString());
 
             //알림전송
             // 푸시 알림 메시지 생성
             Message message = Message.builder()
                     .setNotification(Notification.builder()
-                            .setTitle(createScheduleInputDto.getType().toString())
-                            .setBody(createScheduleInputDto.getContent())
+                            .setTitle(createScheduleInputDto.getType().DRESS.toString())
+                            .setBody(createScheduleInputDto.getContent().toString())
                             .build())
                     .setToken(token) // 푸시 알림 토큰
                     .build();
