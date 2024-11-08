@@ -106,13 +106,14 @@ public class UserService ***REMOVED***
         ***REMOVED***
 
         // coupleCode 업데이트 및 저장
-        userEntity = UserEntity.builder()
+        userEntity = userEntity.toBuilder()
                 .coupleCode(coupleCode)
                 .otherId(otheruserEntity.getId())
                 .build();
         userRepository.save(userEntity);
-        otheruserEntity = UserEntity.builder()
-                .otherId(userEntity.getId()).build();
+        otheruserEntity = otheruserEntity.toBuilder()
+                .otherId(userEntity.getId())
+                .build();
         userRepository.save(otheruserEntity);
 
 
