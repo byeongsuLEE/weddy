@@ -17,13 +17,13 @@ function Calendar(***REMOVED***
 ***REMOVED***: CalendarProps) ***REMOVED***
   
   // `eventDays` 배열에서 날짜가 이벤트에 해당하는지 확인하는 함수
-  const isEventDay = (day: Date) => ***REMOVED***
-    const result = eventDays.some((eventDay: Date) =>
-      eventDay.toDateString() === day.toDateString()
-    );
-    console.log(`Date: $***REMOVED***day.toDateString()***REMOVED***, Is Event Day: $***REMOVED***result***REMOVED***`);
-    return result;
-  ***REMOVED***;
+  // const isEventDay = (day: Date) => ***REMOVED***
+  //   const result = eventDays.some((eventDay: Date) =>
+  //     eventDay.toDateString() === day.toDateString()
+  //   );
+  //   console.log(`Date: $***REMOVED***day.toDateString()***REMOVED***, Is Event Day: $***REMOVED***result***REMOVED***`);
+  //   return result;
+  // ***REMOVED***;
 
   return (
     <DayPicker
@@ -67,14 +67,15 @@ function Calendar(***REMOVED***
         IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,
         IconRight: () => <ChevronRightIcon className="h-4 w-4" />,
       ***REMOVED******REMOVED***
-      renderDay=***REMOVED***(day: Date) => (
-        <div className="relative">
-          ***REMOVED***day.getDate()***REMOVED***
-          ***REMOVED***isEventDay(day) && (
-            <div className="bg-red-500 rounded-full h-2 w-2 absolute bottom-1 left-1/2 transform -translate-x-1/2"></div>
-          )***REMOVED***
-        </div>
-      )***REMOVED***
+      
+      // renderDay=***REMOVED***(day: Date) => (
+      //   <div className="relative">
+      //     ***REMOVED***day.getDate()***REMOVED***
+      //     ***REMOVED***isEventDay(day) && (
+      //       <div className="bg-red-500 rounded-full h-2 w-2 absolute bottom-1 left-1/2 transform -translate-x-1/2"></div>
+      //     )***REMOVED***
+      //   </div>
+      // )***REMOVED***
       ***REMOVED***...props***REMOVED***
     />
   );

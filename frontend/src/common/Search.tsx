@@ -1,4 +1,4 @@
-import SearchIcon from "@/icons/SearchIcon";
+import SearchIcon from "@/icons/searchIcon";
 import ***REMOVED*** useState ***REMOVED*** from "react";
 
 interface SearchProp ***REMOVED***
