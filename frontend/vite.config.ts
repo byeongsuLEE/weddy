@@ -1,6 +1,6 @@
-import ***REMOVED*** defineConfig ***REMOVED*** from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import ***REMOVED*** VitePWA ***REMOVED*** from 'vite-plugin-pwa'
+import ***REMOVED*** defineConfig ***REMOVED*** from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import ***REMOVED*** VitePWA ***REMOVED*** from 'vite-plugin-pwa';
 import tailwindcss from "tailwindcss";
 import path from 'path';
 
@@ -28,6 +28,9 @@ export default defineConfig(***REMOVED***
           ***REMOVED***,
         ],
       ***REMOVED***,
+      workbox: ***REMOVED***
+        maximumFileSizeToCacheInBytes: 5242880, // 5MB로 제한 증가
+      ***REMOVED***
     ***REMOVED***),
   ],
   css: ***REMOVED***
@@ -40,4 +43,4 @@ export default defineConfig(***REMOVED***
       '@': path.resolve(__dirname, './src'),
     ***REMOVED***,
   ***REMOVED***,
-***REMOVED***)
+***REMOVED***);
