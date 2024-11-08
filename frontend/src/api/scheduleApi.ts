@@ -1,7 +1,7 @@
 import axios from "axios";
 import ***REMOVED*** GetSchedule, Schedule ***REMOVED*** from "./schedule.type";
 
-const BASE_URL = "http://localhost:8080/api/schedules";
+const BASE_URL = "http://localhost:8082/api/schedules";
 
 const token = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwidXNlck5hbWUiOiJb6rSR7KO8XzHrsJhfYzEwM1_snbTrs5HsiJhdIiwiY29kZSI6IkczNzFSTyIsImlhdCI6MTczMDQyNDQ1MSwiZXhwIjoxNzMzMDE2NDUxfQ.R7YFdmlN-IZkTeo0veuMA4W2eW_9-dXJJ-pGU8SRmPk'
 

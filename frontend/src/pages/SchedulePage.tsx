@@ -1,6 +1,6 @@
 import ***REMOVED*** GetSchedule ***REMOVED*** from "@/api/schedule.type";
 import ***REMOVED*** getSchedule ***REMOVED*** from "@/api/scheduleApi";
-import ***REMOVED*** useState ***REMOVED*** from "react";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import CalenderBox from "../components/SchedulePage/CalenderBox";
 import ***REMOVED*** AlertDialogDemo ***REMOVED*** from "../components/SchedulePage/DrawerBox";
@@ -10,11 +10,27 @@ import PlusIcon from "../icons/PlusIcon";
 const Schedule = () => ***REMOVED***
   const [isOpen, setIsOpen] = useState(false);
   const [ selectedDate, setSelectedDate ] = useState<Date>(new Date());
+  const [ formattedDate, setFormattedDate ] = useState<string>('');
+
+  useEffect(() => ***REMOVED***
+    setFormattedDate(
+      selectedDate.toLocaleString('ko-KR', ***REMOVED***
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour12: false,
+      ***REMOVED***)
+      .replace(/\./g, '')
+      .replace(/\s/g, '-')
+      .slice(0, 19)
+    );
+  ***REMOVED***, [selectedDate]);
+  
 
   const ***REMOVED*** data: scheduleList ***REMOVED*** = useQuery(
-    ['getSchedule', selectedDate.toISOString().slice(0, 10)],
-    () => getSchedule(selectedDate.toISOString().slice(0, 10)),
-    ***REMOVED*** enabled: !!selectedDate.toISOString().slice(0, 10)***REMOVED***
+    ['getSchedule', formattedDate],
+    () => getSchedule(formattedDate),
+    ***REMOVED*** enabled: !!formattedDate***REMOVED***
   );
 
   const handleCloseDialog = () => ***REMOVED***

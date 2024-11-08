@@ -1,5 +1,5 @@
 export interface Schedule ***REMOVED***
-  contractType: string;
+  type: string;
   startDate: string | null;
   endDate: string | null;
   content: string;
