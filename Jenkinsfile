@@ -131,7 +131,7 @@ pipeline ***REMOVED***
         stage('Update GitOps Repo') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    sshagent (credentials: [GITOPS_CREDENTIALS]) ***REMOVED***
+                    sshagent ([GITOPS_CREDENTIALS]) ***REMOVED***
                         dir('gitops') ***REMOVED***
                             // GitOps 저장소 클론
                             sh 'git clone -b main git@github.com:zion0425/weddy_gitops.git .'
