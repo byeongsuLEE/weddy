@@ -22,6 +22,7 @@ public class Schedule ***REMOVED***
 
 
     private String content ;
+    @Enumerated(EnumType.STRING)
     private ContractType type;
     private Long productId;
 
