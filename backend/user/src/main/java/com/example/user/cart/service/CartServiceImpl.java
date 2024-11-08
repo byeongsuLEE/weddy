@@ -15,13 +15,21 @@ public class CartServiceImpl implements CartService ***REMOVED***
         this.cartRepository = cartRepository;
     ***REMOVED***
 
-    public CartResponseDto addCart(Long productId, UserEntity userEntity)***REMOVED***
+    public void addCart(Long productId, UserEntity userEntity)***REMOVED***
         CartEntity cartEntity = CartEntity.builder()
                 .productId(productId)
                 .userId(userEntity.getId())
                 .build();
 
         cartRepository.save(cartEntity);
-        return new CartResponseDto(cartEntity);
+    ***REMOVED***
+
+    public void removeCart(Long productId, UserEntity userEntity)***REMOVED***
+        CartEntity cartEntity = cartRepository.findById(productId).orElse(null);
+        cartRepository.delete(cartEntity);
+    ***REMOVED***
+
+    public CartResponseDto getCart(UserEntity userEntity)***REMOVED***
+        return null;
     ***REMOVED***
 ***REMOVED***

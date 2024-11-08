@@ -4,5 +4,7 @@ import com.example.user.cart.dto.response.CartResponseDto;
 import com.example.user.user.entity.UserEntity;
 
 public interface CartService***REMOVED***
-    CartResponseDto addCart(Long productId, UserEntity userEntity);
+    void addCart(Long productId, UserEntity userEntity);
+    CartResponseDto getCart(UserEntity userEntity);
+    void removeCart(Long productId,UserEntity userEntity);
 ***REMOVED***
