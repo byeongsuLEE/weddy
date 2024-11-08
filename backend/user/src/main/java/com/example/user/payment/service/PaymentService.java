@@ -8,6 +8,8 @@ import com.example.user.contract.repository.ContractRepository;
 import com.example.user.contract.service.ContractService;
 import com.example.user.payment.dto.request.ContractInfoRequestDto;
 import com.example.user.payment.dto.request.PaymentProductInfo;
+import com.example.user.user.dto.response.UserCoupleTokenDto;
+import com.example.user.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -39,6 +38,7 @@ public class PaymentService ***REMOVED***
     private final KafkaTemplate<String ,PaymentProductInfo> kafkaTemplate;
     private final ContractService contractService;
     private final ContractRepository contractRepository;
+    private final UserService userService;
     /**
      * 결제 성공 후 게약서 상태 정보 변경 및 카프카를 통해 일정 자동 등록 이벤트 발생
      * @ 작성자   : 이병수
@@ -149,6 +149,9 @@ public class PaymentService ***REMOVED***
      */
     public void occurPaymentEvent(ContractInfoRequestDto contractInfoRequestDto)  ***REMOVED***
         PaymentProductInfo paymentProductInfo = mapToPaymentProductInfo(contractInfoRequestDto);
+        UserCoupleTokenDto fcmToken = userService.getFcmToken(contractInfoRequestDto.getCode(), contractInfoRequestDto.getUserId());
+        paymentProductInfo.addFcmTokenInfo(fcmToken);
+
         CompletableFuture<SendResult<String, PaymentProductInfo>> send = kafkaTemplate.send(TOPIC_PAYMENT, paymentProductInfo);
         // 이 함수는 이벤트가 전달 됐는지를 확인하는거다.
         send.whenComplete((sendResult,ex)->***REMOVED***
