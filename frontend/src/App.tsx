@@ -26,8 +26,10 @@ import ***REMOVED*** useSetRecoilState ***REMOVED*** from 'recoil';
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from './store/firebaseToken.ts';
 
 import ***REMOVED*** useEffect ***REMOVED*** from 'react';
-import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
 import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi.ts";
+import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
+import DressSketch from "./pages/DressSketchPage.tsx";
+import DressImg from "./pages/DressImgPage.tsx";
 
 function AppContent() ***REMOVED***
   const location = useLocation();
@@ -49,6 +51,8 @@ function AppContent() ***REMOVED***
         <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
         <Route path="/planner/list/:category" element=***REMOVED***<PlannerList />***REMOVED*** />
         <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
+        <Route path="/dress" element=***REMOVED***<DressSketch />***REMOVED*** />
+        <Route path="/dress/img" element=***REMOVED***<DressImg />***REMOVED*** />
         <Route path="/sketch" element=***REMOVED***<Sketch />***REMOVED*** />
         <Route path="/contract/:category/:contractId" element=***REMOVED***<Contract />***REMOVED*** />
         <Route path="/contract/list" element=***REMOVED***<ContractList />***REMOVED*** />
@@ -96,14 +100,14 @@ function App() ***REMOVED***
       const token = await requestForToken();
       if (token) ***REMOVED***
         setToken(token);
-        
+
         if (userId !== null) ***REMOVED***
           saveFcmToken(token, userId);
         ***REMOVED*** else ***REMOVED***
           console.warn("User ID is null, skipping saveFcmToken");
         ***REMOVED***
-        
-        
+
+
       ***REMOVED*** else ***REMOVED***
         console.warn("No token received");
       ***REMOVED***

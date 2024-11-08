@@ -9,9 +9,9 @@ import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Mypage = () => ***REMOVED***
   // const token = useRecoilValue(firebaseTokenState);
-  const [ isConneted, setIsconnected ] = useState<boolean>(false);
-  const [ imageSrc, setImageSrc ] = useState<string>("/icons/profile.png");
-  const [ userInfo, setUserInfo ] = useState<userInformation>(***REMOVED***
+  const [isConneted, setIsconnected] = useState<boolean>(false);
+  const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png");
+  const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
     name: '',
     phone: '',
     email: '',
@@ -20,7 +20,7 @@ const Mypage = () => ***REMOVED***
     date: '',
   ***REMOVED***);
 
-  const [ coupleInfo, setCoupleInfo ] = useState<userInformation>(***REMOVED***
+  const [coupleInfo, setCoupleInfo] = useState<userInformation>(***REMOVED***
     name: '',
     phone: '',
     email: '',
@@ -38,7 +38,7 @@ const Mypage = () => ***REMOVED***
       formdata.append('picture', files[0]);
       await editProfile(formdata);
     ***REMOVED***
-    
+
     if (files === null || files.length === 0) ***REMOVED***
       return;
     ***REMOVED***
@@ -93,14 +93,14 @@ const Mypage = () => ***REMOVED***
   const differenceInTime = new Date(userInfo.date).getTime() - today.getTime();
   const dDay = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
 
-  if (isLoading)***REMOVED***
+  if (isLoading) ***REMOVED***
     return <div>로딩중...</div>
   ***REMOVED***
-  
+
   return (
-    <div className="m-5 bg-white h-[700px] rounded-xl p-5">
+    <div className="m-5 bg-white h-[750px] rounded-xl p-5 mb-24">
       <h1 className="text-center mt-5">마이페이지</h1>
-      ***REMOVED***/* <div>***REMOVED***token***REMOVED***</div> */***REMOVED***
+      
       <div className="flex justify-between">
         <div className="bg-main1 flex flex-col items-center p-5 h-[200px] w-[300px] mx-3 mt-10 rounded-xl">
           <span className="font-bold text-3xl text-main2">D-***REMOVED***dDay***REMOVED***</span>
@@ -122,13 +122,13 @@ const Mypage = () => ***REMOVED***
                 </div>
               </div>
               <RingIcon />
-                <div>
-                  <img
-                    className="bg-main1 rounded-full h-[70px] w-[70px] mt-5"
-                    src=***REMOVED***"/icons/profile.png"***REMOVED***
-                    alt="profile image"
-                  />
-                  <div className="text-xs text-center mt-1">
+              <div>
+                <img
+                  className="bg-main1 rounded-full h-[70px] w-[70px] mt-5"
+                  src=***REMOVED***"/icons/profile.png"***REMOVED***
+                  alt="profile image"
+                />
+                <div className="text-xs text-center mt-1">
                   <span>***REMOVED***coupleInfo.name***REMOVED***</span>
                 </div>
               </div>
@@ -143,7 +143,22 @@ const Mypage = () => ***REMOVED***
         </div>
       </div>
 
-      <div className="flex justify-between ml-3 mr-10 mt-10">
+      <div className="flex flex-col items-center">
+        <img
+          className="bg-main1 rounded-full h-[100px] w-[100px] mt-5"
+          src=***REMOVED***imageSrc***REMOVED***
+          alt="profile image"
+        />
+        <div className="text-xs mt-1 text-blue-400">
+          <label htmlFor="profile-image">
+            <span>이미지 변경</span>
+            <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
+          </label>
+        </div>
+      </div>
+
+      <div className="flex justify-between ml-3 mr-10 mt-2">
+        
         <div className="flex flex-col">
           <span className="my-2 text-gray-600">이름</span>
           <span className="my-3 text-gray-600">전화번호</span>

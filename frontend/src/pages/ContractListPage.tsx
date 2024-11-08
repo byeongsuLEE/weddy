@@ -7,7 +7,7 @@ const ContractList = () => ***REMOVED***
   const ***REMOVED*** data: contractList ***REMOVED*** = useQuery("myContract", myContract);
   
   return (
-    <div className="my-12 mx-5">
+    <div className="mt-12 mb-32 mx-5">
       ***REMOVED***contractList?.map((contract: ContractData) => (
         <ContractListBox key=***REMOVED***contract.id***REMOVED*** type=***REMOVED***contract.product.type***REMOVED*** contractInfo=***REMOVED***contract***REMOVED*** />
       ))***REMOVED***
