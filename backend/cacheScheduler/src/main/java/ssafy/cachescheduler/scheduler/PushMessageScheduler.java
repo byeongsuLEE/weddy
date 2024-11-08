@@ -2,6 +2,7 @@ package ssafy.cachescheduler.scheduler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
@@ -18,12 +19,12 @@ import weddy.commonlib.constant.KeyType;
 @Component
 @EnableAsync
 @RequiredArgsConstructor
-public class CacheScheduler ***REMOVED***
+public class PushMessageScheduler ***REMOVED***
     private final RedisUtil redisUtil;
     private final ProductMapper productMapper;
     private final ReviewMapper reviewMapper;
 
-
+    private final RedisTemplate<String,Object> redisTemplate;
     /**
      * 이 작업이 실패할 경우 최대 3번까지 재시도하며, 재시도 간격은 2초
      */
@@ -58,10 +59,12 @@ public class CacheScheduler ***REMOVED***
         log.info("productReviewCachingScheduler 종료");
     ***REMOVED***
 
-
     /**
-     *
-     *
+     * 푸시알림 해당날짜
+     * @ 작성자   : 이병수
+     * @ 작성일   : 2024-11-08
+     * @ 설명     :
+
      */
     @Retryable(
             value = ***REMOVED*** SchedulerException.class ***REMOVED***,
@@ -71,9 +74,7 @@ public class CacheScheduler ***REMOVED***
     @Async("taskExecutor")
     @Scheduled(cron = "$***REMOVED***cron.expression***REMOVED***")
     public void sendPushMessage() ***REMOVED***
-        log.info("productReviewCachingScheduler 실행");
 
-        log.info("productReviewCachingScheduler 종료");
     ***REMOVED***
 
 

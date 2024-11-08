@@ -5,13 +5,14 @@ import com.ssafy.schedule.domain.event.UserCoupleTokenDto;
 import com.ssafy.schedule.domain.model.ContractType;
 import com.ssafy.schedule.domain.model.Schedule;
 import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateScheduleInputDto ***REMOVED***
 
     private LocalDate startDate;
