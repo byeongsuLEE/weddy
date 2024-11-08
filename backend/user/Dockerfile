@@ -8,7 +8,7 @@ Run ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
     echo "Asia/Seoul" > /etc/timezone
 
 # JAR 파일을 app.jar로 복사
-ARG JAR_FILE=build/libs/*.jar
+ARG JAR_FILE=build/libs/*SNAPSHOT.jar
 COPY $***REMOVED***JAR_FILE***REMOVED*** app.jar
 
 # 컨테이너 외부 통신을 위한 포트 설정
