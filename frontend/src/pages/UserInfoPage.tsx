@@ -125,25 +125,25 @@ const UserInfo = () => ***REMOVED***
             />
             <input
               defaultValue=***REMOVED***userInfo.name***REMOVED***
-              className="my-2 p-2 w-[180px] border border-gray-400 rounded-lg h-[30px]"
+              className="my-2 p-2 w-[190px] border border-gray-400 rounded-lg h-[30px]"
               type="text"
               onChange=***REMOVED***(e) => updateUserInfo('name', e.target.value)***REMOVED***
             />
             <input
               defaultValue=***REMOVED***userInfo.phone***REMOVED***
-              className="my-2 p-2 w-[180px] border border-gray-400 rounded-lg h-[30px]"
+              className="my-2 p-2 w-[190px] border border-gray-400 rounded-lg h-[30px]"
               type="text"
               onChange=***REMOVED***(e) => updateUserInfo('phone', e.target.value)***REMOVED***
             />
             <input
               defaultValue=***REMOVED***userInfo.email***REMOVED***
-              className="my-2 border p-2 w-[180px] border-gray-400 rounded-lg h-[30px]"
+              className="my-2 border p-2 w-[190px] border-gray-400 rounded-lg h-[30px]"
               type="text"
               onChange=***REMOVED***(e) => updateUserInfo('email', e.target.value)***REMOVED***
             />
             <input
               defaultValue=***REMOVED***userInfo.address***REMOVED***
-              className="my-2 border p-2 w-[180px] border-gray-400 rounded-lg h-[30px]"
+              className="my-2 border p-2 w-[190px] border-gray-400 rounded-lg h-[30px]"
               type="text"
               onChange=***REMOVED***(e) => updateUserInfo('address', e.target.value)***REMOVED***
             />
