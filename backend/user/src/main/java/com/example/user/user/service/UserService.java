@@ -134,7 +134,7 @@ public class UserService ***REMOVED***
      *  토큰 가져오기
      * @ 작성자   : 이병수
      * @ 작성일   : 2024-11-07
-     * @ 설명     : 커플 코드를 통해서 커플들의 fcm 토큰을 가져오기
+     * @ 설명     : 커플 코드를 통해서 커플들의 fcmadapter 토큰을 가져오기
 
      * @param coupleCode
      * @param myUserId
@@ -148,10 +148,10 @@ public class UserService ***REMOVED***
     ***REMOVED***
 
     /**
-     * fcm 토큰 저장
+     * fcmadapter 토큰 저장
      * @ 작성자   : 이병수
      * @ 작성일   : 2024-11-07
-     * @ 설명     : fcm 토큰 저장
+     * @ 설명     : fcmadapter 토큰 저장
 
      * @param userId
      * @param fcmToken

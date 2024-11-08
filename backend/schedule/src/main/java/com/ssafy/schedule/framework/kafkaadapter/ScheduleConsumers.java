@@ -50,12 +50,8 @@ public class ScheduleConsumers ***REMOVED***
             log.info(paymentProductInfo.toString());
             //prododcut로 일정 생성
             CreateScheduleInputDto scheduleInfo = CreateScheduleInputDto.createScheduleInputDto(paymentProductInfo);
-            // UseCase를 통해 일정 생성
+            // UseCase를 통해 일정 생성 및 알림 발송
             createScheduleUsecase.createSchedule(scheduleInfo);
-
-
-            //푸시알림전송
-//            redisTemplate.opsForHash().put("schedule:"+ scheduleInfo.getStartDate(),scheduleInfo.getCode(),);
 
             // 성공 시 이벤트 발생
             eventResult.updateIsSuccess(true);
