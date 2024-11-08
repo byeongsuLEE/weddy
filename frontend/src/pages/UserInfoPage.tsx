@@ -1,5 +1,7 @@
+import ***REMOVED*** Schedule ***REMOVED*** from "@/api/schedule.type";
+import ***REMOVED*** schedule ***REMOVED*** from "@/api/scheduleApi";
 import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
-import ***REMOVED*** editInformation, getUserInfo ***REMOVED*** from "@/api/userApi";
+import ***REMOVED*** editInformation, editProfile, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
 import DatePick from "@/components/SchedulePage/DatePick";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
@@ -8,13 +10,24 @@ import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const UserInfo = () => ***REMOVED***
   const navigate = useNavigate();
-  const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png")
-  const [ imageData, setImageData ] = useState<File>();
+  const formdata = new FormData();
+  const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png");
+  const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
+    name: '',
+    phone: '',
+    email: '',
+    address: '',
+    date: '',
+    coupleCode: ''
+  ***REMOVED***);
 
-  function handleFileUpload(event: React.ChangeEvent<HTMLInputElement>) ***REMOVED***
+  //== 프로필 이미지 ==//
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => ***REMOVED***
     const files = event.target.files;
+
     if (files && files.length > 0) ***REMOVED***
-      setImageData(files[0]);
+      formdata.append('picture', files[0]);
+      await editProfile(formdata);
     ***REMOVED***
 
     if (files === null || files.length === 0) ***REMOVED***
@@ -30,31 +43,40 @@ const UserInfo = () => ***REMOVED***
     reader.readAsDataURL(file);
   ***REMOVED***
 
+  //== 결혼 예정일 등록 ==//
+  const weddingSchedule: Schedule = ***REMOVED***
+    contractType: "WEDDING",
+    startDate: userInfo.date,
+    endDate: userInfo.date,
+    content: "결혼식",
+    productId: "1",
+  ***REMOVED***
+
    //== 회원 정보 수정 ==//
    const handleUpdate = async () => ***REMOVED***
-    editInformation(userInfo);
+    await editInformation(userInfo);
+    await schedule(weddingSchedule);
     navigate('/');
   ***REMOVED***;
 
   useEffect(() => ***REMOVED***
   ***REMOVED***, [imageSrc])
 
-  const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
-    name: '',
-    phone: '',
-    email: '',
-    address: '',
-    date: '',
-    coupleCode: ''
-  ***REMOVED***);
-
   //== 회원 정보 ==//
   const ***REMOVED*** data: userData, isSuccess, isLoading ***REMOVED*** = useQuery('getUserInfo', getUserInfo);
 
   //== 상태 업데이트 ==//
-  const updateUserInfo = (key: keyof userInformation, value: string) => ***REMOVED***
-    setUserInfo((prev) => ***REMOVED*** return ***REMOVED*** ...prev, [key]: value ***REMOVED*** ***REMOVED***);
-  ***REMOVED***;
+  const updateUserInfo = (key: keyof userInformation, value: string | Date) => ***REMOVED***
+    const formattedValue = key === 'date' && value instanceof Date
+        ? value.toLocaleDateString('ko-KR', ***REMOVED***
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          ***REMOVED***).replace(/\./g, '').replace(/\s/g, '-')
+        : value;
+
+    setUserInfo((prev) => (***REMOVED*** ...prev, [key]: formattedValue ***REMOVED***));
+***REMOVED***;
 
   //== userdata 업데이트 후 userInfo 업데이트 ==//
   useEffect(() => ***REMOVED***
@@ -98,9 +120,9 @@ const UserInfo = () => ***REMOVED***
           </div>
           <div className="flex flex-col mt-10">
             <DatePick
-              type="start"
-              title="예식 예정일"
-              changeDate=***REMOVED***(newDate) => updateUserInfo('date', newDate.toISOString().slice(0, 10))***REMOVED***
+                type="start"
+                title="예식 예정일"
+                changeDate=***REMOVED***(newDate) => updateUserInfo('date', newDate)***REMOVED***
             />
             <input
               defaultValue=***REMOVED***userInfo.name***REMOVED***

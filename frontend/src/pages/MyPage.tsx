@@ -1,5 +1,5 @@
 import ***REMOVED*** userInformation ***REMOVED*** from "@/api/user.type";
-import ***REMOVED*** editInformation, getUserInfo ***REMOVED*** from "@/api/userApi";
+import ***REMOVED*** editInformation, editProfile, getUserInfo ***REMOVED*** from "@/api/userApi";
 import TodoButton from "@/common/TodoButton";
 import RingIcon from "@/icons/RingIcon";
 // import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
@@ -9,9 +9,8 @@ import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Mypage = () => ***REMOVED***
   // const token = useRecoilValue(firebaseTokenState);
-  const [ isConneted, setIsconnected ] = useState<boolean>(true);
+  const [ isConneted, setIsconnected ] = useState<boolean>(false);
   const [ imageSrc, setImageSrc ] = useState<string>("/icons/profile.png");
-  const [ imageData, setImageData ] = useState<File | undefined>();
   const [ userInfo, setUserInfo ] = useState<userInformation>(***REMOVED***
     name: '',
     phone: '',
@@ -21,20 +20,23 @@ const Mypage = () => ***REMOVED***
     date: '',
   ***REMOVED***);
 
-  // const [ coupleInfo, setCoupleInfo ] = useState<userInformation>(***REMOVED***
-  //   name: '',
-  //   phone: '',
-  //   email: '',
-  //   address: '',
-  //   coupleCode: '',
-  //   date: '',
-  // ***REMOVED***);
+  const [ coupleInfo, setCoupleInfo ] = useState<userInformation>(***REMOVED***
+    name: '',
+    phone: '',
+    email: '',
+    address: '',
+    coupleCode: '',
+    date: '',
+  ***REMOVED***);
+
+  const formdata = new FormData();
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => ***REMOVED***
     const files = event.target.files;
 
     if (files && files.length > 0) ***REMOVED***
-      setImageData(files[0]);
+      formdata.append('picture', files[0]);
+      await editProfile(formdata);
     ***REMOVED***
     
     if (files === null || files.length === 0) ***REMOVED***
@@ -60,24 +62,26 @@ const Mypage = () => ***REMOVED***
   useEffect(() => ***REMOVED***
     if (isSuccess && userData) ***REMOVED***
       //== 커플 연결 여부 확인 ==//
-      // if (userData.length === 1) ***REMOVED***
-      //   setIsconnected(false);
-      // ***REMOVED*** else if (userData.length === 2) ***REMOVED***
-      //   setIsconnected(true);
-      //   setCoupleInfo(userData[1]);
-      // ***REMOVED***
+      if (userData.length === 1) ***REMOVED***
+        setIsconnected(false);
+      ***REMOVED*** else if (userData.length === 2) ***REMOVED***
+        setIsconnected(true);
+        setCoupleInfo(userData[1]);
+      ***REMOVED***
 
       //== 유저 정보 업데이트 ==//
       setUserInfo(userData[0]);
-      
+
+      //== 유저 이미지 업데이트 ==//
+      if (userData[0].picture) ***REMOVED***
+        setImageSrc(userData[0].picture);
+      ***REMOVED***
     ***REMOVED***
   ***REMOVED***, [isSuccess, userData]);
 
   //== 회원 정보 수정 ==//
   const handleUpdate = async () => ***REMOVED***
-    if (imageData) ***REMOVED***
-      await editInformation(userInfo);
-    ***REMOVED***
+    await editInformation(userInfo);
   ***REMOVED***;
 
   //== 상태 업데이트 ==//
@@ -100,7 +104,7 @@ const Mypage = () => ***REMOVED***
       <div className="flex justify-between">
         <div className="bg-main1 flex flex-col items-center p-5 h-[200px] w-[300px] mx-3 mt-10 rounded-xl">
           <span className="font-bold text-3xl text-main2">D-***REMOVED***dDay***REMOVED***</span>
-          <span className="text-gray-400 text-sm">***REMOVED***userInfo.date***REMOVED***</span>
+          <span className="text-gray-400 text-sm">2024-11-19</span>
 
           ***REMOVED***isConneted ? (
             <div className="flex items-center justify-center">
@@ -125,7 +129,7 @@ const Mypage = () => ***REMOVED***
                     alt="profile image"
                   />
                   <div className="text-xs text-center mt-1">
-                  ***REMOVED***/* <span>***REMOVED***coupleInfo.name***REMOVED***</span> */***REMOVED***
+                  <span>***REMOVED***coupleInfo.name***REMOVED***</span>
                 </div>
               </div>
             </div>

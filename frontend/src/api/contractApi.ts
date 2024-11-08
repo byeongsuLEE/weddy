@@ -9,7 +9,11 @@ const token = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwidXNlck5hbWUiOiJb6rSR7KO8XzHrsJhf
 //== 계약서 생성 ==// 
 export const createContract = async (contractItems: Product[]): Promise<void> => ***REMOVED***
   const contracts = contractItems.map((item) => ***REMOVED***
-    const date = new Date().toISOString().slice(0, 10);
+    const date = new Date().toLocaleDateString('ko-KR', ***REMOVED***
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    ***REMOVED***).replace(/. /g, '-').slice(0, 10);
 
     const contractProduct: ContractProduct = ***REMOVED***
       productId: item.id,

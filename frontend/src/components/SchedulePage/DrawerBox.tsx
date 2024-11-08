@@ -31,7 +31,6 @@ export function AlertDialogDemo(***REMOVED*** isOpen, onClose ***REMOVED***: Ale
     endDate: null,
     content: '',
     contractType: '',
-    productId: '',
   ***REMOVED***);
 
   const updateScheduleInfo = (key: keyof Schedule, value: any) => ***REMOVED***
