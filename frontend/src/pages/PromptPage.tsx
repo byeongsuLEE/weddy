@@ -8,7 +8,7 @@ const Prompt = () => ***REMOVED***
   const [placeholder, setPlaceholder] = useState("");
   const text = "모던한 분위기의 500만원대 스튜디오 추천해줘";
   const [inputValue, setInputValue] = useState("");
-  const [recommendList, setRecommendList] = useRecoilState(recommendState);
+  const [recommendList, ] = useRecoilState(recommendState);
 
   const navigate = useNavigate();
 
