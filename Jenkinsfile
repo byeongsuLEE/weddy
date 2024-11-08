@@ -4,13 +4,13 @@ pipeline ***REMOVED***
 
     environment ***REMOVED***
         // Docker Hub
-        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub ÏûêÍ≤© Ï¶ùÎ™Ö
+        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub ?ûêÍ≤? Ï¶ùÎ™Ö
 
-        // Mattermost ÏïåÎ¶º ÏÑ§Ï†ï
+        // Mattermost ?ïåÎ¶? ?Ñ§?†ï
         MATTERMOST_ENDPOINT = 'https://meeting.ssafy.com/hooks/yzzezkburpdd9gcac4fdzkaguo'
         MATTERMOST_CHANNEL = 'c203-jenkins'
 
-        // Docker Ïù¥ÎØ∏ÏßÄ Ïù¥Î¶Ñ
+        // Docker ?ù¥ÎØ∏Ï? ?ù¥Î¶?
         CACHE_SCHEDULER_IMAGE = 'siokim002/weddy_cache_scheduler'
         COMMON_LIB_IMAGE = 'siokim002/weddy_common_lib'
         GATEWAY_IMAGE = 'siokim002/weddy_gateway'
@@ -19,12 +19,12 @@ pipeline ***REMOVED***
         USER_IMAGE = 'siokim002/weddy_user'
         FRONTEND_IMAGE = 'siokim002/weddy_frontend'
 
-        // GitOps Ï†ÄÏû•ÏÜå Ï£ºÏÜå
+        // GitOps ???û•?Üå Ï£ºÏÜå
         GITOPS_REPO = 'git@github.com:zion0425/weddy_gitops.git' 
 
         // Credentials
-        GITOPS_CREDENTIALS = 'gitops_pk' // JenkinsÏóê Îì±Î°ùÎêú GitOps Î∞∞Ìè¨ ÌÇ§Ïùò Credential ID
-        GITLAB_CREDENTIALS = 'gitlab' // GitLab ÏûêÍ≤© Ï¶ùÎ™Ö ID
+        GITOPS_CREDENTIALS = 'gitops_pk' // Jenkins?óê ?ì±Î°ùÎêú GitOps Î∞∞Ìè¨ ?Ç§?ùò Credential ID
+        GITLAB_CREDENTIALS = 'gitlab' // GitLab ?ûêÍ≤? Ï¶ùÎ™Ö ID
     ***REMOVED***
 
     options ***REMOVED***
@@ -35,7 +35,16 @@ pipeline ***REMOVED***
         stage('Start Notification') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    sendNotification('warning', 'ÎπåÎìú ÏãúÏûë')
+                    sendNotification('warning', 'ÎπåÎìú ?ãú?ûë')
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***
+        stage('Setup SSH') ***REMOVED***
+            steps ***REMOVED***
+                script ***REMOVED***
+                    // GitHub?ùò ?ò∏?ä§?ä∏ ?Ç§Î•? known_hosts?óê Ï∂îÍ?
+                    sh 'mkdir -p ~/.ssh'
+                    sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
@@ -43,14 +52,14 @@ pipeline ***REMOVED***
         stage('Checkout') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    // ÏÜåÏä§ ÏΩîÎìú Ï≤¥ÌÅ¨ÏïÑÏõÉ
+                    // ?Üå?ä§ ÏΩîÎìú Ï≤¥ÌÅ¨?ïÑ?õÉ
                     git url: 'https://lab.ssafy.com/s11-final/S11P31C203.git', branch: 'release', credentialsId: GITLAB_CREDENTIALS
 
-                    // Î≥ÄÍ≤ΩÎêú ÌååÏùº Î™©Î°ù Í∞ÄÏ†∏Ïò§Í∏∞
+                    // Î≥?Í≤ΩÎêú ?åå?ùº Î™©Î°ù Í∞??†∏?ò§Í∏?
                     def changes = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim()
                     println "Changed files:\n$***REMOVED***changes***REMOVED***"
 
-                    // Î≥ÄÍ≤ΩÎêú ÏÑúÎπÑÏä§ ÌôïÏù∏
+                    // Î≥?Í≤ΩÎêú ?ÑúÎπÑÏä§ ?ôï?ù∏
                     changedServices = []
                     if (changes.contains('frontend/')) ***REMOVED***
                         changedServices.add('frontend')
@@ -83,7 +92,7 @@ pipeline ***REMOVED***
         stage('Build and Push Docker Images') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    // Docker Hub Î°úÍ∑∏Ïù∏
+                    // Docker Hub Î°úÍ∑∏?ù∏
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 
                     for (service in changedServices) ***REMOVED***
@@ -112,7 +121,7 @@ pipeline ***REMOVED***
                             dirPath = 'backend/user'
                         ***REMOVED***
 
-                        // Docker Ïù¥ÎØ∏ÏßÄ ÎπåÎìú
+                        // Docker ?ù¥ÎØ∏Ï? ÎπåÎìú
                         dir(dirPath) ***REMOVED***
                             if (service != 'frontend') ***REMOVED***
                                 sh 'chmod +x ./gradlew'
@@ -121,7 +130,7 @@ pipeline ***REMOVED***
                             sh "docker build --no-cache -t $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED*** ."
                         ***REMOVED***
 
-                        // Docker Ïù¥ÎØ∏ÏßÄ Ìë∏Ïãú
+                        // Docker ?ù¥ÎØ∏Ï? ?ë∏?ãú
                         sh "docker push $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED***"
                     ***REMOVED***
                 ***REMOVED***
@@ -133,7 +142,7 @@ pipeline ***REMOVED***
                 script ***REMOVED***
                     sshagent (credentials: [GITOPS_CREDENTIALS]) ***REMOVED***
                         dir('gitops') ***REMOVED***
-                            // GitOps Ï†ÄÏû•ÏÜå ÌÅ¥Î°†
+                            // GitOps ???û•?Üå ?Å¥Î°?
                             sh 'git clone -b main git@github.com:zion0425/weddy_gitops.git .'
 
                             for (service in changedServices) ***REMOVED***
@@ -162,13 +171,13 @@ pipeline ***REMOVED***
                                     deploymentFile = 'user-deployment.yaml'
                                 ***REMOVED***
 
-                                // deployment.yaml ÌååÏùºÏùò Ïù¥ÎØ∏ÏßÄ ÌÉúÍ∑∏ ÏóÖÎç∞Ïù¥Ìä∏
+                                // deployment.yaml ?åå?ùº?ùò ?ù¥ÎØ∏Ï? ?ÉúÍ∑? ?óÖ?ç∞?ù¥?ä∏
                                 sh """
                                 sed -i 's#image: .*#image: $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED***#' $***REMOVED***deploymentFile***REMOVED***
                                 """
                             ***REMOVED***
 
-                            // Î≥ÄÍ≤Ω ÏÇ¨Ìï≠ Ïª§Î∞ã Î∞è Ìë∏Ïãú
+                            // Î≥?Í≤? ?Ç¨?ï≠ Ïª§Î∞ã Î∞? ?ë∏?ãú
                             sh """
                             git config user.name "Jenkins"
                             git config user.email "jenkins@gitops.com"
@@ -186,13 +195,13 @@ pipeline ***REMOVED***
     post ***REMOVED***
         success ***REMOVED***
             script ***REMOVED***
-                sendNotification('good', 'ÎπåÎìú ÏÑ±Í≥µ')
+                sendNotification('good', 'ÎπåÎìú ?Ñ±Í≥?')
                 cleanWs()
             ***REMOVED***
         ***REMOVED***
         failure ***REMOVED***
             script ***REMOVED***
-                sendNotification('danger', 'ÎπåÎìú Ïã§Ìå®')
+                sendNotification('danger', 'ÎπåÎìú ?ã§?å®')
                 cleanWs()
             ***REMOVED***
         ***REMOVED***
@@ -206,9 +215,9 @@ def sendNotification(String color, String status) ***REMOVED***
     mattermostSend(
         color: color,
         message: """$***REMOVED***status***REMOVED***: ÎπåÎìú Î≤àÌò∏ #$***REMOVED***env.BUILD_NUMBER***REMOVED***
-Ïª§Î∞ã ÏûëÏÑ±Ïûê: $***REMOVED***gitCommitterName***REMOVED***
-Ïª§Î∞ã Î©îÏãúÏßÄ: $***REMOVED***gitCommitMessage***REMOVED***
-(<$***REMOVED***env.BUILD_URL***REMOVED***|ÎπåÎìú ÏÉÅÏÑ∏ Ï†ïÎ≥¥>)""",
+Ïª§Î∞ã ?ûë?Ñ±?ûê: $***REMOVED***gitCommitterName***REMOVED***
+Ïª§Î∞ã Î©îÏãúÏß?: $***REMOVED***gitCommitMessage***REMOVED***
+(<$***REMOVED***env.BUILD_URL***REMOVED***|ÎπåÎìú ?ÉÅ?Ñ∏ ?†ïÎ≥?>)""",
         endpoint: MATTERMOST_ENDPOINT,
         channel: MATTERMOST_CHANNEL
     )
