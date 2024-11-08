@@ -21,10 +21,8 @@ import Review from "./pages/ReviewPage";
 import Schedule from './pages/SchedulePage';
 import Sketch from './pages/SketchPage';
 import UserInfo from "./pages/UserInfoPage";
-
 import ***REMOVED*** useSetRecoilState ***REMOVED*** from 'recoil';
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from './store/firebaseToken.ts';
-
 import ***REMOVED*** useEffect ***REMOVED*** from 'react';
 import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi.ts";
 import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
@@ -72,54 +70,51 @@ function App() ***REMOVED***
   const userId = sessionStorage.getItem("userId");
 
   useEffect(() => ***REMOVED***
-    if ('serviceWorker' in navigator) ***REMOVED***
-      navigator.serviceWorker.getRegistrations().then((registrations) => ***REMOVED***
-        // 기존 등록된 서비스 워커가 있는지 확인
+    const registerServiceWorker = async () => ***REMOVED***
+      if ('serviceWorker' in navigator) ***REMOVED***
+        const registrations = await navigator.serviceWorker.getRegistrations();
         const isRegistered = registrations.some((registration) =>
           registration.active && registration.scope === '/firebase-messaging-sw.js'
         );
 
         if (!isRegistered) ***REMOVED***
-          // 서비스 워커가 등록되지 않았을 경우에만 등록
-          navigator.serviceWorker.register('/firebase-messaging-sw.js')
-            .catch((err) => ***REMOVED***
-              console.error('Service Worker registration failed:', err);
-            ***REMOVED***);
+          try ***REMOVED***
+            await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+            console.log('Service Worker registered successfully');
+          ***REMOVED*** catch (err) ***REMOVED***
+            console.error('Service Worker registration failed:', err);
+          ***REMOVED***
         ***REMOVED*** else ***REMOVED***
           console.log('Service Worker already registered');
         ***REMOVED***
-      ***REMOVED***);
-    ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***;
+
+    registerServiceWorker();
   ***REMOVED***, []);
 
   useEffect(() => ***REMOVED***
-    // userId가 존재할 때만 실행
-    if (userId !== null) ***REMOVED***
-      // 푸시 알림 요청 및 토큰 처리
-      const requestPermissionsAndToken = async () => ***REMOVED***
-        await requestNotificationPermission();
-  
-        const token = await requestForToken();
-        if (token) ***REMOVED***
-          setToken(token);
-          saveFcmToken(token, userId);
-        ***REMOVED*** else ***REMOVED***
-          console.warn("No token received");
+    const requestPermissionsAndToken = async () => ***REMOVED***
+      if (userId) ***REMOVED***
+        try ***REMOVED***
+          await requestNotificationPermission();
+          const token = await requestForToken();
+          if (token) ***REMOVED***
+            setToken(token);
+            saveFcmToken(token, userId);
+          ***REMOVED*** else ***REMOVED***
+            console.warn("No token received");
+          ***REMOVED***
+        ***REMOVED*** catch (error) ***REMOVED***
+          console.error("Error requesting permissions or token:", error);
         ***REMOVED***
-      ***REMOVED***;
-  
-      requestPermissionsAndToken();
-    ***REMOVED*** else ***REMOVED***
-      console.warn("User ID is null, skipping requestPermissionsAndToken");
-    ***REMOVED***
-  
-    // 기존 코드에서 삭제된 포그라운드 메시지 수신 리스너 부분
-    // onMessage(messaging, (payload) => ***REMOVED***
-    //   console.log("Message received in foreground:", payload);
-    // ***REMOVED***);
-  
+      ***REMOVED*** else ***REMOVED***
+        console.warn("User ID is null, skipping requestPermissionsAndToken");
+      ***REMOVED***
+    ***REMOVED***;
+
+    requestPermissionsAndToken();
   ***REMOVED***, [setToken, userId]);
-  
 
   return (
     <div className='container'>
