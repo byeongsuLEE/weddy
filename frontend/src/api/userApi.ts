@@ -46,23 +46,20 @@ export const getUserInfo = async (): Promise<userInformation[]> => ***REMOVED***
 
 //== 회원 프로필 수정 ==//
 export const editProfile = async (file: FormData): Promise<void> => ***REMOVED***
-  console.log(file);
   const response = await axios(***REMOVED***
     method: "patch",
-    url: BASE_URL,
+    url: `$***REMOVED***BASE_URL***REMOVED***/picture`,
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
-    data: ***REMOVED***
-      picture: file
-    ***REMOVED***
+    data: file
     ***REMOVED***);
-    console.log(response);
+    console.log(response.data);
   ***REMOVED***;
 
 //== 회원 정보 수정 ==//
 export const editInformation = async ( userInfo?: userInformation ): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: "patch",
     url: BASE_URL,
     headers: ***REMOVED***
