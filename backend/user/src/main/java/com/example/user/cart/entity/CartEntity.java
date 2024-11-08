@@ -15,4 +15,11 @@ public class CartEntity ***REMOVED***
     private Long productId;
 
     private Long userId;
+
+    @Builder
+    public CartEntity(Long id, Long productId, Long userId) ***REMOVED***
+        this.id = id;
+        this.productId = productId;
+        this.userId = userId;
+    ***REMOVED***
 ***REMOVED***
