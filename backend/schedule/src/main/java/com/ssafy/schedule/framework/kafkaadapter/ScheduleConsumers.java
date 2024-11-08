@@ -55,7 +55,7 @@ public class ScheduleConsumers ***REMOVED***
 
 
             //푸시알림전송
-            redisTemplate.opsForHash().put("schedule:"+ scheduleInfo.getStartDate(), scheduleInfo.getCode(),scheduleInfo.getContent(),scheduleInfo.getUserCoupleToken().getMyFcmToken());
+//            redisTemplate.opsForHash().put("schedule:"+ scheduleInfo.getStartDate(),scheduleInfo.getCode(),);
 
             // 성공 시 이벤트 발생
             eventResult.updateIsSuccess(true);

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/backend.iml" filepath="$PROJECT_DIR$/.idea/backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.ssafy.demo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.ssafy.demo.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common-lib.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common-lib.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/product.main.iml" filepath="$PROJECT_DIR$/.idea/modules/product.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/schedule.main.iml" filepath="$PROJECT_DIR$/.idea/modules/schedule.main.iml" />
