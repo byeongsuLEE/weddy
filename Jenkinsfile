@@ -94,22 +94,22 @@ pipeline ***REMOVED***
                             dirPath = 'frontend'
                         ***REMOVED*** else if (service == 'cacheScheduler') ***REMOVED***
                             imageName = CACHE_SCHEDULER_IMAGE
-                            dirPath = 'cacheScheduler'
+                            dirPath = 'backend/cacheScheduler'
                         ***REMOVED*** else if (service == 'common-lib') ***REMOVED***
                             imageName = COMMON_LIB_IMAGE
-                            dirPath = 'common-lib'
+                            dirPath = 'backend/common-lib'
                         ***REMOVED*** else if (service == 'gateway') ***REMOVED***
                             imageName = GATEWAY_IMAGE
-                            dirPath = 'gateway'
+                            dirPath = 'backend/gateway'
                         ***REMOVED*** else if (service == 'product') ***REMOVED***
                             imageName = PRODUCT_IMAGE
-                            dirPath = 'product'
+                            dirPath = 'backend/product'
                         ***REMOVED*** else if (service == 'schedule') ***REMOVED***
                             imageName = SCHEDULE_IMAGE
-                            dirPath = 'schedule'
+                            dirPath = 'backend/schedule'
                         ***REMOVED*** else if (service == 'user') ***REMOVED***
                             imageName = USER_IMAGE
-                            dirPath = 'user'
+                            dirPath = 'backend/user'
                         ***REMOVED***
 
                         // Docker 이미지 빌드
