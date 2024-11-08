@@ -36,5 +36,10 @@
       <option name="name" value="maven" />
       <option name="url" value="http://localhost:8081/repository/maven-releases" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="http://34.47.121.214:8081/repository/maven-releases" />
+    </remote-repository>
   </component>
 </project>

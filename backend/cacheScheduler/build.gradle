@@ -24,7 +24,7 @@ configurations ***REMOVED***
 repositories ***REMOVED***
 	mavenCentral()
 	maven ***REMOVED***
-		url = uri('http://localhost:8081/repository/maven-releases')
+		url = uri('http://34.47.121.214:8081/repository/maven-releases')
 		allowInsecureProtocol = true //http를 사용하기 위해 추가
 		credentials***REMOVED***
 			username = "weddy"
