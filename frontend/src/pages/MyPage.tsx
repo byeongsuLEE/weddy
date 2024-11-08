@@ -9,8 +9,10 @@ import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
 const Mypage = () => ***REMOVED***
   // const token = useRecoilValue(firebaseTokenState);
-  const [isConneted, setIsconnected] = useState<boolean>(false);
-  const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png");
+  const [ isConneted, setIsconnected] = useState<boolean>(false);
+  const [ imageSrc, setImageSrc] = useState<string>("/icons/profile.png");
+  const [ coupleImageSrc, setCoupleImageSrc ] = useState<string>("/icons/profile.png");
+
   const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
     name: '',
     phone: '',
@@ -67,6 +69,10 @@ const Mypage = () => ***REMOVED***
       ***REMOVED*** else if (userData.length === 2) ***REMOVED***
         setIsconnected(true);
         setCoupleInfo(userData[1]);
+
+        if (userData[1].picture != null) ***REMOVED***
+          setCoupleImageSrc(userData[1].picture);
+        ***REMOVED***
       ***REMOVED***
 
       //== 유저 정보 업데이트 ==//
@@ -104,7 +110,7 @@ const Mypage = () => ***REMOVED***
       <div className="flex justify-between">
         <div className="bg-main1 flex flex-col items-center p-5 h-[200px] w-[300px] mx-3 mt-10 rounded-xl">
           <span className="font-bold text-3xl text-main2">D-***REMOVED***dDay***REMOVED***</span>
-          <span className="text-gray-400 text-sm">2024-11-19</span>
+          <span className="text-gray-400 text-sm">***REMOVED***userInfo.date***REMOVED***</span>
 
           ***REMOVED***isConneted ? (
             <div className="flex items-center justify-center">
@@ -114,18 +120,19 @@ const Mypage = () => ***REMOVED***
                   src=***REMOVED***imageSrc***REMOVED***
                   alt="profile image"
                 />
-                <div className="text-xs text-center mt-1 text-blue-400">
-                  <label htmlFor="profile-image">
+                <div className="text-xs text-center mt-1">
+                  ***REMOVED***/* <label htmlFor="profile-image">
                     <span>이미지 변경</span>
                     <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
-                  </label>
+                  </label> */***REMOVED***
+                  <span>***REMOVED***userInfo.name***REMOVED***</span>
                 </div>
               </div>
               <RingIcon />
               <div>
                 <img
                   className="bg-main1 rounded-full h-[70px] w-[70px] mt-5"
-                  src=***REMOVED***"/icons/profile.png"***REMOVED***
+                  src=***REMOVED***coupleImageSrc***REMOVED***
                   alt="profile image"
                 />
                 <div className="text-xs text-center mt-1">
