@@ -48,6 +48,9 @@ const Navbar = () => ***REMOVED***
       ***REMOVED***location === "sketch" && (
         <div>3D 드레스 스케치</div>
       )***REMOVED***
+      ***REMOVED***location === "dress" && (
+        <div>3D 드레스 스케치</div>
+      )***REMOVED***
 
       ***REMOVED***location === "board" && locationDetail === "detail" && (
         <div>제품 상세</div>
