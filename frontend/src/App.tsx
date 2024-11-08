@@ -93,34 +93,33 @@ function App() ***REMOVED***
   ***REMOVED***, []);
 
   useEffect(() => ***REMOVED***
-    // 푸시 알림 요청 및 토큰 처리
-    const requestPermissionsAndToken = async () => ***REMOVED***
-      await requestNotificationPermission();
-
-      const token = await requestForToken();
-      if (token) ***REMOVED***
-        setToken(token);
-
-        if (userId !== null) ***REMOVED***
+    // userId가 존재할 때만 실행
+    if (userId !== null) ***REMOVED***
+      // 푸시 알림 요청 및 토큰 처리
+      const requestPermissionsAndToken = async () => ***REMOVED***
+        await requestNotificationPermission();
+  
+        const token = await requestForToken();
+        if (token) ***REMOVED***
+          setToken(token);
           saveFcmToken(token, userId);
         ***REMOVED*** else ***REMOVED***
-          console.warn("User ID is null, skipping saveFcmToken");
+          console.warn("No token received");
         ***REMOVED***
-
-
-      ***REMOVED*** else ***REMOVED***
-        console.warn("No token received");
-      ***REMOVED***
-    ***REMOVED***;
-
-    requestPermissionsAndToken();
-
+      ***REMOVED***;
+  
+      requestPermissionsAndToken();
+    ***REMOVED*** else ***REMOVED***
+      console.warn("User ID is null, skipping requestPermissionsAndToken");
+    ***REMOVED***
+  
     // 기존 코드에서 삭제된 포그라운드 메시지 수신 리스너 부분
     // onMessage(messaging, (payload) => ***REMOVED***
     //   console.log("Message received in foreground:", payload);
     // ***REMOVED***);
-
-  ***REMOVED***, [setToken]);
+  
+  ***REMOVED***, [setToken, userId]);
+  
 
   return (
     <div className='container'>
