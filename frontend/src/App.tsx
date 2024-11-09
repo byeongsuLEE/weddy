@@ -1,42 +1,37 @@
 import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-query";
-import ***REMOVED*** BrowserRouter, Route, Routes, useLocation ***REMOVED*** from 'react-router-dom';
-import Footer from './common/Footer';
-import Navbar from './common/Navbar';
-import './index.css';
-import BoardDetail from './pages/BoardDetailPage';
-import Board from './pages/BoardPage';
-import CallBack from './pages/CallBack';
-import Cart from './pages/CartPage';
-import ContractList from './pages/ContractListPage';
-import Contract from './pages/ContractPage';
-import Login from './pages/LoginPage';
-import Main from './pages/MainPage';
-import Mypage from './pages/MyPage';
+import ***REMOVED*** BrowserRouter, Route, Routes, useLocation ***REMOVED*** from "react-router-dom";
+import Footer from "./common/Footer";
+import Navbar from "./common/Navbar";
+import "./index.css";
+import BoardDetail from "./pages/BoardDetailPage";
+import Board from "./pages/BoardPage";
+import CallBack from "./pages/CallBack";
+import Cart from "./pages/CartPage";
+import ContractList from "./pages/ContractListPage";
+import Contract from "./pages/ContractPage";
+import Login from "./pages/LoginPage";
+import Main from "./pages/MainPage";
+import Mypage from "./pages/MyPage";
 import NFTLoading from "./pages/NFTLoadingPage";
 import PlannerList from "./pages/PlannerListPage";
-import Planner from './pages/PlannerPage';
-import Prompt from './pages/PromptPage';
+import Planner from "./pages/PlannerPage";
+import Prompt from "./pages/PromptPage";
 import RecommendLoading from "./pages/RecommendLoadingPage";
 import Review from "./pages/ReviewPage";
-import Schedule from './pages/SchedulePage';
-import Sketch from './pages/SketchPage';
+import Schedule from "./pages/SchedulePage";
+import Sketch from "./pages/SketchPage";
 import UserInfo from "./pages/UserInfoPage";
-import ***REMOVED*** useSetRecoilState ***REMOVED*** from 'recoil';
-import ***REMOVED*** firebaseTokenState ***REMOVED*** from './store/firebaseToken.ts';
-import ***REMOVED*** useEffect ***REMOVED*** from 'react';
-import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi.ts";
-import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
 import DressSketch from "./pages/DressSketchPage.tsx";
 import DressImg from "./pages/DressImgPage.tsx";
 
 function AppContent() ***REMOVED***
   const location = useLocation();
-  const currentPath = location.pathname.split('/')[1];
-  const currentDetail = location.pathname.split('/')[2];
+  const currentPath = location.pathname.split("/")[1];
+  const currentDetail = location.pathname.split("/")[2];
 
   return (
     <>
-      ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && <Navbar />***REMOVED***
+      ***REMOVED***currentPath !== "login" && currentPath !== "userinfo" && <Navbar />***REMOVED***
       <Routes>
         <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
         <Route path="/review/:productId" element=***REMOVED***<Review />***REMOVED*** />
@@ -59,65 +54,18 @@ function AppContent() ***REMOVED***
         <Route path="/nft/loading" element=***REMOVED***<NFTLoading />***REMOVED*** />
         <Route path="/recommend/loading" element=***REMOVED***<RecommendLoading />***REMOVED*** />
       </Routes>
-      ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && (currentDetail !== "detail") && <Footer />***REMOVED***
+      ***REMOVED***currentPath !== "login" &&
+        currentPath !== "userinfo" &&
+        currentDetail !== "detail" && <Footer />***REMOVED***
     </>
   );
 ***REMOVED***
 
 function App() ***REMOVED***
   const queryClient = new QueryClient();
-  const setToken = useSetRecoilState(firebaseTokenState);
-  const userId = sessionStorage.getItem("userId");
-
-  useEffect(() => ***REMOVED***
-    const registerServiceWorker = async () => ***REMOVED***
-      if ('serviceWorker' in navigator) ***REMOVED***
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        const isRegistered = registrations.some((registration) =>
-          registration.active && registration.scope === '/firebase-messaging-sw.js'
-        );
-
-        if (!isRegistered) ***REMOVED***
-          try ***REMOVED***
-            await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-            console.log('Service Worker registered successfully');
-          ***REMOVED*** catch (err) ***REMOVED***
-            console.error('Service Worker registration failed:', err);
-          ***REMOVED***
-        ***REMOVED*** else ***REMOVED***
-          console.log('Service Worker already registered');
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***;
-
-    registerServiceWorker();
-  ***REMOVED***, []);
-
-  useEffect(() => ***REMOVED***
-    const requestPermissionsAndToken = async () => ***REMOVED***
-      if (userId) ***REMOVED***
-        try ***REMOVED***
-          await requestNotificationPermission();
-          const token = await requestForToken();
-          if (token) ***REMOVED***
-            setToken(token);
-            saveFcmToken(token, userId);
-          ***REMOVED*** else ***REMOVED***
-            console.warn("No token received");
-          ***REMOVED***
-        ***REMOVED*** catch (error) ***REMOVED***
-          console.error("Error requesting permissions or token:", error);
-        ***REMOVED***
-      ***REMOVED*** else ***REMOVED***
-        console.warn("User ID is null, skipping requestPermissionsAndToken");
-      ***REMOVED***
-    ***REMOVED***;
-
-    requestPermissionsAndToken();
-  ***REMOVED***, [setToken, userId]);
 
   return (
-    <div className='container'>
+    <div className="container">
       <QueryClientProvider client=***REMOVED***queryClient***REMOVED***>
         <BrowserRouter>
           <AppContent />
