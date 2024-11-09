@@ -1,7 +1,8 @@
 import ***REMOVED*** Environment, OrbitControls, useGLTF ***REMOVED*** from '@react-three/drei';
 import ***REMOVED*** Canvas, useThree ***REMOVED*** from '@react-three/fiber';
+import html2canvas from 'html2canvas';
 import ***REMOVED*** Leva, useControls ***REMOVED*** from 'leva';
-import ***REMOVED*** useEffect ***REMOVED*** from 'react';
+import ***REMOVED*** useEffect, useRef ***REMOVED*** from 'react';
 import * as THREE from 'three';
 
 function WeddingDress() ***REMOVED***
@@ -90,33 +91,60 @@ function CameraSettings() ***REMOVED***
 ***REMOVED***
 
 const Sketch: React.FC = () => ***REMOVED***
+  const captureRef = useRef<HTMLDivElement>(null);
+
+  // 캡처 함수 정의
+  const handleCapture = () => ***REMOVED***
+    if (captureRef.current) ***REMOVED***
+      html2canvas(captureRef.current).then((canvas) => ***REMOVED***
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'wedding_dress_capture.png';
+        link.click();
+      ***REMOVED***);
+    ***REMOVED***
+  ***REMOVED***;
+
   return (
-    <div
-      style=***REMOVED******REMOVED***
-        width: 414,
-        height: '100vh',
-        backgroundImage: 'url(../assets/wedding-back2.jpeg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      ***REMOVED******REMOVED***
-    >
-      <Canvas shadows camera=***REMOVED******REMOVED*** fov: 40, position: [0, 1, 5] ***REMOVED******REMOVED***>
-        <hemisphereLight groundColor=***REMOVED***'#eeeeee'***REMOVED*** intensity=***REMOVED***1.0***REMOVED*** />
-        <ambientLight intensity=***REMOVED***0.5***REMOVED*** />
-        <pointLight position=***REMOVED***[10, 10, 10]***REMOVED*** intensity=***REMOVED***1.2***REMOVED*** />
-        <directionalLight position=***REMOVED***[-5, 5, 5]***REMOVED*** intensity=***REMOVED***0.8***REMOVED*** castShadow />
-        <spotLight position=***REMOVED***[5, 15, 10]***REMOVED*** angle=***REMOVED***0.3***REMOVED*** penumbra=***REMOVED***1***REMOVED*** intensity=***REMOVED***1.2***REMOVED*** castShadow />
+    <>
+      <button
+        className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 rounded px-4 py-2 shadow-lg"
+        style=***REMOVED******REMOVED*** zIndex: 100 ***REMOVED******REMOVED***
+        onClick=***REMOVED***handleCapture***REMOVED***
+      >
+        캡처하기
+      </button>
+      <div
+        ref=***REMOVED***captureRef***REMOVED*** // 캡처할 영역
+        style=***REMOVED******REMOVED***
+          width: 414,
+          height: 800,
+          display: 'flex',
+          position: 'relative',
+          backgroundImage: 'url(../assets/wedding-back2.jpeg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        ***REMOVED******REMOVED***
+      >
+        <Canvas shadows camera=***REMOVED******REMOVED*** fov: 40, position: [0, 1, 5] ***REMOVED******REMOVED***>
+          <hemisphereLight groundColor=***REMOVED***'#eeeeee'***REMOVED*** intensity=***REMOVED***1.0***REMOVED*** />
+          <ambientLight intensity=***REMOVED***0.5***REMOVED*** />
+          <pointLight position=***REMOVED***[10, 10, 10]***REMOVED*** intensity=***REMOVED***1.2***REMOVED*** />
+          <directionalLight position=***REMOVED***[-5, 5, 5]***REMOVED*** intensity=***REMOVED***0.8***REMOVED*** castShadow />
+          <spotLight position=***REMOVED***[5, 15, 10]***REMOVED*** angle=***REMOVED***0.3***REMOVED*** penumbra=***REMOVED***1***REMOVED*** intensity=***REMOVED***1.2***REMOVED*** castShadow />
 
-        <WeddingDress />
+          <WeddingDress />
 
-        <Environment preset="sunset" />
-        <CameraSettings />
-        <OrbitControls target=***REMOVED***[0, 1, 0]***REMOVED*** enablePan=***REMOVED***false***REMOVED*** />
-      </Canvas>
+          <Environment preset="sunset" />
+          <CameraSettings />
+          <OrbitControls target=***REMOVED***[0, 1, 0]***REMOVED*** enablePan=***REMOVED***false***REMOVED*** />
+        </Canvas>
 
-      <Leva collapsed=***REMOVED***true***REMOVED*** oneLineLabels=***REMOVED***true***REMOVED*** />
-      
-    </div>
+        <Leva collapsed=***REMOVED***true***REMOVED*** oneLineLabels=***REMOVED***true***REMOVED*** />
+
+
+      </div>
+    </>
   );
 ***REMOVED***;
 
