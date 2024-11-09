@@ -4,7 +4,6 @@ import ***REMOVED*** VitePWA ***REMOVED*** from 'vite-plugin-pwa';
 import tailwindcss from "tailwindcss";
 import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig(***REMOVED***
   plugins: [
     react(),
@@ -29,7 +28,7 @@ export default defineConfig(***REMOVED***
         ],
       ***REMOVED***,
       workbox: ***REMOVED***
-        maximumFileSizeToCacheInBytes: 5242880, // 5MB로 제한 증가
+        maximumFileSizeToCacheInBytes: 5242880,
       ***REMOVED***
     ***REMOVED***),
   ],
@@ -43,4 +42,12 @@ export default defineConfig(***REMOVED***
       '@': path.resolve(__dirname, './src'),
     ***REMOVED***,
   ***REMOVED***,
+  // server: ***REMOVED***
+  //   hmr: ***REMOVED***
+  //     overlay: false,  // 개발 중 발생하는 에러 오버레이 비활성화
+  //   ***REMOVED***,
+  // ***REMOVED***,
+  // build: ***REMOVED***
+  //   sourcemap: true, // 디버깅을 위한 소스맵 활성화
+  // ***REMOVED***,
 ***REMOVED***);
