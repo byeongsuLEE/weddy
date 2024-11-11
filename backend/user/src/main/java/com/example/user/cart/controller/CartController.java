@@ -1,5 +1,6 @@
 package com.example.user.cart.controller;
 
+import com.example.user.cart.dto.response.CartProductDto;
 import com.example.user.cart.dto.response.CartResponseDto;
 import com.example.user.cart.service.CartService;
 import com.example.user.common.dto.ApiResponse;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users/cart")
@@ -27,9 +30,9 @@ public class CartController ***REMOVED***
     ***REMOVED***
 
     @GetMapping
-    public ResponseEntity<ApiResponse<CartResponseDto>> getCart(@AuthenticationPrincipal UserEntity user)***REMOVED***
-        CartResponseDto cartResponseDto = cartService.getCart(user);
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(cartResponseDto,"카트 조회 성공"));
+    public ResponseEntity<ApiResponse<List<CartProductDto>>> getCart(@AuthenticationPrincipal UserEntity user)***REMOVED***
+        List<CartProductDto> cartProductDto = cartService.getCart(user);
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(cartProductDto,"카트 조회 성공"));
     ***REMOVED***
 
     @DeleteMapping
