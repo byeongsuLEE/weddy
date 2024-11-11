@@ -1,4 +1,4 @@
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+import ***REMOVED*** useState, useMemo ***REMOVED*** from "react";
 import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
@@ -8,37 +8,30 @@ import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** useSearchParams ***REMOVED*** from "react-router-dom";
 
 const Board = () => ***REMOVED***
-  const [filteredProductList, setFilteredProductList] = useState<Product[]>([]);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category") || "studio";
 
-  const ***REMOVED*** data: allProductList = [] ***REMOVED*** = useQuery('allProducts', allProducts);
+  const ***REMOVED*** data: allProductList = [] ***REMOVED*** = useQuery("allProducts", allProducts);
 
   const handleTabChange = (value: string) => setSearchParams(***REMOVED*** category: value ***REMOVED***);
 
   const handleRegionSelect = (value: string) => setSelectedRegion(value);
 
-  const handlePriceSelect = (value: string) => setSelectedPrice(parseInt(value.replace(/,/g, ""), 10));
+  const handlePriceSelect = (value: string) =>
+    setSelectedPrice(parseInt(value.replace(/,/g, ""), 10));
 
-  // 필터링 로직 함수
-  const filterProducts = () => ***REMOVED***
+  const filteredProductList = useMemo(() => ***REMOVED***
     return allProductList.filter((product: Product) => ***REMOVED***
       const matchesRegion = selectedRegion ? product.address.includes(selectedRegion) : true;
       const matchesPrice = selectedPrice ? Number(product.price) <= selectedPrice : true;
       return matchesRegion && matchesPrice;
     ***REMOVED***);
-  ***REMOVED***;
+  ***REMOVED***, [selectedRegion, selectedPrice, allProductList]);
 
-  // 필터링된 리스트 업데이트
-  useEffect(() => ***REMOVED***
-    setFilteredProductList(filterProducts());
-  ***REMOVED***, [selectedPrice, selectedRegion, allProductList]);
-
-   // Dummy data
-   const regions = [
+  const regions = [
     ***REMOVED*** value: "서울", label: "서울" ***REMOVED***,
     ***REMOVED*** value: "부산", label: "부산" ***REMOVED***,
     ***REMOVED*** value: "대구", label: "대구" ***REMOVED***,
@@ -72,7 +65,9 @@ const Board = () => ***REMOVED***
           <TabsContent key=***REMOVED***type***REMOVED*** value=***REMOVED***type***REMOVED***>
             <SDMList
               value=***REMOVED***type***REMOVED***
-              productList=***REMOVED***filteredProductList.filter((product) => product.type === type.toUpperCase())***REMOVED***
+              productList=***REMOVED***filteredProductList.filter(
+                (product) => product.type === type.toUpperCase()
+              )***REMOVED***
             />
           </TabsContent>
         ))***REMOVED***
