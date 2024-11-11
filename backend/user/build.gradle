@@ -61,6 +61,9 @@ dependencies ***REMOVED***
     implementation 'com.google.cloud:google-cloud-storage'
 
 
+    //fcm test
+    implementation 'com.google.firebase:firebase-admin:9.4.1'
+
 ***REMOVED***
 
 dependencyManagement ***REMOVED***

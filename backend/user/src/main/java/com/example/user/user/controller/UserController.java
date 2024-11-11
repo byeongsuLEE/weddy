@@ -102,7 +102,8 @@ public class UserController ***REMOVED***
     ***REMOVED***
 
     @PatchMapping("/fcm-token/***REMOVED***userId***REMOVED***")
-    public ResponseEntity<ApiResponse<String>> setFcmToken(@AuthenticationPrincipal UserEntity user, @PathVariable Long userId, @RequestBody String fcmToken)***REMOVED***
+    public ResponseEntity<ApiResponse<String>> setFcmToken(@AuthenticationPrincipal UserEntity user, @PathVariable Long userId, @RequestBody Map<String ,String> request)***REMOVED***
+        String fcmToken = request.get("fcmToken");
         userService.setFcmToken(userId,fcmToken);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("FCM 토큰 저장 성공"));
     ***REMOVED***
