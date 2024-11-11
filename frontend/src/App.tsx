@@ -1,5 +1,6 @@
 import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-query";
 import ***REMOVED*** BrowserRouter, Route, Routes, useLocation ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** RecoilRoot ***REMOVED*** from "recoil";
 import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
 import "./index.css";
@@ -67,9 +68,11 @@ function App() ***REMOVED***
   return (
     <div className="container">
       <QueryClientProvider client=***REMOVED***queryClient***REMOVED***>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
+        <RecoilRoot>
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </RecoilRoot>
       </QueryClientProvider>
     </div>
   );
