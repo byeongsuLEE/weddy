@@ -5,6 +5,7 @@ import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from
 import ***REMOVED*** allProducts ***REMOVED*** from "@/api/productApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** useSearchParams ***REMOVED*** from "react-router-dom";
 
 const Board = () => ***REMOVED***
   const [productList, setProductList] = useState<Product[]>([]);
@@ -14,6 +15,14 @@ const Board = () => ***REMOVED***
   const [studioList, setStudioList] = useState<Product[]>([]);
   const [dressList, setDressList] = useState<Product[]>([]);
   const [makeupList, setMakeupList] = useState<Product[]>([]);
+
+  //== param에서 category 가져오기 ==//
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category") || "studio";
+
+  const handleTabChange = (value: string) => ***REMOVED***
+    setSearchParams(***REMOVED*** category: value ***REMOVED***);
+  ***REMOVED***
 
   const ***REMOVED*** data: allProductList ***REMOVED*** = useQuery('allProducts', allProducts);
 
@@ -72,7 +81,7 @@ const Board = () => ***REMOVED***
 
   return (
     <div className="mb-20 mt-5">
-      <Tabs defaultValue="studio">
+      <Tabs defaultValue=***REMOVED***category***REMOVED*** onValueChange=***REMOVED***handleTabChange***REMOVED***>
         <TabsList className="flex justify-center">
           <TabsTrigger value="studio">스튜디오</TabsTrigger>
           <TabsTrigger value="dress">드레스</TabsTrigger>
