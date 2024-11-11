@@ -28,7 +28,7 @@ const ContractListBox = (***REMOVED*** type, NftData, contractInfo ***REMOVED***
 
   const handlePayment = async() => ***REMOVED***
     if (contractInfo) ***REMOVED***
-      // await requestPayment(contractInfo);
+      await requestPayment(contractInfo);
       await changeStatus(contractInfo.id);
     ***REMOVED***
   ***REMOVED***;
