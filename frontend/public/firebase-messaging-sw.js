@@ -23,6 +23,8 @@ self.addEventListener("push", function (event) ***REMOVED***
   console.log("Push event received:", event);
 
   let data = ***REMOVED*** title: "기본 제목", body: "기본 내용" ***REMOVED***;
+
+  if (!event.data) return;
   if (event.data) ***REMOVED***
     try ***REMOVED***
       data = JSON.parse(event.data.text());

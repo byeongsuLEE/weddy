@@ -70,9 +70,6 @@ function App() ***REMOVED***
   const fcmToken = useRecoilValue(firebaseTokenState);
   const queryClient = new QueryClient();
 
-
-  
-
   useEffect(() => ***REMOVED***
     if (userId && fcmToken) ***REMOVED***
       saveFcmToken(fcmToken, userId);

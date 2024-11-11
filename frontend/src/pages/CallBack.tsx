@@ -1,4 +1,4 @@
-import ***REMOVED*** getToken, getUserInfo, saveFcmToken ***REMOVED*** from "@/api/userApi";
+import ***REMOVED*** getToken, getUserInfo ***REMOVED*** from "@/api/userApi";
 import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from "@/firebase";
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
@@ -26,22 +26,25 @@ const CallBack = () => ***REMOVED***
   useEffect(() => ***REMOVED***
     const registerServiceWorker = async () => ***REMOVED***
       if ("serviceWorker" in navigator) ***REMOVED***
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        const isRegistered = registrations.some(
-          (registration) =>
-            registration.active &&
-            registration.scope === "/firebase-messaging-sw.js"
-        );
+        try ***REMOVED***
+          // 특정 경로에 등록된 서비스 워커가 있는지 확인
+          const existingRegistration =
+            await navigator.serviceWorker.getRegistration(
+              "/firebase-messaging-sw.js"
+            );
 
-        if (!isRegistered) ***REMOVED***
-          try ***REMOVED***
-            await navigator.serviceWorker.register("/firebase-messaging-sw.js");
-            console.log("Service Worker registered successfully");
-          ***REMOVED*** catch (err) ***REMOVED***
-            console.error("Service Worker registration failed:", err);
+          if (existingRegistration) ***REMOVED***
+            console.log("Service Worker already registered");
+            return;
           ***REMOVED***
-        ***REMOVED*** else ***REMOVED***
-          console.log("Service Worker already registered");
+
+          // 서비스 워커 등록
+          const registration = await navigator.serviceWorker.register(
+            "/firebase-messaging-sw.js"
+          );
+          console.log("Service Worker registered successfully:", registration);
+        ***REMOVED*** catch (err) ***REMOVED***
+          console.error("Service Worker registration failed:", err);
         ***REMOVED***
       ***REMOVED***
     ***REMOVED***;
@@ -51,13 +54,18 @@ const CallBack = () => ***REMOVED***
 
   useEffect(() => ***REMOVED***
     const requestPermissionsAndToken = async () => ***REMOVED***
+      console.log("유저 아이디는 : " + userId);
       if (userId) ***REMOVED***
         try ***REMOVED***
           await requestNotificationPermission();
           const token = await requestForToken();
+          alert("발급된 토큰은 : " + token);
+          console.log("발급된 토큰은 : " + token);
           if (token) ***REMOVED***
+            alert("정보가 바뀌었으니 토큰 저장 메서드를 실행해");
+            console.log(token);
             setToken(token);
-            saveFcmToken(token, userId);
+            // saveFcmToken(token, userId);
           ***REMOVED*** else ***REMOVED***
             console.warn("No token received");
           ***REMOVED***
