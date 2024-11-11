@@ -1,4 +1,4 @@
-// import ***REMOVED*** aiRecommend ***REMOVED*** from "@/api/recommendApi";
+import ***REMOVED*** aiRecommend ***REMOVED*** from "@/api/recommendApi";
 import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
@@ -8,7 +8,7 @@ const Prompt = () => ***REMOVED***
   const [placeholder, setPlaceholder] = useState("");
   const text = "모던한 분위기의 500만원대 스튜디오 추천해줘";
   const [inputValue, setInputValue] = useState("");
-  const [recommendList, ] = useRecoilState(recommendState);
+  const [recommendList, setRecommendList] = useRecoilState(recommendState);
 
   const navigate = useNavigate();
 
@@ -20,9 +20,8 @@ const Prompt = () => ***REMOVED***
   ***REMOVED***, []);
 
   const toPlanner = async () => ***REMOVED***
-    console.log(inputValue);
-    // const recommendList = await aiRecommend(inputValue);
-    // setRecommendList(recommendList);
+    const recommendList = await aiRecommend(inputValue);
+    setRecommendList(recommendList);
     navigate("/planner");
   ***REMOVED***;
 
