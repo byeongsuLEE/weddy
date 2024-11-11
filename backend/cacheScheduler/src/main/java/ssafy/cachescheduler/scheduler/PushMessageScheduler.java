@@ -44,13 +44,9 @@ public class PushMessageScheduler ***REMOVED***
      * @ 설명     :
 
      */
-    @Retryable(
-            value = ***REMOVED*** SchedulerException.class ***REMOVED***,
-            maxAttempts = 3,
-            backoff = @Backoff(delay = 2000)  // 2초 지연 후 재시도
-    )
+
     @Async("taskExecutor")
-    @Scheduled(cron = "*/1 * * * * *")
+    @Scheduled(cron = "0 0 9 * * *")
     public void sendPushMessage() throws FirebaseMessagingException ***REMOVED***
 
         // 현재 로컬 날짜 얻어봐

@@ -16,7 +16,6 @@ import weddy.commonlib.constant.KeyType;
 public class RedisUtil ***REMOVED***
     private static final Logger log = LoggerFactory.getLogger(RedisUtil.class);
     private final RedisTemplate<String, Object> redisTemplate;
-
     /**
      * HashSet 자료구조 사용 데이터 저장
      */
@@ -54,7 +53,7 @@ public class RedisUtil ***REMOVED***
 
             // 커플이 존재할 경우 커플의 FCM Token도 저장
             if(schedule.getUserCoupleToken().getCoupleFcmToken() != null) ***REMOVED***
-                redisTemplate.opsForHash().put(keyType.name() + ":" +schedule.getStartDate(), schedule.getUserCoupleToken().getCoupleFcmToken(), object);
+                redisTemplate.opsForHash().put(keyType.name() + ":" +schedule.getStartDate(), schedule.getCode(), object);
             ***REMOVED***
 
         ***REMOVED***

@@ -31,6 +31,7 @@ public class ScheduleRedisAdapter implements ScheduleRedisCacheOutputPort ***REM
 
     @Override
     public void saveScheduleToCache(CreateScheduleInputDto createScheduleInputDto) ***REMOVED***
+
         redisUtil.addToHashSet(KeyType.SCHEDULE,createScheduleInputDto);
     ***REMOVED***
 ***REMOVED***

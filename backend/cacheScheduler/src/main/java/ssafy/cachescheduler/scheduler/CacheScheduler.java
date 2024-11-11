@@ -59,22 +59,6 @@ public class CacheScheduler ***REMOVED***
     ***REMOVED***
 
 
-    /**
-     *
-     *
-     */
-    @Retryable(
-            value = ***REMOVED*** SchedulerException.class ***REMOVED***,
-            maxAttempts = 3,
-            backoff = @Backoff(delay = 2000)  // 2초 지연 후 재시도
-    )
-    @Async("taskExecutor")
-    @Scheduled(cron = "$***REMOVED***cron.expression***REMOVED***")
-    public void sendPushMessage() ***REMOVED***
-        log.info("productReviewCachingScheduler 실행");
-
-        log.info("productReviewCachingScheduler 종료");
-    ***REMOVED***
 
 
 ***REMOVED***

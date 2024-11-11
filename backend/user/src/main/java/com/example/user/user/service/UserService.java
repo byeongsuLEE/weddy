@@ -10,6 +10,7 @@ import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,10 +27,13 @@ public class UserService ***REMOVED***
     private final UserRepository userRepository;
     private final GCSImageService gcsImageService;
     private final FcmService fcmService;
-    public UserService(UserRepository userRepository, GCSImageService gcsImageService, FcmService fcmService)***REMOVED***
+    private RedisTemplate<String, String> redisTemplate;
+
+    public UserService(UserRepository userRepository, GCSImageService gcsImageService, FcmService fcmService, RedisTemplate<String, String> redisTemplate)***REMOVED***
         this.userRepository = userRepository;
         this.gcsImageService = gcsImageService;
         this.fcmService = fcmService;
+        this.redisTemplate = redisTemplate;
     ***REMOVED***
 
     public List<UserResponseDTO> userInfo(UserEntity user) ***REMOVED***
@@ -119,6 +123,14 @@ public class UserService ***REMOVED***
         userRepository.save(otheruserEntity);
 
 
+        String beforeMyCoupleCode=  userEntity.getCoupleCode();
+
+        String myFcmToken = userEntity.getFcmToken();
+
+        //커플 코드 redis 추가 및 삭제
+        redisTemplate.opsForHash().delete("couple:"+beforeMyCoupleCode);
+        redisTemplate.opsForHash().put("couple:"+coupleCode,id,myFcmToken);
+
         // UserResponseDTO 빌드 및 반환
         return UserResponseDTO.builder()
                 .id(otheruserEntity.getId())
@@ -162,8 +174,15 @@ public class UserService ***REMOVED***
     @Transactional
     public void setFcmToken(Long userId, String fcmToken) ***REMOVED***
         UserEntity userEntity = getUserEntity(userId);
+        String beforeFcmToken = userEntity.getFcmToken();
         userEntity.updateFcmToken(fcmToken);
         fcmService.sendPushNotification(fcmToken, "FCM 토큰 저장 성공", "FCM 토큰 저장 성공");
+
+        String coupleCode = userEntity.getCoupleCode();
+
+        redisTemplate.opsForHash().put("couple:"+coupleCode, userId, fcmToken);
+
+
     ***REMOVED***
 
 
