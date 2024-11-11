@@ -3,28 +3,43 @@ pipeline ***REMOVED***
     agent any
 
     environment ***REMOVED***
-        // Docker Hub
-        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub ?ûêÍ≤? Ï¶ùÎ™Ö
 
-        // Mattermost ?ïåÎ¶? ?Ñ§?†ï
+        // ECR
+        ECR_REGISTRY = '654654308839.dkr.ecr.ap-northeast-2.amazonaws.com'
+        ECR_CREDENTIALS = 'ecr:ap-northeast-2:ECR'
+
+        // Docker Hub
+        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials') // Docker Hub ÏûêÍ≤© Ï¶ùÎ™Ö
+
+        // Mattermost ÏïåÎ¶º ÏÑ§Ï†ï
         MATTERMOST_ENDPOINT = 'https://meeting.ssafy.com/hooks/yzzezkburpdd9gcac4fdzkaguo'
         MATTERMOST_CHANNEL = 'c203-jenkins'
 
-        // Docker ?ù¥ÎØ∏Ï? ?ù¥Î¶?
-        CACHE_SCHEDULER_IMAGE = 'siokim002/weddy_cache_scheduler'
-        COMMON_LIB_IMAGE = 'siokim002/weddy_common_lib'
-        GATEWAY_IMAGE = 'siokim002/weddy_gateway'
-        PRODUCT_IMAGE = 'siokim002/weddy_product'
-        SCHEDULE_IMAGE = 'siokim002/weddy_schedule'
-        USER_IMAGE = 'siokim002/weddy_user'
-        FRONTEND_IMAGE = 'siokim002/weddy_frontend'
+        // Docker Ïù¥ÎØ∏ÏßÄ Ïù¥Î¶Ñ
+        // CACHE_SCHEDULER_IMAGE = 'siokim002/weddy_cache_scheduler'
+        // COMMON_LIB_IMAGE = 'siokim002/weddy_common_lib'
+        // GATEWAY_IMAGE = 'siokim002/weddy_gateway'
+        // PRODUCT_IMAGE = 'siokim002/weddy_product'
+        // SCHEDULE_IMAGE = 'siokim002/weddy_schedule'
+        // USER_IMAGE = 'siokim002/weddy_user'
+        // FRONTEND_IMAGE = 'siokim002/weddy_frontend'
 
-        // GitOps ???û•?Üå Ï£ºÏÜå
+
+        // ECR Ïù¥ÎØ∏ÏßÄ Ïù¥Î¶Ñ
+        CACHE_SCHEDULER_IMAGE = 'weddy/cache_scheduler'
+        COMMON_LIB_IMAGE = 'weddy/common_lib'
+        GATEWAY_IMAGE = 'weddy/gateway'
+        PRODUCT_IMAGE = 'weddy/product'
+        SCHEDULE_IMAGE = 'weddy/schedule'
+        USER_IMAGE = 'weddy/user'
+        FRONTEND_IMAGE = 'weddy/frontend'
+
+        // GitOps Ï†ÄÏû•ÏÜå Ï£ºÏÜå
         GITOPS_REPO = 'git@github.com:zion0425/weddy_gitops.git' 
 
         // Credentials
-        GITOPS_CREDENTIALS = 'gitops_pk' // Jenkins?óê ?ì±Î°ùÎêú GitOps Î∞∞Ìè¨ ?Ç§?ùò Credential ID
-        GITLAB_CREDENTIALS = 'gitlab' // GitLab ?ûêÍ≤? Ï¶ùÎ™Ö ID
+        GITOPS_CREDENTIALS = 'gitops_pk' // JenkinsÏóê Îì±Î°ùÎêú GitOps Î∞∞Ìè¨ ÌÇ§Ïùò Credential ID
+        GITLAB_CREDENTIALS = 'gitlab' // GitLab ÏûêÍ≤© Ï¶ùÎ™Ö ID
     ***REMOVED***
 
     options ***REMOVED***
@@ -35,31 +50,40 @@ pipeline ***REMOVED***
         stage('Start Notification') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    sendNotification('warning', 'ÎπåÎìú ?ãú?ûë')
+                    sendNotification('warning', 'ÎπåÎìú ÏãúÏûë')
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
         stage('Setup SSH') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    // GitHub?ùò ?ò∏?ä§?ä∏ ?Ç§Î•? known_hosts?óê Ï∂îÍ?
+                    // GitHubÏùò Ìò∏Ïä§Ìä∏ ÌÇ§Î•º known_hostsÏóê Ï∂îÍ∞Ä
                     sh 'mkdir -p ~/.ssh'
                     sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
 
+        // // ECR Docker Ï¥àÍ∏∞Ìôî docker.withRegisitry Ìï† Îïå ÏûêÎèôÏúºÎ°ú Ï≤òÎ¶¨ Îê®
+        // stage('Setup Docker') ***REMOVED***
+        //     steps ***REMOVED***
+        //         script ***REMOVED***
+        //             sh 'rm -f ~/.dockercfg ~/.docker/config.json || true'
+        //         ***REMOVED***
+        //     ***REMOVED***
+        // ***REMOVED***
+
         stage('Checkout') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    // ?Üå?ä§ ÏΩîÎìú Ï≤¥ÌÅ¨?ïÑ?õÉ
+                    // ÏÜåÏä§ ÏΩîÎìú Ï≤¥ÌÅ¨ÏïÑÏõÉ
                     git url: 'https://lab.ssafy.com/s11-final/S11P31C203.git', branch: 'release', credentialsId: GITLAB_CREDENTIALS
 
-                    // Î≥?Í≤ΩÎêú ?åå?ùº Î™©Î°ù Í∞??†∏?ò§Í∏?
+                    // Î≥ÄÍ≤ΩÎêú ÌååÏùº Î™©Î°ù Í∞ÄÏ†∏Ïò§Í∏∞
                     def changes = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim()
                     println "Changed files:\n$***REMOVED***changes***REMOVED***"
 
-                    // Î≥?Í≤ΩÎêú ?ÑúÎπÑÏä§ ?ôï?ù∏
+                    // Î≥ÄÍ≤ΩÎêú ÏÑúÎπÑÏä§ ÌôïÏù∏
                     changedServices = []
                     if (changes.contains('frontend/')) ***REMOVED***
                         changedServices.add('frontend')
@@ -92,46 +116,62 @@ pipeline ***REMOVED***
         stage('Build and Push Docker Images') ***REMOVED***
             steps ***REMOVED***
                 script ***REMOVED***
-                    // Docker Hub Î°úÍ∑∏?ù∏
-                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                    // Docker Hub Î°úÍ∑∏Ïù∏
+                    // sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                    try ***REMOVED***
+                    // ECR Î†àÏßÄÏä§Ìä∏Î¶¨
+                        docker.withRegistry("https://$***REMOVED***ECR_REGISTRY***REMOVED***", ECR_CREDENTIALS) ***REMOVED***
+                            for (service in changedServices) ***REMOVED***
+                                def imageName = ""
+                                def dirPath = ""
+                                if (service == 'frontend') ***REMOVED***
+                                    imageName = FRONTEND_IMAGE
+                                    dirPath = 'frontend'
+                                ***REMOVED*** else if (service == 'cacheScheduler') ***REMOVED***
+                                    imageName = CACHE_SCHEDULER_IMAGE
+                                    dirPath = 'backend/cacheScheduler'
+                                ***REMOVED*** else if (service == 'common-lib') ***REMOVED***
+                                    imageName = COMMON_LIB_IMAGE
+                                    dirPath = 'backend/common-lib'
+                                ***REMOVED*** else if (service == 'gateway') ***REMOVED***
+                                    imageName = GATEWAY_IMAGE
+                                    dirPath = 'backend/gateway'
+                                ***REMOVED*** else if (service == 'product') ***REMOVED***
+                                    imageName = PRODUCT_IMAGE
+                                    dirPath = 'backend/product'
+                                ***REMOVED*** else if (service == 'schedule') ***REMOVED***
+                                    imageName = SCHEDULE_IMAGE
+                                    dirPath = 'backend/schedule'
+                                ***REMOVED*** else if (service == 'user') ***REMOVED***
+                                    imageName = USER_IMAGE
+                                    dirPath = 'backend/user'
+                                ***REMOVED***
 
-                    for (service in changedServices) ***REMOVED***
-                        def imageName = ""
-                        def dirPath = ""
-                        if (service == 'frontend') ***REMOVED***
-                            imageName = FRONTEND_IMAGE
-                            dirPath = 'frontend'
-                        ***REMOVED*** else if (service == 'cacheScheduler') ***REMOVED***
-                            imageName = CACHE_SCHEDULER_IMAGE
-                            dirPath = 'backend/cacheScheduler'
-                        ***REMOVED*** else if (service == 'common-lib') ***REMOVED***
-                            imageName = COMMON_LIB_IMAGE
-                            dirPath = 'backend/common-lib'
-                        ***REMOVED*** else if (service == 'gateway') ***REMOVED***
-                            imageName = GATEWAY_IMAGE
-                            dirPath = 'backend/gateway'
-                        ***REMOVED*** else if (service == 'product') ***REMOVED***
-                            imageName = PRODUCT_IMAGE
-                            dirPath = 'backend/product'
-                        ***REMOVED*** else if (service == 'schedule') ***REMOVED***
-                            imageName = SCHEDULE_IMAGE
-                            dirPath = 'backend/schedule'
-                        ***REMOVED*** else if (service == 'user') ***REMOVED***
-                            imageName = USER_IMAGE
-                            dirPath = 'backend/user'
-                        ***REMOVED***
+                                // Docker Ïù¥ÎØ∏ÏßÄ ÎπåÎìú
+                                dir(dirPath) ***REMOVED***
+                                    if (service != 'frontend') ***REMOVED***
+                                        sh 'chmod +x ./gradlew'
+                                        sh './gradlew clean build -x test'
+                                    ***REMOVED***
+                                    // Docker Ïù¥ÎØ∏ÏßÄ ÎπåÎìú
+                                    // sh "docker build --no-cache -t $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED*** ."
 
-                        // Docker ?ù¥ÎØ∏Ï? ÎπåÎìú
-                        dir(dirPath) ***REMOVED***
-                            if (service != 'frontend') ***REMOVED***
-                                sh 'chmod +x ./gradlew'
-                                sh './gradlew clean build -x test'
+                                    // Docker hubÏóê Ïù¥ÎØ∏ÏßÄ Ìë∏Ïãú
+                                    // sh "docker push $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED***"
+
+                                    // ECR Ïù¥ÎØ∏ÏßÄ ÎπåÎìú
+                                    def app = docker.build("$***REMOVED***ECR_REGISTRY***REMOVED***/$***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED***", '.')
+
+                                    // ECRÏóê Ïù¥ÎØ∏ÏßÄ Ìë∏Ïãú
+                                    app.push("$***REMOVED***env.BUILD_NUMBER***REMOVED***")
+                                ***REMOVED***
+
+
                             ***REMOVED***
-                            sh "docker build --no-cache -t $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED*** ."
                         ***REMOVED***
-
-                        // Docker ?ù¥ÎØ∏Ï? ?ë∏?ãú
-                        sh "docker push $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED***"
+                    ***REMOVED*** catch (Exception e) ***REMOVED***
+                        echo "Error during build/push: $***REMOVED***e.message***REMOVED***"
+                        throw e
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***
@@ -142,12 +182,20 @@ pipeline ***REMOVED***
                 script ***REMOVED***
                     sshagent (credentials: [GITOPS_CREDENTIALS]) ***REMOVED***
                         dir('gitops') ***REMOVED***
-                            // GitOps ???û•?Üå ?Å¥Î°?
+                            // GitOps Ï†ÄÏû•ÏÜå ÌÅ¥Î°†
                             sh 'git clone -b main git@github.com:zion0425/weddy_gitops.git .'
 
                             for (service in changedServices) ***REMOVED***
                                 def imageName = ""
                                 def deploymentFile = ""
+
+                                // Î≥ÄÍ≤Ω ÏÇ¨Ïïà ÌôïÏù∏
+                                def hasChanges = sh(script: 'git status --porcelain', returnStdout: true).trim()
+                                if (!hasChanges) ***REMOVED***
+                                    echo 'No changes to commit'
+                                    return
+                                ***REMOVED***
+
                                 if (service == 'frontend') ***REMOVED***
                                     imageName = FRONTEND_IMAGE
                                     deploymentFile = 'frontend-deployment.yaml'
@@ -171,13 +219,13 @@ pipeline ***REMOVED***
                                     deploymentFile = 'user-deployment.yaml'
                                 ***REMOVED***
 
-                                // deployment.yaml ?åå?ùº?ùò ?ù¥ÎØ∏Ï? ?ÉúÍ∑? ?óÖ?ç∞?ù¥?ä∏
+                                // deployment.yaml ÌååÏùºÏùò Ïù¥ÎØ∏ÏßÄ ÌÉúÍ∑∏ ÏóÖÎç∞Ïù¥Ìä∏
                                 sh """
-                                sed -i 's#image: .*#image: $***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED***#' $***REMOVED***deploymentFile***REMOVED***
+                                sed -i 's#image: .*#image: $***REMOVED***ECR_REGISTRY***REMOVED***/$***REMOVED***imageName***REMOVED***:$***REMOVED***env.BUILD_NUMBER***REMOVED***#' $***REMOVED***deploymentFile***REMOVED***
                                 """
                             ***REMOVED***
 
-                            // Î≥?Í≤? ?Ç¨?ï≠ Ïª§Î∞ã Î∞? ?ë∏?ãú
+                            // Î≥ÄÍ≤Ω ÏÇ¨Ìï≠ Ïª§Î∞ã Î∞è Ìë∏Ïãú
                             sh """
                             git config user.name "Jenkins"
                             git config user.email "jenkins@gitops.com"
@@ -195,13 +243,13 @@ pipeline ***REMOVED***
     post ***REMOVED***
         success ***REMOVED***
             script ***REMOVED***
-                sendNotification('good', 'ÎπåÎìú ?Ñ±Í≥?')
+                sendNotification('good', 'ÎπåÎìú ÏÑ±Í≥µ')
                 cleanWs()
             ***REMOVED***
         ***REMOVED***
         failure ***REMOVED***
             script ***REMOVED***
-                sendNotification('danger', 'ÎπåÎìú ?ã§?å®')
+                sendNotification('danger', 'ÎπåÎìú Ïã§Ìå®')
                 cleanWs()
             ***REMOVED***
         ***REMOVED***
@@ -215,9 +263,9 @@ def sendNotification(String color, String status) ***REMOVED***
     mattermostSend(
         color: color,
         message: """$***REMOVED***status***REMOVED***: ÎπåÎìú Î≤àÌò∏ #$***REMOVED***env.BUILD_NUMBER***REMOVED***
-Ïª§Î∞ã ?ûë?Ñ±?ûê: $***REMOVED***gitCommitterName***REMOVED***
-Ïª§Î∞ã Î©îÏãúÏß?: $***REMOVED***gitCommitMessage***REMOVED***
-(<$***REMOVED***env.BUILD_URL***REMOVED***|ÎπåÎìú ?ÉÅ?Ñ∏ ?†ïÎ≥?>)""",
+Ïª§Î∞ã ÏûëÏÑ±Ïûê: $***REMOVED***gitCommitterName***REMOVED***
+Ïª§Î∞ã Î©îÏãúÏßÄ: $***REMOVED***gitCommitMessage***REMOVED***
+(<$***REMOVED***env.BUILD_URL***REMOVED***|ÎπåÎìú ÏÉÅÏÑ∏ Ï†ïÎ≥¥>)""",
         endpoint: MATTERMOST_ENDPOINT,
         channel: MATTERMOST_CHANNEL
     )
