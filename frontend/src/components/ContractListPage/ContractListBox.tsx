@@ -8,13 +8,15 @@ import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
 import ProgressBar from "./ProgressBar";
+import ***REMOVED*** NftType ***REMOVED*** from "@/api/nft.type";
 
 interface ContractListBoxProps ***REMOVED***
   type: string;
+  NftData?: NftType;
   contractInfo?: ContractData;
 ***REMOVED***
 
-const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+const ContractListBox = (***REMOVED*** type, NftData, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
   const handleChangeStatus = async () => ***REMOVED***
     if (contractInfo) ***REMOVED***
       await changeStatus(contractInfo.id);
@@ -22,9 +24,16 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
     window.location.reload();
   ***REMOVED***;
 
-  const handlePayment = () => ***REMOVED***
+  const handlePayment = async() => ***REMOVED***
     if (contractInfo) ***REMOVED***
-      requestPayment(contractInfo);
+      await requestPayment(contractInfo);
+      await changeStatus(contractInfo.id);
+    ***REMOVED***
+  ***REMOVED***;
+
+  const goNFT = () => ***REMOVED***
+    if (NftData) ***REMOVED***
+      window.location.href = NftData?.image;
     ***REMOVED***
   ***REMOVED***;
 
@@ -107,7 +116,7 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
               )***REMOVED***
               ***REMOVED***contractInfo.status === "PAYMENT_COMPLETED" && (
                 <div className="flex items-center">
-                  <div className="mr-2">
+                  <div className="mr-2" onClick=***REMOVED***goNFT***REMOVED***>
                     <FileSelectIcon w=***REMOVED***20***REMOVED*** h=***REMOVED***20***REMOVED*** />
                   </div>
                   <Link to=***REMOVED***`/review/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>

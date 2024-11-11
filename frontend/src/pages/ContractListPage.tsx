@@ -3,8 +3,11 @@ import ContractListBox from "../components/ContractListPage/ContractListBox";
 import ***REMOVED*** ContractData ***REMOVED*** from "@/api/contract.type";
 import ***REMOVED*** myContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+import ***REMOVED*** NftType ***REMOVED*** from "@/api/nft.type";
+import ***REMOVED*** getNFT ***REMOVED*** from "@/hooks/getNFT";
 
 const ContractList = () => ***REMOVED***
+  const [ NFTList, setNFTLIst ] = useState<NftType[]>([]);
   const [ studioContract, setStudioContract ] = useState<ContractData>();
   const [ dressContract, setDressContract ] = useState<ContractData>();
   const [ makeupContract, setMakeupContract ] = useState<ContractData>();
@@ -17,11 +20,19 @@ const ContractList = () => ***REMOVED***
     setMakeupContract(contractList?.find((contract: ContractData) => contract.product.type === "MAKEUP"));
   ***REMOVED***, [contractList]);
   
+  useEffect(() => ***REMOVED***
+    const update = async () => ***REMOVED***
+      const myNFT = await getNFT();
+      setNFTLIst(myNFT);
+    ***REMOVED***;
+    update();
+  ***REMOVED***, []);
+
   return (
     <div className="mt-12 mb-32 mx-5">
-      <ContractListBox type="STUDIO" contractInfo=***REMOVED***studioContract***REMOVED***/>
-      <ContractListBox type="DRESS" contractInfo=***REMOVED***dressContract***REMOVED***/>
-      <ContractListBox type="MAKEUP" contractInfo=***REMOVED***makeupContract***REMOVED***/>
+      <ContractListBox type="STUDIO" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.name === 'STUDIO')***REMOVED*** contractInfo=***REMOVED***studioContract***REMOVED***/>
+      <ContractListBox type="DRESS" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.name === 'DRESS')***REMOVED*** contractInfo=***REMOVED***dressContract***REMOVED***/>
+      <ContractListBox type="MAKEUP" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.name === 'MAKEUP')***REMOVED*** contractInfo=***REMOVED***makeupContract***REMOVED***/>
     </div>
   );
 ***REMOVED***;
