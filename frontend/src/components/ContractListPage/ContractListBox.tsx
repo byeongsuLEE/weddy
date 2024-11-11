@@ -8,13 +8,17 @@ import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
 import ProgressBar from "./ProgressBar";
+import ***REMOVED*** NftType ***REMOVED*** from "@/api/nft.type";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 
 interface ContractListBoxProps ***REMOVED***
   type: string;
+  NftData?: NftType;
   contractInfo?: ContractData;
 ***REMOVED***
 
-const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+const ContractListBox = (***REMOVED*** type, NftData, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+  const [showIcon, setShowIcon] = useState<Boolean>(false);
   const handleChangeStatus = async () => ***REMOVED***
     if (contractInfo) ***REMOVED***
       await changeStatus(contractInfo.id);
@@ -22,11 +26,24 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
     window.location.reload();
   ***REMOVED***;
 
-  const handlePayment = () => ***REMOVED***
+  const handlePayment = async() => ***REMOVED***
     if (contractInfo) ***REMOVED***
-      requestPayment(contractInfo);
+      await requestPayment(contractInfo);
+      await changeStatus(contractInfo.id);
     ***REMOVED***
   ***REMOVED***;
+
+  const goNFT = () => ***REMOVED***
+    if (NftData) ***REMOVED***
+      window.open(NftData?.image);
+    ***REMOVED***
+  ***REMOVED***;
+
+  useEffect(() => ***REMOVED***
+    if (NftData)***REMOVED***
+      setShowIcon(true);
+    ***REMOVED***
+  ***REMOVED***, [NftData]);
 
   return (
     <div className="mb-5">
@@ -95,7 +112,7 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
               )***REMOVED***
               ***REMOVED***contractInfo.status === "SIGN_PENDING" && (
                 <Link
-                  to=***REMOVED***`/contract/$***REMOVED***contractInfo.product.type***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***
+                  to=***REMOVED***`/contract/$***REMOVED***contractInfo.product.type.toLowerCase()***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***
                 >
                   <TodoButton title="서명 하기" colorId=***REMOVED***1***REMOVED*** />
                 </Link>
@@ -107,9 +124,13 @@ const ContractListBox = (***REMOVED*** type, contractInfo ***REMOVED***: Contrac
               )***REMOVED***
               ***REMOVED***contractInfo.status === "PAYMENT_COMPLETED" && (
                 <div className="flex items-center">
-                  <div className="mr-2">
-                    <FileSelectIcon w=***REMOVED***20***REMOVED*** h=***REMOVED***20***REMOVED*** />
-                  </div>
+                  ***REMOVED***showIcon ? (
+                    <>
+                      <div className="mr-2" onClick=***REMOVED***goNFT***REMOVED***>
+                        <FileSelectIcon w=***REMOVED***20***REMOVED*** h=***REMOVED***20***REMOVED*** />
+                      </div>
+                    </>
+                  ) : null ***REMOVED***
                   <Link to=***REMOVED***`/review/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>
                     <TodoButton title="리뷰 쓰기" colorId=***REMOVED***1***REMOVED*** />
                   </Link>

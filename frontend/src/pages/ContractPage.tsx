@@ -1,4 +1,4 @@
-import ***REMOVED*** useRef ***REMOVED*** from "react";
+import ***REMOVED*** useRef, useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate, useParams ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** changeStatus, contractInfo ***REMOVED*** from "../api/contractApi";
 import TodoButton from "../common/TodoButton";
@@ -7,11 +7,13 @@ import ***REMOVED*** mintNFT ***REMOVED*** from "../hooks/mintNFT";
 import ***REMOVED*** makeSignature ***REMOVED*** from "../hooks/signature";
 import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import NFTLoading from "./NFTLoadingPage";
 
 const Contract = () => ***REMOVED***
   const ***REMOVED*** category, contractId ***REMOVED*** = useParams();
   const navigate = useNavigate();
   const pageRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState<Boolean>(false);
 
   const date = new Date();
 
@@ -35,9 +37,10 @@ const Contract = () => ***REMOVED***
 
     await makeSignature();
 
-    const hash = await uploadToPinata(contractImage, category);
+    const hash = await uploadToPinata(contractImage, contract);
 
     await Promise.all([
+      setLoading(true),
       mintNFT(hash),
       changeStatus(contractId)
     ]);
@@ -46,18 +49,22 @@ const Contract = () => ***REMOVED***
   ***REMOVED***;
 
   const type = ***REMOVED***
-    STUDIO: "촬영",
-    DRESS: "드레스",
-    MAKEUP: "메이크업"
-  ***REMOVED***[category as "STUDIO" | "DRESS" | "MAKEUP"];
+    studio: "촬영",
+    dress: "드레스",
+    makeup: "메이크업"
+  ***REMOVED***[category as "studio" | "dress" | "makeup"];
 
   if (isLoading) ***REMOVED***
     return <div>로딩중...</div>;
   ***REMOVED***
 
   return (
-    <div>
-      <div className="bg-white border rounded-sm p-5 mx-5 mt-5" ref=***REMOVED***pageRef***REMOVED***>
+    <>
+      ***REMOVED***loading ? (
+        <NFTLoading/>
+      ) : (
+        <div>
+          <div className="bg-white border rounded-sm p-5 mx-5 mt-5" ref=***REMOVED***pageRef***REMOVED***>
         <div className="text-center text-lg font-bold">
           계약서
         </div>
@@ -127,7 +134,9 @@ const Contract = () => ***REMOVED***
       <div className="flex justify-end mt-3 mb-24 mr-5" onClick=***REMOVED***handleSignature***REMOVED***>
         <TodoButton title="전자 서명" colorId=***REMOVED***1***REMOVED*** />
       </div>
-    </div>
+        </div>
+      )***REMOVED***
+    </>
   )
 ***REMOVED***
 
