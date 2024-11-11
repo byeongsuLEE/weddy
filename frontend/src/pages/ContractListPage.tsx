@@ -14,6 +14,7 @@ const ContractList = () => ***REMOVED***
 
   const ***REMOVED*** data: contractList ***REMOVED*** = useQuery("myContract", myContract);
 
+  
   useEffect(() => ***REMOVED***
     setStudioContract(contractList?.find((contract: ContractData) => contract.product.type === "STUDIO"));
     setDressContract(contractList?.find((contract: ContractData) => contract.product.type === "DRESS"));
@@ -27,12 +28,15 @@ const ContractList = () => ***REMOVED***
     ***REMOVED***;
     update();
   ***REMOVED***, []);
-
   return (
     <div className="mt-12 mb-32 mx-5">
-      <ContractListBox type="STUDIO" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.name === 'STUDIO')***REMOVED*** contractInfo=***REMOVED***studioContract***REMOVED***/>
-      <ContractListBox type="DRESS" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.name === 'DRESS')***REMOVED*** contractInfo=***REMOVED***dressContract***REMOVED***/>
-      <ContractListBox type="MAKEUP" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.name === 'MAKEUP')***REMOVED*** contractInfo=***REMOVED***makeupContract***REMOVED***/>
+      ***REMOVED***NFTList ? (
+        <>
+          <ContractListBox type="STUDIO" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.contractId === studioContract?.id)***REMOVED*** contractInfo=***REMOVED***studioContract***REMOVED***/>
+          <ContractListBox type="DRESS" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.contractId === dressContract?.id)***REMOVED*** contractInfo=***REMOVED***dressContract***REMOVED***/>
+          <ContractListBox type="MAKEUP" NftData=***REMOVED***NFTList?.find((nft: NftType) => nft.contractId === makeupContract?.id)***REMOVED*** contractInfo=***REMOVED***makeupContract***REMOVED***/>
+        </>
+      ) : null***REMOVED***
     </div>
   );
 ***REMOVED***;

@@ -8,6 +8,7 @@ import ***REMOVED*** makeSignature ***REMOVED*** from "../hooks/signature";
 import ***REMOVED*** uploadToPinata ***REMOVED*** from "../hooks/uploadToPinata";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 
+
 const Contract = () => ***REMOVED***
   const ***REMOVED*** category, contractId ***REMOVED*** = useParams();
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Contract = () => ***REMOVED***
 
     await makeSignature();
 
-    const hash = await uploadToPinata(contractImage, category);
+    const hash = await uploadToPinata(contractImage, contract);
 
     await Promise.all([
       mintNFT(hash),
@@ -46,10 +47,10 @@ const Contract = () => ***REMOVED***
   ***REMOVED***;
 
   const type = ***REMOVED***
-    STUDIO: "촬영",
-    DRESS: "드레스",
-    MAKEUP: "메이크업"
-  ***REMOVED***[category as "STUDIO" | "DRESS" | "MAKEUP"];
+    studio: "촬영",
+    dress: "드레스",
+    makeup: "메이크업"
+  ***REMOVED***[category as "studio" | "dress" | "makeup"];
 
   if (isLoading) ***REMOVED***
     return <div>로딩중...</div>;
