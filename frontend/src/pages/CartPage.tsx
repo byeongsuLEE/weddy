@@ -3,16 +3,13 @@ import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import ***REMOVED*** deleteFromCart, getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import CartListBox from "@/components/CartPage/CartListBox";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** useState ***REMOVED*** from "react";
+import ***REMOVED*** QueryClient, useMutation, useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const CartPage = () => ***REMOVED***
   const navigate = useNavigate();
-
-  const [studioList, setStudioList] = useState<Product[]>([]);
-  const [dressList, setDressList] = useState<Product[]>([]);
-  const [makeupList, setMakeupList] = useState<Product[]>([]);
+  const queryClient = new QueryClient();
 
   const [selectedList, setSelectedList] = useState<***REMOVED*** [type: string]: Product | null ***REMOVED***>(***REMOVED***
     STUDIO: null,
@@ -22,13 +19,15 @@ const CartPage = () => ***REMOVED***
 
   const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
 
-  useEffect(() => ***REMOVED***
-    if (Array.isArray(cartList)) ***REMOVED***
-      setStudioList(cartList.filter((item: Product) => item.type === "STUDIO"));
-      setDressList(cartList.filter((item: Product) => item.type === "DRESS"));
-      setMakeupList(cartList.filter((item: Product) => item.type === "MAKEUP"));
+  const deleteMutation = useMutation(deleteFromCart, ***REMOVED***
+    onSuccess: () => ***REMOVED***
+      queryClient.invalidateQueries("getCartItems");
     ***REMOVED***
-  ***REMOVED***, [cartList]);
+  ***REMOVED***)
+  
+  const handleRemoveItem = (productId: string) => ***REMOVED***
+    deleteMutation.mutate(productId);
+  ***REMOVED***
 
   //== 총 가격 계산 ==//
   const totalAmount = Object.values(selectedList).reduce((acc, item) => acc + (Number(item?.price) || 0), 0).toLocaleString();
@@ -48,43 +47,21 @@ const CartPage = () => ***REMOVED***
     navigate("/contract/list");
   ***REMOVED***;
 
-  const deleteCartItem = async(category: string, id: string) => ***REMOVED***
-    if (category === 'STUDIO') ***REMOVED***
-      setStudioList(studioList.filter((item) => item.id !== id));
-    ***REMOVED*** else if (category === 'DRESS') ***REMOVED***
-      setDressList(dressList.filter((item) => item.id !== id));
-    ***REMOVED*** else if (category === 'MAKEUP') ***REMOVED***
-      setMakeupList(makeupList.filter((item) => item.id !== id));
-    ***REMOVED***
-
-    await deleteFromCart(id);
-  ***REMOVED***;
-
   return (
     <div className="flex flex-col relative">
       <div className="m-5 flex flex-col items-center">
 
-        <CartListBox
-          category="STUDIO"
-          productList=***REMOVED***studioList***REMOVED***
+        ***REMOVED***['STUDIO', 'DRESS', 'MAKEUP'].map((category: string) => (
+          <CartListBox
+          key=***REMOVED***category***REMOVED***
+          category=***REMOVED***category***REMOVED***
+          productList=***REMOVED***cartList?.filter((item: Product) => item.type === category)***REMOVED***
           selectedList=***REMOVED***selectedList***REMOVED***
           onProductChange=***REMOVED***handleProductChange***REMOVED***
-          onRemove=***REMOVED***deleteCartItem***REMOVED***
-        />
-        <CartListBox
-          category="DRESS"
-          productList=***REMOVED***dressList***REMOVED***
-          selectedList=***REMOVED***selectedList***REMOVED***
-          onProductChange=***REMOVED***handleProductChange***REMOVED***
-          onRemove=***REMOVED***deleteCartItem***REMOVED***
-        />
-        <CartListBox
-          category="MAKEUP"
-          productList=***REMOVED***makeupList***REMOVED***
-          selectedList=***REMOVED***selectedList***REMOVED***
-          onProductChange=***REMOVED***handleProductChange***REMOVED***
-          onRemove=***REMOVED***deleteCartItem***REMOVED***
-        />
+          onRemove=***REMOVED***handleRemoveItem***REMOVED***
+          />
+        ))***REMOVED***
+
       </div>
       
       <div className="flex justify-end mr-10 mt-14">

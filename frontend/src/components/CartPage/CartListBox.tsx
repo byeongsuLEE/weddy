@@ -8,10 +8,10 @@ import CartBox from "./CartBox";
 
 interface CartListBoxProps ***REMOVED***
   category: string;
-  productList: Product[];
+  productList?: Product[];
   selectedList: ***REMOVED*** [type: string]: Product | null ***REMOVED***;
   onProductChange: (category: string, product: Product | null) => void;
-  onRemove: (category: string, id: string) => void;
+  onRemove: (productId: string) => void;
 ***REMOVED***
 
 const CartListBox = (***REMOVED*** category, productList, selectedList, onProductChange, onRemove ***REMOVED***: CartListBoxProps) => ***REMOVED***
@@ -24,7 +24,7 @@ const CartListBox = (***REMOVED*** category, productList, selectedList, onProduc
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => ***REMOVED***
-    setIsChecked(!!productList.length);
+    setIsChecked(!!productList?.length);
   ***REMOVED***, [productList]);
 
   const handleProductSelect = (product: Product | null) => ***REMOVED***
@@ -79,13 +79,13 @@ const CartListBox = (***REMOVED*** category, productList, selectedList, onProduc
         </div>
       </AccordionSummary>
       ***REMOVED***isChecked ? (
-        productList.map((item: Product, index) => (
+        productList?.map((item: Product, index) => (
           <div key=***REMOVED***index***REMOVED***>
             <CartBox
               item=***REMOVED***item***REMOVED***
               isSelected=***REMOVED***selectedList[category]?.id === item.id***REMOVED***
               onProductSelect=***REMOVED***handleProductSelect***REMOVED***
-              onRemove=***REMOVED***() => onRemove(category, item.id)***REMOVED***
+              onRemove=***REMOVED***() => onRemove(item.id)***REMOVED***
             />
           </div>
         ))
