@@ -8,15 +8,22 @@ import com.example.user.common.config.KafkaTopicProperties;
 import com.example.user.user.entity.UserEntity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
+
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 
 import java.util.List;
 import java.util.concurrent.*;
 
 @Service
+@Slf4j
 public class CartServiceImpl implements CartService ***REMOVED***
 
 
@@ -50,7 +57,7 @@ public class CartServiceImpl implements CartService ***REMOVED***
     public List<CartProductDto> getCart(UserEntity userEntity) ***REMOVED***
         try ***REMOVED***
             // 1. 상품 ID 목록을 가져옵니다.
-            List<Long> productIds = cartRepository.findCartIdsByUserId(userEntity.getId());
+            List<Long> productIds = cartRepository.findAllProductIdByUserId(userEntity.getId());
 
             // 2. 고유한 요청 ID를 생성합니다. 이를 통해 요청과 응답을 매칭할 수 있습니다.
             String correlationId = "cart-request-" + userEntity.getId();
@@ -63,6 +70,7 @@ public class CartServiceImpl implements CartService ***REMOVED***
 
             // 5. Kafka에 요청 전송 (productIds 목록을 JSON으로 직렬화하여 전송)
             String jsonRequest = objectMapper.writeValueAsString(productIds);
+            log.info("로그 출력:***REMOVED******REMOVED***",jsonRequest);
             String topic = kafkaTopicProperties.getCartRequestTopic().getName();
             kafkaTemplate.send(topic, correlationId, jsonRequest);
 
@@ -80,9 +88,17 @@ public class CartServiceImpl implements CartService ***REMOVED***
     ***REMOVED***
 
 
+
+
     @KafkaListener(topics = "#***REMOVED***@kafkaTopicProperties.cartResponseTopic.name***REMOVED***", groupId = "cart-response-group")
-    public void onResponseReceived(String correlationId, String jsonResponse) ***REMOVED***
+    public void onResponseReceived(
+            @Header(KafkaHeaders.RECEIVED_KEY) String correlationId, // Key를 Header로 받아옴
+            String jsonResponse
+    ) ***REMOVED***
+        log.info("correlationId : ***REMOVED******REMOVED***, jsonResponse : ***REMOVED******REMOVED***", correlationId, jsonResponse);
         CompletableFuture<List<CartProductDto>> future = pendingRequests.get(correlationId);
+        log.info("들어옴?***REMOVED******REMOVED***", future == null ? "no" : "yes");
+
         if (future != null) ***REMOVED***
             try ***REMOVED***
                 // JSON 문자열을 List<CartResponseDto>로 변환
@@ -90,12 +106,14 @@ public class CartServiceImpl implements CartService ***REMOVED***
                         jsonResponse,
                         new TypeReference<List<CartProductDto>>() ***REMOVED******REMOVED*** // List 타입을 명확하게 지정
                 );
+                log.info("받은 로그 출력***REMOVED******REMOVED***", responseList);
                 future.complete(responseList);
             ***REMOVED*** catch (Exception e) ***REMOVED***
                 future.completeExceptionally(e);
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***
+
 
 ***REMOVED***
 
