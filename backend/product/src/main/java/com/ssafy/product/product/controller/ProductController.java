@@ -1,11 +1,12 @@
 package com.ssafy.product.product.controller;
 
+import com.ssafy.product.global.util.response.ApiResponse;
 import com.ssafy.product.product.dto.request.ProductRegistRequestDto;
 import com.ssafy.product.product.dto.request.ReviewRequestDto;
 import com.ssafy.product.product.dto.response.ProductResponseDto;
 import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.service.ProductService;
-import com.ssafy.product.global.util.response.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,11 @@ public class ProductController ***REMOVED***
     ***REMOVED***
 
     @PostMapping("/***REMOVED***product_id***REMOVED***/review")
-    public ResponseEntity<ApiResponse<ReviewResponseDto>> registReviewByProductId(@RequestBody ReviewRequestDto reviewRequestDto, @PathVariable("product_id") Long productId) ***REMOVED***
+    public ResponseEntity<ApiResponse<ReviewResponseDto>> registReviewByProductId(@RequestBody ReviewRequestDto reviewRequestDto,
+                                                                                  @PathVariable("product_id") Long productId,
+                                                                                  HttpServletRequest request) ***REMOVED***
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.success(HttpStatus.CREATED,productService.registerReview(reviewRequestDto,productId),"리뷰 등록"));
+                .body(ApiResponse.success(HttpStatus.CREATED,productService.registerReview(reviewRequestDto,productId,request),"리뷰 등록"));
 
     ***REMOVED***
 

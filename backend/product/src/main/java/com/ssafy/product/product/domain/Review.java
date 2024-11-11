@@ -46,8 +46,8 @@ public class Review ***REMOVED***
     ***REMOVED***
 
     @Builder
-    public Review(ReviewRequestDto reviewRequestDto, Product product) ***REMOVED***
-        this.userId = 1L;
+    public Review(ReviewRequestDto reviewRequestDto, Product product, Long userId) ***REMOVED***
+        this.userId = userId;
         this.content = reviewRequestDto.content();
         this.score = reviewRequestDto.score();
         this.product = product;

@@ -3,6 +3,7 @@ package com.ssafy.product.product.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.product.global.s3.S3Uploader;
+import com.ssafy.product.global.util.JwtUtil;
 import com.ssafy.product.global.util.RedisUtil;
 import com.ssafy.product.global.util.exception.ImageInvalidException;
 import com.ssafy.product.global.util.exception.ProductNotFoundExpception;
@@ -18,6 +19,7 @@ import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.repository.ProductImageRepository;
 import com.ssafy.product.product.repository.ProductRepository;
 import com.ssafy.product.product.repository.ReviewRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     private final RedisUtil redisUtil;
     private final SyncService syncService;
     private final ObjectMapper mapper;
+    private final JwtUtil jwtUtil;
 
     @Override
     public List<ProductResponseDto> getList() ***REMOVED***
@@ -81,9 +84,10 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     @Override
     @Transactional
-    public ReviewResponseDto registerReview(final ReviewRequestDto reviewRequestDto, final Long productId) ***REMOVED***
+    public ReviewResponseDto registerReview(final ReviewRequestDto reviewRequestDto, final Long productId, final HttpServletRequest request) ***REMOVED***
         Product product = productIsPresent(productId);
-        Review review = reviewRepository.save(Review.builder().reviewRequestDto(reviewRequestDto).product(product).build());
+        Long userId = jwtUtil.getUserId(jwtUtil.resolveToken(request));
+        Review review = reviewRepository.save(Review.builder().reviewRequestDto(reviewRequestDto).product(product).userId(userId).build());
         ReviewResponseDto reviewResponse = review.getReview(review,product);
         syncService.syncToReadDatabaseAsync(KeyType.REVIEW, productId,reviewResponse);
         return review.getReview(review,product);
