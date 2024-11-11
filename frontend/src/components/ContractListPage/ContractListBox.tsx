@@ -33,7 +33,7 @@ const ContractListBox = (***REMOVED*** type, NftData, contractInfo ***REMOVED***
 
   const goNFT = () => ***REMOVED***
     if (NftData) ***REMOVED***
-      window.location.href = NftData?.image;
+      window.open(NftData?.image);
     ***REMOVED***
   ***REMOVED***;
 
