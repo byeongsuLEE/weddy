@@ -10,14 +10,14 @@ export const getToken = async (userId?: string): Promise<void> => ***REMOVED***
     url: `$***REMOVED***BASE_URL***REMOVED***/token/super`,
     params: ***REMOVED***
       id: userId,
-    ***REMOVED***
+    ***REMOVED***,
   ***REMOVED***);
 
   if (userId) ***REMOVED***
     sessionStorage.setItem("userId", userId);
     sessionStorage.setItem("token", response.data.accessToken);
     sessionStorage.setItem("refreshToken", response.data.refreshToken);
-  ***REMOVED***;
+  ***REMOVED***
 ***REMOVED***;
 
 //== 로그아웃 ==//
@@ -26,7 +26,7 @@ export const logout = () => ***REMOVED***
     method: "post",
     url: `$***REMOVED***BASE_URL***REMOVED***/logout`,
     headers: ***REMOVED***
-      Authorization: sessionStorage.getItem("token")
+      Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
   ***REMOVED***);
 ***REMOVED***;
@@ -37,7 +37,7 @@ export const getUserInfo = async (): Promise<userInformation[]> => ***REMOVED***
     method: "get",
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: sessionStorage.getItem("token")
+      Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
   ***REMOVED***);
   console.log(response.data.data);
@@ -52,13 +52,15 @@ export const editProfile = async (file: FormData): Promise<void> => ***REMOVED**
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
-    data: file
-    ***REMOVED***);
-    console.log(response.data);
-  ***REMOVED***;
+    data: file,
+  ***REMOVED***);
+  console.log(response.data);
+***REMOVED***;
 
 //== 회원 정보 수정 ==//
-export const editInformation = async ( userInfo?: userInformation ): Promise<void> => ***REMOVED***
+export const editInformation = async (
+  userInfo?: userInformation
+): Promise<void> => ***REMOVED***
   console.log(userInfo);
   // await axios(***REMOVED***
   //   method: "patch",
@@ -75,6 +77,10 @@ export const saveFcmToken = async (
   fcmToken: string,
   userId: string
 ): Promise<void> => ***REMOVED***
+export const saveFcmToken = async (
+  fcmToken: string,
+  userId: string
+): Promise<void> => ***REMOVED***
   await axios(***REMOVED***
     method: "patch",
     url: `$***REMOVED***BASE_URL***REMOVED***/fcm-token/$***REMOVED***userId***REMOVED***`,
@@ -83,6 +89,7 @@ export const saveFcmToken = async (
       sessionStorage.getItem("token"),
       "Content-Type": "application/json",
     ***REMOVED***,
+    data: ***REMOVED*** fcmToken: fcmToken ***REMOVED***,
     data: ***REMOVED*** fcmToken: fcmToken ***REMOVED***,
   ***REMOVED***);
 ***REMOVED***;
@@ -99,4 +106,4 @@ export const getFcmToken = async (coupleCode: string): Promise<string> => ***REM
     ***REMOVED***,
   ***REMOVED***);
   return response.data.data;
-***REMOVED***
+***REMOVED***;
