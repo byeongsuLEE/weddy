@@ -19,14 +19,9 @@ const ContractList = () => ***REMOVED***
   
   return (
     <div className="mt-12 mb-32 mx-5">
-      ***REMOVED***/* ***REMOVED***contractList?.map((contract: ContractData) => (
-        <ContractListBox key=***REMOVED***contract.id***REMOVED*** type=***REMOVED***contract.product.type***REMOVED*** contractInfo=***REMOVED***contract***REMOVED*** />
-      ))***REMOVED*** */***REMOVED***
-
       <ContractListBox type="STUDIO" contractInfo=***REMOVED***studioContract***REMOVED***/>
       <ContractListBox type="DRESS" contractInfo=***REMOVED***dressContract***REMOVED***/>
       <ContractListBox type="MAKEUP" contractInfo=***REMOVED***makeupContract***REMOVED***/>
-
     </div>
   );
 ***REMOVED***;

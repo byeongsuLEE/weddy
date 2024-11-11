@@ -5,29 +5,40 @@ import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from
 import ***REMOVED*** allProducts ***REMOVED*** from "@/api/productApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** useSearchParams ***REMOVED*** from "react-router-dom";
 
 const Board = () => ***REMOVED***
-  const [productList, setProductList] = useState<Product[]>([]);
   const [filteredProductList, setFilteredProductList] = useState<Product[]>([]);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
-  const [studioList, setStudioList] = useState<Product[]>([]);
-  const [dressList, setDressList] = useState<Product[]>([]);
-  const [makeupList, setMakeupList] = useState<Product[]>([]);
 
-  const ***REMOVED*** data: allProductList ***REMOVED*** = useQuery('allProducts', allProducts);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category") || "studio";
 
-  const handleRegionSelect = (value: string) => ***REMOVED***
-    setSelectedRegion(value);
+  const ***REMOVED*** data: allProductList = [] ***REMOVED*** = useQuery('allProducts', allProducts);
+
+  const handleTabChange = (value: string) => setSearchParams(***REMOVED*** category: value ***REMOVED***);
+
+  const handleRegionSelect = (value: string) => setSelectedRegion(value);
+
+  const handlePriceSelect = (value: string) => setSelectedPrice(parseInt(value.replace(/,/g, ""), 10));
+
+  // 필터링 로직 함수
+  const filterProducts = () => ***REMOVED***
+    return allProductList.filter((product: Product) => ***REMOVED***
+      const matchesRegion = selectedRegion ? product.address.includes(selectedRegion) : true;
+      const matchesPrice = selectedPrice ? Number(product.price) <= selectedPrice : true;
+      return matchesRegion && matchesPrice;
+    ***REMOVED***);
   ***REMOVED***;
 
-  const handlePriceSelect = (value: string) => ***REMOVED***
-    const price = parseInt(value.replace(/,/g, ""), 10);
-    setSelectedPrice(price);
-  ***REMOVED***;
+  // 필터링된 리스트 업데이트
+  useEffect(() => ***REMOVED***
+    setFilteredProductList(filterProducts());
+  ***REMOVED***, [selectedPrice, selectedRegion, allProductList]);
 
-  // Dummy data
-  const regions = [
+   // Dummy data
+   const regions = [
     ***REMOVED*** value: "서울", label: "서울" ***REMOVED***,
     ***REMOVED*** value: "부산", label: "부산" ***REMOVED***,
     ***REMOVED*** value: "대구", label: "대구" ***REMOVED***,
@@ -43,36 +54,9 @@ const Board = () => ***REMOVED***
     ***REMOVED*** value: "15000000", label: "15,000,000" ***REMOVED***,
   ];
 
-  useEffect(() => ***REMOVED***
-    if (allProductList) ***REMOVED***
-      setProductList(allProductList);
-      setFilteredProductList(allProductList);
-    ***REMOVED***
-  ***REMOVED***, [allProductList]);
-
-  useEffect(() => ***REMOVED***
-    if (productList) ***REMOVED***
-      const filtered = productList.filter((product: Product) => ***REMOVED***
-        const matchesRegion = selectedRegion ? product.address.includes(selectedRegion) : true;
-        const matchesPrice = selectedPrice ? Number(product.price) <= selectedPrice : true;
-        
-        return matchesRegion && matchesPrice;
-      ***REMOVED***);
-      setFilteredProductList(filtered);
-    ***REMOVED***
-  ***REMOVED***, [selectedPrice, selectedRegion, productList]);
-
-  useEffect(() => ***REMOVED***
-    if (filteredProductList) ***REMOVED***
-      setStudioList(filteredProductList.filter((product: Product) => product.type === "STUDIO"));
-      setDressList(filteredProductList.filter((product: Product) => product.type === "DRESS"));
-      setMakeupList(filteredProductList.filter((product: Product) => product.type === "MAKEUP"));
-    ***REMOVED***
-  ***REMOVED***, [filteredProductList]);
-
   return (
     <div className="mb-20 mt-5">
-      <Tabs defaultValue="studio">
+      <Tabs defaultValue=***REMOVED***category***REMOVED*** onValueChange=***REMOVED***handleTabChange***REMOVED***>
         <TabsList className="flex justify-center">
           <TabsTrigger value="studio">스튜디오</TabsTrigger>
           <TabsTrigger value="dress">드레스</TabsTrigger>
@@ -84,17 +68,14 @@ const Board = () => ***REMOVED***
           <ComboboxDemo lists=***REMOVED***prices***REMOVED*** title="가격" onSelect=***REMOVED***handlePriceSelect***REMOVED*** />
         </div>
 
-        <TabsContent value="studio">
-          <SDMList value="studio" productList=***REMOVED***studioList***REMOVED*** />
-        </TabsContent>
-
-        <TabsContent value="dress">
-          <SDMList value="dress" productList=***REMOVED***dressList***REMOVED*** />
-        </TabsContent>
-
-        <TabsContent value="makeup">
-          <SDMList value="makeup" productList=***REMOVED***makeupList***REMOVED*** />
-        </TabsContent>
+        ***REMOVED***["studio", "dress", "makeup"].map((type) => (
+          <TabsContent key=***REMOVED***type***REMOVED*** value=***REMOVED***type***REMOVED***>
+            <SDMList
+              value=***REMOVED***type***REMOVED***
+              productList=***REMOVED***filteredProductList.filter((product) => product.type === type.toUpperCase())***REMOVED***
+            />
+          </TabsContent>
+        ))***REMOVED***
       </Tabs>
     </div>
   );

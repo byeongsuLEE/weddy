@@ -51,7 +51,7 @@ const Schedule = () => ***REMOVED***
         ***REMOVED***)***REMOVED***
       </div>
 
-      <div></div>
+      ***REMOVED***/* <div></div> */***REMOVED***
 
       ***REMOVED***!scheduleList || scheduleList?.length <= 0 ? (
         <ScheduleBox type="etc" title="일정이 없습니다." />

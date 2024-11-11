@@ -41,28 +41,26 @@ export const detailProduct = async (productId?: string): Promise<Product> => ***
 
 //== 상품 담기 ==//
 export const addProductToCart = async (productId?: string): Promise<void> => ***REMOVED***
-  console.log(productId);
-  // const response = await axios(***REMOVED***
-  //   method: 'post',
-  //   url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
-  //   headers: ***REMOVED***
-  //     Authorization: sessionStorage.getItem('token')
-  //   ***REMOVED***
-  // ***REMOVED***);
-  // console.log(response.data);
+  const response = await axios(***REMOVED***
+    method: 'post',
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
+    headers: ***REMOVED***
+      Authorization: sessionStorage.getItem('token')
+    ***REMOVED***
+  ***REMOVED***);
+  console.log(response.data);
 ***REMOVED***;
 
 //== 장바구니 삭제 ==//
 export const deleteFromCart = async (productId?: string): Promise<void> => ***REMOVED***
-  console.log(productId);
-  // const response = await axios(***REMOVED***
-  //   method: 'delete',
-  //   url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
-  //   headers: ***REMOVED***
-  //     Authorization: sessionStorage.getItem('token')
-  //   ***REMOVED***
-  // ***REMOVED***);
-  // console.log(response.data);
+  const response = await axios(***REMOVED***
+    method: 'delete',
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***/cart`,
+    headers: ***REMOVED***
+      Authorization: sessionStorage.getItem('token')
+    ***REMOVED***
+  ***REMOVED***);
+  console.log(response.data);
 ***REMOVED***;
 
 //== 장바구니 리스트 조회 ==//
