@@ -33,7 +33,7 @@ const Review = () => ***REMOVED***
   //== 리뷰 등록 ==//
   const handleSubmit = async () => ***REMOVED***
     await submitReview(reviewData, productId);
-    // navigate('/');
+    navigate('/');
   ***REMOVED***;
 
   return (
