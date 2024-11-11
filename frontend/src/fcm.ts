@@ -6,11 +6,17 @@ admin.initializeApp(***REMOVED***
   credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
 ***REMOVED***);
 
+
+
 export const sendPushNotification = async (
   token: string,
   title: string,
   body: string
 ) => ***REMOVED***
+  console.log("Token:", token);
+  console.log("Title:", title);
+  console.log("Body:", body);
+
   const message = ***REMOVED***
     notification: ***REMOVED***
       title,

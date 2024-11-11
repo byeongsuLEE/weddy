@@ -21,12 +21,13 @@ import Review from "./pages/ReviewPage";
 import Schedule from "./pages/SchedulePage";
 import Sketch from "./pages/SketchPage";
 import UserInfo from "./pages/UserInfoPage";
-import DressSketch from "./pages/DressSketchPage.tsx";
-import DressImg from "./pages/DressImgPage.tsx";
+import DressSketch from "./pages/DressSketchPage";
+import DressImg from "./pages/DressImgPage";
 import ***REMOVED*** useRecoilValue ***REMOVED*** from "recoil";
-import ***REMOVED*** firebaseTokenState ***REMOVED*** from "./store/firebaseToken.ts";
+import ***REMOVED*** firebaseTokenState ***REMOVED*** from "./store/firebaseToken";
 import ***REMOVED*** useEffect ***REMOVED*** from "react";
-import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi.ts";
+import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi";
+import ***REMOVED*** onMessageListener ***REMOVED*** from "./firebase"; // 정확한 경로로 수정하세요
 
 function AppContent() ***REMOVED***
   const location = useLocation();
@@ -71,12 +72,24 @@ function App() ***REMOVED***
   const queryClient = new QueryClient();
 
   useEffect(() => ***REMOVED***
+    // FCM 토큰 저장
     if (userId && fcmToken) ***REMOVED***
       saveFcmToken(fcmToken, userId);
       console.log("fcmToken saved");
     ***REMOVED***
+
+    // 포그라운드 메시지 리스너 설정
+    const initializeMessageListener = async () => ***REMOVED***
+      try ***REMOVED***
+        const payload = await onMessageListener();
+        console.log("Foreground message received:", payload);
+      ***REMOVED*** catch (error) ***REMOVED***
+        console.error("Error in foreground message listener:", error);
+      ***REMOVED***
+    ***REMOVED***;
+
+    initializeMessageListener();
   ***REMOVED***, [userId, fcmToken]);
-  
 
   return (
     <div className="container">

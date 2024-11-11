@@ -81,9 +81,16 @@ export const onMessageListener = (): Promise<MessagePayload> => ***REMOVED***
   return new Promise((resolve) => ***REMOVED***
     onMessage(messaging, (payload: MessagePayload) => ***REMOVED***
       console.log("Message received in foreground:", payload);
-      if (payload.data) ***REMOVED***
-        alert(`Title: $***REMOVED***payload.data.title***REMOVED***\nBody: $***REMOVED***payload.data.body***REMOVED***`);
+
+      // 알림이 브라우저에서 지원되는지 확인 후, 수동으로 알림 표시
+      if (Notification.permission === "granted") ***REMOVED***
+        const ***REMOVED*** title, body ***REMOVED*** = payload.notification || ***REMOVED*** title: "No title", body: "No body" ***REMOVED***;
+        console.log("payload:",payload)
+        new Notification(title, ***REMOVED*** body ***REMOVED***);
+      ***REMOVED*** else ***REMOVED***
+        console.warn("Notification permission not granted.");
       ***REMOVED***
+
       resolve(payload);
     ***REMOVED***);
   ***REMOVED***);

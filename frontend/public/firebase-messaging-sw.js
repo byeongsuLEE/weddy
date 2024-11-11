@@ -19,28 +19,29 @@ firebase.initializeApp(***REMOVED***
 const messaging = firebase.messaging();
 
 // 백그라운드 메시지 수신 핸들러
-self.addEventListener("push", function (event) ***REMOVED***
-  console.log("Push event received:", event);
+// self.addEventListener("push", function (event) ***REMOVED***
+//   console.log("Push event received:", event);
 
-  let data = ***REMOVED*** title: "기본 제목", body: "기본 내용" ***REMOVED***;
+//   let data = ***REMOVED*** title: "기본 제목", body: "기본 내용" ***REMOVED***;
 
-  if (!event.data) return;
-  if (event.data) ***REMOVED***
-    try ***REMOVED***
-      data = JSON.parse(event.data.text());
-    ***REMOVED*** catch (e) ***REMOVED***
-      console.error("Push data JSON parse error:", e);
-    ***REMOVED***
-  ***REMOVED***
+//   if (!event.data) return;
+//   if (event.data) ***REMOVED***
+//     try ***REMOVED***
+//       data = JSON.parse(event.data.text());
+//     ***REMOVED*** catch (e) ***REMOVED***
+//       console.error("Push data JSON parse error:", e);
+//     ***REMOVED***
+//   ***REMOVED***
 
-  const options = ***REMOVED***
-    body: data.body,
-    icon: "/default-icon.png",
-  ***REMOVED***;
+//   const options = ***REMOVED***
+//     title: data.title,
+//     body: data.body,
+//     icon: "/default-icon.png",
+//   ***REMOVED***;
 
-  console.log("Attempting to show notification:", data.title, options);
-  event.waitUntil(self.registration.showNotification(data.title, options));
-***REMOVED***);
+//   console.log("Attempting to show notification:", data.title, options);
+//   event.waitUntil(self.registration.showNotification(data.title, options));
+// ***REMOVED***);
 
 // PWA 캐싱 설정
 const CACHE_NAME = "weddy-cache-v1";
