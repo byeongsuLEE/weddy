@@ -1,6 +1,6 @@
 import ***REMOVED*** getToken, getUserInfo ***REMOVED*** from "@/api/userApi";
-// import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from "@/firebase";
-// import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
+import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from "@/firebase";
+import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** useLocation, useNavigate ***REMOVED*** from "react-router-dom";

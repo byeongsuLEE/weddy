@@ -53,40 +53,24 @@ export const editProfile = async (file: FormData): Promise<void> => ***REMOVED**
     ***REMOVED***,
     data: file,
   ***REMOVED***);
-  console.log(response.data);
 ***REMOVED***;
-    data: file
-    ***REMOVED***);
-
-    alert("프로필 사진이 변경되었습니다.");
-  ***REMOVED***;
 
 //== 회원 정보 수정 ==//
 export const editInformation = async (
   userInfo?: userInformation
 ): Promise<void> => ***REMOVED***
-  console.log(userInfo);
-  // await axios(***REMOVED***
-  //   method: "patch",
-  //   url: BASE_URL,
-  //   headers: ***REMOVED***
-  //     Authorization: sessionStorage.getItem("token"),
-  //   ***REMOVED***,
-  //   data: userInfo
-  // ***REMOVED***);
-export const editInformation = async ( userInfo?: userInformation ): Promise<void> => ***REMOVED***
   await axios(***REMOVED***
     method: "patch",
     url: BASE_URL,
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
-    data: userInfo
+    data: userInfo,
   ***REMOVED***);
   alert("회원 정보가 수정되었습니다.");
 ***REMOVED***;
 
-//fcm 토큰 저장
+//== FCM 토큰 저장 ==//
 export const saveFcmToken = async (
   fcmToken: string,
   userId: string
@@ -102,7 +86,7 @@ export const saveFcmToken = async (
   ***REMOVED***);
 ***REMOVED***;
 
-// 커플코드로 fcm 토큰 조회
+//== 커플코드로 FCM 토큰 조회 ==//
 export const getFcmToken = async (coupleCode: string): Promise<string> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
