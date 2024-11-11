@@ -75,7 +75,8 @@ function App() ***REMOVED***
       saveFcmToken(fcmToken, userId);
       console.log("fcmToken saved");
     ***REMOVED***
-  ***REMOVED***);
+  ***REMOVED***, [userId, fcmToken]);
+  
 
   return (
     <div className="container">
