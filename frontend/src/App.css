@@ -1,0 +1,71 @@
+.canvas ***REMOVED***
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+***REMOVED***
+
+.toggle-container ***REMOVED***
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  pointer-events: auto;
+  width: 90%;
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+***REMOVED***
+
+.toggle-title ***REMOVED***
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+***REMOVED***
+
+.toggle-group ***REMOVED***
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 15px;
+***REMOVED***
+
+.toggle-group h4 ***REMOVED***
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+***REMOVED***
+
+.toggle-button ***REMOVED***
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid #FF0000;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.2s ease;
+  width: 60px;
+***REMOVED***
+
+.toggle-button.active ***REMOVED***
+  border-color: #00FF00;
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.3);
+***REMOVED***
+
+.toggle-button-image ***REMOVED***
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+***REMOVED***
+
+.toggle-button-label ***REMOVED***
+  margin-top: 5px;
+  font-size: 0.9em;
+***REMOVED***

@@ -71,17 +71,23 @@ export const editInformation = async ( userInfo?: userInformation ): Promise<voi
 ***REMOVED***;
 
 //fcm 토큰 저장
-export const saveFcmToken = async (fcmToken: string, userId:string): Promise<void> => ***REMOVED***
+export const saveFcmToken = async (
+  fcmToken: string,
+  userId: string
+): Promise<void> => ***REMOVED***
   await axios(***REMOVED***
     method: "patch",
     url: `$***REMOVED***BASE_URL***REMOVED***/fcm-token/$***REMOVED***userId***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: sessionStorage.getItem("token"),
-      'Content-Type': 'text/plain',
+      Authorization:
+      sessionStorage.getItem("token"),
+      "Content-Type": "application/json",
     ***REMOVED***,
-    data: fcmToken 
+    data: ***REMOVED*** fcmToken: fcmToken ***REMOVED***,
   ***REMOVED***);
-***REMOVED***
+***REMOVED***;
+
+
 
 // 커플코드로 fcm 토큰 조회
 export const getFcmToken = async (coupleCode: string): Promise<string> => ***REMOVED***
