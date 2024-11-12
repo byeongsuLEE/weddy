@@ -1,5 +1,5 @@
+import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/cartApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import RecommendBox from "@/components/PlannerPage/RecommendBox";
 import ***REMOVED*** RadioGroup ***REMOVED*** from "@/components/ui/radio-group";

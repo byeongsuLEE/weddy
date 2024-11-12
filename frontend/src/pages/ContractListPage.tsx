@@ -25,6 +25,7 @@ const ContractList = () => ***REMOVED***
   useEffect(() => ***REMOVED***
     const update = async () => ***REMOVED***
       const myNFT = await getNFT();
+      console.log(myNFT);
       setNftLIst(myNFT);
     ***REMOVED***;
     update();

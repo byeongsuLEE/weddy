@@ -26,13 +26,14 @@ export const metadataUpload = async (imageCID: string, contract?: ContractData):
   if (!contract) ***REMOVED***
     return '';
   ***REMOVED***
+  console.log(imageCID);
 
   const metadata = ***REMOVED***
     name: contract.product.productName,
     description: contract.product.productContent,
     contractId: contract.id,
     type: contract.product.type,
-    image: `https://ipfs.io/ipfs/$***REMOVED***imageCID***REMOVED***`
+    image: `https://fuchsia-changing-flamingo-499.mypinata.cloud/ipfs/$***REMOVED***imageCID***REMOVED***`
   ***REMOVED***;
 
   const response = await axios(***REMOVED***
