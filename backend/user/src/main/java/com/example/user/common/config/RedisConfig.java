@@ -36,18 +36,17 @@ public class RedisConfig ***REMOVED***
     ***REMOVED***
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() ***REMOVED***
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>(); // RedisTemplate 인스턴스 생성
-        redisTemplate.setConnectionFactory(redisConnectionFactory()); // Redis 연결 팩토리 설정
+    public RedisTemplate<String, String> userRedisTemplate() ***REMOVED***
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
 
         // 키와 값 직렬화 설정
         StringRedisSerializer stringSerializer = new StringRedisSerializer();
-
+        redisTemplate.setKeySerializer(stringSerializer); // 일반 키를 문자열로 직렬화
         redisTemplate.setHashKeySerializer(stringSerializer); // 해시 키를 문자열로 직렬화
-        redisTemplate.setHashValueSerializer(stringSerializer); // 해시 값을 JSON으로 직렬화
-        redisTemplate.setHashKeySerializer(stringSerializer); // 키를 문자열이 아닌 숫자로 저장할 수 있도록 설정
+        redisTemplate.setHashValueSerializer(stringSerializer); // 해시 값을 문자열로 직렬화
 
         redisTemplate.afterPropertiesSet();
-        return redisTemplate; // 설정이 완료된 RedisTemplate 인스턴스를 반환
+        return redisTemplate;
     ***REMOVED***
 ***REMOVED***

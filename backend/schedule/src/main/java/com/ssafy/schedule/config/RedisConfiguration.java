@@ -17,7 +17,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @RequiredArgsConstructor
 @EnableRedisRepositories // Redis 레포지토리 기능 활성화
-public class RedisConfiguration ***REMOVED***
+public class    RedisConfiguration ***REMOVED***
     @Value("$***REMOVED***spring.redis.schedule.host***REMOVED***")
     private String host;
     @Value("$***REMOVED***spring.redis.schedule.port***REMOVED***")

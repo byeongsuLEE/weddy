@@ -2,10 +2,12 @@ package com.ssafy.schedule.framework.kafkaadapter;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.schedule.application.outputport.ScheduleOutPutPort;
 import com.ssafy.schedule.application.usecase.CreateScheduleUsecase;
 import com.ssafy.schedule.domain.event.EventResult;
 import com.ssafy.schedule.domain.event.EventType;
 import com.ssafy.schedule.domain.event.PaymentProductInfo;
+import com.ssafy.schedule.domain.model.Schedule;
 import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
 import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -33,8 +37,8 @@ public class ScheduleConsumers ***REMOVED***
     private final CreateScheduleUsecase createScheduleUsecase;
 
     private final ScheduleEventProducer eventProducer;
-
-    private final RedisTemplate redisTemplate;
+    private final ScheduleOutPutPort scheduleOutPutPort;
+    private final RedisTemplate<String,Object> redisTemplate;
 
     @KafkaListener(topics = "$***REMOVED***consumer.topic1.name***REMOVED***",groupId = "$***REMOVED***consumer.groupid.name***REMOVED***")
     public void paymentProduct(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
@@ -63,11 +67,33 @@ public class ScheduleConsumers ***REMOVED***
         ***REMOVED***
 //        eventProducer.occurEvent(event);
 
+    ***REMOVED***
+
+    @KafkaListener(topics = "$***REMOVED***consumer.topic2.name***REMOVED***",groupId = "$***REMOVED***consumer.groupid.name***REMOVED***")
+    public void coupleCodeChange(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
+
+        log.info("커플 코드 변경 이벤트 받음  "+ record.value());
+        Map<String,String>  userData = objectMapper.readValue(record.value(), Map.class);
+        String oldCoupleCode  = userData.get("oldCoupleCode");
+        String newCoupleCode  = userData.get("newCoupleCode");
+
+        // 커플코드 변경 시 일정 정보 업데이트
+        // 기존 일정 데이터의 유저 정보를
+        scheduleOutPutPort.getSchedulesByCoupleCode(oldCoupleCode).forEach(schedule -> ***REMOVED***
+            schedule.updateCoupleCode(newCoupleCode);
+
+            String key = "SCHEDULE:"+schedule.getStartDate().toString();
+            Object scheduleInfo = redisTemplate.opsForHash().get(key, oldCoupleCode);
+            redisTemplate.opsForHash().put(key,newCoupleCode,scheduleInfo);
+            redisTemplate.opsForHash().delete(key,oldCoupleCode);
+        ***REMOVED***);
+
 
 
 
 
     ***REMOVED***
+
 
 
 ***REMOVED***

@@ -70,4 +70,22 @@ public class RedisConfig ***REMOVED***
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     ***REMOVED***
+
+
+    @Bean(name = "redisUserTemplate")
+    public RedisTemplate<String, String> redisUserTemplate() ***REMOVED***
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+
+        // 키와 값 직렬화 설정
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringSerializer); // 일반 키를 문자열로 직렬화
+        redisTemplate.setHashKeySerializer(stringSerializer); // 해시 키를 문자열로 직렬화
+        redisTemplate.setHashValueSerializer(stringSerializer); // 해시 값을 문자열로 직렬화
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    ***REMOVED***
+
+
 ***REMOVED***
