@@ -1,5 +1,6 @@
 package com.ssafy.schedule.framework.web.dto.output;
 
+import com.ssafy.schedule.domain.event.ProductType;
 import com.ssafy.schedule.domain.model.ContractType;
 import com.ssafy.schedule.domain.model.Schedule;
 import lombok.Builder;
@@ -14,7 +15,7 @@ public class ScheduleOutputDto ***REMOVED***
     // front로 보내는 response랑 같음
 
     private Long id;
-    private ContractType contractType;
+    private ProductType contractType;
     private LocalDate startDate;
     private LocalDate endDate;
     private String content;

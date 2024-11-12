@@ -1,6 +1,7 @@
 package com.ssafy.schedule.domain.model;
 
 
+import com.ssafy.schedule.domain.event.ProductType;
 import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +23,8 @@ public class Schedule ***REMOVED***
 
 
     private String content ;
-    private ContractType type;
+    @Enumerated(EnumType.STRING)
+    private ProductType type;
     private Long productId;
 
     @Column(length = 10)

@@ -1,0 +1,63 @@
+plugins ***REMOVED***
+	id 'java'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.6'
+	id 'maven-publish' // maven 배포를 위한 플러그인 적용
+***REMOVED***
+
+group = 'weddy'
+version = '1.0.1'
+
+java ***REMOVED***
+	toolchain ***REMOVED***
+		languageVersion = JavaLanguageVersion.of(17)
+	***REMOVED***
+	withSourcesJar() // 소스 코드를 포함한 jar 파일 생성
+***REMOVED***
+
+configurations ***REMOVED***
+	compileOnly ***REMOVED***
+		extendsFrom annotationProcessor
+	***REMOVED***
+***REMOVED***
+
+repositories ***REMOVED***
+	mavenCentral()
+***REMOVED***
+
+dependencies ***REMOVED***
+	// nexus에 배포할 경우 종속성에 대한 버전 명시해야함
+	// 버전 명시 안하면 배포 실패
+	implementation 'org.springframework.boot:spring-boot-starter:3.3.5'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.5'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.8.2'
+***REMOVED***
+
+tasks.named('test') ***REMOVED***
+	useJUnitPlatform()
+***REMOVED***
+
+// maven 배포 설정
+publishing ***REMOVED***
+	publications ***REMOVED***
+		maven(MavenPublication)***REMOVED***
+			from components.java
+			groupId = group.toString()
+			artifactId = project.name
+			version = version
+		***REMOVED***
+	***REMOVED***
+
+	repositories ***REMOVED*** // 배포할 리포지토리 정보
+		maven ***REMOVED***
+			url = uri('http://34.47.121.214:8081/repository/maven-releases')
+			allowInsecureProtocol = true //http를 사용하기 위해 추가
+			credentials***REMOVED***
+				username = "weddy"
+				password = "weddy"
+			***REMOVED***
+		***REMOVED***
+	***REMOVED***
+***REMOVED***

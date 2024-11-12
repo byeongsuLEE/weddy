@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/cacheScheduler" />
+    <file type="web" url="file://$PROJECT_DIR$/common-lib" />
     <file type="web" url="file://$PROJECT_DIR$/product" />
     <file type="web" url="file://$PROJECT_DIR$/schedule" />
     <file type="web" url="file://$PROJECT_DIR$/user" />

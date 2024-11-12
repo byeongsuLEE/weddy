@@ -21,11 +21,22 @@ configurations ***REMOVED***
 
 repositories ***REMOVED***
     mavenCentral()
+    maven ***REMOVED***
+        url = uri('http://34.47.121.214:8081/repository/maven-releases')
+        allowInsecureProtocol = true //http를 사용하기 위해 추가
+        credentials***REMOVED***
+            username = "weddy"
+            password = "weddy"
+        ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
 
 ext ***REMOVED***
     set('springCloudVersion', "2023.0.3")
 ***REMOVED***
+
+
+
 
 dependencies ***REMOVED***
     implementation 'org.springframework.boot:spring-boot-starter-batch'
@@ -58,6 +69,9 @@ dependencies ***REMOVED***
     //localDate 직렬화
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    // 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
+    implementation 'weddy:common-lib:1.0.1'
 ***REMOVED***
 
 dependencyManagement ***REMOVED***

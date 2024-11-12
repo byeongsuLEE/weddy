@@ -2,12 +2,8 @@ package com.example.user.payment.dto.request;
 
 import com.example.user.contract.constant.ContractStatus;
 import com.example.user.contract.domain.Product;
+import com.example.user.user.dto.response.UserCoupleTokenDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,4 +38,10 @@ public class PaymentProductInfo ***REMOVED***
     private LocalDate endDate;
     private Product product;
     private String paymentId;
+    private UserCoupleTokenDto userCoupleToken;
+
+    public void addFcmTokenInfo(UserCoupleTokenDto userCoupleToken) ***REMOVED***
+        this.userCoupleToken = userCoupleToken;
+    ***REMOVED***
+
 ***REMOVED***
