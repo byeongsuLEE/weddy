@@ -19,7 +19,7 @@ import Login from "./pages/LoginPage";
 import Main from "./pages/MainPage";
 import Mypage from "./pages/MyPage";
 import NFTLoading from "./pages/NFTLoadingPage";
-import PlannerList from "./pages/PlannerListPage";
+// import PlannerList from "./pages/PlannerListPage";
 import Planner from "./pages/PlannerPage";
 import Prompt from "./pages/PromptPage";
 import RecommendLoading from "./pages/RecommendLoadingPage";
@@ -71,7 +71,7 @@ function AppContent() ***REMOVED***
         <Route path="/board/detail/:productId" element=***REMOVED***<BoardDetail />***REMOVED*** />
         <Route path="/prompt" element=***REMOVED***<Prompt />***REMOVED*** />
         <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
-        <Route path="/planner/list/:category" element=***REMOVED***<PlannerList />***REMOVED*** />
+        ***REMOVED***/* <Route path="/planner/list/:category" element=***REMOVED***<PlannerList />***REMOVED*** /> */***REMOVED***
         <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
         <Route path="/dress" element=***REMOVED***<DressSketch />***REMOVED*** />
         <Route path="/dress/img" element=***REMOVED***<DressImg />***REMOVED*** />
