@@ -52,4 +52,22 @@ public class RedisConfig ***REMOVED***
         redisTemplate.afterPropertiesSet();
         return redisTemplate; // 설정이 완료된 RedisTemplate 인스턴스를 반환
     ***REMOVED***
+
+
+    @Bean(name = "redisScheduleTemplate")
+    public RedisTemplate<String, Object> redisScheduleTemplate() ***REMOVED***
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+        GenericJackson2JsonRedisSerializer jsonSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);
+
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setValueSerializer(jsonSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+        redisTemplate.setHashValueSerializer(jsonSerializer);
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    ***REMOVED***
 ***REMOVED***
