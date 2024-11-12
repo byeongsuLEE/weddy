@@ -3,6 +3,7 @@ package com.example.user.common.exception;
 
 import com.example.user.common.dto.ApiResponse;
 import com.example.user.common.dto.ErrorCode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -87,5 +88,12 @@ public class CustomExceptionHandler ***REMOVED***
         log.info(ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ApiResponse.error(HttpStatus.CONFLICT,ex.getMessage()));
+    ***REMOVED***
+
+    @ExceptionHandler(JsonProcessingException.class)
+    public ResponseEntity<ApiResponse<String>> handleJsonProcessingException(JsonProcessingException ex) ***REMOVED***
+        log.error("JSON 처리 중 오류 발생: ***REMOVED******REMOVED***", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.PROCESSING)
+                .body(ApiResponse.error(HttpStatus.PROCESSING,ex.getMessage()));
     ***REMOVED***
 ***REMOVED***

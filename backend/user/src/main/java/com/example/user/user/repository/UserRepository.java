@@ -12,4 +12,5 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> ***REMOVE
     UserEntity findBySocialId(String socialId);
     Optional<UserEntity> findByOtherId(Long otherId);
     List<UserEntity> findByCoupleCode(String coupleCode);
+    int countByCoupleCode(String coupleCode);
 ***REMOVED***
