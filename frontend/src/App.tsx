@@ -5,7 +5,7 @@ import ***REMOVED*** RecoilRoot, useRecoilValue ***REMOVED*** from "recoil";
 import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi";
 import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
-import ***REMOVED*** onMessageListener ***REMOVED*** from "./firebase"; // 정확한 경로로 수정하세요
+import ***REMOVED*** onMessageListener ***REMOVED*** from "./firebase";
 import "./index.css";
 import BoardDetail from "./pages/BoardDetailPage";
 import Board from "./pages/BoardPage";
@@ -88,8 +88,9 @@ function AppContent() ***REMOVED***
   );
 ***REMOVED***
 
+const queryClient = new QueryClient();
+
 function App() ***REMOVED***
-  const queryClient = new QueryClient();
 
   return (
     <div className="container">

@@ -13,37 +13,43 @@ import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 
 interface ContractListBoxProps ***REMOVED***
   type: string;
-  NftData?: NftType;
+  nftList: NftType[];
   contractInfo?: ContractData;
+  onChange: (contractId: string) => void;
 ***REMOVED***
 
-const ContractListBox = (***REMOVED*** type, NftData, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***REMOVED***: ContractListBoxProps) => ***REMOVED***
   const [showIcon, setShowIcon] = useState<Boolean>(false);
+  const [nftData, setNftData] = useState<NftType | undefined>();
+
   const handleChangeStatus = async () => ***REMOVED***
     if (contractInfo) ***REMOVED***
-      await changeStatus(contractInfo.id);
+      onChange(contractInfo.id);
     ***REMOVED***
-    window.location.reload();
   ***REMOVED***;
 
   const handlePayment = async() => ***REMOVED***
     if (contractInfo) ***REMOVED***
       await requestPayment(contractInfo);
       await changeStatus(contractInfo.id);
+      onChange(contractInfo.id);
     ***REMOVED***
   ***REMOVED***;
 
   const goNFT = () => ***REMOVED***
-    if (NftData) ***REMOVED***
-      window.open(NftData?.image);
+    if (nftData) ***REMOVED***
+      window.open(nftData.image);
     ***REMOVED***
   ***REMOVED***;
 
   useEffect(() => ***REMOVED***
-    if (NftData)***REMOVED***
+    if (nftList) ***REMOVED***
+      setNftData(nftList.find((nft: NftType) => nft.type === contractInfo?.product.type));
+    ***REMOVED***
+    if (nftData) ***REMOVED***
       setShowIcon(true);
     ***REMOVED***
-  ***REMOVED***, [NftData]);
+  ***REMOVED***, [nftList, nftData]);
 
   return (
     <div className="mb-5">
