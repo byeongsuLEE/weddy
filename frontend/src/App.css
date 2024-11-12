@@ -1,24 +1,68 @@
+.app-container ***REMOVED***
+  width: 414px;
+  height: 100vh;
+  position: relative;
+***REMOVED***
+
+.makeImg-button***REMOVED***
+  position: fixed;
+  bottom: 20%;
+  right: 5%;
+  z-index: 1000;
+***REMOVED***
+
+.makeImg-modal***REMOVED***
+  position: fixed;
+  bottom: 20%;
+  right: 20%;
+  z-index: 1000;
+***REMOVED***
+
+.leva-container ***REMOVED***
+  position: absolute;
+  top: 18%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+***REMOVED***
+
+.input-container ***REMOVED***
+  position: absolute;
+  top: 20%;
+  left: 22%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+***REMOVED***
+
 .canvas ***REMOVED***
   position: absolute;
-  top: 0;
+  bottom: 50px;
   left: 0;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  
   z-index: 0;
 ***REMOVED***
 
 .toggle-container ***REMOVED***
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 1px;
   z-index: 10;
   pointer-events: auto;
-  width: 90%;
+  width: 414px;
   overflow-x: auto;
   white-space: nowrap;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #F9F9F4;
   padding: 10px;
   border-radius: 8px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+***REMOVED***
+
+
+.toggle-container::-webkit-scrollbar ***REMOVED***
+  display: none;
+  /* 웹킷 브라우저에서 스크롤바 숨기기 */
 ***REMOVED***
 
 .toggle-title ***REMOVED***
@@ -46,7 +90,7 @@
   display: inline-block;
   margin: 5px;
   padding: 5px;
-  border: 2px solid #FF0000;
+  border: 2px solid #FCCD2A;
   border-radius: 8px;
   text-align: center;
   transition: all 0.2s ease;
@@ -54,9 +98,9 @@
 ***REMOVED***
 
 .toggle-button.active ***REMOVED***
-  border-color: #00FF00;
+  border-color: #ff3300;
   transform: scale(1.05);
-  box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.3);
+  box-shadow: 0px 0px 10px rgba(243, 219, 2, 0.3);
 ***REMOVED***
 
 .toggle-button-image ***REMOVED***
@@ -69,3 +113,5 @@
   margin-top: 5px;
   font-size: 0.9em;
 ***REMOVED***
+
+

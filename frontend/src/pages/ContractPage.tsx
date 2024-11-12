@@ -13,7 +13,7 @@ const Contract = () => ***REMOVED***
   const ***REMOVED*** category, contractId ***REMOVED*** = useParams();
   const navigate = useNavigate();
   const pageRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState(false);
 
   const date = new Date();
 
@@ -141,3 +141,5 @@ const Contract = () => ***REMOVED***
 ***REMOVED***
 
 export default Contract;
+
+

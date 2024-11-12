@@ -28,6 +28,7 @@ import Schedule from "./pages/SchedulePage";
 import Sketch from "./pages/SketchPage";
 import UserInfo from "./pages/UserInfoPage";
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from "./store/firebaseToken";
+import Test from "./pages/testPage";
 
 function AppContent() ***REMOVED***
   const userId = sessionStorage.getItem("userId");
@@ -61,6 +62,7 @@ function AppContent() ***REMOVED***
       ***REMOVED***currentPath !== "login" && currentPath !== "userinfo" && <Navbar />***REMOVED***
       <Routes>
         <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
+        <Route path="/test" element=***REMOVED***<Test />***REMOVED*** />
         <Route path="/review/:productId" element=***REMOVED***<Review />***REMOVED*** />
         <Route path="/cart" element=***REMOVED***<Cart />***REMOVED*** />
         <Route path="/login" element=***REMOVED***<Login />***REMOVED*** />
