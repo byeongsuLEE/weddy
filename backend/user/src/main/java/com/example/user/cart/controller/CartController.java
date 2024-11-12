@@ -26,19 +26,19 @@ public class CartController ***REMOVED***
     @PostMapping("/add/***REMOVED***productId***REMOVED***")
     public ResponseEntity<ApiResponse<String>> addCart(@PathVariable Long productId, @AuthenticationPrincipal UserEntity user) ***REMOVED***
         cartService.addCart(productId, user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("카트 추가 성공"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("상품 담기 완료"));
     ***REMOVED***
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<CartProductDto>>> getCart(@AuthenticationPrincipal UserEntity user)***REMOVED***
         List<CartProductDto> cartProductDto = cartService.getCart(user);
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(cartProductDto,"카트 조회 성공"));
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(cartProductDto,"장바구니 조회 성공"));
     ***REMOVED***
 
     @DeleteMapping("/delete/***REMOVED***productId***REMOVED***")
     public ResponseEntity<ApiResponse<String>> deleteCart(@PathVariable Long productId, @AuthenticationPrincipal UserEntity user)***REMOVED***
         cartService.removeCart(productId,user);
-        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("카트 제거 성공"));
+        return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(productId + "상품 삭제 성공"));
     ***REMOVED***
 
 ***REMOVED***

@@ -74,4 +74,18 @@ public class CustomExceptionHandler ***REMOVED***
         log.info(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error(ErrorCode.USER_NOT_FOUND));
     ***REMOVED***
+
+    @ExceptionHandler(CartNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> UserNotFoundException(CartNotFoundException ex) ***REMOVED***
+        log.info(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(HttpStatus.NOT_FOUND,ex.getMessage()));
+    ***REMOVED***
+
+    @ExceptionHandler(ConflictItemsException.class)
+    public ResponseEntity<ApiResponse<String>> ConflictItemsException(ConflictItemsException ex) ***REMOVED***
+        log.info(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ApiResponse.error(HttpStatus.CONFLICT,ex.getMessage()));
+    ***REMOVED***
 ***REMOVED***

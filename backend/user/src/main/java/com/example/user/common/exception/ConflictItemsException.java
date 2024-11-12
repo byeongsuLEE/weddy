@@ -1,0 +1,10 @@
+package com.example.user.common.exception;
+import com.example.user.common.dto.ErrorCode;
+
+public class ConflictItemsException extends RuntimeException ***REMOVED***
+    private final ErrorCode errorCode;
+    public ConflictItemsException(ErrorCode errorCode )***REMOVED***
+        super(errorCode.getMessage()); // 에러 코드의 메시지를 기본 메시지로 설정
+        this.errorCode = errorCode;
+    ***REMOVED***
+***REMOVED***
