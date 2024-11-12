@@ -146,9 +146,12 @@ public class UserService ***REMOVED***
 
         String myFcmToken = userEntity.getFcmToken();
 
+        String hashKey = "USER:" + beforeMyCoupleCode;
         //커플 코드 redis 추가 및 삭제
-        redisTemplate.opsForHash().delete("USER:"+beforeMyCoupleCode);
-        redisTemplate.opsForHash().put("USER:"+coupleCode,id,myFcmToken);
+        if (redisTemplate.hasKey(hashKey))
+            redisTemplate.delete(hashKey);
+//        redisTemplate.opsForHash().delete("USER:"+beforeMyCoupleCode);
+        redisTemplate.opsForHash().put("USER:"+coupleCode,String.valueOf(id),myFcmToken);
 
         // UserResponseDTO 빌드 및 반환
         return UserResponseDTO.builder()
