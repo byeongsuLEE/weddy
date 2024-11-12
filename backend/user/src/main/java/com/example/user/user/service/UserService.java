@@ -1,6 +1,7 @@
 package com.example.user.user.service;
 
 import com.example.user.common.dto.ErrorCode;
+import com.example.user.common.exception.JsonParsingException;
 import com.example.user.common.exception.UserNotFoundException;
 import com.example.user.common.exception.UserTokenNotFoundException;
 import com.example.user.common.service.GCSImageService;
@@ -9,14 +10,20 @@ import com.example.user.user.dto.response.UserCoupleTokenDto;
 import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.user.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +31,8 @@ import java.util.Map;
 @Slf4j
 public class UserService ***REMOVED***
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final KafkaTemplate<String, Object> kafkaTemplate;
     private final UserRepository userRepository;
     private final GCSImageService gcsImageService;
     private final FcmService fcmService;
@@ -35,6 +44,8 @@ public class UserService ***REMOVED***
         this.fcmService = fcmService;
         this.redisTemplate = redisTemplate;
     ***REMOVED***
+    @Value("$***REMOVED***producers.couplecode.name***REMOVED***")
+    private final String coupleTopic = "coupleTopic";
 
     public List<UserResponseDTO> userInfo(UserEntity user) ***REMOVED***
         // userEntity와 otherUserEntity를 각각 조회하며, 없으면 UserNotFoundException 발생
@@ -58,9 +69,6 @@ public class UserService ***REMOVED***
 
         return responseList;
     ***REMOVED***
-
-
-
 
     public UserResponseDTO coupleCode(String coupleCode)***REMOVED***
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
@@ -104,13 +112,20 @@ public class UserService ***REMOVED***
 
 
 
-    public UserResponseDTO connectCoupleCode(String coupleCode, Long id) ***REMOVED***
+    public UserResponseDTO connectCoupleCode(String coupleCode, Long id) throws JsonProcessingException ***REMOVED***
         UserEntity userEntity = userRepository.findById(id).orElse(null);
+        int count = userRepository.countByCoupleCode(coupleCode);
+        String oldCoupleCode = userRepository.findById(id).get().getCoupleCode();
+        if(count != 1) throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
         UserEntity otheruserEntity = userRepository.findByCoupleCode(coupleCode).get(0); // 이부분 내가 바꿨으니 확인 해보셈
 
         if (userEntity == null || otheruserEntity == null) ***REMOVED***
             throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
         ***REMOVED***
+        //userEntity 전송용 저장
+        Map<String, String> userData = new HashMap<>();
+        userData.put("oldCoupleCode", oldCoupleCode);
+        userData.put("newCoupleCode", coupleCode);
 
         // coupleCode 업데이트 및 저장
         userEntity = userEntity.toBuilder()
@@ -123,6 +138,7 @@ public class UserService ***REMOVED***
                 .build();
         userRepository.save(otheruserEntity);
 
+        kafkaTemplate.send(coupleTopic,userData);
 
         String beforeMyCoupleCode=  userEntity.getCoupleCode();
 
