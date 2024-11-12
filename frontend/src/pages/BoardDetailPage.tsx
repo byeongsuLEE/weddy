@@ -6,7 +6,8 @@ import BoardReview from "../components/BoardDetailPage/BoardReview";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
 import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs"
 import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** addProductToCart, detailProduct, getReviewList ***REMOVED*** from "@/api/productApi";
+import ***REMOVED*** detailProduct, getReviewList ***REMOVED*** from "@/api/productApi";
+import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/cartApi";
 
 const BoardDetail = () => ***REMOVED***
   const ***REMOVED*** productId ***REMOVED*** = useParams();

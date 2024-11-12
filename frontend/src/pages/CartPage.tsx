@@ -1,6 +1,6 @@
+import ***REMOVED*** deleteFromCart, getCartItems ***REMOVED*** from "@/api/cartApi";
 import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-import ***REMOVED*** deleteFromCart, getCartItems ***REMOVED*** from "@/api/productApi";
 import TodoButton from "@/common/TodoButton";
 import CartListBox from "@/components/CartPage/CartListBox";
 import ***REMOVED*** useState ***REMOVED*** from "react";
