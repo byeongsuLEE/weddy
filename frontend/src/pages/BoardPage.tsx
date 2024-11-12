@@ -10,11 +10,11 @@ import ***REMOVED*** useSearchParams ***REMOVED*** from "react-router-dom";
 const Board = () => ***REMOVED***
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
-
+  
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category") || "studio";
 
-  const ***REMOVED*** data: allProductList = [] ***REMOVED*** = useQuery("allProducts", allProducts);
+  const ***REMOVED*** data: allProductList ***REMOVED*** = useQuery("allProducts", allProducts);
 
   const handleTabChange = (value: string) => setSearchParams(***REMOVED*** category: value ***REMOVED***);
 
@@ -24,7 +24,7 @@ const Board = () => ***REMOVED***
     setSelectedPrice(parseInt(value.replace(/,/g, ""), 10));
 
   const filteredProductList = useMemo(() => ***REMOVED***
-    return allProductList.filter((product: Product) => ***REMOVED***
+    return allProductList?.filter((product: Product) => ***REMOVED***
       const matchesRegion = selectedRegion ? product.address.includes(selectedRegion) : true;
       const matchesPrice = selectedPrice ? Number(product.price) <= selectedPrice : true;
       return matchesRegion && matchesPrice;
@@ -65,9 +65,9 @@ const Board = () => ***REMOVED***
           <TabsContent key=***REMOVED***type***REMOVED*** value=***REMOVED***type***REMOVED***>
             <SDMList
               value=***REMOVED***type***REMOVED***
-              productList=***REMOVED***filteredProductList.filter(
+              productList=***REMOVED***Array.isArray(filteredProductList) ? filteredProductList.filter(
                 (product) => product.type === type.toUpperCase()
-              )***REMOVED***
+              ) : []***REMOVED***
             />
           </TabsContent>
         ))***REMOVED***
