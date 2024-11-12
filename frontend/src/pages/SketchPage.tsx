@@ -2,6 +2,7 @@ import ***REMOVED*** Environment, OrbitControls, useGLTF ***REMOVED*** from '@re
 import ***REMOVED*** Canvas, useThree ***REMOVED*** from '@react-three/fiber';
 import ***REMOVED*** Leva, useControls ***REMOVED*** from 'leva';
 import React, ***REMOVED*** useEffect, useState ***REMOVED*** from 'react';
+import * as THREE from 'three';
 import '../App.css';
 
 // ToggleButton의 Props 타입 정의
