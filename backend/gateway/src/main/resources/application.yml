@@ -7,13 +7,30 @@ spring:
     active: common, user
   config:
     import: optional:configserver:***REMOVED***:8888
+  # 이 부분 weddy-user-deployment.yml로 config 폴더에 만들긴 했는데 바꾸고 싶으면 바뀌십쇼
   cloud:
     gateway:
       routes:
-        - id: user-service
-          uri: http://localhost:8081  # user-service? ??
+        - id: product-service
+          uri: http://product:8080
           predicates:
-            - Path=/api/users, /api/users/**, /api/login, /api/login/**, /api/oauth2/**
+            - Path=/api/products/**
+          filters:
+            - StripPrefix=1
+
+        - id: schedule-service
+          uri: http://schedule:8080
+          predicates:
+            - Path=/api/schedules/**
+          filters:
+            - StripPrefix=1
+
+        - id: user-service
+          uri: http://user:8080
+          predicates:
+            - Path=/api/users/**, /api/payments/**, /api/contracts/**, /api/login/**, /api/oauth2/**
+          filters:
+            - StripPrefix=1
 
 
 #        - id: order-service
