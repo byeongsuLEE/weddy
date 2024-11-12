@@ -15,19 +15,8 @@ pipeline ***REMOVED***
         MATTERMOST_ENDPOINT = 'https://meeting.ssafy.com/hooks/yzzezkburpdd9gcac4fdzkaguo'
         MATTERMOST_CHANNEL = 'c203-jenkins'
 
-        // Docker 이미지 이름
-        // CACHE_SCHEDULER_IMAGE = 'siokim002/weddy_cache_scheduler'
-        // COMMON_LIB_IMAGE = 'siokim002/weddy_common_lib'
-        // GATEWAY_IMAGE = 'siokim002/weddy_gateway'
-        // PRODUCT_IMAGE = 'siokim002/weddy_product'
-        // SCHEDULE_IMAGE = 'siokim002/weddy_schedule'
-        // USER_IMAGE = 'siokim002/weddy_user'
-        // FRONTEND_IMAGE = 'siokim002/weddy_frontend'
-
-
         // ECR 이미지 이름
         CACHE_SCHEDULER_IMAGE = 'weddy/cache_scheduler'
-        COMMON_LIB_IMAGE = 'weddy/common_lib'
         GATEWAY_IMAGE = 'weddy/gateway'
         PRODUCT_IMAGE = 'weddy/product'
         SCHEDULE_IMAGE = 'weddy/schedule'
@@ -63,15 +52,6 @@ pipeline ***REMOVED***
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
-
-        // // ECR Docker 초기화 docker.withRegisitry 할 때 자동으로 처리 됨
-        // stage('Setup Docker') ***REMOVED***
-        //     steps ***REMOVED***
-        //         script ***REMOVED***
-        //             sh 'rm -f ~/.dockercfg ~/.docker/config.json || true'
-        //         ***REMOVED***
-        //     ***REMOVED***
-        // ***REMOVED***
 
         stage('Checkout') ***REMOVED***
             steps ***REMOVED***
@@ -130,9 +110,6 @@ pipeline ***REMOVED***
                                 ***REMOVED*** else if (service == 'cacheScheduler') ***REMOVED***
                                     imageName = CACHE_SCHEDULER_IMAGE
                                     dirPath = 'backend/cacheScheduler'
-                                ***REMOVED*** else if (service == 'common-lib') ***REMOVED***
-                                    imageName = COMMON_LIB_IMAGE
-                                    dirPath = 'backend/common-lib'
                                 ***REMOVED*** else if (service == 'gateway') ***REMOVED***
                                     imageName = GATEWAY_IMAGE
                                     dirPath = 'backend/gateway'
@@ -198,25 +175,22 @@ pipeline ***REMOVED***
 
                                 if (service == 'frontend') ***REMOVED***
                                     imageName = FRONTEND_IMAGE
-                                    deploymentFile = 'frontend-deployment.yaml'
+                                    deploymentFile = 'base/frontend/deployment.yaml'
                                 ***REMOVED*** else if (service == 'cacheScheduler') ***REMOVED***
                                     imageName = CACHE_SCHEDULER_IMAGE
-                                    deploymentFile = 'cache-scheduler-deployment.yaml'
-                                ***REMOVED*** else if (service == 'common-lib') ***REMOVED***
-                                    imageName = COMMON_LIB_IMAGE
-                                    deploymentFile = 'common-lib-deployment.yaml'
+                                    deploymentFile = 'base/cache-scheduler/deployment.yaml'
                                 ***REMOVED*** else if (service == 'gateway') ***REMOVED***
                                     imageName = GATEWAY_IMAGE
-                                    deploymentFile = 'gateway-deployment.yaml'
+                                    deploymentFile = 'base/gateway/deployment.yaml'
                                 ***REMOVED*** else if (service == 'product') ***REMOVED***
                                     imageName = PRODUCT_IMAGE
-                                    deploymentFile = 'product-deployment.yaml'
+                                    deploymentFile = 'base/product/deployment.yaml'
                                 ***REMOVED*** else if (service == 'schedule') ***REMOVED***
                                     imageName = SCHEDULE_IMAGE
-                                    deploymentFile = 'schedule-deployment.yaml'
+                                    deploymentFile = 'base/schedule/deployment.yaml'
                                 ***REMOVED*** else if (service == 'user') ***REMOVED***
                                     imageName = USER_IMAGE
-                                    deploymentFile = 'user-deployment.yaml'
+                                    deploymentFile = 'base/user/deployment.yaml'
                                 ***REMOVED***
 
                                 // deployment.yaml 파일의 이미지 태그 업데이트
