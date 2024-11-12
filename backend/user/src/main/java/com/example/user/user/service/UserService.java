@@ -13,6 +13,7 @@ import com.example.user.user.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,9 +37,9 @@ public class UserService ***REMOVED***
     private final UserRepository userRepository;
     private final GCSImageService gcsImageService;
     private final FcmService fcmService;
-    private RedisTemplate<String, String> redisTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
 
-    public UserService(KafkaTemplate<String, Object> kafkaTemplate, UserRepository userRepository, GCSImageService gcsImageService, FcmService fcmService, RedisTemplate<String, String> redisTemplate)***REMOVED***
+    public UserService(KafkaTemplate<String, Object> kafkaTemplate, UserRepository userRepository, GCSImageService gcsImageService, FcmService fcmService, @Qualifier("redisUserTemplate") RedisTemplate<String, String> redisTemplate)***REMOVED***
         this.kafkaTemplate = kafkaTemplate;
         this.userRepository = userRepository;
         this.gcsImageService = gcsImageService;
@@ -146,8 +147,8 @@ public class UserService ***REMOVED***
         String myFcmToken = userEntity.getFcmToken();
 
         //커플 코드 redis 추가 및 삭제
-        redisTemplate.opsForHash().delete("couple:"+beforeMyCoupleCode);
-        redisTemplate.opsForHash().put("couple:"+coupleCode,id,myFcmToken);
+        redisTemplate.opsForHash().delete("USER:"+beforeMyCoupleCode);
+        redisTemplate.opsForHash().put("USER:"+coupleCode,id,myFcmToken);
 
         // UserResponseDTO 빌드 및 반환
         return UserResponseDTO.builder()
@@ -198,7 +199,7 @@ public class UserService ***REMOVED***
 
         String coupleCode = userEntity.getCoupleCode();
 
-        redisTemplate.opsForHash().put("couple:"+coupleCode, userId, fcmToken);
+        redisTemplate.opsForHash().put("USER:"+coupleCode, userId.toString(), fcmToken);
 
 
     ***REMOVED***
