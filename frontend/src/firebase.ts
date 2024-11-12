@@ -45,7 +45,6 @@ export const requestForToken = async (): Promise<string | null> => ***REMOVED***
 
     if (!registration) ***REMOVED***
       console.error("Service Worker is not registered");
-      alert("Service Worker 등록 오류");
       return null;
     ***REMOVED***
 
@@ -65,12 +64,10 @@ export const requestForToken = async (): Promise<string | null> => ***REMOVED***
       console.warn(
         "No registration token available. Request permission to generate one."
       );
-      alert("토큰 생성 실패");
       return null;
     ***REMOVED***
   ***REMOVED*** catch (err) ***REMOVED***
     console.error("토큰 생성 에러:", err);
-    alert("토큰 생성 에러: " + err);
     return null;
   ***REMOVED***
 ***REMOVED***;
