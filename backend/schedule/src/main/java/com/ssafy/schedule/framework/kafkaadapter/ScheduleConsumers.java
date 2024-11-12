@@ -2,12 +2,14 @@ package com.ssafy.schedule.framework.kafkaadapter;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.schedule.application.outputport.FCMOutputPort;
 import com.ssafy.schedule.application.outputport.ScheduleOutPutPort;
 import com.ssafy.schedule.application.usecase.CreateScheduleUsecase;
 import com.ssafy.schedule.domain.event.EventResult;
 import com.ssafy.schedule.domain.event.EventType;
 import com.ssafy.schedule.domain.event.PaymentProductInfo;
 import com.ssafy.schedule.domain.model.Schedule;
+import com.ssafy.schedule.framework.fcmadapter.FCMAdapter;
 import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
 import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +41,7 @@ public class ScheduleConsumers ***REMOVED***
     private final ScheduleEventProducer eventProducer;
     private final ScheduleOutPutPort scheduleOutPutPort;
     private final RedisTemplate<String,Object> redisTemplate;
+    private final FCMOutputPort fcmOutputPort;
 
     @KafkaListener(topics = "$***REMOVED***consumer.topic1.name***REMOVED***",groupId = "$***REMOVED***consumer.groupid.name***REMOVED***")
     public void paymentProduct(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
@@ -57,6 +60,10 @@ public class ScheduleConsumers ***REMOVED***
             // UseCase를 통해 일정 생성 및 알림 발송
             createScheduleUsecase.createSchedule(scheduleInfo);
 
+            String fcmToken = scheduleInfo.getUserCoupleToken().getMyFcmToken();
+            String title =  scheduleInfo.getType().name();
+                    String body  = scheduleInfo.getContent();
+            fcmOutputPort.send(fcmToken,title,body);
             // 성공 시 이벤트 발생
             eventResult.updateIsSuccess(true);
 
