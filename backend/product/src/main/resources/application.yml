@@ -13,6 +13,3 @@ management:
         include: refresh, prometheus
 
 
-## 나중에 바꿔야함
-server:
-  port: 8080
