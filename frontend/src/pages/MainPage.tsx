@@ -13,7 +13,6 @@ const Main = () => ***REMOVED***
     '/main/main4.png',
   ];
 
-
   //== 베스트 ==//
   const ***REMOVED*** data: getRankedProductList ***REMOVED*** = useQuery('getRankedProducts', getRankedProducts);
 

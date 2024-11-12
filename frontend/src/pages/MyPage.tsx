@@ -69,7 +69,7 @@ const Mypage = () => ***REMOVED***
       ***REMOVED*** else if (userData.length === 2) ***REMOVED***
         setIsconnected(true);
         setCoupleInfo(userData[1]);
-
+        //== 커플 이미지 업데이트 ==//
         if (userData[1].picture != null) ***REMOVED***
           setCoupleImageSrc(userData[1].picture);
         ***REMOVED***
