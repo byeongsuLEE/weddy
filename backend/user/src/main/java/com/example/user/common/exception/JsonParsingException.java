@@ -1,0 +1,14 @@
+package com.example.user.common.exception;
+
+import com.example.user.common.dto.ErrorCode;
+import lombok.Getter;
+
+@Getter
+public class JsonParsingException extends RuntimeException ***REMOVED***
+
+    private final ErrorCode errorCode;
+    public JsonParsingException(ErrorCode errorCode) ***REMOVED***
+        super(errorCode.getMessage());
+        this.errorCode = errorCode;
+    ***REMOVED***
+***REMOVED***

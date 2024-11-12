@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,7 +51,7 @@ public class KafkaConfig ***REMOVED***
 
     // 상품정보용 Kafka 프로듀서
     @Bean
-    public ProducerFactory<String,String> cartkafkaProducerFactory() ***REMOVED***
+    public ProducerFactory<String,Object> defaultkafkaProducerFactory() ***REMOVED***
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -61,13 +62,14 @@ public class KafkaConfig ***REMOVED***
     ***REMOVED***
 
     @Bean
-    public KafkaTemplate<String,String> cartkafkaTemplate() ***REMOVED***
-        return new KafkaTemplate<>(cartkafkaProducerFactory());
+    @Qualifier("defaultKafkaTemplate")
+    public KafkaTemplate<String,Object> defaultkafkaTemplate() ***REMOVED***
+        return new KafkaTemplate<>(defaultkafkaProducerFactory());
     ***REMOVED***
 
     // 상품정보용 Kafka 컨슈머 설정
     @Bean
-    public ConsumerFactory<String, CartProductDto> cartConsumerFactory() ***REMOVED***
+    public ConsumerFactory<String, Object> defaultConsumerFactory() ***REMOVED***
 
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -75,16 +77,16 @@ public class KafkaConfig ***REMOVED***
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class); // 값 역직렬화 (JSON)
 
         // JsonDeserializer 설정
-        JsonDeserializer<CartProductDto> deserializer = new JsonDeserializer<>(CartProductDto.class);
+        JsonDeserializer<Object> deserializer = new JsonDeserializer<>(Object.class);
         deserializer.addTrustedPackages("*"); // 모든 패키지에서 오는 클래스 신뢰
 
         return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), deserializer);
     ***REMOVED***
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CartProductDto> cartKafkaListenerContainerFactory() ***REMOVED***
-        ConcurrentKafkaListenerContainerFactory<String, CartProductDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(cartConsumerFactory());
+    public ConcurrentKafkaListenerContainerFactory<String, Object> defaultKafkaListenerContainerFactory() ***REMOVED***
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(defaultConsumerFactory());
         return factory;
     ***REMOVED***
 
