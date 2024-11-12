@@ -1,3 +1,4 @@
+import MakeImg from '@/components/SketchPage/MakeImg';
 import ***REMOVED*** Environment, OrbitControls, useGLTF ***REMOVED*** from '@react-three/drei';
 import ***REMOVED*** Canvas, useThree ***REMOVED*** from '@react-three/fiber';
 import ***REMOVED*** Leva, useControls ***REMOVED*** from 'leva';
@@ -103,6 +104,11 @@ const Sketch: React.FC = () => ***REMOVED***
     arm_3: false,
   ***REMOVED***);
 
+  const dressList = ['../assets/dress/dress1.png', '../assets/dress/dress2.png', '../assets/dress/dress3.png', '../assets/dress/dress4.png', '../assets/dress/dress5.png'];
+  const topList = ['../assets/top/top1.png', '../assets/top/top2.png', '../assets/top/top3.png', '../assets/top/top4.png', '../assets/top/top5.png'];
+  const shoulderList = ['../assets/shoulder/shoulder1.png', '../assets/shoulder/shoulder2.png'];
+  const armList = ['../assets/arm/arm1.png', '../assets/arm/arm2.png', '../assets/arm/arm3.png'];
+
   // Leva 슬라이더로 각 축별 스케일 값을 개별적으로 조정
   const ***REMOVED*** dressWidthScale, dressDepthScale ***REMOVED*** = useControls(***REMOVED***
     dressWidthScale: ***REMOVED***
@@ -138,10 +144,40 @@ const Sketch: React.FC = () => ***REMOVED***
       return updatedVisibility;
     ***REMOVED***);
   ***REMOVED***;
+  const [canvasElement, setCanvasElement] = useState<HTMLCanvasElement | null>(null);
+  // const [imgURL, setImgURL] = useState<string>("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [blobData, setBlobData] = useState<Blob | null>(null);
+
+  const captureImage = () => ***REMOVED***
+    if (canvasElement) ***REMOVED***
+      requestAnimationFrame(() => ***REMOVED***
+        const dataURL = canvasElement.toDataURL("image/jpeg", 0.8);
+        const base64Data = dataURL.split(",")[1];
+
+        // Base64 데이터를 Blob으로 변환
+        const byteString = atob(base64Data);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) ***REMOVED***
+          uint8Array[i] = byteString.charCodeAt(i);
+        ***REMOVED***
+        const blob = new Blob([uint8Array], ***REMOVED*** type: "image/jpeg" ***REMOVED***); 
+        
+        setBlobData(blob); // Blob을 상태로 저장
+        setIsOpen(true);
+      ***REMOVED***);
+    ***REMOVED***
+  ***REMOVED***;
+
 
   return (
     <div className="app-container">
       <Canvas
+        onCreated=***REMOVED***(***REMOVED*** gl, scene, camera ***REMOVED***) => ***REMOVED***
+          setCanvasElement(gl.domElement); // 캔버스 엘리먼트를 상태에 저장
+          gl.render(scene, camera); // 초기 렌더링 강제 실행
+        ***REMOVED******REMOVED***
         shadows
         camera=***REMOVED******REMOVED*** fov: 40, position: [0, 1, 5] ***REMOVED******REMOVED***
         className="canvas"
@@ -179,62 +215,69 @@ const Sketch: React.FC = () => ***REMOVED***
       </Canvas>
 
       <div className="toggle-container">
-        <h3 className="toggle-title">Toggle Parts Visibility</h3>
 
         <div className="toggle-group">
           <h4>Dress</h4>
-          ***REMOVED***[1, 2, 3, 4, 5].map((num) => (
+          ***REMOVED***dressList.map((dress, index) => (
             <ToggleButton
-              key=***REMOVED***`dress_$***REMOVED***num***REMOVED***`***REMOVED***
-              label=***REMOVED***`Dress $***REMOVED***num***REMOVED***`***REMOVED***
-              image="../assets/아기봇지.jfif"
-              isVisible=***REMOVED***visibility[`dress_$***REMOVED***num***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`dress_$***REMOVED***num***REMOVED***`, 'dress')***REMOVED***
+              key=***REMOVED***`dress_$***REMOVED***index + 1***REMOVED***`***REMOVED***
+              label=***REMOVED***` $***REMOVED***index + 1***REMOVED***`***REMOVED***
+              image=***REMOVED***dress***REMOVED***
+              isVisible=***REMOVED***visibility[`dress_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
+              onClick=***REMOVED***() => selectVisibility(`dress_$***REMOVED***index + 1***REMOVED***`, 'dress')***REMOVED***
             />
           ))***REMOVED***
         </div>
 
         <div className="toggle-group">
           <h4>Top</h4>
-          ***REMOVED***[1, 2, 3, 4, 5].map((num) => (
+          ***REMOVED***topList.map((top, index) => (
             <ToggleButton
-              key=***REMOVED***`top_$***REMOVED***num***REMOVED***`***REMOVED***
-              label=***REMOVED***`Top $***REMOVED***num***REMOVED***`***REMOVED***
-              image="../assets/아기봇지.jfif"
-              isVisible=***REMOVED***visibility[`top_$***REMOVED***num***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`top_$***REMOVED***num***REMOVED***`, 'top')***REMOVED***
+              key=***REMOVED***`top_$***REMOVED***index + 1***REMOVED***`***REMOVED***
+              label=***REMOVED***` $***REMOVED***index + 1***REMOVED***`***REMOVED***
+              image=***REMOVED***top***REMOVED***
+              isVisible=***REMOVED***visibility[`top_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
+              onClick=***REMOVED***() => selectVisibility(`top_$***REMOVED***index + 1***REMOVED***`, 'top')***REMOVED***
             />
           ))***REMOVED***
         </div>
 
         <div className="toggle-group">
           <h4>Shoulder</h4>
-          ***REMOVED***[1, 2].map((num) => (
+          ***REMOVED***shoulderList.map((shoulder, index) => (
             <ToggleButton
-              key=***REMOVED***`shoulder_$***REMOVED***num***REMOVED***`***REMOVED***
-              label=***REMOVED***`Shoulder $***REMOVED***num***REMOVED***`***REMOVED***
-              image="../assets/아기봇지.jfif"
-              isVisible=***REMOVED***visibility[`shoulder_$***REMOVED***num***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`shoulder_$***REMOVED***num***REMOVED***`, 'shoulder')***REMOVED***
+              key=***REMOVED***`shoulder_$***REMOVED***index + 1***REMOVED***`***REMOVED***
+              label=***REMOVED***`$***REMOVED***index + 1***REMOVED***`***REMOVED***
+              image=***REMOVED***shoulder***REMOVED***
+              isVisible=***REMOVED***visibility[`shoulder_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
+              onClick=***REMOVED***() => selectVisibility(`shoulder_$***REMOVED***index + 1***REMOVED***`, 'shoulder')***REMOVED***
             />
           ))***REMOVED***
         </div>
 
         <div className="toggle-group">
           <h4>Arm</h4>
-          ***REMOVED***[1, 2, 3].map((num) => (
+          ***REMOVED***armList.map((arm, index) => (
             <ToggleButton
-              key=***REMOVED***`arm_$***REMOVED***num***REMOVED***`***REMOVED***
-              label=***REMOVED***`Arm $***REMOVED***num***REMOVED***`***REMOVED***
-              image="../assets/아기봇지.jfif"
-              isVisible=***REMOVED***visibility[`arm_$***REMOVED***num***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`arm_$***REMOVED***num***REMOVED***`, 'arm')***REMOVED***
+              key=***REMOVED***`arm_$***REMOVED***index + 1***REMOVED***`***REMOVED***
+              label=***REMOVED***` $***REMOVED***index + 1***REMOVED***`***REMOVED***
+              image=***REMOVED***arm***REMOVED***
+              isVisible=***REMOVED***visibility[`arm_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
+              onClick=***REMOVED***() => selectVisibility(`arm_$***REMOVED***index + 1***REMOVED***`, 'arm')***REMOVED***
             />
           ))***REMOVED***
         </div>
       </div>
+      <div className="leva-container">
+        <Leva collapsed />
+      </div>
 
-      <Leva collapsed />
+      <div onClick=***REMOVED***captureImage***REMOVED*** className="plusIconButton">
+        <button className='bg-main2 rounded-lg p-2 text-sm'>이미지 만들기</button>
+      </div>
+      <div className='makeImg-modal'>
+        <MakeImg isOpen=***REMOVED***isOpen***REMOVED*** setIsOpen=***REMOVED***setIsOpen***REMOVED*** blobData=***REMOVED***blobData***REMOVED*** />
+      </div>
     </div>
   );
 ***REMOVED***;
