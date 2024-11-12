@@ -29,6 +29,8 @@ import Sketch from "./pages/SketchPage";
 import UserInfo from "./pages/UserInfoPage";
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from "./store/firebaseToken";
 
+const queryClient = new QueryClient();
+
 function AppContent() ***REMOVED***
   const userId = sessionStorage.getItem("userId");
   const fcmToken = useRecoilValue(firebaseTokenState);
@@ -88,10 +90,7 @@ function AppContent() ***REMOVED***
   );
 ***REMOVED***
 
-const queryClient = new QueryClient();
-
 function App() ***REMOVED***
-
   return (
     <div className="container">
       <RecoilRoot>
