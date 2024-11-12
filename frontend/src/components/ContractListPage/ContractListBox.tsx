@@ -15,23 +15,24 @@ interface ContractListBoxProps ***REMOVED***
   type: string;
   nftList: NftType[];
   contractInfo?: ContractData;
+  onChange: (contractId: string) => void;
 ***REMOVED***
 
-const ContractListBox = (***REMOVED*** type, nftList, contractInfo ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***REMOVED***: ContractListBoxProps) => ***REMOVED***
   const [showIcon, setShowIcon] = useState<Boolean>(false);
   const [nftData, setNftData] = useState<NftType | undefined>();
-  
+
   const handleChangeStatus = async () => ***REMOVED***
     if (contractInfo) ***REMOVED***
-      await changeStatus(contractInfo.id);
+      onChange(contractInfo.id);
     ***REMOVED***
-    window.location.reload();
   ***REMOVED***;
 
   const handlePayment = async() => ***REMOVED***
     if (contractInfo) ***REMOVED***
       await requestPayment(contractInfo);
       await changeStatus(contractInfo.id);
+      onChange(contractInfo.id);
     ***REMOVED***
   ***REMOVED***;
 
