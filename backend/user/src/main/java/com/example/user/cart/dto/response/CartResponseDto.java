@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartResponseDto ***REMOVED***
-    Long id;
+    String coupleCode;
     Long productId;
     Long userId;
 
     public CartResponseDto(CartEntity cartEntity) ***REMOVED***
-        this.id = cartEntity.getId();
+        this.coupleCode = cartEntity.getCoupleCode();
         this.productId = cartEntity.getProductId();
         this.userId = cartEntity.getUserId();
     ***REMOVED***

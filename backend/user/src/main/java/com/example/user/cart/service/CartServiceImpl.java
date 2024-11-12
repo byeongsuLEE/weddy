@@ -6,6 +6,7 @@ import com.example.user.cart.entity.CartEntity;
 import com.example.user.cart.repository.CartRepository;
 import com.example.user.common.config.KafkaTopicProperties;
 import com.example.user.user.entity.UserEntity;
+import com.example.user.user.repository.UserRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -31,36 +32,40 @@ public class CartServiceImpl implements CartService ***REMOVED***
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final KafkaTopicProperties kafkaTopicProperties;
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final UserRepository userRepository;
     private ConcurrentHashMap<String, CompletableFuture<List<CartProductDto>>> pendingRequests = new ConcurrentHashMap<>();
 
 
-    public CartServiceImpl(CartRepository cartRepository, KafkaTemplate<String, String> kafkaTemplate, KafkaTopicProperties kafkaTopicProperties) ***REMOVED***
+    public CartServiceImpl(CartRepository cartRepository, KafkaTemplate<String, String> kafkaTemplate, KafkaTopicProperties kafkaTopicProperties, UserRepository userRepository) ***REMOVED***
         this.cartRepository = cartRepository;
         this.kafkaTemplate = kafkaTemplate;
         this.kafkaTopicProperties = kafkaTopicProperties;
+        this.userRepository = userRepository;
     ***REMOVED***
 
     public void addCart(Long productId, UserEntity userEntity)***REMOVED***
         CartEntity cartEntity = CartEntity.builder()
                 .productId(productId)
-                .userId(userEntity.getId())
+                .coupleCode(userEntity.getCoupleCode())
                 .build();
 
         cartRepository.save(cartEntity);
     ***REMOVED***
 
     public void removeCart(Long productId, UserEntity userEntity)***REMOVED***
-        CartEntity cartEntity = cartRepository.findById(productId).orElse(null);
-        cartRepository.delete(cartEntity);
+        List<CartEntity> cartEntities = cartRepository.findByCoupleCode(userEntity.getCoupleCode());
+        if (cartEntities != null && !cartEntities.isEmpty()) ***REMOVED***
+            cartRepository.deleteAll(cartEntities);
+        ***REMOVED***
     ***REMOVED***
 
     public List<CartProductDto> getCart(UserEntity userEntity) ***REMOVED***
         try ***REMOVED***
             // 1. 상품 ID 목록을 가져옵니다.
-            List<Long> productIds = cartRepository.findAllProductIdByUserId(userEntity.getId());
+            List<Long> productIds = cartRepository.findAllProductIdByUserId(userEntity.getCoupleCode());
 
             // 2. 고유한 요청 ID를 생성합니다. 이를 통해 요청과 응답을 매칭할 수 있습니다.
-            String correlationId = "cart-request-" + userEntity.getId();
+            String correlationId = "cart-request-" + userEntity.getCoupleCode();
 
             // 3. CompletableFuture 생성: 나중에 응답이 올 때까지 기다릴 수 있게 준비합니다.
             CompletableFuture<List<CartProductDto>> future = new CompletableFuture<>();

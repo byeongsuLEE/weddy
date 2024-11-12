@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CartRepository extends JpaRepository<CartEntity,Long> ***REMOVED***
-    Long findCartIdByUserId(Long userId);
+    List<CartEntity> findByCoupleCode(String coupleCode);
 
     List<Long> findCartIdsByUserId(Long id);
 
-    @Query("SELECT c.productId FROM CartEntity c WHERE c.userId = :userId")
-    List<Long> findAllProductIdByUserId(Long userId);
+    @Query("SELECT c.productId FROM CartEntity c WHERE c.coupleCode = :coupleCode")
+    List<Long> findAllProductIdByUserId(String coupleCode);
 ***REMOVED***
