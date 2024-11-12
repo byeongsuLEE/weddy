@@ -1,4 +1,4 @@
-import MakeImg, ***REMOVED*** PopoverDemo ***REMOVED*** from '@/components/SketchPage/MakeImg';
+import MakeImg from '@/components/SketchPage/MakeImg';
 import ***REMOVED*** Environment, OrbitControls, useGLTF ***REMOVED*** from '@react-three/drei';
 import ***REMOVED*** Canvas, useThree ***REMOVED*** from '@react-three/fiber';
 import ***REMOVED*** Leva, useControls ***REMOVED*** from 'leva';
@@ -145,23 +145,27 @@ const Sketch: React.FC = () => ***REMOVED***
     ***REMOVED***);
   ***REMOVED***;
   const [canvasElement, setCanvasElement] = useState<HTMLCanvasElement | null>(null);
-  const [imgURL, setImgURL] = useState<string>("");
+  // const [imgURL, setImgURL] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
+  const [blobData, setBlobData] = useState<Blob | null>(null);
 
   const captureImage = () => ***REMOVED***
     if (canvasElement) ***REMOVED***
       requestAnimationFrame(() => ***REMOVED***
-        const dataURL = canvasElement.toDataURL("image/png");
+        const dataURL = canvasElement.toDataURL("image/jpeg", 0.8);
         const base64Data = dataURL.split(",")[1];
-        setImgURL(base64Data);
-        setIsOpen(true);
 
-        // 이미지 다운로드
-        // const link = document.createElement("a");
-        // console.log(link)
-        // link.href = dataURL;
-        // link.download = "canvas_image.png";
-        // link.click();
+        // Base64 데이터를 Blob으로 변환
+        const byteString = atob(base64Data);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) ***REMOVED***
+          uint8Array[i] = byteString.charCodeAt(i);
+        ***REMOVED***
+        const blob = new Blob([uint8Array], ***REMOVED*** type: "image/jpeg" ***REMOVED***); 
+        
+        setBlobData(blob); // Blob을 상태로 저장
+        setIsOpen(true);
       ***REMOVED***);
     ***REMOVED***
   ***REMOVED***;
@@ -270,11 +274,9 @@ const Sketch: React.FC = () => ***REMOVED***
 
       <div onClick=***REMOVED***captureImage***REMOVED*** className="plusIconButton">
         <button className='bg-main2 rounded-lg p-2 text-sm'>이미지 만들기</button>
-        ***REMOVED***/* <PlusIcon /> */***REMOVED***
       </div>
       <div className='makeImg-modal'>
-        <MakeImg isOpen=***REMOVED***isOpen***REMOVED*** setIsOpen=***REMOVED***setIsOpen***REMOVED*** imgURL=***REMOVED***imgURL***REMOVED*** />
-      ***REMOVED***/* <PopoverDemo isOpen=***REMOVED***isOpen***REMOVED*** setIsOpen=***REMOVED***setIsOpen***REMOVED*** imgURL=***REMOVED***imgURL***REMOVED*** /> */***REMOVED***
+        <MakeImg isOpen=***REMOVED***isOpen***REMOVED*** setIsOpen=***REMOVED***setIsOpen***REMOVED*** blobData=***REMOVED***blobData***REMOVED*** />
       </div>
     </div>
   );

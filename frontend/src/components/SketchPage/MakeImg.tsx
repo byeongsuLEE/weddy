@@ -1,4 +1,4 @@
-import ***REMOVED*** useState ***REMOVED*** from "react";
+import ***REMOVED*** saveDress ***REMOVED*** from "@/api/dressApi";
 import ***REMOVED***
   AlertDialog,
   AlertDialogAction,
@@ -12,57 +12,56 @@ import ***REMOVED***
 ***REMOVED*** from "@/components/ui/alert-dialog";
 import ***REMOVED*** Button ***REMOVED*** from "@/components/ui/button";
 import ***REMOVED*** Input ***REMOVED*** from "@/components/ui/input";
-import ***REMOVED*** useSetRecoilState ***REMOVED*** from "recoil";
 import ***REMOVED*** capturedImageState ***REMOVED*** from "@/store/imageState";
+import ***REMOVED*** useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** useSetRecoilState ***REMOVED*** from "recoil";
 
 interface PopoverDemoProps ***REMOVED***
   isOpen: boolean;
-  imgURL: string;
+  blobData: File | null;
   setIsOpen: (open: boolean) => void;
 ***REMOVED***
 
-// base64 데이터를 Blob으로 변환하는 함수
-const base64ToBlob = (base64: string, contentType: string) => ***REMOVED***
-  const byteCharacters = atob(base64);
-  const byteNumbers = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) ***REMOVED***
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  ***REMOVED***
-  const byteArray = new Uint8Array(byteNumbers);
-  return new Blob([byteArray], ***REMOVED*** type: contentType ***REMOVED***);
-***REMOVED***;
-
-const MakeImg = (***REMOVED*** isOpen, setIsOpen, imgURL ***REMOVED***: PopoverDemoProps) => ***REMOVED***
+const MakeImg = (***REMOVED*** isOpen, setIsOpen, blobData ***REMOVED***: PopoverDemoProps) => ***REMOVED***
   const [studioName, setStudioName] = useState("");
   const [dressName, setDressName] = useState("");
   const setCapturedImageState = useSetRecoilState(capturedImageState);
-
   const navigate = useNavigate();
 
-  const onClick = () => ***REMOVED***
-    if (imgURL) ***REMOVED***
+  const onClick = async () => ***REMOVED***
+    if (blobData) ***REMOVED***
       try ***REMOVED***
-        // base64 데이터를 Blob으로 변환
-        const blob = base64ToBlob(imgURL, "image/png");
-  
-        // Blob을 Recoil 상태로 저장
-        setCapturedImageState(blob);
+        // FormData 객체 생성 및 데이터 추가
+        const formData = new FormData();
+        const sketch = ***REMOVED***
+          studio: studioName,
+          dressName: dressName,
+        ***REMOVED***;
+        formData.append("sketch", new Blob([JSON.stringify(sketch)], ***REMOVED*** type: "application/json" ***REMOVED***));
+        const file = new File([blobData], "image.png", ***REMOVED*** type: "image/png" ***REMOVED***);
+
+      // 변환된 파일을 FormData에 추가
+      formData.append("image", file);
+
+        // saveDress 함수 호출하여 FormData 전송
+        await saveDress(formData);
+
+        // Blob을 Recoil 상태로 저장 (필요할 경우)
+        setCapturedImageState(blobData);
         setIsOpen(false);
         setStudioName("");
         setDressName("");
-  
-        navigate("/test");
+
+        // 전송 후 페이지 이동
+        navigate("/dress/img");
       ***REMOVED*** catch (error) ***REMOVED***
-        console.error("Blob 변환 중 오류가 발생했습니다:", error);
+        console.error("이미지 저장 중 오류가 발생했습니다:", error);
       ***REMOVED***
     ***REMOVED*** else ***REMOVED***
       console.error("imgURL이 비어 있습니다. 캔버스 캡처 과정에서 문제가 있는지 확인하세요.");
     ***REMOVED***
-  
-    // console.log(studioName, dressName, imgURL);
   ***REMOVED***;
-  
 
   return (
     <AlertDialog open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***setIsOpen***REMOVED***>
