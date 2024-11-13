@@ -19,7 +19,6 @@ interface ContractListBoxProps ***REMOVED***
 ***REMOVED***
 
 const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***REMOVED***: ContractListBoxProps) => ***REMOVED***
-  console.log(nftList);
   const [showIcon, setShowIcon] = useState<Boolean>(false);
   const [nftData, setNftData] = useState<NftType | undefined>();
 

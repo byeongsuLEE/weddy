@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root ***REMOVED***
+html,
+body,
+#root ***REMOVED***
   height: 100%;
   margin: 0;
   width: 100%;
@@ -24,7 +26,7 @@ html, body, #root ***REMOVED***
 nav ***REMOVED***
   position: fixed;
   height: 50px;
-  top: 0; 
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   padding: 1rem;
@@ -36,7 +38,6 @@ nav ***REMOVED***
   background-color: white;
   width: 414px;
 ***REMOVED***
-
 
 nav .textAlign ***REMOVED***
   margin: 0 20px;
@@ -64,8 +65,8 @@ nav .textAlign ***REMOVED***
 ***REMOVED***
 
 .content ***REMOVED***
-  flex-grow: 1;/* 남은 공간을 차지 */
-  padding-top: 50px; 
+  flex-grow: 1; /* 남은 공간을 차지 */
+  padding-top: 50px;
 ***REMOVED***
 
 footer ***REMOVED***
@@ -111,25 +112,24 @@ footer ***REMOVED***
 .container ***REMOVED***
   max-width: 414px; /* iPhone XR, iPhone 11 기준 */
   margin: 0 auto;
-  background-color: #F9F9F4;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #f9f9f4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: noto-sans, sans-serif;
-  flex-grow: 1;/* 남은 공간을 차지 */
-  padding-top: 50px; 
-  overflow: hidden;
+  flex-grow: 1; /* 남은 공간을 차지 */
+  padding-top: 50px;
+  /* overflow: hidden; */
 ***REMOVED***
 
 .plusIconButton ***REMOVED***
   position: fixed;
-  bottom: 5.5rem;  /* footer와 충분히 떨어지도록 */
+  bottom: 5.5rem; /* footer와 충분히 떨어지도록 */
   right: calc(50% - 190px); /* 414px 화면 폭의 절반에서 아이콘 위치 조정 */
-   /* nav 및 footer 위에 위치 */
+  /* nav 및 footer 위에 위치 */
 ***REMOVED***
-
 
 @layer base ***REMOVED***
   :root ***REMOVED***
-    --color-main1: #F9F9F4; /* main1 색상 코드 */
+    --color-main1: #f9f9f4; /* main1 색상 코드 */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;

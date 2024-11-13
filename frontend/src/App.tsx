@@ -1,6 +1,6 @@
 import ***REMOVED*** useEffect ***REMOVED*** from "react";
 import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-query";
-import ***REMOVED*** BrowserRouter, Route, Routes, useLocation ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** BrowserRouter, Route, Routes, useLocation, useNavigate ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** RecoilRoot, useRecoilValue ***REMOVED*** from "recoil";
 import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi";
 import Footer from "./common/Footer";
@@ -19,7 +19,6 @@ import Login from "./pages/LoginPage";
 import Main from "./pages/MainPage";
 import Mypage from "./pages/MyPage";
 import NFTLoading from "./pages/NFTLoadingPage";
-// import PlannerList from "./pages/PlannerListPage";
 import Planner from "./pages/PlannerPage";
 import Prompt from "./pages/PromptPage";
 import RecommendLoading from "./pages/RecommendLoadingPage";
@@ -33,12 +32,19 @@ const queryClient = new QueryClient();
 
 function AppContent() ***REMOVED***
   const userId = sessionStorage.getItem("userId");
+  const token = sessionStorage.getItem("token");
   const fcmToken = useRecoilValue(firebaseTokenState);
+  const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname.split("/")[1];
   const currentDetail = location.pathname.split("/")[2];
 
   useEffect(() => ***REMOVED***
+    // 비로그인 상태일 경우 로그인 페이지로 리다이렉트
+    if (!token && currentPath !== "login" && currentPath !== "callback") ***REMOVED***
+      navigate("/login");
+    ***REMOVED***
+
     // FCM 토큰 저장
     if (userId && fcmToken) ***REMOVED***
       saveFcmToken(fcmToken, userId);
@@ -56,7 +62,7 @@ function AppContent() ***REMOVED***
     ***REMOVED***;
 
     initializeMessageListener();
-  ***REMOVED***, [userId, fcmToken]);
+  ***REMOVED***, [token, userId, fcmToken]);
 
   return (
     <>
@@ -71,7 +77,6 @@ function AppContent() ***REMOVED***
         <Route path="/board/detail/:productId" element=***REMOVED***<BoardDetail />***REMOVED*** />
         <Route path="/prompt" element=***REMOVED***<Prompt />***REMOVED*** />
         <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
-        ***REMOVED***/* <Route path="/planner/list/:category" element=***REMOVED***<PlannerList />***REMOVED*** /> */***REMOVED***
         <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
         <Route path="/dress" element=***REMOVED***<DressSketch />***REMOVED*** />
         <Route path="/dress/img" element=***REMOVED***<DressImg />***REMOVED*** />
