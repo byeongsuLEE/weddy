@@ -12,4 +12,5 @@ management:
       exposure:
         include: refresh
 
-
+server:
+  port: 8083
