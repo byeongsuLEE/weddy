@@ -1,7 +1,7 @@
 package com.ssafy.product.product.domain;
 
 import com.ssafy.product.product.dto.request.ReviewRequestDto;
-import com.ssafy.product.product.dto.response.ReviewResponseDto;
+import weddy.commonlib.dto.response.ReviewResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -38,7 +38,7 @@ public class Review ***REMOVED***
         return ReviewResponseDto.builder()
                 .id(review.id)
                 .userId(review.userId)
-                .product(product.getProduct(product))
+                .productId(product.getId())
                 .content(review.content)
                 .date(review.date)
                 .score(review.score)
