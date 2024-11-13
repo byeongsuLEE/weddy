@@ -1,8 +1,8 @@
+import ***REMOVED*** connectCoupleCode ***REMOVED*** from '@/api/userApi';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import ***REMOVED*** connectCoupleCode ***REMOVED*** from "@/api/coupleApi";
 
 const style = ***REMOVED***
   position: 'absolute',

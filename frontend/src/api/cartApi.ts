@@ -33,7 +33,7 @@ export const getCartItems = async (): Promise<Product[]> => ***REMOVED***
 export const deleteFromCart = async (productId?: string): Promise<void> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "delete",
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***productId***REMOVED***`,
+    url: `$***REMOVED***BASE_URL***REMOVED***/delete/$***REMOVED***productId***REMOVED***`,
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
