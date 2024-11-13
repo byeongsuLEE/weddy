@@ -8,6 +8,7 @@ plugins ***REMOVED***
 group = 'weddy'
 version = '1.0.7-SNAPSHOT'
 
+
 java ***REMOVED***
 	toolchain ***REMOVED***
 		languageVersion = JavaLanguageVersion.of(17)
@@ -53,6 +54,7 @@ publishing ***REMOVED***
 	repositories ***REMOVED*** // 배포할 리포지토리 정보
 		maven ***REMOVED***
 			url = uri('http://localhost:8081/repository/maven-snapshots')
+
 			allowInsecureProtocol = true //http를 사용하기 위해 추가
 			credentials***REMOVED***
 				username = "weddy"

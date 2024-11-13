@@ -24,7 +24,7 @@ configurations ***REMOVED***
 repositories ***REMOVED***
 	mavenCentral()
 	maven ***REMOVED***
-		url = uri('http://localhost:8081/repository/maven-snapshots')
+		url = uri('http://34.47.121.214:8081/repository/maven-releases')
 		allowInsecureProtocol = true //http를 사용하기 위해 추가
 		credentials***REMOVED***
 			username = "weddy"
@@ -50,12 +50,15 @@ dependencies ***REMOVED***
 	// 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
 	implementation 'weddy:common-lib:1.0.7-SNAPSHOT'
 
+
 	// Spring Retry
 	implementation 'org.springframework.retry:spring-retry'
 
 	// Spring AOP
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 
+	//fcm
+	implementation 'com.google.firebase:firebase-admin:9.4.1'
 ***REMOVED***
 
 tasks.named('test') ***REMOVED***
