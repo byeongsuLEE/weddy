@@ -8,7 +8,7 @@ export interface Schedule ***REMOVED***
 
 export interface GetSchedule ***REMOVED***
   id: string;
-  contractType: string;
+  contractType: "STUDIO" | "DRESS" | "MAKEUP" | "WEDDING";
   startDate: Date;
   endDate: Date;
   content: string;

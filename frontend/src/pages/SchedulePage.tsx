@@ -27,7 +27,7 @@ const Schedule = () => ***REMOVED***
   ***REMOVED***, [selectedDate]);
   
 
-  const ***REMOVED*** data: scheduleList ***REMOVED*** = useQuery(
+  const ***REMOVED*** data: scheduleList = [] ***REMOVED*** = useQuery(
     ['getSchedule', formattedDate],
     () => getSchedule(formattedDate),
     ***REMOVED*** enabled: !!formattedDate***REMOVED***
@@ -51,29 +51,12 @@ const Schedule = () => ***REMOVED***
         ***REMOVED***)***REMOVED***
       </div>
 
-      ***REMOVED***/* <div></div> */***REMOVED***
-
-      ***REMOVED***!scheduleList || scheduleList?.length <= 0 ? (
-        <ScheduleBox type="etc" title="일정이 없습니다." />
+      ***REMOVED***scheduleList.length > 0 ? (
+        scheduleList.map((schedule: GetSchedule) => (
+          <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type=***REMOVED***schedule.contractType***REMOVED*** title=***REMOVED***schedule.content***REMOVED***/>
+        ))
       ) : (
-        scheduleList?.map((schedule: GetSchedule) => ***REMOVED***
-          switch (schedule.contractType) ***REMOVED***
-            case 'STUDIO':
-              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="studio" title=***REMOVED***schedule.content***REMOVED*** />;
-            
-            case 'DRESS':
-              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="dress" title="드레스 피팅" />;
-
-            case 'MAKEUP':
-              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="makeup" title="메이크업" />;
-            
-            case 'WEDDING':
-              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="wedding" title="예식일"/>
-
-            default:
-              return <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type="etc" title=***REMOVED***schedule.content***REMOVED*** />;
-          ***REMOVED***
-        ***REMOVED***)
+        <ScheduleBox type="etc" title="일정이 없습니다." />
       )***REMOVED***
 
       <div onClick=***REMOVED***() => ***REMOVED*** setIsOpen(true); ***REMOVED******REMOVED*** className="plusIconButton">
