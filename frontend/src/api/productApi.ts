@@ -12,7 +12,6 @@ export const allProducts = async (): Promise<Product[]> => ***REMOVED***
       Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
-  console.log(response.data);
   return response.data.data;
 ***REMOVED***;
 

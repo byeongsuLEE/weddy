@@ -5,14 +5,13 @@ const BASE_URL = "http://localhost:8080/api/users/cart";
 
 //== 상품 담기 ==//
 export const addProductToCart = async (productId?: string): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: "post",
     url: `$***REMOVED***BASE_URL***REMOVED***/add/$***REMOVED***productId***REMOVED***`,
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
   ***REMOVED***);
-  console.log(response.data.data);
 ***REMOVED***;
 
 //== 장바구니 리스트 조회 ==//
