@@ -55,7 +55,7 @@ const PlannerPage = () => ***REMOVED***
       <div className="mt-10">
         ***REMOVED***recommendList.length > 0 ? (
           <>
-            ***REMOVED***["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
+            ***REMOVED***/* ***REMOVED***["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
               <PlannerBox
                 key=***REMOVED***category***REMOVED***
                 title=***REMOVED***category***REMOVED***
@@ -74,7 +74,7 @@ const PlannerPage = () => ***REMOVED***
               <div onClick=***REMOVED***handleCreateContract***REMOVED***>
                 <TodoButton title="계약 요청" />
               </div>
-            </div>
+            </div> */***REMOVED***
           </>
         ) : (
           <div className="flex flex-col m-5">

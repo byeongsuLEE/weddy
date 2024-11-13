@@ -1,9 +1,9 @@
 import axios from "axios";
-import ***REMOVED*** Product ***REMOVED*** from "./product.type";
+import ***REMOVED*** RecommendData ***REMOVED*** from "./recommend.type";
 
-const BASE_URL = "http://localhost:8000/api/recommends";
+const BASE_URL = "http://localhost:8086/api/recommends";
 
-export const aiRecommend = async (message: string): Promise<Product[]> => ***REMOVED***
+export const aiRecommend = async (message: string): Promise<RecommendData[]> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
     url: BASE_URL,
