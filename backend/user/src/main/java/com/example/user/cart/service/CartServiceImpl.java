@@ -56,10 +56,17 @@ public class CartServiceImpl implements CartService ***REMOVED***
 
     public void removeCart(Long productId, UserEntity userEntity)***REMOVED***
         List<CartEntity> cartEntities = cartRepository.findByCoupleCode(userEntity.getCoupleCode());
+
         if (cartEntities != null && !cartEntities.isEmpty()) ***REMOVED***
-            cartRepository.deleteAll(cartEntities);
+            int deletedCount = cartRepository.deleteByUserIdAndProductId(productId,userEntity.getCoupleCode());
+
+            if (deletedCount == 0) ***REMOVED***
+                // 삭제가 실패했을 때 예외 던지기
+                throw new CartNotFoundException(ErrorCode.ITEM_NOT_FOUND);
+            ***REMOVED***
+        ***REMOVED*** else ***REMOVED***
+            throw new CartNotFoundException(ErrorCode.ITEM_NOT_FOUND);
         ***REMOVED***
-        else throw new CartNotFoundException(ErrorCode.ITEM_NOT_FOUND);
     ***REMOVED***
 
     public List<CartProductDto> getCart(UserEntity userEntity) ***REMOVED***
