@@ -67,7 +67,6 @@ export const editInformation = async (
     ***REMOVED***,
     data: userInfo,
   ***REMOVED***);
-  alert("회원 정보가 수정되었습니다.");
 ***REMOVED***;
 
 //== FCM 토큰 저장 ==//
