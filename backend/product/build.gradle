@@ -21,6 +21,14 @@ configurations ***REMOVED***
 
 repositories ***REMOVED***
 	mavenCentral()
+	maven ***REMOVED***
+		url = uri('http://localhost:8081/repository/maven-snapshots')
+		allowInsecureProtocol = true //http를 사용하기 위해 추가
+		credentials***REMOVED***
+			username = "weddy"
+			password = "weddy"
+		***REMOVED***
+	***REMOVED***
 ***REMOVED***
 
 ext ***REMOVED***
@@ -62,6 +70,9 @@ dependencies ***REMOVED***
 
 	// prometheus
 	implementation 'io.micrometer:micrometer-registry-prometheus'
+
+	// 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
+	implementation 'weddy:common-lib:1.0.7-SNAPSHOT'
 ***REMOVED***
 
 dependencyManagement ***REMOVED***
