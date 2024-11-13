@@ -17,5 +17,9 @@ public class ProductResponseDto ***REMOVED***
     private ProductType type;
     private int price;
     private String address;
+    private String vendorName;
+    private String vendorPhone;
+    private String vendorAddress;
+    private Long vendorId;
     private List<ProductImageResponseDto> images = new ArrayList<>();
 ***REMOVED***
