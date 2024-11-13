@@ -54,7 +54,7 @@ const MakeImg = (***REMOVED*** isOpen, setIsOpen, blobData ***REMOVED***: Popove
         setDressName("");
 
         // 전송 후 페이지 이동
-        navigate("/dress/img");
+        navigate("/dress");
       ***REMOVED*** catch (error) ***REMOVED***
         console.error("이미지 저장 중 오류가 발생했습니다:", error);
       ***REMOVED***

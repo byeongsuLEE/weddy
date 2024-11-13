@@ -77,7 +77,7 @@ const CameraSettings: React.FC = () => ***REMOVED***
   useEffect(() => ***REMOVED***
     camera.position.set(0, 1, 5);
     camera.lookAt(0, 1, 0);
-    camera.zoom = 1.5;
+    camera.zoom = 1.2;
     camera.updateProjectionMatrix();
   ***REMOVED***, [camera]);
 
@@ -152,9 +152,9 @@ const Sketch: React.FC = () => ***REMOVED***
   const captureImage = () => ***REMOVED***
     if (canvasElement) ***REMOVED***
       requestAnimationFrame(() => ***REMOVED***
-        const dataURL = canvasElement.toDataURL("image/jpeg", 0.8);
+        const dataURL = canvasElement.toDataURL("image/png"); // PNG로 설정
         const base64Data = dataURL.split(",")[1];
-
+  
         // Base64 데이터를 Blob으로 변환
         const byteString = atob(base64Data);
         const arrayBuffer = new ArrayBuffer(byteString.length);
@@ -162,7 +162,7 @@ const Sketch: React.FC = () => ***REMOVED***
         for (let i = 0; i < byteString.length; i++) ***REMOVED***
           uint8Array[i] = byteString.charCodeAt(i);
         ***REMOVED***
-        const blob = new Blob([uint8Array], ***REMOVED*** type: "image/jpeg" ***REMOVED***); 
+        const blob = new Blob([uint8Array], ***REMOVED*** type: "image/png" ***REMOVED***); // Blob 타입을 PNG로 설정
         
         setBlobData(blob); // Blob을 상태로 저장
         setIsOpen(true);
