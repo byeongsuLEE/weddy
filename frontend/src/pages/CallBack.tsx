@@ -59,10 +59,11 @@ const CallBack = () => ***REMOVED***
         try ***REMOVED***
           await requestNotificationPermission();
           const token = await requestForToken();
+          setToken(token);
           console.log("발급된 토큰은 : " + token);
           if (token) ***REMOVED***
-            console.log(token);
-            setToken(token);
+            sessionStorage.setItem('firebaseToken', token);
+            // console.log(token);
             // saveFcmToken(token, userId);
           ***REMOVED*** else ***REMOVED***
             console.warn("No token received");

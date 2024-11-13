@@ -11,7 +11,7 @@ import ***REMOVED***
   AlertDialogHeader,
   AlertDialogTitle,
 ***REMOVED*** from "@/components/ui/alert-dialog";
-import ***REMOVED*** useState ***REMOVED*** from "react";
+import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import styled from "styled-components";
 import DatePick from "./DatePick";
 
@@ -26,12 +26,29 @@ const FlexCenterWrapper = styled.div`
 `;
 
 export function AlertDialogDemo(***REMOVED*** isOpen, onClose ***REMOVED***: AlertDialogDemoProps) ***REMOVED***
+  const firebaseToken = sessionStorage.getItem('firebaseToken');
+
   const [scheduleInfo, setScheduleInfo] = useState<Schedule>(***REMOVED***
     startDate: null,
     endDate: null,
     content: '',
     type: '',
+    userCoupleToken: ***REMOVED***
+      myFcmToken: ""
+    ***REMOVED***,
   ***REMOVED***);
+
+  useEffect(() => ***REMOVED***
+    if (firebaseToken) ***REMOVED***
+      setScheduleInfo((prev) => (***REMOVED***
+        ...prev,
+        userCoupleToken: ***REMOVED***
+          // ...prev.userCoupleCodeToken,
+          myFcmToken: firebaseToken,
+        ***REMOVED***,
+      ***REMOVED***));
+    ***REMOVED***
+  ***REMOVED***, [firebaseToken]);
 
   function formatDate(date: Date): string ***REMOVED***
   const year = date.getFullYear();
