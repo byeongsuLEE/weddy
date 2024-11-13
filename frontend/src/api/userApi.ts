@@ -70,6 +70,20 @@ export const editInformation = async (
   alert("회원 정보가 수정되었습니다.");
 ***REMOVED***;
 
+//== 커플 코드 연결 ==//
+export const connectCoupleCode = async (code: string): Promise<void> => ***REMOVED***
+  await axios(***REMOVED***
+    method: 'patch',
+    url: `$***REMOVED***BASE_URL***REMOVED***/couple-connect`,
+    headers: ***REMOVED***
+      Authorization: sessionStorage.getItem("token")
+    ***REMOVED***,
+    data: ***REMOVED***
+      "code": code
+    ***REMOVED***
+  ***REMOVED***);
+***REMOVED***;
+
 //== FCM 토큰 저장 ==//
 export const saveFcmToken = async (
   fcmToken: string,
