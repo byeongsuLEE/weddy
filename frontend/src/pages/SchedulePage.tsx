@@ -1,13 +1,14 @@
 import ***REMOVED*** GetSchedule ***REMOVED*** from "@/api/schedule.type";
 import ***REMOVED*** getSchedule ***REMOVED*** from "@/api/scheduleApi";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** useQuery, useQueryClient ***REMOVED*** from "react-query";
 import CalenderBox from "../components/SchedulePage/CalenderBox";
 import ***REMOVED*** AlertDialogDemo ***REMOVED*** from "../components/SchedulePage/DrawerBox";
 import ScheduleBox from "../components/SchedulePage/ScheduleBox";
 import PlusIcon from "../icons/PlusIcon";
 
 const Schedule = () => ***REMOVED***
+  const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const [ selectedDate, setSelectedDate ] = useState<Date>(new Date());
   const [ formattedDate, setFormattedDate ] = useState<string>('');
@@ -32,6 +33,10 @@ const Schedule = () => ***REMOVED***
     () => getSchedule(formattedDate),
     ***REMOVED*** enabled: !!formattedDate***REMOVED***
   );
+
+  const handleAddSchedule = () => ***REMOVED***
+    queryClient.invalidateQueries('getSchedule');
+  ***REMOVED***;
 
   const handleCloseDialog = () => ***REMOVED***
     setIsOpen(false);
@@ -63,7 +68,7 @@ const Schedule = () => ***REMOVED***
         <PlusIcon />
       </div>
 
-      <AlertDialogDemo isOpen=***REMOVED***isOpen***REMOVED*** onClose=***REMOVED***handleCloseDialog***REMOVED*** />
+      <AlertDialogDemo isOpen=***REMOVED***isOpen***REMOVED*** addSchedule=***REMOVED***handleAddSchedule***REMOVED*** onClose=***REMOVED***handleCloseDialog***REMOVED*** />
     </div>
   )
 ***REMOVED***
