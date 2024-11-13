@@ -42,7 +42,7 @@ public class PushMessageScheduler ***REMOVED***
      */
 
     @Async("taskExecutor")
-    @Scheduled(cron = "0 0 9 * * *")
+    @Scheduled(cron = "1 * * * * *")
     public void sendPushMessage() throws FirebaseMessagingException ***REMOVED***
 
 
