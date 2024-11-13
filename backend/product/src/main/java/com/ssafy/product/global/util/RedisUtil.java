@@ -2,14 +2,14 @@ package com.ssafy.product.global.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.ssafy.product.product.constant.KeyType;
-import weddy.commonlib.dto.response.ProductResponseDto;
 import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Repository;
+import weddy.commonlib.constant.KeyType;
+import weddy.commonlib.dto.response.ProductResponseDto;
 
 import java.util.Map;
 import java.util.Set;
@@ -118,6 +118,4 @@ public class RedisUtil ***REMOVED***
     public Map<Object, Object> getAllHashValues(String keyType) ***REMOVED***
         return redisTemplate.opsForHash().entries(keyType);
     ***REMOVED***
-
-
 ***REMOVED***
