@@ -1,44 +1,67 @@
+import ***REMOVED*** useEffect ***REMOVED*** from "react";
 import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-query";
-import ***REMOVED*** BrowserRouter, Route, Routes, useLocation ***REMOVED*** from 'react-router-dom';
-import Footer from './common/Footer';
-import Navbar from './common/Navbar';
-import './index.css';
-import BoardDetail from './pages/BoardDetailPage';
-import Board from './pages/BoardPage';
-import CallBack from './pages/CallBack';
-import Cart from './pages/CartPage';
-import ContractList from './pages/ContractListPage';
-import Contract from './pages/ContractPage';
-import Login from './pages/LoginPage';
-import Main from './pages/MainPage';
-import Mypage from './pages/MyPage';
+import ***REMOVED*** BrowserRouter, Route, Routes, useLocation, useNavigate ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** RecoilRoot, useRecoilValue ***REMOVED*** from "recoil";
+import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi";
+import Footer from "./common/Footer";
+import Navbar from "./common/Navbar";
+import ***REMOVED*** onMessageListener ***REMOVED*** from "./firebase";
+import "./index.css";
+import BoardDetail from "./pages/BoardDetailPage";
+import Board from "./pages/BoardPage";
+import CallBack from "./pages/CallBack";
+import Cart from "./pages/CartPage";
+import ContractList from "./pages/ContractListPage";
+import Contract from "./pages/ContractPage";
+import DressImg from "./pages/DressImgPage";
+import DressSketch from "./pages/DressSketchPage";
+import Login from "./pages/LoginPage";
+import Main from "./pages/MainPage";
+import Mypage from "./pages/MyPage";
 import NFTLoading from "./pages/NFTLoadingPage";
-import PlannerList from "./pages/PlannerListPage";
-import Planner from './pages/PlannerPage';
-import Prompt from './pages/PromptPage';
+import Planner from "./pages/PlannerPage";
+import Prompt from "./pages/PromptPage";
 import RecommendLoading from "./pages/RecommendLoadingPage";
 import Review from "./pages/ReviewPage";
-import Schedule from './pages/SchedulePage';
-import Sketch from './pages/SketchPage';
+import Schedule from "./pages/SchedulePage";
+import Sketch from "./pages/SketchPage";
 import UserInfo from "./pages/UserInfoPage";
+import ***REMOVED*** firebaseTokenState ***REMOVED*** from "./store/firebaseToken";
 
-import ***REMOVED*** useSetRecoilState ***REMOVED*** from 'recoil';
-import ***REMOVED*** firebaseTokenState ***REMOVED*** from './store/firebaseToken.ts';
-
-import ***REMOVED*** useEffect ***REMOVED*** from 'react';
-import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi.ts";
-import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from './firebase.ts';
-import DressSketch from "./pages/DressSketchPage.tsx";
-import DressImg from "./pages/DressImgPage.tsx";
+const queryClient = new QueryClient();
 
 function AppContent() ***REMOVED***
+  const userId = sessionStorage.getItem("userId");
+  const token = sessionStorage.getItem("token");
+  const fcmToken = useRecoilValue(firebaseTokenState);
+  const navigate = useNavigate();
   const location = useLocation();
-  const currentPath = location.pathname.split('/')[1];
-  const currentDetail = location.pathname.split('/')[2];
+  const currentPath = location.pathname.split("/")[1];
+  const currentDetail = location.pathname.split("/")[2];
+
+  useEffect(() => ***REMOVED***
+    if (!token && currentPath !== "login" && currentPath !== "callback") ***REMOVED***
+      navigate("/login");
+    ***REMOVED***
+
+    if (userId && fcmToken) ***REMOVED***
+      saveFcmToken(fcmToken, userId);
+    ***REMOVED***
+
+    const initializeMessageListener = async () => ***REMOVED***
+      try ***REMOVED***
+        await onMessageListener();
+      ***REMOVED*** catch ***REMOVED***
+        // 포그라운드 메시지 리스너 오류 처리 로직
+      ***REMOVED***
+    ***REMOVED***;
+
+    initializeMessageListener();
+  ***REMOVED***, [token, userId, fcmToken]);
 
   return (
     <>
-      ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && <Navbar />***REMOVED***
+      ***REMOVED***currentPath !== "login" && currentPath !== "userinfo" && <Navbar />***REMOVED***
       <Routes>
         <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
         <Route path="/review/:productId" element=***REMOVED***<Review />***REMOVED*** />
@@ -49,7 +72,6 @@ function AppContent() ***REMOVED***
         <Route path="/board/detail/:productId" element=***REMOVED***<BoardDetail />***REMOVED*** />
         <Route path="/prompt" element=***REMOVED***<Prompt />***REMOVED*** />
         <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
-        <Route path="/planner/list/:category" element=***REMOVED***<PlannerList />***REMOVED*** />
         <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
         <Route path="/dress" element=***REMOVED***<DressSketch />***REMOVED*** />
         <Route path="/dress/img" element=***REMOVED***<DressImg />***REMOVED*** />
@@ -61,74 +83,23 @@ function AppContent() ***REMOVED***
         <Route path="/nft/loading" element=***REMOVED***<NFTLoading />***REMOVED*** />
         <Route path="/recommend/loading" element=***REMOVED***<RecommendLoading />***REMOVED*** />
       </Routes>
-      ***REMOVED***(currentPath !== "login") && (currentPath !== "userinfo") && (currentDetail !== "detail") && <Footer />***REMOVED***
+      ***REMOVED***currentPath !== "login" &&
+        currentPath !== "userinfo" &&
+        currentDetail !== "detail" && <Footer />***REMOVED***
     </>
   );
 ***REMOVED***
 
 function App() ***REMOVED***
-  const queryClient = new QueryClient();
-  const setToken = useSetRecoilState(firebaseTokenState);
-  const userId = sessionStorage.getItem("userId");
-
-  useEffect(() => ***REMOVED***
-    if ('serviceWorker' in navigator) ***REMOVED***
-      navigator.serviceWorker.getRegistrations().then((registrations) => ***REMOVED***
-        // 기존 등록된 서비스 워커가 있는지 확인
-        const isRegistered = registrations.some((registration) =>
-          registration.active && registration.scope === '/firebase-messaging-sw.js'
-        );
-
-        if (!isRegistered) ***REMOVED***
-          // 서비스 워커가 등록되지 않았을 경우에만 등록
-          navigator.serviceWorker.register('/firebase-messaging-sw.js')
-            .catch((err) => ***REMOVED***
-              console.error('Service Worker registration failed:', err);
-            ***REMOVED***);
-        ***REMOVED*** else ***REMOVED***
-          console.log('Service Worker already registered');
-        ***REMOVED***
-      ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***, []);
-
-  useEffect(() => ***REMOVED***
-    // 푸시 알림 요청 및 토큰 처리
-    const requestPermissionsAndToken = async () => ***REMOVED***
-      await requestNotificationPermission();
-
-      const token = await requestForToken();
-      if (token) ***REMOVED***
-        setToken(token);
-
-        if (userId !== null) ***REMOVED***
-          saveFcmToken(token, userId);
-        ***REMOVED*** else ***REMOVED***
-          console.warn("User ID is null, skipping saveFcmToken");
-        ***REMOVED***
-
-
-      ***REMOVED*** else ***REMOVED***
-        console.warn("No token received");
-      ***REMOVED***
-    ***REMOVED***;
-
-    requestPermissionsAndToken();
-
-    // 기존 코드에서 삭제된 포그라운드 메시지 수신 리스너 부분
-    // onMessage(messaging, (payload) => ***REMOVED***
-    //   console.log("Message received in foreground:", payload);
-    // ***REMOVED***);
-
-  ***REMOVED***, [setToken]);
-
   return (
-    <div className='container'>
-      <QueryClientProvider client=***REMOVED***queryClient***REMOVED***>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
-      </QueryClientProvider>
+    <div className="container">
+      <RecoilRoot>
+        <QueryClientProvider client=***REMOVED***queryClient***REMOVED***>
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </QueryClientProvider>
+      </RecoilRoot>
     </div>
   );
 ***REMOVED***

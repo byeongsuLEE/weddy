@@ -1,10 +1,10 @@
-import ***REMOVED*** Product, ReviewData ***REMOVED*** from "@/api/product.type";
-import ***REMOVED*** submitReview ***REMOVED*** from "@/api/productApi";
+import ***REMOVED*** ReviewData ***REMOVED*** from "@/api/product.type";
+import ***REMOVED*** detailProduct, submitReview ***REMOVED*** from "@/api/productApi";
 import Separate from "@/common/Separate";
 import TodoButton from "@/common/TodoButton";
 import RatingBox from "@/components/ReviewPage/RatingBox";
 import ***REMOVED*** useState ***REMOVED*** from "react";
-// import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import ***REMOVED*** useNavigate, useParams ***REMOVED*** from "react-router-dom";
 
 const Review = () => ***REMOVED***
@@ -19,23 +19,11 @@ const Review = () => ***REMOVED***
   ***REMOVED***);
 
   //== 상품 정보 ==//
-  // const ***REMOVED*** data: productData ***REMOVED*** = useQuery(
-  //   ['detailProduct', productId],
-  //   () => detailProduct(productId),
-  //   ***REMOVED***enabled: !!productId***REMOVED***
-  // );
-
-  const productData: Product = ***REMOVED***
-    id: "1",
-      type: "DRESS",
-      name: "웨딩 드레스 대여",
-      price: "1500000",
-      address: "서울 강남구",
-      content: "고급스러운 웨딩 드레스 대여 서비스입니다.",
-      vendorName: "Elegant Bridal",
-      vendorId: "vendor1",
-      images: [],
-  ***REMOVED***
+  const ***REMOVED*** data: productData ***REMOVED*** = useQuery(
+    ['detailProduct', productId],
+    () => detailProduct(productId),
+    ***REMOVED***enabled: !!productId***REMOVED***
+  );
 
   //== 상태 업데이트 ==//
   const updateReviewData = (key: keyof ReviewData, value: any) => ***REMOVED***

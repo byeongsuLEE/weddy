@@ -10,14 +10,14 @@ export const getToken = async (userId?: string): Promise<void> => ***REMOVED***
     url: `$***REMOVED***BASE_URL***REMOVED***/token/super`,
     params: ***REMOVED***
       id: userId,
-    ***REMOVED***
+    ***REMOVED***,
   ***REMOVED***);
 
   if (userId) ***REMOVED***
     sessionStorage.setItem("userId", userId);
     sessionStorage.setItem("token", response.data.accessToken);
     sessionStorage.setItem("refreshToken", response.data.refreshToken);
-  ***REMOVED***;
+  ***REMOVED***
 ***REMOVED***;
 
 //== 로그아웃 ==//
@@ -26,7 +26,7 @@ export const logout = () => ***REMOVED***
     method: "post",
     url: `$***REMOVED***BASE_URL***REMOVED***/logout`,
     headers: ***REMOVED***
-      Authorization: sessionStorage.getItem("token")
+      Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
   ***REMOVED***);
 ***REMOVED***;
@@ -37,53 +37,69 @@ export const getUserInfo = async (): Promise<userInformation[]> => ***REMOVED***
     method: "get",
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: sessionStorage.getItem("token")
+      Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
   ***REMOVED***);
-  console.log(response.data.data);
   return response.data.data;
 ***REMOVED***;
 
 //== 회원 프로필 수정 ==//
 export const editProfile = async (file: FormData): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: "patch",
     url: `$***REMOVED***BASE_URL***REMOVED***/picture`,
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
-    data: file
-    ***REMOVED***);
-    console.log(response.data);
-  ***REMOVED***;
-
-//== 회원 정보 수정 ==//
-export const editInformation = async ( userInfo?: userInformation ): Promise<void> => ***REMOVED***
-  console.log(userInfo);
-  // await axios(***REMOVED***
-  //   method: "patch",
-  //   url: BASE_URL,
-  //   headers: ***REMOVED***
-  //     Authorization: sessionStorage.getItem("token"),
-  //   ***REMOVED***,
-  //   data: userInfo
-  // ***REMOVED***);
+    data: file,
+  ***REMOVED***);
 ***REMOVED***;
 
-//fcm 토큰 저장
-export const saveFcmToken = async (fcmToken: string, userId:string): Promise<void> => ***REMOVED***
+//== 회원 정보 수정 ==//
+export const editInformation = async (
+  userInfo?: userInformation
+): Promise<void> => ***REMOVED***
+  await axios(***REMOVED***
+    method: "patch",
+    url: BASE_URL,
+    headers: ***REMOVED***
+      Authorization: sessionStorage.getItem("token"),
+    ***REMOVED***,
+    data: userInfo,
+  ***REMOVED***);
+***REMOVED***;
+
+//== 커플 코드 연결 ==//
+export const connectCoupleCode = async (code: string): Promise<void> => ***REMOVED***
+  await axios(***REMOVED***
+    method: 'patch',
+    url: `$***REMOVED***BASE_URL***REMOVED***/couple-connect`,
+    headers: ***REMOVED***
+      Authorization: sessionStorage.getItem("token")
+    ***REMOVED***,
+    data: ***REMOVED***
+      "code": code
+    ***REMOVED***
+  ***REMOVED***);
+***REMOVED***;
+
+//== FCM 토큰 저장 ==//
+export const saveFcmToken = async (
+  fcmToken: string,
+  userId: string
+): Promise<void> => ***REMOVED***
   await axios(***REMOVED***
     method: "patch",
     url: `$***REMOVED***BASE_URL***REMOVED***/fcm-token/$***REMOVED***userId***REMOVED***`,
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token"),
-      'Content-Type': 'text/plain',
+      "Content-Type": "application/json",
     ***REMOVED***,
-    data: fcmToken 
+    data: ***REMOVED*** fcmToken: fcmToken ***REMOVED***,
   ***REMOVED***);
-***REMOVED***
+***REMOVED***;
 
-// 커플코드로 fcm 토큰 조회
+//== 커플코드로 FCM 토큰 조회 ==//
 export const getFcmToken = async (coupleCode: string): Promise<string> => ***REMOVED***
   const response = await axios(***REMOVED***
     method: "get",
@@ -93,4 +109,4 @@ export const getFcmToken = async (coupleCode: string): Promise<string> => ***REM
     ***REMOVED***,
   ***REMOVED***);
   return response.data.data;
-***REMOVED***
+***REMOVED***;

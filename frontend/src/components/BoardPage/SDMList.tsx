@@ -38,9 +38,11 @@ const SDMList = (***REMOVED*** value, productList ***REMOVED***: SDMListProps) =
           )
         ) : productList && productList.length > 0 ? (
           productList.map((product: Product) => (
-            <Link to=***REMOVED***`/board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
-              <SDMBox src=***REMOVED***product.images[0].imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
-            </Link>
+            product.images.length > 0 ? (
+              <Link to=***REMOVED***`/board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
+                <SDMBox src=***REMOVED***product.images[0].imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
+              </Link>
+            ) : null
           ))
         ) : (
           <p>상품이 없습니다.</p>

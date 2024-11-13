@@ -1,29 +1,30 @@
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import DropdownIcon from "@/icons/DropdownIcon";
-// import GotoIcon from "@/icons/Goto";
+import GotoIcon from "@/icons/Goto";
 import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-// import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 import CartBox from "./CartBox";
 
 interface CartListBoxProps ***REMOVED***
   category: string;
-  productList: Product[];
+  productList?: Product[];
   selectedList: ***REMOVED*** [type: string]: Product | null ***REMOVED***;
   onProductChange: (category: string, product: Product | null) => void;
-  onRemove: (category: string, id: string) => void;
+  onRemove: (productId: string) => void;
 ***REMOVED***
 
 const CartListBox = (***REMOVED*** category, productList, selectedList, onProductChange, onRemove ***REMOVED***: CartListBoxProps) => ***REMOVED***
-  // const navigate = useNavigate();
-  // const goRecommend = () => ***REMOVED***
-  //   navigate(`/planner/list/$***REMOVED***category***REMOVED***`);
-  // ***REMOVED***;
+  const navigate = useNavigate();
+
+  const goboard = () => ***REMOVED***
+    navigate(`/board?category=$***REMOVED***category.toLowerCase()***REMOVED***`);
+  ***REMOVED***
 
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => ***REMOVED***
-    setIsChecked(!!productList.length);
+    setIsChecked(!!productList?.length);
   ***REMOVED***, [productList]);
 
   const handleProductSelect = (product: Product | null) => ***REMOVED***
@@ -70,22 +71,21 @@ const CartListBox = (***REMOVED*** category, productList, selectedList, onProduc
               <DropdownIcon />
             </div>
           ) : (
-            // <div onClick=***REMOVED***goRecommend***REMOVED*** className="flex items-center">
-            //   <p className="mr-1">상품 보러가기</p>
-            //   <GotoIcon />
-            // </div>
-            <></>
+            <div onClick=***REMOVED***goboard***REMOVED*** className="flex items-center">
+              <p className="mr-1">상품 보러가기</p>
+              <GotoIcon />
+            </div>
           )***REMOVED***
         </div>
       </AccordionSummary>
       ***REMOVED***isChecked ? (
-        productList.map((item: Product, index) => (
+        productList?.map((item: Product, index) => (
           <div key=***REMOVED***index***REMOVED***>
             <CartBox
               item=***REMOVED***item***REMOVED***
               isSelected=***REMOVED***selectedList[category]?.id === item.id***REMOVED***
               onProductSelect=***REMOVED***handleProductSelect***REMOVED***
-              onRemove=***REMOVED***() => onRemove(category, item.id)***REMOVED***
+              onRemove=***REMOVED***() => onRemove(item.id)***REMOVED***
             />
           </div>
         ))

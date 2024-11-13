@@ -1,5 +1,5 @@
 import ***REMOVED*** BrowserProvider, ethers ***REMOVED*** from "ethers";
-import MyNFT from '../../../blockchain/NFT/build/contracts/MyNFT.json';
+import MyNFT from '@/hooks/contracts/MyNFT.json';
 import detectEthereumProvider from "@metamask/detect-provider";
 
 interface WindowWithEthereum extends Window ***REMOVED***
