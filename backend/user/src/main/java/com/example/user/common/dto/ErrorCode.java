@@ -19,7 +19,8 @@ public enum ErrorCode ***REMOVED***
     USER_TOKEN_NOT_FOUND(HttpStatus.NOT_FOUND,"유저 토큰을 찾을 수 없습니다."),
     ITEM_NOT_FOUND(HttpStatus.NOT_FOUND,"상품을 찾을 수 없습니다."),
     CONFLICT_ITEM(HttpStatus.CONFLICT,"상품이 중복됩니다."),
-    JSON_ERROR(HttpStatus.PROCESSING,"JSON 에러입니다.");
+    JSON_ERROR(HttpStatus.PROCESSING,"JSON 에러입니다."),
+    IMAGE_UPLOAD_FAIL(HttpStatus.INTERNAL_SERVER_ERROR,"이미지 업로드에 실패하였습니다.");
 
     private HttpStatus status;
     private String message;
