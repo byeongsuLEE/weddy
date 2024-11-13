@@ -4,8 +4,6 @@ import ***REMOVED*** Product ***REMOVED*** from "./product.type";
 
 const BASE_URL = 'http://localhost:8080/api/contracts'
 
-const token = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwidXNlck5hbWUiOiJb6rSR7KO8XzHrsJhfYzEwM1_snbTrs5HsiJhdIiwiY29kZSI6IkczNzFSTyIsImlhdCI6MTczMDQyNDQ1MSwiZXhwIjoxNzMzMDE2NDUxfQ.R7YFdmlN-IZkTeo0veuMA4W2eW_9-dXJJ-pGU8SRmPk'
-
 //== 계약서 생성 ==// 
 export const createContract = async (contractItems: Product[]): Promise<void> => ***REMOVED***
   const contracts = contractItems.map((item) => ***REMOVED***
@@ -39,13 +37,10 @@ export const createContract = async (contractItems: Product[]): Promise<void> =>
 export const requestContract = async (contractList: SentContractType[]): Promise<void> => ***REMOVED***
   await axios(***REMOVED***
     method: 'post',
-    url: `$***REMOVED***BASE_URL***REMOVED***/5`,
+    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem('userId')***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***token***REMOVED***`
+      Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
-    // headers: ***REMOVED***
-    //   Authorization: sessionStorage.getItem("token")
-    // ***REMOVED***,
     data: contractList
   ***REMOVED***);
 ***REMOVED***;
@@ -56,11 +51,8 @@ export const myContract = async (): Promise<ContractData[]> => ***REMOVED***
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***token***REMOVED***`
+      Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
     ***REMOVED***
-    // headers: ***REMOVED***
-    //   Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
-    // ***REMOVED***
   ***REMOVED***);
   return response.data.data;
 ***REMOVED***;
@@ -71,11 +63,8 @@ export const contractInfo = async (contractId?: string): Promise<ContractData> =
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***token***REMOVED***`
+      Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
     ***REMOVED***
-    // headers: ***REMOVED***
-    //   Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
-    // ***REMOVED***
   ***REMOVED***);
   return response.data.data;
 ***REMOVED***;
@@ -86,10 +75,7 @@ export const changeStatus = async (contractId?: string): Promise<void> => ***REM
     method: 'patch',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***token***REMOVED***`
+      Authorization: sessionStorage.getItem("token")
     ***REMOVED***
-    // headers: ***REMOVED***
-    //   Authorization: sessionStorage.getItem("token")
-    // ***REMOVED***
   ***REMOVED***);
 ***REMOVED***;
