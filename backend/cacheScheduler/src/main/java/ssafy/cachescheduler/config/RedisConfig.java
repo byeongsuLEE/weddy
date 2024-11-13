@@ -27,12 +27,31 @@ public class RedisConfig ***REMOVED***
     private final ObjectMapper objectMapper;
 
     @Bean // 스프링 컨텍스트에 RedisConnectionFactory 빈 등록
+    public RedisConnectionFactory redisUserConnectionFactory() ***REMOVED***
+        // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
+        redisStandaloneConfiguration.setPassword(password);
+        redisStandaloneConfiguration.setDatabase(1); // DB 0번 사용
+        return new LettuceConnectionFactory(redisStandaloneConfiguration);
+    ***REMOVED***
+
+    @Bean // 스프링 컨텍스트에 RedisConnectionFactory 빈 등록
     public RedisConnectionFactory redisConnectionFactory() ***REMOVED***
         // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
         redisStandaloneConfiguration.setPassword(password);
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     ***REMOVED***
+
+    @Bean
+    public RedisConnectionFactory redisScheduleConnectionFactory() ***REMOVED***
+        // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
+        redisStandaloneConfiguration.setPassword(password);
+        redisStandaloneConfiguration.setDatabase(2); // DB 0번 사용
+        return new LettuceConnectionFactory(redisStandaloneConfiguration);
+    ***REMOVED***
+
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate() ***REMOVED***
@@ -52,4 +71,40 @@ public class RedisConfig ***REMOVED***
         redisTemplate.afterPropertiesSet();
         return redisTemplate; // 설정이 완료된 RedisTemplate 인스턴스를 반환
     ***REMOVED***
+
+
+    @Bean(name = "redisScheduleTemplate")
+    public RedisTemplate<String, Object> redisScheduleTemplate() ***REMOVED***
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisScheduleConnectionFactory());
+
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+        GenericJackson2JsonRedisSerializer jsonSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);
+
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setValueSerializer(jsonSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+        redisTemplate.setHashValueSerializer(jsonSerializer);
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    ***REMOVED***
+
+
+    @Bean(name = "redisUserTemplate")
+    public RedisTemplate<String, String> redisUserTemplate() ***REMOVED***
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisUserConnectionFactory());
+
+        // 키와 값 직렬화 설정
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringSerializer); // 일반 키를 문자열로 직렬화
+        redisTemplate.setHashKeySerializer(stringSerializer); // 해시 키를 문자열로 직렬화
+        redisTemplate.setHashValueSerializer(stringSerializer); // 해시 값을 문자열로 직렬화
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    ***REMOVED***
+
+
 ***REMOVED***

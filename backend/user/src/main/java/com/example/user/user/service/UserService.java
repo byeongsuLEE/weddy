@@ -1,20 +1,30 @@
 package com.example.user.user.service;
 
 import com.example.user.common.dto.ErrorCode;
+import com.example.user.common.exception.JsonParsingException;
 import com.example.user.common.exception.UserNotFoundException;
 import com.example.user.common.exception.UserTokenNotFoundException;
 import com.example.user.common.service.GCSImageService;
+import com.example.user.common.service.FcmService;
 import com.example.user.user.dto.response.UserCoupleTokenDto;
 import com.example.user.user.dto.response.UserResponseDTO;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.user.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,12 +32,22 @@ import java.util.Map;
 @Slf4j
 public class UserService ***REMOVED***
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final KafkaTemplate<String, Object> kafkaTemplate;
     private final UserRepository userRepository;
     private final GCSImageService gcsImageService;
-    public UserService(UserRepository userRepository, GCSImageService gcsImageService)***REMOVED***
+    private final FcmService fcmService;
+    private final RedisTemplate<String, String> redisTemplate;
+
+    public UserService(KafkaTemplate<String, Object> kafkaTemplate, UserRepository userRepository, GCSImageService gcsImageService, FcmService fcmService, @Qualifier("redisUserTemplate") RedisTemplate<String, String> redisTemplate)***REMOVED***
+        this.kafkaTemplate = kafkaTemplate;
         this.userRepository = userRepository;
         this.gcsImageService = gcsImageService;
+        this.fcmService = fcmService;
+        this.redisTemplate = redisTemplate;
     ***REMOVED***
+    @Value("$***REMOVED***producers.couplecode.name***REMOVED***")
+    private final String coupleTopic = "coupleTopic";
 
     public List<UserResponseDTO> userInfo(UserEntity user) ***REMOVED***
         // userEntity와 otherUserEntity를 각각 조회하며, 없으면 UserNotFoundException 발생
@@ -51,9 +71,6 @@ public class UserService ***REMOVED***
 
         return responseList;
     ***REMOVED***
-
-
-
 
     public UserResponseDTO coupleCode(String coupleCode)***REMOVED***
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
@@ -97,24 +114,44 @@ public class UserService ***REMOVED***
 
 
 
-    public UserResponseDTO connectCoupleCode(String coupleCode, Long id) ***REMOVED***
+    public UserResponseDTO connectCoupleCode(String coupleCode, Long id) throws JsonProcessingException ***REMOVED***
         UserEntity userEntity = userRepository.findById(id).orElse(null);
+        int count = userRepository.countByCoupleCode(coupleCode);
+        String oldCoupleCode = userRepository.findById(id).get().getCoupleCode();
+        if(count != 1) throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
         UserEntity otheruserEntity = userRepository.findByCoupleCode(coupleCode).get(0); // 이부분 내가 바꿨으니 확인 해보셈
 
         if (userEntity == null || otheruserEntity == null) ***REMOVED***
             throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
         ***REMOVED***
+        //userEntity 전송용 저장
+        Map<String, String> userData = new HashMap<>();
+        userData.put("oldCoupleCode", oldCoupleCode);
+        userData.put("newCoupleCode", coupleCode);
 
         // coupleCode 업데이트 및 저장
-        userEntity = UserEntity.builder()
+        userEntity = userEntity.toBuilder()
                 .coupleCode(coupleCode)
                 .otherId(otheruserEntity.getId())
                 .build();
         userRepository.save(userEntity);
-        otheruserEntity = UserEntity.builder()
-                .otherId(userEntity.getId()).build();
+        otheruserEntity = otheruserEntity.toBuilder()
+                .otherId(userEntity.getId())
+                .build();
         userRepository.save(otheruserEntity);
 
+        kafkaTemplate.send(coupleTopic,userData);
+
+        String beforeMyCoupleCode=  userEntity.getCoupleCode();
+
+        String myFcmToken = userEntity.getFcmToken();
+
+        String hashKey = "USER:" + beforeMyCoupleCode;
+        //커플 코드 redis 추가 및 삭제
+        if (redisTemplate.hasKey(hashKey))
+            redisTemplate.delete(hashKey);
+//        redisTemplate.opsForHash().delete("USER:"+beforeMyCoupleCode);
+        redisTemplate.opsForHash().put("USER:"+coupleCode,String.valueOf(id),myFcmToken);
 
         // UserResponseDTO 빌드 및 반환
         return UserResponseDTO.builder()
@@ -134,7 +171,7 @@ public class UserService ***REMOVED***
      *  토큰 가져오기
      * @ 작성자   : 이병수
      * @ 작성일   : 2024-11-07
-     * @ 설명     : 커플 코드를 통해서 커플들의 fcm 토큰을 가져오기
+     * @ 설명     : 커플 코드를 통해서 커플들의 fcmadapter 토큰을 가져오기
 
      * @param coupleCode
      * @param myUserId
@@ -148,10 +185,10 @@ public class UserService ***REMOVED***
     ***REMOVED***
 
     /**
-     * fcm 토큰 저장
+     * fcmadapter 토큰 저장
      * @ 작성자   : 이병수
      * @ 작성일   : 2024-11-07
-     * @ 설명     : fcm 토큰 저장
+     * @ 설명     : fcmadapter 토큰 저장
 
      * @param userId
      * @param fcmToken
@@ -159,7 +196,15 @@ public class UserService ***REMOVED***
     @Transactional
     public void setFcmToken(Long userId, String fcmToken) ***REMOVED***
         UserEntity userEntity = getUserEntity(userId);
+        String beforeFcmToken = userEntity.getFcmToken();
         userEntity.updateFcmToken(fcmToken);
+        fcmService.sendPushNotification(fcmToken, "FCM 토큰 저장 성공", "FCM 토큰 저장 성공");
+
+        String coupleCode = userEntity.getCoupleCode();
+
+        redisTemplate.opsForHash().put("USER:"+coupleCode, userId.toString(), fcmToken);
+
+
     ***REMOVED***
 
 

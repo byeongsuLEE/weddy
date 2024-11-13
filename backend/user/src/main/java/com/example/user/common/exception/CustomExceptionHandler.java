@@ -3,6 +3,7 @@ package com.example.user.common.exception;
 
 import com.example.user.common.dto.ApiResponse;
 import com.example.user.common.dto.ErrorCode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,4 +75,25 @@ public class CustomExceptionHandler ***REMOVED***
         log.info(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error(ErrorCode.USER_NOT_FOUND));
     ***REMOVED***
+
+    @ExceptionHandler(CartNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> UserNotFoundException(CartNotFoundException ex) ***REMOVED***
+        log.info(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(HttpStatus.NOT_FOUND,ex.getMessage()));
+    ***REMOVED***
+
+    @ExceptionHandler(ConflictItemsException.class)
+    public ResponseEntity<ApiResponse<String>> ConflictItemsException(ConflictItemsException ex) ***REMOVED***
+        log.info(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ApiResponse.error(HttpStatus.CONFLICT,ex.getMessage()));
+    ***REMOVED***
+
+//    @ExceptionHandler(JsonProcessingException.class)
+//    public ResponseEntity<ApiResponse<String>> handleJsonProcessingException(JsonProcessingException ex) ***REMOVED***
+//        log.error("JSON 처리 중 오류 발생: ***REMOVED******REMOVED***", ex.getMessage());
+//        return ResponseEntity.status(HttpStatus.PROCESSING)
+//                .body(ApiResponse.error(HttpStatus.PROCESSING,ex.getMessage()));
+//    ***REMOVED***
 ***REMOVED***

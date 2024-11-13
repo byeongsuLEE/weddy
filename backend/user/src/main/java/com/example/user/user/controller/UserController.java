@@ -10,6 +10,7 @@ import com.example.user.security.jwt.BlackTokenService;
 import com.example.user.user.repository.UserRepository;
 import com.example.user.security.service.TokenService;
 import com.example.user.user.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -89,7 +90,7 @@ public class UserController ***REMOVED***
 
 
     @PatchMapping("/couple-connect")
-    public ResponseEntity<ApiResponse<UserResponseDTO>> connectCouple(@AuthenticationPrincipal UserEntity user, @RequestBody Map<String, String> codeRequest) ***REMOVED***
+    public ResponseEntity<ApiResponse<UserResponseDTO>> connectCouple(@AuthenticationPrincipal UserEntity user, @RequestBody Map<String, String> codeRequest) throws JsonProcessingException ***REMOVED***
         String code = codeRequest.get("code");
         UserResponseDTO userResponseDTO = userService.connectCoupleCode(code,user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(userResponseDTO,"커플코드 연결 성공"));
@@ -102,7 +103,8 @@ public class UserController ***REMOVED***
     ***REMOVED***
 
     @PatchMapping("/fcm-token/***REMOVED***userId***REMOVED***")
-    public ResponseEntity<ApiResponse<String>> setFcmToken(@AuthenticationPrincipal UserEntity user, @PathVariable Long userId, @RequestBody String fcmToken)***REMOVED***
+    public ResponseEntity<ApiResponse<String>> setFcmToken(@AuthenticationPrincipal UserEntity user, @PathVariable Long userId, @RequestBody Map<String ,String> request)***REMOVED***
+        String fcmToken = request.get("fcmToken");
         userService.setFcmToken(userId,fcmToken);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success("FCM 토큰 저장 성공"));
     ***REMOVED***

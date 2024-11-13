@@ -1,5 +1,7 @@
 package com.ssafy.schedule.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,48 +9,54 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-public class RedisConfiguration ***REMOVED***
+@RequiredArgsConstructor
+@EnableRedisRepositories // Redis 레포지토리 기능 활성화
+public class    RedisConfiguration ***REMOVED***
     @Value("$***REMOVED***spring.redis.schedule.host***REMOVED***")
-    private String redisHost;
+    private String host;
     @Value("$***REMOVED***spring.redis.schedule.port***REMOVED***")
-    private int redisPort;
+    private int port;
     @Value("$***REMOVED***spring.redis.schedule.password***REMOVED***")
-    private String redisPassword;
-
+    private String password;
+    private final ObjectMapper objectMapper;
 
 
     /*
       RedisConnectionFactory 인터페이스를 통해
       LettuceConnectionFactory를 생성하여 반환
    */
-    @Bean
+
+    @Bean // 스프링 컨텍스트에 RedisConnectionFactory 빈 등록
     public RedisConnectionFactory redisConnectionFactory() ***REMOVED***
-        RedisConnectionFactory factory = new LettuceConnectionFactory();
-        // RedisStandaloneConfiguration을 사용하여 호스트, 포트, 패스워드를 설정
-        RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
-        redisConfig.setHostName(redisHost);
-        redisConfig.setPort(redisPort);
-        redisConfig.setPassword(redisPassword); // 패스워드 설정
-
-        return new LettuceConnectionFactory(redisConfig);
-
+        // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
+        redisStandaloneConfiguration.setPassword(password);
+        redisStandaloneConfiguration.setDatabase(2);
+        return new LettuceConnectionFactory(redisStandaloneConfiguration);
     ***REMOVED***
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate() ***REMOVED***
-        // redisTemplate를 받아와서 set, get, delete를 사용
-        RedisTemplate<String,Object> redisTemplate = new RedisTemplate<>();
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>(); // RedisTemplate 인스턴스 생성
+        redisTemplate.setConnectionFactory(redisConnectionFactory()); // Redis 연결 팩토리 설정
 
-        /**
-         * setKeySerializer, setValueSerializer 설정
-         * redis-cli을 통해 직접 데이터를 조회 시 알아볼 수 없는 형태로 출력되는 것을 방지
-         */
-        redisTemplate.setConnectionFactory(redisConnectionFactory());
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new StringRedisSerializer());
-        return redisTemplate;
+        // 키와 값 직렬화 설정
+        StringRedisSerializer stringSerializer = new StringRedisSerializer();
+        GenericJackson2JsonRedisSerializer jsonSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);
+
+        redisTemplate.setKeySerializer(stringSerializer); // 키를 문자열로 직렬화
+        redisTemplate.setValueSerializer(jsonSerializer); // 값을 JSON으로 직렬화
+        redisTemplate.setHashKeySerializer(stringSerializer); // 해시 키를 문자열로 직렬화
+        redisTemplate.setHashValueSerializer(jsonSerializer); // 해시 값을 JSON으로 직렬화
+//        redisTemplate.setHashKeySerializer(new GenericToStringSerializer<>(Long.class)); // 키를 문자열이 아닌 숫자로 저장할 수 있도록 설정
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate; // 설정이 완료된 RedisTemplate 인스턴스를 반환
     ***REMOVED***
 ***REMOVED***

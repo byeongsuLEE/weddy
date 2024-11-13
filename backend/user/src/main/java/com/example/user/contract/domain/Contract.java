@@ -29,7 +29,10 @@ public class Contract ***REMOVED***
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
     private ContractStatus status;
+
     private Long totalMount;
     private Long downPayment;
     private Long finalPayment;

@@ -3,6 +3,8 @@ package com.ssafy.product.product.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.product.global.s3.S3Uploader;
+import com.ssafy.product.global.util.JwtUtil;
+import com.ssafy.product.global.util.ProducerUtil;
 import com.ssafy.product.global.util.RedisUtil;
 import com.ssafy.product.global.util.exception.ImageInvalidException;
 import com.ssafy.product.global.util.exception.ProductNotFoundExpception;
@@ -18,8 +20,12 @@ import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.repository.ProductImageRepository;
 import com.ssafy.product.product.repository.ProductRepository;
 import com.ssafy.product.product.repository.ReviewRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +44,8 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     private final RedisUtil redisUtil;
     private final SyncService syncService;
     private final ObjectMapper mapper;
+    private final JwtUtil jwtUtil;
+    private final ProducerUtil<String,ProductResponseDto> producerUtil;
 
     @Override
     public List<ProductResponseDto> getList() ***REMOVED***
@@ -81,9 +89,10 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     @Override
     @Transactional
-    public ReviewResponseDto registerReview(final ReviewRequestDto reviewRequestDto, final Long productId) ***REMOVED***
+    public ReviewResponseDto registerReview(final ReviewRequestDto reviewRequestDto, final Long productId, final HttpServletRequest request) ***REMOVED***
         Product product = productIsPresent(productId);
-        Review review = reviewRepository.save(Review.builder().reviewRequestDto(reviewRequestDto).product(product).build());
+        Long userId = jwtUtil.getUserId(jwtUtil.resolveToken(request));
+        Review review = reviewRepository.save(Review.builder().reviewRequestDto(reviewRequestDto).product(product).userId(userId).build());
         ReviewResponseDto reviewResponse = review.getReview(review,product);
         syncService.syncToReadDatabaseAsync(KeyType.REVIEW, productId,reviewResponse);
         return review.getReview(review,product);
@@ -108,5 +117,19 @@ public class ProductServiceImpl implements ProductService***REMOVED***
         if(images == null || images.isEmpty())***REMOVED***
             throw new ImageInvalidException(ErrorCode.IMAGE_INVALID_EXCEPTION);
         ***REMOVED***
+    ***REMOVED***
+
+    @KafkaListener(topics = "$***REMOVED***producers.cart-request-topic.name***REMOVED***", groupId = "$***REMOVED***spring.kafka.consumer.group-id***REMOVED***")
+    public void listenFindProduct(List<?> response, @Header(KafkaHeaders.RECEIVED_KEY) String key) ***REMOVED***
+        log.info("key : ***REMOVED******REMOVED***",key);
+        List<ProductResponseDto> cartList = response.stream()
+                .map(id -> ***REMOVED***
+                    Long parseLong = Long.parseLong(String.valueOf(id).replaceAll("[\\[\\]]", ""));
+                    Product product = productIsPresent(parseLong);
+                    return product.getProduct(product);
+                ***REMOVED***)
+                .toList();
+        producerUtil.sendCartListTopic(key,cartList);
+        log.info("전송 성공");
     ***REMOVED***
 ***REMOVED***
