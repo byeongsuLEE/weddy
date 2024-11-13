@@ -46,4 +46,9 @@ public class Schedule ***REMOVED***
 //        Schedule schedule1 = createScheduleAdapter.save(schedule);
         return schedule;
     ***REMOVED***
+
+    // 새로운 커플 코드로 업데이트
+    public void updateCoupleCode(String coupleCode)***REMOVED***
+        this.code = coupleCode;
+    ***REMOVED***
 ***REMOVED***

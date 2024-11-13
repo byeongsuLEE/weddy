@@ -9,6 +9,8 @@ import com.example.user.contract.service.ContractService;
 import com.example.user.payment.dto.request.ContractInfoRequestDto;
 import com.example.user.payment.dto.request.PaymentProductInfo;
 import com.example.user.user.dto.response.UserCoupleTokenDto;
+import com.example.user.user.entity.UserEntity;
+import com.example.user.user.repository.UserRepository;
 import com.example.user.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +41,7 @@ public class PaymentService ***REMOVED***
     private final ContractService contractService;
     private final ContractRepository contractRepository;
     private final UserService userService;
+    private final UserRepository userRepository;
     /**
      * 결제 성공 후 게약서 상태 정보 변경 및 카프카를 통해 일정 자동 등록 이벤트 발생
      * @ 작성자   : 이병수
@@ -47,14 +50,16 @@ public class PaymentService ***REMOVED***
      * @param contractInfoRequestDto
      */
     public void paymentSuccess(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
-
-//        boolean isValidatedPayment = validatePayment(contractInfoRequestDto);
-//        if(!isValidatedPayment) ***REMOVED***
-//            //결제 취소 로직 작성
-//            String reason = " 결제 인증 실패";
-//            paymentCancel(contractInfoRequestDto.getPaymentId(), reason);
-//            return ;
-//        ***REMOVED***
+        UserEntity userEntity = userRepository.findById(contractInfoRequestDto.getUserId()).orElse(null);
+        if (userEntity == null) return ;
+        contractInfoRequestDto.setCode(userEntity.getCoupleCode());
+        boolean isValidatedPayment = validatePayment(contractInfoRequestDto);
+        if(!isValidatedPayment) ***REMOVED***
+            //결제 취소 로직 작성
+            String reason = " 결제 인증 실패";
+            paymentCancel(contractInfoRequestDto.getPaymentId(), reason);
+            return ;
+        ***REMOVED***
 
         log.info("결제성공" + contractInfoRequestDto.toString());
         contractService.changeContractStatus(contractInfoRequestDto.getId());
@@ -151,7 +156,7 @@ public class PaymentService ***REMOVED***
         PaymentProductInfo paymentProductInfo = mapToPaymentProductInfo(contractInfoRequestDto);
         UserCoupleTokenDto fcmToken = userService.getFcmToken(contractInfoRequestDto.getCode(), contractInfoRequestDto.getUserId());
         paymentProductInfo.addFcmTokenInfo(fcmToken);
-
+        log.info("전달된 paymentinfo: " +paymentProductInfo.toString());
         CompletableFuture<SendResult<String, PaymentProductInfo>> send = kafkaTemplate.send(TOPIC_PAYMENT, paymentProductInfo);
         // 이 함수는 이벤트가 전달 됐는지를 확인하는거다.
         send.whenComplete((sendResult,ex)->***REMOVED***

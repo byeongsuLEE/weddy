@@ -101,9 +101,8 @@ public class CartServiceImpl implements CartService ***REMOVED***
     @KafkaListener(topics = "#***REMOVED***@kafkaTopicProperties.cartResponseTopic.name***REMOVED***", groupId = "cart-response-group")
     public void onResponseReceived(
             @Header(KafkaHeaders.RECEIVED_KEY) String correlationId, // Key를 Header로 받아옴
-            Object message
+            String jsonResponse
     ) ***REMOVED***
-        String jsonResponse = message.toString();
         log.info("correlationId : ***REMOVED******REMOVED***, jsonResponse : ***REMOVED******REMOVED***", correlationId, jsonResponse);
         CompletableFuture<List<CartProductDto>> future = pendingRequests.get(correlationId);
         log.info("들어옴?***REMOVED******REMOVED***", future == null ? "no" : "yes");
