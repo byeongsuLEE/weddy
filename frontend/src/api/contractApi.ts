@@ -51,7 +51,7 @@ export const myContract = async (): Promise<ContractData[]> => ***REMOVED***
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
+      Authorization:sessionStorage.getItem("token")
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -63,7 +63,7 @@ export const contractInfo = async (contractId?: string): Promise<ContractData> =
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
+      Authorization: sessionStorage.getItem("token")
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
