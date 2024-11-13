@@ -4,14 +4,13 @@ import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** useRecoilState ***REMOVED*** from "recoil";
 import RecommendLoading from "./RecommendLoadingPage";
-import ***REMOVED*** RecommendData ***REMOVED*** from "@/api/recommend.type";
 
 const Prompt = () => ***REMOVED***
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState("");
   const [inputValue, setInputValue] = useState("");
-  // const [recommendList, setRecommendList] = useRecoilState(recommendState);
+  const [recommendList, setRecommendList] = useRecoilState(recommendState);
 
   const text = "모던한 분위기의 1,000만원대 스튜디오 추천해줘";
 
@@ -22,15 +21,11 @@ const Prompt = () => ***REMOVED***
     ***REMOVED***
   ***REMOVED***, []);
 
-  // 빈 배열로 초기화하여 `filter`가 항상 동작하도록 설정
-  const [recommendList, setRecommendList] = useState<RecommendData[]>([]);
-
-
   const toPlanner = async () => ***REMOVED***
     setLoading(true);
-    const data = await aiRecommend(inputValue);
-    console.log(data);
-    setRecommendList(data);
+    const RecommendList = await aiRecommend(inputValue);
+    console.log(RecommendList);
+    setRecommendList(RecommendList);
     navigate("/planner");
   ***REMOVED***;
 

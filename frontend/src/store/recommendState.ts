@@ -1,7 +1,7 @@
-import ***REMOVED*** RecommendData ***REMOVED*** from "@/api/recommend.type";
+import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import ***REMOVED*** atom ***REMOVED*** from "recoil";
 
-export const recommendState = atom<RecommendData[]>(***REMOVED***
+export const recommendState = atom<Product[]>(***REMOVED***
   key: 'recommendState',
   default: [],
 ***REMOVED***);
