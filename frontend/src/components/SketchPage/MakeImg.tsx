@@ -21,9 +21,10 @@ interface PopoverDemoProps ***REMOVED***
   isOpen: boolean;
   blobData: Blob | null;
   setIsOpen: (open: boolean) => void;
+  onSave: () => void;
 ***REMOVED***
 
-const MakeImg = (***REMOVED*** isOpen, setIsOpen, blobData ***REMOVED***: PopoverDemoProps) => ***REMOVED***
+const MakeImg = (***REMOVED*** isOpen, setIsOpen, blobData, onSave ***REMOVED***: PopoverDemoProps) => ***REMOVED***
   const [studioName, setStudioName] = useState("");
   const [dressName, setDressName] = useState("");
   const setCapturedImageState = useSetRecoilState(capturedImageState);
@@ -41,8 +42,8 @@ const MakeImg = (***REMOVED*** isOpen, setIsOpen, blobData ***REMOVED***: Popove
         formData.append("sketch", new Blob([JSON.stringify(sketch)], ***REMOVED*** type: "application/json" ***REMOVED***));
         const file = new File([blobData], "image.png", ***REMOVED*** type: "image/png" ***REMOVED***);
 
-      // 변환된 파일을 FormData에 추가
-      formData.append("image", file);
+        // 변환된 파일을 FormData에 추가
+        formData.append("image", file);
 
         // saveDress 함수 호출하여 FormData 전송
         await saveDress(formData);
@@ -52,7 +53,8 @@ const MakeImg = (***REMOVED*** isOpen, setIsOpen, blobData ***REMOVED***: Popove
         setIsOpen(false);
         setStudioName("");
         setDressName("");
-
+        onSave(); 
+        setIsOpen(false);
         // 전송 후 페이지 이동
         navigate("/dress");
       ***REMOVED*** catch (error) ***REMOVED***
@@ -64,36 +66,38 @@ const MakeImg = (***REMOVED*** isOpen, setIsOpen, blobData ***REMOVED***: Popove
   ***REMOVED***;
 
   return (
-    <AlertDialog open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***setIsOpen***REMOVED***>
-      <AlertDialogTrigger asChild>
-        <Button style=***REMOVED******REMOVED*** display: "none" ***REMOVED******REMOVED*** variant="outline"></Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>스케치 이미지 만들기</AlertDialogTitle>
-          <AlertDialogDescription style=***REMOVED******REMOVED*** display: "flex", flexDirection: "column" ***REMOVED******REMOVED***>
-            <Input
-              id="studioName"
-              placeholder="스튜디오명"
-              className="col-span-2 h-10 my-2"
-              value=***REMOVED***studioName***REMOVED***
-              onChange=***REMOVED***(e) => setStudioName(e.target.value)***REMOVED***
-            />
-            <Input
-              id="dressName"
-              placeholder="드레스명"
-              className="col-span-2 h-10 my-2"
-              value=***REMOVED***dressName***REMOVED***
-              onChange=***REMOVED***(e) => setDressName(e.target.value)***REMOVED***
-            />
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>취소</AlertDialogCancel>
-          <AlertDialogAction onClick=***REMOVED***onClick***REMOVED***>스케치 저장</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <>
+      <AlertDialog open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***setIsOpen***REMOVED***>
+        <AlertDialogTrigger asChild>
+          <Button style=***REMOVED******REMOVED*** display: "none" ***REMOVED******REMOVED*** variant="outline"></Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>스케치 이미지 만들기</AlertDialogTitle>
+            <AlertDialogDescription style=***REMOVED******REMOVED*** display: "flex", flexDirection: "column" ***REMOVED******REMOVED***>
+              <Input
+                id="studioName"
+                placeholder="스튜디오명"
+                className="col-span-2 h-10 my-2"
+                value=***REMOVED***studioName***REMOVED***
+                onChange=***REMOVED***(e) => setStudioName(e.target.value)***REMOVED***
+              />
+              <Input
+                id="dressName"
+                placeholder="드레스명"
+                className="col-span-2 h-10 my-2"
+                value=***REMOVED***dressName***REMOVED***
+                onChange=***REMOVED***(e) => setDressName(e.target.value)***REMOVED***
+              />
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>취소</AlertDialogCancel>
+            <AlertDialogAction onClick=***REMOVED***onClick***REMOVED***>스케치 저장</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 ***REMOVED***;
 

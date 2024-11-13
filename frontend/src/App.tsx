@@ -40,24 +40,19 @@ function AppContent() ***REMOVED***
   const currentDetail = location.pathname.split("/")[2];
 
   useEffect(() => ***REMOVED***
-    // 비로그인 상태일 경우 로그인 페이지로 리다이렉트
     if (!token && currentPath !== "login" && currentPath !== "callback") ***REMOVED***
       navigate("/login");
     ***REMOVED***
 
-    // FCM 토큰 저장
     if (userId && fcmToken) ***REMOVED***
       saveFcmToken(fcmToken, userId);
-      console.log("fcmToken saved");
     ***REMOVED***
 
-    // 포그라운드 메시지 리스너 설정
     const initializeMessageListener = async () => ***REMOVED***
       try ***REMOVED***
-        const payload = await onMessageListener();
-        console.log("Foreground message received:", payload);
-      ***REMOVED*** catch (error) ***REMOVED***
-        console.error("Error in foreground message listener:", error);
+        await onMessageListener();
+      ***REMOVED*** catch ***REMOVED***
+        // 포그라운드 메시지 리스너 오류 처리 로직
       ***REMOVED***
     ***REMOVED***;
 

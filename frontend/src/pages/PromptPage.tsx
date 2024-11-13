@@ -7,12 +7,12 @@ import RecommendLoading from "./RecommendLoadingPage";
 
 const Prompt = () => ***REMOVED***
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [recommendList, setRecommendList] = useRecoilState(recommendState);
 
-  const text = "모던한 분위기의 500만원대 스튜디오 추천해줘";
+  const text = "모던한 분위기의 1,000만원대 스튜디오 추천해줘";
 
   //== 스토어에 값이 저장되어있으면 바로 planner로 이동 ==//
   useEffect(() => ***REMOVED***
@@ -23,8 +23,9 @@ const Prompt = () => ***REMOVED***
 
   const toPlanner = async () => ***REMOVED***
     setLoading(true);
-    const recommendList = await aiRecommend(inputValue);
-    setRecommendList(recommendList);
+    const RecommendList = await aiRecommend(inputValue);
+    console.log(RecommendList);
+    setRecommendList(RecommendList);
     navigate("/planner");
   ***REMOVED***;
 
@@ -58,7 +59,7 @@ const Prompt = () => ***REMOVED***
   ***REMOVED***;
 
   return (
-    <>
+    <div className="mx-10">
       ***REMOVED***loading ? (
         <RecommendLoading />
       ) : (
@@ -72,7 +73,7 @@ const Prompt = () => ***REMOVED***
           <input
             placeholder=***REMOVED***placeholder***REMOVED***
             autoFocus
-            className="w-[380px] h-[50px] p-5 rounded-3xl mt-10"
+            className="w-[370px] h-[50px] p-5 rounded-3xl mt-10 text-[14px] "
             type="text"
             onChange=***REMOVED***handleChange***REMOVED***
           />
@@ -84,7 +85,7 @@ const Prompt = () => ***REMOVED***
           </button>
         </div>
       )***REMOVED***
-    </>
+    </div>
   );
 ***REMOVED***;
 
