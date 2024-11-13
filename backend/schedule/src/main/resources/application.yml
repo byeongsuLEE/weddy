@@ -17,11 +17,6 @@ endpoints:
 
 
 
-consumer:
-  topic1:
-    name: contract_payment
-  groupid:
-    name: book
 
 server:
   port: 8082

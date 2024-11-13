@@ -17,7 +17,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @RequiredArgsConstructor
 @EnableRedisRepositories // Redis 레포지토리 기능 활성화
-public class RedisConfiguration ***REMOVED***
+public class    RedisConfiguration ***REMOVED***
     @Value("$***REMOVED***spring.redis.schedule.host***REMOVED***")
     private String host;
     @Value("$***REMOVED***spring.redis.schedule.port***REMOVED***")
@@ -37,10 +37,11 @@ public class RedisConfiguration ***REMOVED***
         // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
         redisStandaloneConfiguration.setPassword(password);
+        redisStandaloneConfiguration.setDatabase(2);
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     ***REMOVED***
 
-    @Bean(name = "redisScheduleTemplate")
+    @Bean
     public RedisTemplate<String, Object> redisTemplate() ***REMOVED***
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>(); // RedisTemplate 인스턴스 생성
         redisTemplate.setConnectionFactory(redisConnectionFactory()); // Redis 연결 팩토리 설정
