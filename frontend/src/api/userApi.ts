@@ -71,7 +71,7 @@ export const editInformation = async (
 
 //== 커플 코드 연결 ==//
 export const connectCoupleCode = async (code: string): Promise<void> => ***REMOVED***
-  await axios(***REMOVED***
+  const response = await axios(***REMOVED***
     method: 'patch',
     url: `$***REMOVED***BASE_URL***REMOVED***/couple-connect`,
     headers: ***REMOVED***
@@ -81,6 +81,7 @@ export const connectCoupleCode = async (code: string): Promise<void> => ***REMOV
       "code": code
     ***REMOVED***
   ***REMOVED***);
+  console.log(response.data);
 ***REMOVED***;
 
 //== FCM 토큰 저장 ==//
