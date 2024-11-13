@@ -1,5 +1,6 @@
     package com.ssafy.schedule.application.inputport;
 
+    import com.ssafy.schedule.application.outputport.FCMOutputPort;
     import com.ssafy.schedule.application.outputport.ScheduleOutPutPort;
     import com.ssafy.schedule.application.outputport.ScheduleRedisCacheOutputPort;
     import com.ssafy.schedule.application.usecase.CreateScheduleUsecase;
@@ -21,6 +22,7 @@
 
         private final ScheduleOutPutPort scheduleOutPutPort;
         private final ScheduleRedisCacheOutputPort scheduleRedisCacheOutputPort;
+        private final FCMOutputPort fcmOutputPort;
 
         @Override
         public ScheduleOutputDto createSchedule(CreateScheduleInputDto createScheduleInputDto) ***REMOVED***
@@ -29,6 +31,7 @@
             Schedule savedSchedule = scheduleOutPutPort.save(schedule);
             //푸시알림을 위한 일정 저장
             scheduleRedisCacheOutputPort.saveScheduleToCache(createScheduleInputDto);
+            fcmOutputPort.send(createScheduleInputDto.getUserCoupleToken().getMyFcmToken(),createScheduleInputDto.getType().name(),createScheduleInputDto.getContent());
             return createScheduleInputDto.mapToDto(savedSchedule);
         ***REMOVED***
     ***REMOVED***
