@@ -13,13 +13,13 @@ import com.ssafy.product.product.constant.KeyType;
 import com.ssafy.product.product.domain.Product;
 import com.ssafy.product.product.domain.ProductImage;
 import com.ssafy.product.product.domain.Review;
+import com.ssafy.product.product.domain.Vender;
 import com.ssafy.product.product.dto.request.ProductRegistRequestDto;
 import com.ssafy.product.product.dto.request.ReviewRequestDto;
-import com.ssafy.product.product.dto.response.ProductResponseDto;
-import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import com.ssafy.product.product.repository.ProductImageRepository;
 import com.ssafy.product.product.repository.ProductRepository;
 import com.ssafy.product.product.repository.ReviewRepository;
+import com.ssafy.product.product.repository.VenderRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +29,8 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import weddy.commonlib.dto.response.ProductResponseDto;
+import weddy.commonlib.dto.response.ReviewResponseDto;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService***REMOVED***
     private final ProductRepository productRepository;
     private final ProductImageRepository productImageRepository;
+    private final VenderRepository venderRepository;
     private final S3Uploader s3Uploader;
     private final ReviewRepository reviewRepository;
     private final RedisUtil redisUtil;
@@ -55,20 +58,20 @@ public class ProductServiceImpl implements ProductService***REMOVED***
     @Override
     public ProductResponseDto detailProduct(final Long productId) ***REMOVED***
         Product product = productIsPresent(productId);
-
         ProductResponseDto productResponse = product.getProduct(product);
         redisUtil.addToSortedSet(productResponse);
 
-        return mapper.convertValue(redisUtil.getHashValue(KeyType.PRODUCT,productResponse.id()), ProductResponseDto.class);
+        return mapper.convertValue(redisUtil.getHashValue(KeyType.PRODUCT,productResponse.getId()), ProductResponseDto.class);
     ***REMOVED***
 
     @Override
     @Transactional
     public ProductResponseDto registProduct(final ProductRegistRequestDto productRegistRequestDto,
-                                            final List<MultipartFile> images) ***REMOVED***
+                                            final List<MultipartFile> images,
+                                            final HttpServletRequest request) ***REMOVED***
         productImageValidation(images);
-        Product product = productRepository.save(Product.builder().productRegistRequestDto(productRegistRequestDto).build());
-
+        Vender vender = venderRepository.findByUserId(jwtUtil.getUserId(jwtUtil.resolveToken(request)));
+        Product product = productRepository.save(Product.builder().productRegistRequestDto(productRegistRequestDto).vender(vender).build());
         List<ProductImage> productImages = productImageRepository.saveAll(images.stream()
                 .map(image -> ProductImage.builder()
                         .imageUrl(s3Uploader.putS3(image))
@@ -77,7 +80,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
                 .toList());
 
         ProductResponseDto productResponse = product.registProductResponseDto(product,productImages);
-        syncService.syncToReadDatabaseAsync(KeyType.PRODUCT,productResponse.id(),productResponse);
+        syncService.syncToReadDatabaseAsync(KeyType.PRODUCT,productResponse.getId(),productResponse);
         return productResponse;
     ***REMOVED***
 
@@ -121,7 +124,6 @@ public class ProductServiceImpl implements ProductService***REMOVED***
 
     @KafkaListener(topics = "$***REMOVED***producers.cart-request-topic.name***REMOVED***", groupId = "$***REMOVED***spring.kafka.consumer.group-id***REMOVED***")
     public void listenFindProduct(List<?> response, @Header(KafkaHeaders.RECEIVED_KEY) String key) ***REMOVED***
-        log.info("key : ***REMOVED******REMOVED***",key);
         List<ProductResponseDto> cartList = response.stream()
                 .map(id -> ***REMOVED***
                     Long parseLong = Long.parseLong(String.valueOf(id).replaceAll("[\\[\\]]", ""));
@@ -129,7 +131,7 @@ public class ProductServiceImpl implements ProductService***REMOVED***
                     return product.getProduct(product);
                 ***REMOVED***)
                 .toList();
+        log.info("전송완료");
         producerUtil.sendCartListTopic(key,cartList);
-        log.info("전송 성공");
     ***REMOVED***
 ***REMOVED***

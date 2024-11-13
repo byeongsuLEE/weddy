@@ -1,6 +1,6 @@
 package com.ssafy.product.global.config;
 
-import com.ssafy.product.product.dto.response.ProductResponseDto;
+import weddy.commonlib.dto.response.ProductResponseDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

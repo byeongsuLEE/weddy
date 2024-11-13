@@ -3,7 +3,7 @@ package com.ssafy.product.global.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ssafy.product.product.constant.KeyType;
-import com.ssafy.product.product.dto.response.ProductResponseDto;
+import weddy.commonlib.dto.response.ProductResponseDto;
 import com.ssafy.product.product.dto.response.ReviewResponseDto;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;

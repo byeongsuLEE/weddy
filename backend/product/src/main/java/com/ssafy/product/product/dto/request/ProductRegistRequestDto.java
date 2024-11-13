@@ -1,8 +1,8 @@
 package com.ssafy.product.product.dto.request;
 
-import com.ssafy.product.product.constant.ProductType;
 import com.ssafy.product.product.domain.ProductImage;
 import lombok.Builder;
+import weddy.commonlib.constant.ProductType;
 
 import java.util.List;
 

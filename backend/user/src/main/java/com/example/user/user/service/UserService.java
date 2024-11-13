@@ -198,7 +198,7 @@ public class UserService ***REMOVED***
         UserEntity userEntity = getUserEntity(userId);
         String beforeFcmToken = userEntity.getFcmToken();
         userEntity.updateFcmToken(fcmToken);
-        fcmService.sendPushNotification(fcmToken, "FCM 토큰 저장 성공", "FCM 토큰 저장 성공");
+//        fcmService.sendPushNotification(fcmToken, "FCM 토큰 저장 성공", "FCM 토큰 저장 성공");
 
         String coupleCode = userEntity.getCoupleCode();
 

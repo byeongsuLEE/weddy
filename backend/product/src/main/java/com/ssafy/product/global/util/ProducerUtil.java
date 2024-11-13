@@ -1,6 +1,6 @@
 package com.ssafy.product.global.util;
 
-import com.ssafy.product.product.dto.response.ProductResponseDto;
+import weddy.commonlib.dto.response.ProductResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
