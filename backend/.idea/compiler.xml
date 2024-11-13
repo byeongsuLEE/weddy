@@ -11,5 +11,8 @@
         <module name="product.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common-lib" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
