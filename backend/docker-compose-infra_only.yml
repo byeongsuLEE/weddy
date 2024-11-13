@@ -22,7 +22,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:32181  # Zookeeper 연결 정보
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT  # 리스너 보안 프로토콜 설정
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL  # 브로커 간 내부 통신 리스너 이름 설정
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:29092,EXTERNAL://34.64.98.78:9092  # Kafka의 리스너 주소와 포트 설정
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:29092,EXTERNAL://34.64.32.89:9092  # Kafka의 리스너 주소와 포트 설정
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1  # 오프셋 토픽의 복제 인수 설정
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0  # 소비자 그룹 재조정 지연 시간 (밀리초) 설정
       # KAFKA_DEFAULT_REPLICATION_FACTOR: 3  # 토픽의 기본 복제 인수 설정 (주석 처리됨)

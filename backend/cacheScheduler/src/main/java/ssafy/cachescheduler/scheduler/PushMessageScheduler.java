@@ -9,19 +9,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import ssafy.cachescheduler.exception.SchedulerException;
-import ssafy.cachescheduler.mapper.ProductMapper;
-import ssafy.cachescheduler.mapper.ReviewMapper;
-import ssafy.cachescheduler.util.RedisUtil;
-import weddy.commonlib.constant.KeyType;
 import weddy.commonlib.dto.response.CreateScheduleInputDto;
 
 import java.time.LocalDate;
@@ -33,62 +25,69 @@ import java.time.LocalDate;
 public class PushMessageScheduler ***REMOVED***
     @Autowired
     @Qualifier("redisScheduleTemplate")
-    private final RedisTemplate<String,Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisScheduleTemplate;
+
+    @Autowired
+    @Qualifier("redisUserTemplate")
+    private final RedisTemplate<String, String> redisUserTemplate;
 
     private final ObjectMapper objectMapper;
 
     /**
      * 푸시알림 해당날짜
+     *
      * @ 작성자   : 이병수
      * @ 작성일   : 2024-11-08
      * @ 설명     :
-
      */
 
     @Async("taskExecutor")
     @Scheduled(cron = "0 0 9 * * *")
     public void sendPushMessage() throws FirebaseMessagingException ***REMOVED***
 
-        // 현재 로컬 날짜 얻어봐
+
         LocalDate localDate = LocalDate.now();
-        String key = "SCHEDULE:"+localDate;
-        // 해당 날짜에 등록된 스케쥴이 있는지 확인
-//        redisTemplate.opsForHash(key).entries()
+        String key = "SCHEDULE:" + localDate;
 
+        //일정 데이터를 순회
+        redisScheduleTemplate.opsForHash().entries(key).forEach((coupleCode, scheduleInfo) -> ***REMOVED***
+            log.info("key : " + coupleCode + " value : " + scheduleInfo.toString());
+            CreateScheduleInputDto createScheduleInputDto = objectMapper.convertValue(scheduleInfo, CreateScheduleInputDto.class);
+            log.info("createScheduleInputDto : " + createScheduleInputDto.toString());
 
-        redisTemplate.opsForHash().entries(key).forEach((k,v)->***REMOVED***
-            log.info("key : "+k+" value : "+v.toString());
-            String token = k.toString();
+            //일정의 커플코드를 통해 fcm token 가져오고 푸시알림전송
+            String userKey = "USER:" + coupleCode;
+            redisUserTemplate.opsForHash().keys(userKey)
+                    .forEach(userId -> ***REMOVED***
+                        log.info("등록된 일정의 userId : " + userId);
+                        Object object =  redisUserTemplate.opsForHash().get(coupleCode.toString(), userId);
+                        if(object!=null) ***REMOVED***
+                            String fcmToken = object.toString();
+                            log.info("fcmToken : " + fcmToken);
+                            sendFirebaseNotification(fcmToken, createScheduleInputDto);
 
-            CreateScheduleInputDto createScheduleInputDto = objectMapper.convertValue(v, CreateScheduleInputDto.class);;
-            log.info("createScheduleInputDto : "+createScheduleInputDto.toString());
-
-            //알림전송
-            // 푸시 알림 메시지 생성
-            Message message = Message.builder()
-                    .setNotification(Notification.builder()
-                            .setTitle(createScheduleInputDto.getType().DRESS.toString())
-                            .setBody(createScheduleInputDto.getContent().toString())
-                            .build())
-                    .setToken(token) // 푸시 알림 토큰
-                    .build();
-
-            // 푸시 알림 보내기
-            String response = null;
-            try ***REMOVED***
-                response = FirebaseMessaging.getInstance().send(message);
-            ***REMOVED*** catch (FirebaseMessagingException e) ***REMOVED***
-                throw new RuntimeException(e);
-            ***REMOVED***
-            System.out.println("Successfully sent message: " + response);
-
-
+                        ***REMOVED***
+                    ***REMOVED***);
         ***REMOVED***);
-
-
-
-        
+        //커플코드로 레디스에 있는 user 의 fcm token 가져오기
     ***REMOVED***
 
+    // 푸시 알림 전송을 별도 메서드로 분리
+    private void sendFirebaseNotification(String fcmToken, CreateScheduleInputDto scheduleDto) ***REMOVED***
+        try ***REMOVED***
+            Message message = Message.builder()
+                    .setNotification(Notification.builder()
+                            .setTitle(scheduleDto.getType().toString())
+                            .setBody(scheduleDto.getContent())
+                            .build())
+                    .setToken(fcmToken)
+                    .build();
+
+            String response = FirebaseMessaging.getInstance().send(message);
+            log.info("푸시 알림 전송 성공: " + response);
+        ***REMOVED*** catch (FirebaseMessagingException e) ***REMOVED***
+            log.error("푸시 알림 전송 실패: FCM 토큰=" + fcmToken, e);
+        ***REMOVED***
+    ***REMOVED***
 
 ***REMOVED***

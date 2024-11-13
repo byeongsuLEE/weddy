@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -32,22 +33,32 @@ public class RedisConfig ***REMOVED***
         // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
         redisStandaloneConfiguration.setPassword(password);
+        redisStandaloneConfiguration.setDatabase(1);
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     ***REMOVED***
 
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate() ***REMOVED***
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>(); // RedisTemplate 인스턴스 생성
-        redisTemplate.setConnectionFactory(redisConnectionFactory()); // Redis 연결 팩토리 설정
+    @Bean("redisUserTemplate") // 스프링 컨텍스트에 RedisTemplate 빈 등록
+    public RedisTemplate<String, String> userRedisTemplate() ***REMOVED***
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
 
         // 키와 값 직렬화 설정
         StringRedisSerializer stringSerializer = new StringRedisSerializer();
-
+        redisTemplate.setKeySerializer(stringSerializer); // 일반 키를 문자열로 직렬화
         redisTemplate.setHashKeySerializer(stringSerializer); // 해시 키를 문자열로 직렬화
-        redisTemplate.setHashValueSerializer(stringSerializer); // 해시 값을 JSON으로 직렬화
-        redisTemplate.setHashKeySerializer(stringSerializer); // 키를 문자열이 아닌 숫자로 저장할 수 있도록 설정
+        redisTemplate.setHashValueSerializer(stringSerializer); // 해시 값을 문자열로 직렬화
 
         redisTemplate.afterPropertiesSet();
-        return redisTemplate; // 설정이 완료된 RedisTemplate 인스턴스를 반환
+        return redisTemplate;
+    ***REMOVED***
+
+    @Bean
+    @Primary // 기본 빈으로 설정
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) ***REMOVED***
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(connectionFactory);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        return redisTemplate;
     ***REMOVED***
 ***REMOVED***

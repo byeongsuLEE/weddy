@@ -21,6 +21,14 @@ configurations ***REMOVED***
 
 repositories ***REMOVED***
 	mavenCentral()
+	maven ***REMOVED***
+		url = uri('***REMOVED***/repository/maven-snapshots')
+		allowInsecureProtocol = true //http를 사용하기 위해 추가
+		credentials***REMOVED***
+			username = "weddy"
+			password = "weddy"
+		***REMOVED***
+	***REMOVED***
 ***REMOVED***
 
 ext ***REMOVED***
@@ -51,6 +59,20 @@ dependencies ***REMOVED***
 
 	// AOP
 	implementation 'org.springframework.boot:spring-boot-starter-aop:3.3.2'
+
+	// jwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+	// actuator
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	// prometheus
+	implementation 'io.micrometer:micrometer-registry-prometheus'
+
+	// 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
+	implementation 'weddy:common-lib:1.0.1-SNAPSHOT'
 ***REMOVED***
 
 dependencyManagement ***REMOVED***
