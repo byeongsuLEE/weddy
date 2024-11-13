@@ -1,5 +1,7 @@
 package com.example.user.sketch.service;
 
+import com.example.user.common.dto.ErrorCode;
+import com.example.user.common.exception.ImageUploadFailedException;
 import com.example.user.common.service.GCSImageService;
 import com.example.user.sketch.dto.request.SketchRequestDto;
 import com.example.user.sketch.dto.response.SketchResponseDto;
@@ -28,7 +30,7 @@ public class SketchServiceImpl implements SketchService ***REMOVED***
             Sketch sketch = sketchRepository.save(Sketch.builder().requestDto(sketchRequestDto).image(imageUrl).user(user).build());
             return sketch.getUserSketch(sketch);
         ***REMOVED***
-        throw new IllegalArgumentException("이미지 업로드 실패");
+        throw new ImageUploadFailedException(ErrorCode.IMAGE_UPLOAD_FAIL);
     ***REMOVED***
 
     @Override
