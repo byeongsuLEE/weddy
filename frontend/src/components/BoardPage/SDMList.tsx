@@ -15,7 +15,6 @@ const SDMList = (***REMOVED*** value, productList ***REMOVED***: SDMListProps) =
   const [filteredList, setFilteredList] = useState<Product[]>([]);
 
   const search = (searchTerm: string) => ***REMOVED***
-    console.log(searchTerm);
     const data = productList.filter((product: Product) => product.name === searchTerm);
     setFilteredList(data);
     setSearchTerm(searchTerm);
