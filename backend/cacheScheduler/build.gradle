@@ -48,7 +48,7 @@ dependencies ***REMOVED***
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 
 	// 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
-	implementation 'weddy:common-lib:1.0.1-SNAPSHOT'
+	implementation 'weddy:common-lib:1.0.7-SNAPSHOT'
 
 	// Spring Retry
 	implementation 'org.springframework.retry:spring-retry'
