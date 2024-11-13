@@ -59,10 +59,8 @@ const CallBack = () => ***REMOVED***
         try ***REMOVED***
           await requestNotificationPermission();
           const token = await requestForToken();
-          alert("발급된 토큰은 : " + token);
           console.log("발급된 토큰은 : " + token);
           if (token) ***REMOVED***
-            alert("정보가 바뀌었으니 토큰 저장 메서드를 실행해");
             console.log(token);
             setToken(token);
             // saveFcmToken(token, userId);

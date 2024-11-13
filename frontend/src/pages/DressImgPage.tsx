@@ -12,37 +12,26 @@ const DressImg = () => ***REMOVED***
       ***REMOVED***(imgSrc || capturedImage) && (
         <>
           <img
-            src=***REMOVED***imgSrc ? imgSrc : (capturedImage ? URL.createObjectURL(capturedImage) : "")***REMOVED*** // null 체크 후 사용
+            src=***REMOVED***imgSrc ? imgSrc : (capturedImage ? URL.createObjectURL(capturedImage) : "")***REMOVED***
             alt="Captured"
             style=***REMOVED******REMOVED*** width: '100%' ***REMOVED******REMOVED***
           />
           <div
             style=***REMOVED******REMOVED***
               position: 'absolute',
-              top: '20%',
-              left: '23%',
-              color: 'white',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              top: '15%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              color: "black",
+              // backgroundColor: 'rgba(0, 0, 0, 0.5)',
               padding: '10px',
               borderRadius: '5px',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              textAlign: 'center',
+              width: '100%',
             ***REMOVED******REMOVED***
           >
-            ***REMOVED***studioName || '스튜디오명'***REMOVED***
-          </div>
-          <div
-            style=***REMOVED******REMOVED***
-              position: 'absolute',
-              top: '20%',
-              left: '55%',
-              color: 'white',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              padding: '10px',
-              borderRadius: '5px',
-              fontWeight: 'bold'
-            ***REMOVED******REMOVED***
-          >
-            ***REMOVED***dressName || '드레스명'***REMOVED***
+            ***REMOVED***studioName || '스튜디오명'***REMOVED*** _ ***REMOVED***dressName || '드레스명'***REMOVED***
           </div>
         </>
       )***REMOVED***
