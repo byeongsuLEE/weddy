@@ -5,7 +5,7 @@ const BASE_URL = "http://localhost:8082/api/schedules";
 
 //== 일정 등록 ==//
 export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REMOVED***
-  const response = await axios(***REMOVED***
+  await axios(***REMOVED***
     method: "post",
     url: BASE_URL,
     headers: ***REMOVED***
@@ -13,7 +13,6 @@ export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REM
     ***REMOVED***,
     data: scheduleData
   ***REMOVED***);
-  console.log(response.data);
 ***REMOVED***;
 
 //== 일정 조회 ==//
