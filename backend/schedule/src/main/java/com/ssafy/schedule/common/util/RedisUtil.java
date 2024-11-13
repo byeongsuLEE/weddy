@@ -31,7 +31,7 @@ public class RedisUtil ***REMOVED***
             CreateScheduleInputDto schedule = objectMapper.convertValue(object, CreateScheduleInputDto.class);
             log.info("create input dto가 맞다 sdfsdafdsf"+schedule.toString() + keyType.name() +schedule.getStartDate());
             String pingResponse = redisTemplate.getConnectionFactory().getConnection().ping();
-            System.out.println("Redis 연결 상태: " + pingResponse);
+              log.info("Redis 연결 상태: " + pingResponse);
 
 
 
@@ -47,9 +47,9 @@ public class RedisUtil ***REMOVED***
             Object retrievedObject = redisTemplate.opsForHash().get(redisKey, hashKey);
 
             if (retrievedObject != null) ***REMOVED***
-                System.out.println("조회된 값: " + retrievedObject.toString());
+                log.info("조회된 값: " + retrievedObject.toString());
             ***REMOVED*** else ***REMOVED***
-                System.out.println("해당 키에 대한 데이터가 없습니다.");
+                log.info("해당 키에 대한 데이터가 없습니다.");
             ***REMOVED***
 //
 //            // 커플이 존재할 경우 커플의 FCM Token도 저장

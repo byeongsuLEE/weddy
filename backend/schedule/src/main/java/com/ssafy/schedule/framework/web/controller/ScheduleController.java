@@ -34,6 +34,7 @@ public class ScheduleController ***REMOVED***
 
     @PostMapping
     public ResponseEntity<ApiResponse<ScheduleOutputDto>> createSchedule(@RequestBody CreateScheduleInputDto requestDto, @RequestHeader("Authorization") String token) ***REMOVED***
+        token = token.substring(7);
         Long userId = jwtUtil.extractUserId(token);
         String code = jwtUtil.extractCode(token);
         requestDto.updateUserInfo(userId,code);
