@@ -7,7 +7,7 @@ import RecommendLoading from "./RecommendLoadingPage";
 
 const Prompt = () => ***REMOVED***
   const navigate = useNavigate();
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [recommendList, setRecommendList] = useRecoilState(recommendState);

@@ -55,7 +55,7 @@ const PlannerPage = () => ***REMOVED***
       <div className="mt-10">
         ***REMOVED***recommendList.length > 0 ? (
           <>
-            ***REMOVED***["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
+            ***REMOVED***/* ***REMOVED***["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
               <PlannerBox
                 key=***REMOVED***category***REMOVED***
                 title=***REMOVED***category***REMOVED***
@@ -65,7 +65,7 @@ const PlannerPage = () => ***REMOVED***
                 )***REMOVED***
                 onAmountChange=***REMOVED***handleAmountChange***REMOVED***
               />
-            ))***REMOVED***
+            ))***REMOVED*** */***REMOVED***
 
             <div className="flex justify-between mt-10 mx-10">
               <span className="text-lg font-bold">
