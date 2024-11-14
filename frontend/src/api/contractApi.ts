@@ -2,7 +2,8 @@ import axios from "axios"
 import ***REMOVED*** ContractData, ContractProduct, SentContractType ***REMOVED*** from "./contract.type";
 import ***REMOVED*** Product ***REMOVED*** from "./product.type";
 
-const BASE_URL = 'http://localhost:8080/api/contracts'
+const URL = process.env.VITE_PUBLIC_URL
+const BASE_URL = `$***REMOVED***URL***REMOVED***/api/contracts`
 
 //== 계약서 생성 ==// 
 export const createContract = async (contractItems: Product[]): Promise<void> => ***REMOVED***
@@ -51,7 +52,7 @@ export const myContract = async (): Promise<ContractData[]> => ***REMOVED***
     method: 'get',
     url: BASE_URL,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
+      Authorization:sessionStorage.getItem("token")
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;
@@ -63,7 +64,7 @@ export const contractInfo = async (contractId?: string): Promise<ContractData> =
     method: 'get',
     url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
     headers: ***REMOVED***
-      Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`,
+      Authorization: sessionStorage.getItem("token")
     ***REMOVED***
   ***REMOVED***);
   return response.data.data;

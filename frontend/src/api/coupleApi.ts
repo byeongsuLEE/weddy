@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:8080/api/users'
+const URL = process.env.VITE_PUBLIC_URL
+const BASE_URL = `$***REMOVED***URL***REMOVED***/api/users`
 
 //== 커플 코드 연결 ==//
 export const connectCoupleCode = async (code: string): Promise<void> => ***REMOVED***

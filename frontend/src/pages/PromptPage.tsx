@@ -19,7 +19,7 @@ const Prompt = () => ***REMOVED***
     if (recommendList.length > 0) ***REMOVED***
       navigate("/planner");
     ***REMOVED***
-  ***REMOVED***, []);
+  ***REMOVED***, [recommendList, navigate]);
 
   const toPlanner = async () => ***REMOVED***
     setLoading(true);
