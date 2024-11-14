@@ -64,3 +64,11 @@ dependencies ***REMOVED***
 tasks.named('test') ***REMOVED***
 	useJUnitPlatform()
 ***REMOVED***
+bootJar ***REMOVED***
+	enabled = true
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+***REMOVED***
+jar ***REMOVED***
+	enabled = false
+***REMOVED***
+
