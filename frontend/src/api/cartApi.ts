@@ -1,7 +1,8 @@
 import axios from "axios";
 import ***REMOVED*** Product ***REMOVED*** from "./product.type";
 
-const BASE_URL = "http://localhost:8080/api/users/cart";
+const URL = process.env.VITE_PUBLIC_URL
+const BASE_URL = `$***REMOVED***URL***REMOVED***/api/users/cart`
 
 //== 상품 담기 ==//
 export const addProductToCart = async (productId?: string): Promise<void> => ***REMOVED***

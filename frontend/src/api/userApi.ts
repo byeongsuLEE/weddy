@@ -1,7 +1,8 @@
 import axios from "axios";
 import ***REMOVED*** userInformation ***REMOVED*** from "./user.type";
 
-const BASE_URL = "http://localhost:8080/api/users";
+const URL = process.env.VITE_PUBLIC_URL
+const BASE_URL = `$***REMOVED***URL***REMOVED***/api/users`
 
 //== 토큰 정보 ==//
 export const getToken = async (userId?: string): Promise<void> => ***REMOVED***
