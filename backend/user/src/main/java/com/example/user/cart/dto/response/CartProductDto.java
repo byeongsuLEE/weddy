@@ -1,9 +1,13 @@
 package com.example.user.cart.dto.response;
 
+
+
+import com.example.user.cart.dto.response.productImageResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -11,9 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 public class CartProductDto ***REMOVED***
     Long id;
-    String address;
     String name;
-    int price;
     String type;
+    int price;
+    String address;
+    String vendorName;
+    String vendorPhone;
+    String description;
+    String vendorAddress;
+    Long vendorId;
     List<productImageResponseDto> images;
 ***REMOVED***

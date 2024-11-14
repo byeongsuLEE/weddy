@@ -64,6 +64,7 @@ public class ScheduleController ***REMOVED***
      * @ 설명     : JWT 토큰을 통해 UserInputDto 객체를 설정합니다
      */
     private UserInputDto setUserDto(String token) ***REMOVED***
+        token = token.substring(7);
         Long userId = jwtUtil.extractUserId(token);
         String code = jwtUtil.extractCode(token);
 

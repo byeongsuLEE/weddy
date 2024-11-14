@@ -2,7 +2,6 @@ package com.ssafy.product.product.service;
 
 import com.ssafy.product.global.util.RedisUtil;
 import com.ssafy.product.global.util.exception.SyncException;
-import com.ssafy.product.product.constant.KeyType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
@@ -10,6 +9,7 @@ import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import weddy.commonlib.constant.KeyType;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +23,7 @@ public class SyncServiceImpl<T>implements SyncService<T> ***REMOVED***
             maxAttempts = 3,                 // 최대 재시도 횟수
             backoff = @Backoff(delay = 2000) // 재시도 간격 (밀리초)
     )
-    public void syncToReadDatabaseAsync(final KeyType keyType,final Long id, final T responseData) ***REMOVED***
+    public void syncToReadDatabaseAsync(final KeyType keyType, final Long id, final T responseData) ***REMOVED***
         try***REMOVED***
             saveToReadDataBase(keyType, id, responseData);
         ***REMOVED***catch(Exception e)***REMOVED***
