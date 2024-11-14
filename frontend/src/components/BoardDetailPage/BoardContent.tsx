@@ -10,7 +10,7 @@ const BoardContent = ( ***REMOVED*** product ***REMOVED***: BoardContentProp) =>
   const price = product?.price.toString().replace(/\B(?=(\d***REMOVED***3***REMOVED***)+(?!\d))/g, ',');
   
   return (
-    <div className="mx-5 mb-24">
+    <div className="mx-5 mb-10">
       <div className="flex flex-col my-5">
         <span className="font-bold mt-2">***REMOVED***product?.name***REMOVED***</span>
         <span className="text-gray-500 text-sm">***REMOVED***product?.vendorName***REMOVED***</span>
