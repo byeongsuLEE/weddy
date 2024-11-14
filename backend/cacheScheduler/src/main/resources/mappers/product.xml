@@ -10,6 +10,11 @@
         <result property="type" column="type" />
         <result property="price" column="price" />
         <result property="address" column="address" />
+        <result property="description" column="description" />
+        <result property="vendorId" column="vendor_id" />
+        <result property="vendorName" column="vendor_name" />
+        <result property="vendorPhone" column="vendor_phone" />
+        <result property="vendorAddress" column="vendor_address" />
         <collection property="images" column="id" ofType="weddy.commonlib.dto.response.ProductImageResponseDto" select="findProductImages" />
     </resultMap>
 
@@ -19,9 +24,14 @@
             p.name,
             p.type,
             p.price,
-            p.address
+            p.address,
+            p.description,
+            v.id vendor_id,
+            v.name vendor_name,
+            v.phone vendor_phone,
+            v.address vendor_address
         FROM
-            Product p
+            Product p, Vender v
     </select>
 
     <select id="findProductImages" resultType="weddy.commonlib.dto.response.ProductImageResponseDto">

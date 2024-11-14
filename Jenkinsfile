@@ -72,9 +72,6 @@ pipeline ***REMOVED***
                         if (changes.contains('cacheScheduler/')) ***REMOVED***
                             changedServices.add('cacheScheduler')
                         ***REMOVED***
-                        if (changes.contains('common-lib/')) ***REMOVED***
-                            changedServices.add('common-lib')
-                        ***REMOVED***
                         if (changes.contains('gateway/')) ***REMOVED***
                             changedServices.add('gateway')
                         ***REMOVED***

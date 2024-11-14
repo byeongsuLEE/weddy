@@ -4,6 +4,8 @@ import com.ssafy.product.product.dto.request.VenderRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,12 +29,19 @@ public class Vender ***REMOVED***
 
     private String imageUrl;
 
+    private Long userId;
+
+    @OneToMany(mappedBy = "vender", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Product> products;
+
+
     @Builder
-    public Vender (VenderRequestDto venderRequestDto, String s3Url)***REMOVED***
+    public Vender (VenderRequestDto venderRequestDto, String s3Url, Long userId)***REMOVED***
         this.name = venderRequestDto.name();
         this.businessNumber = venderRequestDto.businessNumber();
         this.phone = venderRequestDto.phone();
         this.address = venderRequestDto.address();
         this.imageUrl = s3Url;
+        this.userId = userId;
     ***REMOVED***
 ***REMOVED***

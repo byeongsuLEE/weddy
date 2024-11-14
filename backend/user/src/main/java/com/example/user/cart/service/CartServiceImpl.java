@@ -9,6 +9,7 @@ import com.example.user.common.exception.CartNotFoundException;
 import com.example.user.common.exception.ConflictItemsException;
 import com.example.user.user.entity.UserEntity;
 import com.example.user.user.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -55,44 +56,59 @@ public class CartServiceImpl implements CartService ***REMOVED***
 
     public void removeCart(Long productId, UserEntity userEntity)***REMOVED***
         List<CartEntity> cartEntities = cartRepository.findByCoupleCode(userEntity.getCoupleCode());
+
         if (cartEntities != null && !cartEntities.isEmpty()) ***REMOVED***
-            cartRepository.deleteAll(cartEntities);
+            int deletedCount = cartRepository.deleteByUserIdAndProductId(productId,userEntity.getCoupleCode());
+
+            if (deletedCount == 0) ***REMOVED***
+                // 삭제가 실패했을 때 예외 던지기
+                throw new CartNotFoundException(ErrorCode.ITEM_NOT_FOUND);
+            ***REMOVED***
+        ***REMOVED*** else ***REMOVED***
+            throw new CartNotFoundException(ErrorCode.ITEM_NOT_FOUND);
         ***REMOVED***
-        else throw new CartNotFoundException(ErrorCode.ITEM_NOT_FOUND);
     ***REMOVED***
 
     public List<CartProductDto> getCart(UserEntity userEntity) ***REMOVED***
+        // 1. 상품 ID 목록을 가져옵니다.
+        List<Long> productIds = cartRepository.findAllProductIdByUserId(userEntity.getCoupleCode());
+
+        // 2. 고유한 요청 ID를 생성합니다. 이를 통해 요청과 응답을 매칭할 수 있습니다.
+        String correlationId = "cart-request-" + userEntity.getCoupleCode();
+
+        // 3. CompletableFuture 생성: 나중에 응답이 올 때까지 기다릴 수 있게 준비합니다.
+        CompletableFuture<List<CartProductDto>> future = new CompletableFuture<>();
+
+        // 4. 이 요청을 추적할 수 있도록 pendingRequests에 저장합니다.
+        pendingRequests.put(correlationId, future);
+
+        // 5. Kafka에 요청 전송 (productIds 목록을 JSON으로 직렬화하여 전송)
+        String jsonRequest = null;
         try ***REMOVED***
-            // 1. 상품 ID 목록을 가져옵니다.
-            List<Long> productIds = cartRepository.findAllProductIdByUserId(userEntity.getCoupleCode());
-
-            // 2. 고유한 요청 ID를 생성합니다. 이를 통해 요청과 응답을 매칭할 수 있습니다.
-            String correlationId = "cart-request-" + userEntity.getCoupleCode();
-
-            // 3. CompletableFuture 생성: 나중에 응답이 올 때까지 기다릴 수 있게 준비합니다.
-            CompletableFuture<List<CartProductDto>> future = new CompletableFuture<>();
-
-            // 4. 이 요청을 추적할 수 있도록 pendingRequests에 저장합니다.
-            pendingRequests.put(correlationId, future);
-
-            // 5. Kafka에 요청 전송 (productIds 목록을 JSON으로 직렬화하여 전송)
-            String jsonRequest = objectMapper.writeValueAsString(productIds);
-            log.info("로그 출력:***REMOVED******REMOVED***",jsonRequest);
-            String topic = kafkaTopicProperties.getCartRequestTopic().getName();
-            kafkaTemplate.send(topic, correlationId, jsonRequest);
-
-            // 6. 응답 대기: 5초 동안 응답을 기다립니다.
-            List<CartProductDto> response = future.get(5, TimeUnit.SECONDS);
-
-            // 7. 응답을 받은 후 요청 목록에서 제거하고 응답을 반환합니다.
-            pendingRequests.remove(correlationId);
-            return response;
-
-        ***REMOVED*** catch (Exception e) ***REMOVED***
-
-            throw new CartNotFoundException(ErrorCode.ITEM_NOT_FOUND);
+            jsonRequest = objectMapper.writeValueAsString(productIds);
+        ***REMOVED*** catch (JsonProcessingException e) ***REMOVED***
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
         ***REMOVED***
-//        return null; // 오류 발생 시 null 반환
+        log.info("로그 출력:***REMOVED******REMOVED***",jsonRequest);
+        String topic = kafkaTopicProperties.getCartRequestTopic().getName();
+        kafkaTemplate.send(topic, correlationId, jsonRequest);
+
+        // 6. 응답 대기: 5초 동안 응답을 기다립니다.
+        List<CartProductDto> response = null;
+        try ***REMOVED***
+            response = future.get(5, TimeUnit.SECONDS);
+        ***REMOVED*** catch (InterruptedException e) ***REMOVED***
+            throw new RuntimeException(e);
+        ***REMOVED*** catch (ExecutionException e) ***REMOVED***
+            throw new RuntimeException(e);
+        ***REMOVED*** catch (TimeoutException e) ***REMOVED***
+            throw new RuntimeException(e);
+        ***REMOVED***
+
+        // 7. 응답을 받은 후 요청 목록에서 제거하고 응답을 반환합니다.
+        pendingRequests.remove(correlationId);
+        return response;
     ***REMOVED***
 
 
