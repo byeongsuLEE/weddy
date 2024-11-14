@@ -47,8 +47,9 @@ const urlsToCache = [
   "/index.html",
   "/offline.html",
   "/styles.css",
-  "/default-icon.png", // 로고 파일 경로 추가
-  "/path/to/logo.png", // 로고 파일 경로 설정
+  "https://weddy.info/logos/icon-196x196.png",  // 아이콘 파일 경로 추가
+  "https://weddy.info/logos/icon-128x128.png",
+  "https://weddy.info/logos/icon-512x512.png"
 ];
 
 self.addEventListener("install", function (event) ***REMOVED***
