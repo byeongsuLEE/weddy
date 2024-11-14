@@ -12,6 +12,7 @@ export const allProducts = async (): Promise<Product[]> => ***REMOVED***
       Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
+  
   return response.data.data;
 ***REMOVED***;
 

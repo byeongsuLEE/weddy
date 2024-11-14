@@ -12,7 +12,7 @@ export const addProductToCart = async (productId?: string): Promise<void> => ***
       Authorization: sessionStorage.getItem("token")
     ***REMOVED***,
   ***REMOVED***);
-  alert("담기 완료");
+  // alert("담기 완료");
 ***REMOVED***;
 
 //== 장바구니 리스트 조회 ==//

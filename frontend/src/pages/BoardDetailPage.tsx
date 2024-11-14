@@ -1,16 +1,18 @@
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import FooterButton from "@/components/BoardDetailPage/FooterButton";
-import BoardAsk from "../components/BoardDetailPage/BoardAsk";
 import BoardContent from "../components/BoardDetailPage/BoardContent";
 import BoardReview from "../components/BoardDetailPage/BoardReview";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
-import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs"
 import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** detailProduct, getReviewList ***REMOVED*** from "@/api/productApi";
 import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/cartApi";
+import Separate from "@/common/Separate";
+import AlertBox from "@/common/AlertBox";
+import ***REMOVED*** useState ***REMOVED*** from "react";
 
 const BoardDetail = () => ***REMOVED***
   const ***REMOVED*** productId ***REMOVED*** = useParams();
+  const [showAlert, setShowAlert] = useState(false);
 
   //== 상품 상세 데이터 ==//
   const ***REMOVED*** data: productDetail ***REMOVED*** = useQuery(
@@ -29,32 +31,26 @@ const BoardDetail = () => ***REMOVED***
   //== 장바구니 담기 ==//
   const addToCart = async () => ***REMOVED***
     await addProductToCart(productId);
+    setShowAlert(true); // 알림 상태를 true로 설정
+    setTimeout(() => setShowAlert(false), 2000); // 3초 후 알림 상태를 false로 변경
   ***REMOVED***;
 
   return (
     <div>
+      ***REMOVED***showAlert && <AlertBox title="상품 담기" description="장바구니에 상품 담기 완료!"/>***REMOVED***
       <MainCarousel imageList=***REMOVED***productDetail?.images***REMOVED*** />
-      <Tabs className="mt-5" defaultValue="info">
-        <TabsList className="flex justify-center">
-          <TabsTrigger value="info">상품 정보</TabsTrigger>
-          <TabsTrigger value="review">리뷰</TabsTrigger>
-          <TabsTrigger value="ask">문의 정보</TabsTrigger>
-        </TabsList>
 
-        <TabsContent value="info">
-          <BoardContent product=***REMOVED***productDetail***REMOVED*** />
-        </TabsContent>
-        <TabsContent value="review">
-          <BoardReview reviewList=***REMOVED***reviewList ?? []***REMOVED*** />
-        </TabsContent>
-        <TabsContent value="ask">
-          <BoardAsk />
-        </TabsContent>
+      <BoardContent product=***REMOVED***productDetail***REMOVED*** />
+      <div className="mx-5 mb-5">
+      <Separate />
+      </div>
+      <span className="m-5 font-bold">Review</span>
+      <BoardReview reviewList=***REMOVED***reviewList ?? []***REMOVED*** />
 
-        <div onClick=***REMOVED***addToCart***REMOVED***>
-          <FooterButton />
-        </div>
-      </Tabs>
+      <div onClick=***REMOVED***addToCart***REMOVED***>
+        <FooterButton />
+      </div>
+
     </div>
   );
 ***REMOVED***;
