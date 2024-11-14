@@ -56,6 +56,7 @@ public class Product ***REMOVED***
                 .price(product.price)
                 .type(product.type)
                 .address(product.address)
+                .description(product.description)
                 .images(images)
                 .vendorName(product.vender.getName())
                 .vendorPhone(product.vender.getPhone())
