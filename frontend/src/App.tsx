@@ -1,6 +1,6 @@
 import ***REMOVED*** useEffect ***REMOVED*** from "react";
 import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-query";
-import ***REMOVED*** BrowserRouter, Route, Routes, useLocation, useNavigate ***REMOVED*** from "react-router-dom";
+import ***REMOVED*** BrowserRouter, Route, Routes, useLocation ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** RecoilRoot, useRecoilValue ***REMOVED*** from "recoil";
 import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi";
 import Footer from "./common/Footer";
