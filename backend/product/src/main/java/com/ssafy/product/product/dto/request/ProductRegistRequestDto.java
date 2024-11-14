@@ -11,5 +11,6 @@ public record ProductRegistRequestDto(String name,
                                       ProductType type,
                                       int price,
                                       String address,
+                                      String description,
                                       List<ProductImage> images) ***REMOVED***
 ***REMOVED***
