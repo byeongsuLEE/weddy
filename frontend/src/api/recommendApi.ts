@@ -10,7 +10,7 @@ export const aiRecommend = async (message: string): Promise<Product[]> => ***REM
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token"),
     ***REMOVED***,
-    params: ***REMOVED*** message ***REMOVED***, // URL 파라미터로 message 전달
+    params: ***REMOVED*** message ***REMOVED***,
   ***REMOVED***);
   
   console.log(response.data);
