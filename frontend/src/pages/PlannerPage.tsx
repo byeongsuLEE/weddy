@@ -10,7 +10,7 @@ import ***REMOVED*** useRecoilValue ***REMOVED*** from "recoil";
 const PlannerPage = () => ***REMOVED***
   const navigate = useNavigate();
   const recommendList = useRecoilValue(recommendState);
-  
+
   const [selectedList, setSelectedList] = useState<***REMOVED*** [type: string]: Product | null; ***REMOVED***>(***REMOVED***
     studio: null,
     dress: null,
@@ -25,7 +25,7 @@ const PlannerPage = () => ***REMOVED***
 
   const totalAmount = Object.values(selectedAmounts).reduce((acc, amount) => acc + amount, 0);
 
-  const handleAmountChange = ( type: string, selectedCartItem: Product | null ) => ***REMOVED***
+  const handleAmountChange = (type: string, selectedCartItem: Product | null) => ***REMOVED***
     const amount = selectedCartItem ? parseInt(selectedCartItem.price) : 0;
 
     setSelectedAmounts((prev) => (***REMOVED*** ...prev, [type]: amount ***REMOVED***));
@@ -52,17 +52,20 @@ const PlannerPage = () => ***REMOVED***
           </span>
         </div>
       </div>
+
       <div className="mt-10">
-        ***REMOVED***recommendList.length > 0 ? (
+        ***REMOVED***Array.isArray(recommendList) && recommendList.length > 0 ? (
           <>
             ***REMOVED***["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
               <PlannerBox
                 key=***REMOVED***category***REMOVED***
                 title=***REMOVED***category***REMOVED***
                 type=***REMOVED***category***REMOVED***
-                cartItem=***REMOVED***recommendList.filter(
-                  (item: Product) => item.type === category
-                )***REMOVED***
+                cartItem=***REMOVED***
+                  recommendList.filter(
+                    (item: Product) => item.type === category
+                  )
+                ***REMOVED***
                 onAmountChange=***REMOVED***handleAmountChange***REMOVED***
               />
             ))***REMOVED***
@@ -80,11 +83,12 @@ const PlannerPage = () => ***REMOVED***
           <div className="flex flex-col m-5">
             <p className="text-center mb-5">추천받은 상품이 없습니다.</p>
             <div className="ml-auto" onClick=***REMOVED***goPrompt***REMOVED***>
-              <TodoButton title="추천 받기"/>
+              <TodoButton title="추천 받기" />
             </div>
           </div>
         )***REMOVED***
-        
+
+
       </div>
     </>
   );
