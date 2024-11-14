@@ -17,6 +17,7 @@ public class ProductResponseDto ***REMOVED***
     private ProductType type;
     private int price;
     private String address;
+    private String description;
     private String vendorName;
     private String vendorPhone;
     private String vendorAddress;

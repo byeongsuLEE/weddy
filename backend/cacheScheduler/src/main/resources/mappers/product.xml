@@ -10,6 +10,7 @@
         <result property="type" column="type" />
         <result property="price" column="price" />
         <result property="address" column="address" />
+        <result property="description" column="description" />
         <result property="vendorId" column="vendor_id" />
         <result property="vendorName" column="vendor_name" />
         <result property="vendorPhone" column="vendor_phone" />
@@ -24,6 +25,7 @@
             p.type,
             p.price,
             p.address,
+            p.description,
             v.id vendor_id,
             v.name vendor_name,
             v.phone vendor_phone,

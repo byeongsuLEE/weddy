@@ -31,6 +31,9 @@ public class Product ***REMOVED***
     @Column(nullable = false, length = 100)
     private String address;
 
+    @Column
+    private String description;
+
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProductImage> productImages;
 
