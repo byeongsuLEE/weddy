@@ -1,10 +1,8 @@
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
 import FooterButton from "@/components/BoardDetailPage/FooterButton";
-import BoardAsk from "../components/BoardDetailPage/BoardAsk";
 import BoardContent from "../components/BoardDetailPage/BoardContent";
 import BoardReview from "../components/BoardDetailPage/BoardReview";
 import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
-import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs"
 import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** detailProduct, getReviewList ***REMOVED*** from "@/api/productApi";
 import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/cartApi";
@@ -34,27 +32,14 @@ const BoardDetail = () => ***REMOVED***
   return (
     <div>
       <MainCarousel imageList=***REMOVED***productDetail?.images***REMOVED*** />
-      <Tabs className="mt-5" defaultValue="info">
-        <TabsList className="flex justify-center">
-          <TabsTrigger value="info">상품 정보</TabsTrigger>
-          <TabsTrigger value="review">리뷰</TabsTrigger>
-          <TabsTrigger value="ask">문의 정보</TabsTrigger>
-        </TabsList>
 
-        <TabsContent value="info">
-          <BoardContent product=***REMOVED***productDetail***REMOVED*** />
-        </TabsContent>
-        <TabsContent value="review">
-          <BoardReview reviewList=***REMOVED***reviewList ?? []***REMOVED*** />
-        </TabsContent>
-        <TabsContent value="ask">
-          <BoardAsk />
-        </TabsContent>
+      <BoardContent product=***REMOVED***productDetail***REMOVED*** />
+      <BoardReview reviewList=***REMOVED***reviewList ?? []***REMOVED*** />
 
-        <div onClick=***REMOVED***addToCart***REMOVED***>
-          <FooterButton />
-        </div>
-      </Tabs>
+      <div onClick=***REMOVED***addToCart***REMOVED***>
+        <FooterButton />
+      </div>
+
     </div>
   );
 ***REMOVED***;
