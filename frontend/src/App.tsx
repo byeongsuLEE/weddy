@@ -41,7 +41,7 @@ function AppContent() ***REMOVED***
   const currentDetail = location.pathname.split("/")[2];
 
   useEffect(() => ***REMOVED***
-    if (!token && currentPath !== "login" && currentPath !== "callback") ***REMOVED***
+    if (!token && currentPath !== "/api/oauth2/authorization/google" && currentPath !== "callback") ***REMOVED***
       navigate("/login");
     ***REMOVED***
 
