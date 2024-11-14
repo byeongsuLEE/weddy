@@ -29,7 +29,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         Long id = customUserDetails.getUserId();
 
-        String redirectUrl = "http://localhost:5173/callback?id=" + id;
+        String redirectUrl = "http:/weddy.info/callback?id=" + id;
 //        String redirectUrl = "https://naver.com";
         getRedirectStrategy().sendRedirect(request, response, redirectUrl);
 
