@@ -2,17 +2,23 @@ import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import ***REMOVED*** AccordionDetails ***REMOVED*** from "@mui/material";
 import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
 import ***REMOVED*** Checkbox ***REMOVED*** from "../ui/checkbox";
+import ***REMOVED*** deleteFromCart ***REMOVED*** from "@/api/cartApi";
 
 interface CartBoxProps ***REMOVED***
   item: Product;
   isSelected: boolean;
   onProductSelect: (product: Product | null) => void;
-  onRemove: (productId: string) => void;
+  onRemove: () => void;
 ***REMOVED***
 
 const CartBox = (***REMOVED*** item, isSelected, onProductSelect, onRemove ***REMOVED***: CartBoxProps) => ***REMOVED***
   const handleCheckboxChange = () => ***REMOVED***
     onProductSelect(isSelected ? null : item);
+  ***REMOVED***;
+
+  const deleteItem = async (productId: string) => ***REMOVED***
+    await deleteFromCart(productId);
+    onRemove();
   ***REMOVED***;
 
   return (
@@ -29,7 +35,7 @@ const CartBox = (***REMOVED*** item, isSelected, onProductSelect, onRemove ***RE
             <span className="font-bold">***REMOVED***Number(item.price).toLocaleString()***REMOVED***원</span>
           </div>
         </Link>
-        <button className="ml-auto mr-3 rounded-full w-[35px] h-[35px] bg-gray-100" onClick=***REMOVED***() => onRemove(item.id)***REMOVED***>
+        <button className="ml-auto mr-3 rounded-full w-[35px] h-[35px] bg-gray-100" onClick=***REMOVED***() => deleteItem(item.id)***REMOVED***>
           삭제
         </button>
       </div>
