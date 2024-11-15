@@ -1,7 +1,7 @@
 import axios from "axios";
 import ***REMOVED*** Product, ReviewData ***REMOVED*** from "./product.type";
 
-const URL = process.env.VITE_PUBLIC_URL
+const URL = import.meta.env.VITE_PUBLIC_URL
 const BASE_URL = `$***REMOVED***URL***REMOVED***/api/products`
 
 //== 모든 상품 조회 ==//

@@ -1,7 +1,7 @@
 import axios from "axios";
 import ***REMOVED*** GetSchedule, Schedule ***REMOVED*** from "./schedule.type";
 
-const URL = process.env.VITE_PUBLIC_URL
+const URL = import.meta.env.VITE_PUBLIC_URL
 const BASE_URL = `$***REMOVED***URL***REMOVED***/api/schedules`
 
 //== 일정 등록 ==//
