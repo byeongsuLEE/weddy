@@ -2,7 +2,7 @@ import axios from "axios";
 import ***REMOVED*** Dress ***REMOVED*** from "./dress.type";
 
 
-const URL = process.env.VITE_PUBLIC_URL
+const URL = import.meta.env.VITE_PUBLIC_URL
 const BASE_URL = `$***REMOVED***URL***REMOVED***/api/users/sketch`
 
 // 드레스 전체 조회

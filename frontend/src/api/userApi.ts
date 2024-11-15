@@ -1,7 +1,7 @@
 import axios from "axios";
 import ***REMOVED*** userInformation ***REMOVED*** from "./user.type";
 
-const URL = process.env.VITE_PUBLIC_URL
+const URL = import.meta.env.VITE_PUBLIC_URL
 const BASE_URL = `$***REMOVED***URL***REMOVED***/api/users`
 
 //== 토큰 정보 ==//
