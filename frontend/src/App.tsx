@@ -39,9 +39,10 @@ function AppContent() ***REMOVED***
   const location = useLocation();
   const currentPath = location.pathname.split("/")[1];
   const currentDetail = location.pathname.split("/")[2];
+  const nowPath = location.pathname;
 
   useEffect(() => ***REMOVED***
-    if (!token && currentPath !== "api/oauth2/authorization/google" && currentPath !== "callback") ***REMOVED***
+    if (!token && nowPath !== "/api/oauth2/authorization/google" && nowPath !== "/callback") ***REMOVED***
       navigate("/login");
     ***REMOVED***
 
@@ -58,7 +59,7 @@ function AppContent() ***REMOVED***
     ***REMOVED***;
 
     initializeMessageListener();
-  ***REMOVED***, [token, userId, fcmToken, currentPath]);
+  ***REMOVED***, [token, userId, fcmToken, nowPath]);
 
   return (
     <>
