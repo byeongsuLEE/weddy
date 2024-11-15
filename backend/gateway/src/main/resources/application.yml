@@ -1,6 +1,12 @@
 server:
   port: 8080
 spring:
+  application:
+    name: weddy
+  profiles:
+    active: common, user
+  config:
+    import: optional:configserver:***REMOVED***:8888
   cloud:
     gateway:
       routes:
