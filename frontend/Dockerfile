@@ -29,6 +29,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Nginx가 사용하는 포트 노출
 EXPOSE 80
 
-# Nginx 실행
+# Nginx 실행1
 CMD ["nginx", "-g", "daemon off;"]
 # test 1
