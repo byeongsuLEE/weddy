@@ -10,17 +10,17 @@
   "theme_color": "#ffffff",
   "icons": [
     ***REMOVED***
-      "src": "/logos/icon-196x196.png",
+      "src": "https://weddy.info/logos/icon-196x196.png",
       "sizes": "196x196",
       "type": "image/png"
     ***REMOVED***,
     ***REMOVED***
-      "src": "/logos/icon-128x128.png",
+      "src": "https://weddy.info/logos/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png"
     ***REMOVED***,
     ***REMOVED***
-      "src": "/logos/icon-512x512.png",
+      "src": "https://weddy.info/logos/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     ***REMOVED***

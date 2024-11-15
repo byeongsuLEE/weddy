@@ -11,7 +11,7 @@ interface CartListBoxProps ***REMOVED***
   productList?: Product[];
   selectedList: ***REMOVED*** [type: string]: Product | null ***REMOVED***;
   onProductChange: (category: string, product: Product | null) => void;
-  onRemove: (productId: string) => void;
+  onRemove: () => void;
 ***REMOVED***
 
 const CartListBox = (***REMOVED*** category, productList, selectedList, onProductChange, onRemove ***REMOVED***: CartListBoxProps) => ***REMOVED***
@@ -85,7 +85,7 @@ const CartListBox = (***REMOVED*** category, productList, selectedList, onProduc
               item=***REMOVED***item***REMOVED***
               isSelected=***REMOVED***selectedList[category]?.id === item.id***REMOVED***
               onProductSelect=***REMOVED***handleProductSelect***REMOVED***
-              onRemove=***REMOVED***() => onRemove(item.id)***REMOVED***
+              onRemove=***REMOVED***() => onRemove()***REMOVED***
             />
           </div>
         ))

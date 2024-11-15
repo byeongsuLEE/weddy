@@ -27,6 +27,7 @@ import Schedule from "./pages/SchedulePage";
 import Sketch from "./pages/SketchPage";
 import UserInfo from "./pages/UserInfoPage";
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from "./store/firebaseToken";
+import Test from "./pages/TestPage";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +41,7 @@ function AppContent() ***REMOVED***
   const currentDetail = location.pathname.split("/")[2];
 
   useEffect(() => ***REMOVED***
-    if (!token && currentPath !== "login" && currentPath !== "callback") ***REMOVED***
+    if (!token && currentPath !== "api/oauth2/authorization/google" && currentPath !== "callback") ***REMOVED***
       navigate("/login");
     ***REMOVED***
 
@@ -57,13 +58,14 @@ function AppContent() ***REMOVED***
     ***REMOVED***;
 
     initializeMessageListener();
-  ***REMOVED***, [token, userId, fcmToken]);
+  ***REMOVED***, [token, userId, fcmToken, currentPath]);
 
   return (
     <>
       ***REMOVED***currentPath !== "login" && currentPath !== "userinfo" && <Navbar />***REMOVED***
       <Routes>
         <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
+        <Route path="/test" element=***REMOVED***<Test />***REMOVED*** />
         <Route path="/review/:productId" element=***REMOVED***<Review />***REMOVED*** />
         <Route path="/cart" element=***REMOVED***<Cart />***REMOVED*** />
         <Route path="/login" element=***REMOVED***<Login />***REMOVED*** />

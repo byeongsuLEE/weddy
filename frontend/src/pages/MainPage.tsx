@@ -19,7 +19,7 @@ const Main = () => ***REMOVED***
   return (
     <div className="flex flex-col items-center mb-24">
       <MainCarousel imageList=***REMOVED***dummyMain***REMOVED*** />
-      <div className="grid grid-cols-2 gap-8 mt-10">
+      <div className="grid grid-cols-2 gap-10 mt-10">
 
         ***REMOVED***getRankedProductList?.map((product: Product, index) => (
           <Link to=***REMOVED***`/board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***index***REMOVED***>

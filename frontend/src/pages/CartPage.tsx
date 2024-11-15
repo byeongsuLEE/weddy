@@ -1,10 +1,10 @@
-import ***REMOVED*** deleteFromCart, getCartItems ***REMOVED*** from "@/api/cartApi";
+import ***REMOVED*** getCartItems ***REMOVED*** from "@/api/cartApi";
 import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
 import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
 import TodoButton from "@/common/TodoButton";
 import CartListBox from "@/components/CartPage/CartListBox";
 import ***REMOVED*** useState ***REMOVED*** from "react";
-import ***REMOVED*** useMutation, useQuery, useQueryClient ***REMOVED*** from "react-query";
+import ***REMOVED*** useQuery, useQueryClient ***REMOVED*** from "react-query";
 import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const CartPage = () => ***REMOVED***
@@ -19,14 +19,8 @@ const CartPage = () => ***REMOVED***
 
   const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
 
-  const deleteMutation = useMutation(deleteFromCart, ***REMOVED***
-    onSuccess: () => ***REMOVED***
-      queryClient.invalidateQueries("getCartItems");
-    ***REMOVED***
-  ***REMOVED***);
-
-  const handleRemove = (productId: string) => ***REMOVED***
-    deleteMutation.mutate(productId);
+  const handleRemove = () => ***REMOVED***
+    queryClient.invalidateQueries("getCartItems");
   ***REMOVED***;
 
   //== 총 가격 계산 ==//

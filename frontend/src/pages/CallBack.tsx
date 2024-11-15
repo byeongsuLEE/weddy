@@ -51,7 +51,9 @@ const CallBack = () => ***REMOVED***
         try ***REMOVED***
           await requestNotificationPermission();
           const token = await requestForToken();
+          
           if (token) ***REMOVED***
+            sessionStorage.setItem('fcmToken', token);
             setToken(token);
           ***REMOVED***
         ***REMOVED*** catch***REMOVED***

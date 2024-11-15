@@ -27,7 +27,7 @@ const FlexCenterWrapper = styled.div`
 `;
 
 export function AlertDialogDemo(***REMOVED*** isOpen, addSchedule, onClose ***REMOVED***: AlertDialogDemoProps) ***REMOVED***
-  const firebaseToken = sessionStorage.getItem('firebaseToken');
+  const firebaseToken = sessionStorage.getItem('fcmToken');
 
   const [scheduleInfo, setScheduleInfo] = useState<Schedule>(***REMOVED***
     startDate: null,
