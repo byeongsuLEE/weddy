@@ -13,7 +13,7 @@ spring:
         - id: product-service
           uri: http://product.default.svc.cluster.local:8080  # 여기 수정
           predicates:
-            - Path=/api/products/**
+            - Path=/api/products/**, /api/venders/**
 
         - id: schedule-service
           uri: http://schedule.default.svc.cluster.local:8080  # 여기도 수정
