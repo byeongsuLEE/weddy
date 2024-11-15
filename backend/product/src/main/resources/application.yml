@@ -13,4 +13,4 @@ management:
         include: refresh, prometheus
 
 server:
-  port: 8083
+  port: 8080
