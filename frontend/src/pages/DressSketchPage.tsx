@@ -14,7 +14,7 @@ const DressSketch = () => ***REMOVED***
         console.log("Fetched Data:", data);
         setDressList(data || []); // 데이터 없을 경우 빈 배열 설정
       ***REMOVED***)
-      .catch(error => console.error("Error fetching dress list:", error));
+      .catch((error) => console.error("Error fetching dress list:", error));
   ***REMOVED***, []);
 
   return (
