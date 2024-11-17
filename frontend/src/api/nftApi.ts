@@ -9,8 +9,8 @@ export const contractUpload = async (formData: FormData, contract?: ContractData
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/pinFileToIPFS`,
     headers: ***REMOVED***
-      'pinata_api_key': import.meta.env.VITE_PINATA_API_KEY,
-      'pinata_secret_api_key': import.meta.env.VITE_PINATA_SECRET_API_KEY,
+      'pinata_api_key': '1810c5b5b6dbf8a680d6',
+      'pinata_secret_api_key': 'af57f7c6da01fda5e12b8f98faff332366ed6b452ad5ae9d13d1e484510fadb3',
     ***REMOVED***,
     data: formData
   ***REMOVED***);
@@ -39,8 +39,8 @@ export const metadataUpload = async (imageCID: string, contract?: ContractData):
     method: 'post',
     url: `$***REMOVED***BASE_URL***REMOVED***/pinJSONToIPFS`,
     headers: ***REMOVED***
-      'pinata_api_key': import.meta.env.VITE_PINATA_API_KEY,
-      'pinata_secret_api_key': import.meta.env.VITE_PINATA_SECRET_API_KEY,
+      'pinata_api_key': '1810c5b5b6dbf8a680d6',
+      'pinata_secret_api_key': 'af57f7c6da01fda5e12b8f98faff332366ed6b452ad5ae9d13d1e484510fadb3',
     ***REMOVED***,
     data: metadata
   ***REMOVED***);

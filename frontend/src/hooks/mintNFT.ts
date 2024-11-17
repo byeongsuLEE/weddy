@@ -8,7 +8,7 @@ interface WindowWithEthereum extends Window ***REMOVED***
 declare let window: WindowWithEthereum;
 
 export const mintNFT = async (CID?: string) => ***REMOVED***
-  const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
+  const contractAddress = '0xE09a0B91F52BD80cAffbA3b4799d3f0F0F953A18';
   const metadataURI = `https://fuchsia-changing-flamingo-499.mypinata.cloud/ipfs/$***REMOVED***CID***REMOVED***`;
   const contractABI = MyNFT.abi;
 
