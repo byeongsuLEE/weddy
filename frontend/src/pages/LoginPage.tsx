@@ -1,18 +1,25 @@
 import ***REMOVED*** useEffect ***REMOVED*** from "react";
-import ***REMOVED*** googleLogin, naverLogin ***REMOVED*** from "../api/authApi";
+import ***REMOVED*** naverLogin ***REMOVED*** from "../api/authApi";
+import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 
 const Login = () => ***REMOVED***
+  const navigate = useNavigate();
+
   useEffect(() => ***REMOVED***
     sessionStorage.setItem('token', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywidXNlck5hbWUiOiLstZzsirntmLgiLCJjb3VwbGVDb2RlIjoiamM3VllhIiwiaWF0IjoxNzMxNDgwNjEwLCJleHAiOjE3MzQwNzI2MTB9.Cyd6ujpcIBHibkdfBBq-OApOHykmVdlzRnRfyp5rfXI')
     sessionStorage.setItem('userId', '3')
   ***REMOVED***, [])
+
+  const goCallback = () => ***REMOVED***
+    navigate('/callback?id=3');
+  ***REMOVED***;
   
   return (
     <div className="flex flex-col justify-center items-center h-full">
       <img className="w-[120px] mb-10" src="logos/Logo.png" alt="" />
       <button
         className="bg-white flex my-2 items-center justify-center w-72 h-14 rounded-xl"
-        onClick=***REMOVED***googleLogin***REMOVED***
+        onClick=***REMOVED***goCallback***REMOVED***
       >
         <img className="w-6 h-6 mr-7" src="icons/google.png" alt="google" />
         구글로 시작하기
