@@ -12,5 +12,5 @@ export const googleLogin = () => ***REMOVED***
   // window.location.href = `$***REMOVED***BASE_URL***REMOVED***/google`;
   sessionStorage.setItem('token', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MywidXNlck5hbWUiOiLstZzsirntmLgiLCJjb3VwbGVDb2RlIjoiamM3VllhIiwiaWF0IjoxNzMxNDgwNjEwLCJleHAiOjE3MzQwNzI2MTB9.Cyd6ujpcIBHibkdfBBq-OApOHykmVdlzRnRfyp5rfXI')
   sessionStorage.setItem('userId', '3')
-  navigate('/callback');
+  navigate('/callback?id=3');
 ***REMOVED***;
