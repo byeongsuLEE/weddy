@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const URL = import.meta.env.VITE_PUBLIC_URL
-const BASE_URL = `$***REMOVED***URL***REMOVED***/api/users`
+const BASE_URL = `/api/users`
 
 //== 커플 코드 연결 ==//
 export const connectCoupleCode = async (code: string): Promise<void> => ***REMOVED***

@@ -1,8 +1,7 @@
 import axios from "axios";
 import ***REMOVED*** Product ***REMOVED*** from "./product.type";
 
-const URL = import.meta.env.VITE_PUBLIC_URL
-const BASE_URL = `$***REMOVED***URL***REMOVED***/api/recommends`
+const BASE_URL = `/api/recommends`
 
 export const aiRecommend = async (message: string): Promise<Product[]> => ***REMOVED***
   const response = await axios(***REMOVED***
