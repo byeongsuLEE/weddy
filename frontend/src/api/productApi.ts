@@ -26,6 +26,7 @@ export const getRankedProducts = async (): Promise<Product[]> => ***REMOVED***
       Authorization: sessionStorage.getItem('token')
     ***REMOVED***
   ***REMOVED***);
+  console.log(URL)
   return response.data.data;
 ***REMOVED***;
 
