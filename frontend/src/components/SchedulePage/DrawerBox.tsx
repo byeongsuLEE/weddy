@@ -69,11 +69,27 @@ export function AlertDialogDemo(***REMOVED*** isOpen, addSchedule, onClose ***RE
     ***REMOVED***);
   ***REMOVED***;
   
-  const updateSchedule = async () => ***REMOVED***
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+const updateSchedule = async () => ***REMOVED***
+  if (isSubmitting) return; // 중복 요청 방지
+  setIsSubmitting(true);
+  try ***REMOVED***
     await schedule(scheduleInfo);
     addSchedule();
     onClose();
-  ***REMOVED***;
+  ***REMOVED*** catch (error) ***REMOVED***
+    console.error("Failed to update schedule:", error);
+  ***REMOVED*** finally ***REMOVED***
+    setIsSubmitting(false);
+  ***REMOVED***
+***REMOVED***;
+
+  // const updateSchedule = async () => ***REMOVED***
+  //   await schedule(scheduleInfo);
+  //   addSchedule();
+  //   onClose();
+  // ***REMOVED***;
 
   return (
     <AlertDialog open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***onClose***REMOVED***>
