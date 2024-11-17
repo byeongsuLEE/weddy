@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
 
 # .gitignore
 server/serviceAccountKey.json
