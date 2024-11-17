@@ -2,8 +2,7 @@ import axios from "axios";
 import ***REMOVED*** Dress ***REMOVED*** from "./dress.type";
 
 
-const URL = import.meta.env.VITE_PUBLIC_URL
-const BASE_URL = `$***REMOVED***URL***REMOVED***/api/users/sketch`
+const BASE_URL = `/api/users/sketch`
 
 // 드레스 전체 조회
 export const getDressList = async (): Promise<Dress[]> => ***REMOVED***
