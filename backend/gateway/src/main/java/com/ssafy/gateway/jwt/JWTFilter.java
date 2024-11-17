@@ -28,7 +28,7 @@ public class JWTFilter implements WebFilter ***REMOVED***
 
         // 제외할 경로 설정
         List<String> excludedPaths = List.of(
-                "/login", "api/oauth2",
+                "/login", "/api/oauth2",
                 "/oauth2", "/api/login",
                 "/users/token",
                 "/users/token/**",
