@@ -5,6 +5,7 @@ const BASE_URL = `/api/schedules`
 
 //== 일정 등록 ==//
 export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REMOVED***
+  console.log(scheduleData);
   await axios(***REMOVED***
     method: "post",
     url: BASE_URL,
