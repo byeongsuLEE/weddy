@@ -14,22 +14,16 @@ spring:
           uri: http://product.default.svc.cluster.local:8080  # 여기 수정
           predicates:
             - Path=/api/products/**, /api/venders/**
-          filters:
-            - StripPrefix=1
 
         - id: schedule-service
           uri: http://schedule.default.svc.cluster.local:8080  # 여기도 수정
           predicates:
             - Path=/api/schedules/**
-          filters:
-            - StripPrefix=1
 
         - id: user-service
           uri: http://user.default.svc.cluster.local:8080  # 여기도 수정
           predicates:
             - Path=/api/users/**, /api/payments/**, /api/contracts/**, /api/login/**, /api/oauth2/**
-          filters:
-            - StripPrefix=1
 
 
 #        - id: order-service
