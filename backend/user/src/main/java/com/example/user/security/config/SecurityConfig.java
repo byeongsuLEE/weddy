@@ -56,6 +56,7 @@ public class SecurityConfig ***REMOVED***
                         "/",
                         "/oauth2",
                         "/api/oauth2",
+                        "/api/oauth2/**",
                         "/login",
                         "/login/**",
                         "/users/token",
