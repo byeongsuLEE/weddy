@@ -25,7 +25,7 @@ public class JWTFilter implements WebFilter ***REMOVED***
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) ***REMOVED***
         String path = exchange.getRequest().getURI().getPath();
-
+        log.info("[요청 경로]: ***REMOVED******REMOVED***", path);
         // 제외할 경로 설정
         List<String> excludedPaths = List.of(
                 "/login", "/api/oauth2",
@@ -38,19 +38,20 @@ public class JWTFilter implements WebFilter ***REMOVED***
 
         // 제외할 경로인 경우 다음 필터로 이동
         if (excludedPaths.stream().anyMatch(path::startsWith)) ***REMOVED***
-            log.info("path : ***REMOVED******REMOVED***", exchange.getRequest().getPath().value());
+            log.info("[JWTFilter] 제외된 경로입니다. 필터를 통과합니다: ***REMOVED******REMOVED***", path);
             return chain.filter(exchange);
         ***REMOVED***
 
         String authorization = exchange.getRequest().getHeaders().getFirst("Authorization");
-
+        log.info("[JWTFilter] Authorization 헤더 값: ***REMOVED******REMOVED***", authorization);
         // Authorization 헤더가 없거나 Bearer 토큰 형식이 아닌 경우 필터 체인 계속
         if (authorization == null || !authorization.startsWith("Bearer ")) ***REMOVED***
+            log.warn("[JWTFilter] Authorization 헤더가 없거나 올바르지 않은 형식입니다.");
             return chain.filter(exchange);
         ***REMOVED***
 
         String token = authorization.substring(7);
-
+        log.info("[JWTFilter] 추출된 토큰: ***REMOVED******REMOVED***", token);
         // 토큰 만료 확인
         if (jwtUtil.isExpired(token)) ***REMOVED***
             log.info("토큰 만료됨");
