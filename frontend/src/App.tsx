@@ -42,7 +42,7 @@ function AppContent() ***REMOVED***
   const nowPath = location.pathname;
 
   useEffect(() => ***REMOVED***
-    if (!token && nowPath !== "/api/oauth2/authorization/google" && nowPath !== "/callback") ***REMOVED***
+    if (!token && nowPath !== "/oauth2/authorization/google" && nowPath !== "/callback") ***REMOVED***
       navigate("/login");
     ***REMOVED***
 
