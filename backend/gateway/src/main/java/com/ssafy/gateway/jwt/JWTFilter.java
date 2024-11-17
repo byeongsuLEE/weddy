@@ -41,7 +41,8 @@ public class JWTFilter implements WebFilter ***REMOVED***
                 "/users/token",
                 "/users/token/**",
                 "/api/users/token",
-                "/api/users/token/**"
+                "/api/users/token/**",
+                "/api/schedules"
         );
 
         // 제외할 경로인 경우 다음 필터로 이동
