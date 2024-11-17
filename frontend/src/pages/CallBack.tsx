@@ -1,4 +1,4 @@
-import ***REMOVED*** getUserInfo ***REMOVED*** from "@/api/userApi";
+import ***REMOVED*** getToken, getUserInfo ***REMOVED*** from "@/api/userApi";
 import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from "@/firebase";
 import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
@@ -11,16 +11,16 @@ const CallBack = () => ***REMOVED***
   const params = new URLSearchParams(useLocation().search);
   const userId = params.get("id");
 
-  const [userInfoEnabled,] = useState(false);
+  const [userInfoEnabled, setUserInfoEnabled] = useState(false);
 
   const setToken = useSetRecoilState(firebaseTokenState);
 
-  // useQuery(["getToken", userId], () => getToken(userId ?? undefined), ***REMOVED***
-  //   enabled: !!userId,
-  //   onSuccess: () => ***REMOVED***
-  //     setUserInfoEnabled(true);
-  //   ***REMOVED***,
-  // ***REMOVED***);
+  useQuery(["getToken", userId], () => getToken(userId ?? undefined), ***REMOVED***
+    enabled: !!userId,
+    onSuccess: () => ***REMOVED***
+      setUserInfoEnabled(true);
+    ***REMOVED***,
+  ***REMOVED***);
 
   useEffect(() => ***REMOVED***
     const registerServiceWorker = async () => ***REMOVED***
