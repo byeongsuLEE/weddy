@@ -28,6 +28,8 @@ public class SecurityConfig ***REMOVED***
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) ***REMOVED***
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)  // CSRF 비활성화
+                // CORS 설정을 필터 체인 상단으로 이동
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers(
                                 "/auth/**",
@@ -40,7 +42,6 @@ public class SecurityConfig ***REMOVED***
 
                         ).permitAll() // 인증 및 OAuth2 경로 허용
                         .anyExchange().authenticated()) // 나머지 요청은 인증 필요
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .addFilterAt(new JWTFilter(jwtUtil), SecurityWebFiltersOrder.AUTHENTICATION) // JWTFilter를 추가
                 .build();
     ***REMOVED***
