@@ -10,9 +10,9 @@ export const schedule = async (scheduleData?: Schedule): Promise<void> => ***REM
   await axios(***REMOVED***
     method: "post",
     url: BASE_URL,
+    withCredentials: true,
     headers: ***REMOVED***
       Authorization: sessionStorage.getItem("token"),
-      withCredentials: true,
     ***REMOVED***,
     data: scheduleData,
   ***REMOVED***);
