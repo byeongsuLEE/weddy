@@ -72,7 +72,7 @@ public class JWTFilter implements WebFilter ***REMOVED***
         // 간단한 인증 객체 생성 및 SecurityContext에 설정
         Authentication authToken = new UsernamePasswordAuthenticationToken(username, null, List.of());
         log.info("필터인증완료");
-        return chain.filter(exchange)
-                .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authToken));
+
+        return chain.filter(exchange);
     ***REMOVED***
 ***REMOVED***
