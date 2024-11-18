@@ -1,10 +1,12 @@
-import ***REMOVED*** createRoot ***REMOVED*** from 'react-dom/client';
-import ***REMOVED*** RecoilRoot ***REMOVED*** from 'recoil';
-import App from './App.tsx';
-import './index.css';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import React from 'react';
 
-createRoot(document.getElementById('root')!).render(
-  <RecoilRoot>
-    <App />
-  </RecoilRoot>
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+  <React.StrictMode>
+  <App />
+  </React.StrictMode>
 );
+
+export default App; // App을 기본 내보내기

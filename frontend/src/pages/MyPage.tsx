@@ -3,14 +3,19 @@ import ***REMOVED*** editInformation, editProfile, getUserInfo ***REMOVED*** fro
 import TodoButton from "@/common/TodoButton";
 import RingIcon from "@/icons/RingIcon";
 // import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
+import AlertBox from "@/common/AlertBox";
 import CoupleCodeModal from "@/components/MyPage/CoupleCodeModal";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
 import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+
 
 const Mypage = () => ***REMOVED***
   // const token = useRecoilValue(firebaseTokenState);
   const [isConneted, setIsconnected] = useState<boolean>(false);
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png");
+  const [coupleImageSrc, setCoupleImageSrc] = useState<string>("/icons/profile.png");
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
   const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
     name: '',
     phone: '',
@@ -67,6 +72,10 @@ const Mypage = () => ***REMOVED***
       ***REMOVED*** else if (userData.length === 2) ***REMOVED***
         setIsconnected(true);
         setCoupleInfo(userData[1]);
+        //== 커플 이미지 업데이트 ==//
+        if (userData[1].picture != null) ***REMOVED***
+          setCoupleImageSrc(userData[1].picture);
+        ***REMOVED***
       ***REMOVED***
 
       //== 유저 정보 업데이트 ==//
@@ -82,6 +91,8 @@ const Mypage = () => ***REMOVED***
   //== 회원 정보 수정 ==//
   const handleUpdate = async () => ***REMOVED***
     await editInformation(userInfo);
+    setShowAlert(true); // 알림 상태를 true로 설정
+    setTimeout(() => setShowAlert(false), 2000); // 3초 후 알림 상태를 false로 변경
   ***REMOVED***;
 
   //== 상태 업데이트 ==//
@@ -94,17 +105,18 @@ const Mypage = () => ***REMOVED***
   const dDay = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
 
   if (isLoading) ***REMOVED***
-    return <div>로딩중...</div>
+    return <div className="flex items-center justify-center mt-10">로딩중...</div>
   ***REMOVED***
 
   return (
     <div className="m-5 bg-white h-[750px] rounded-xl p-5 mb-24">
+        ***REMOVED***showAlert && <AlertBox title="회원 정보 수정" description="정보 수정 완료!" />***REMOVED***
       <h1 className="text-center mt-5">마이페이지</h1>
-      
+
       <div className="flex justify-between">
         <div className="bg-main1 flex flex-col items-center p-5 h-[200px] w-[300px] mx-3 mt-10 rounded-xl">
           <span className="font-bold text-3xl text-main2">D-***REMOVED***dDay***REMOVED***</span>
-          <span className="text-gray-400 text-sm">2024-11-19</span>
+          <span className="text-gray-400 text-sm">***REMOVED***userInfo.date***REMOVED***</span>
 
           ***REMOVED***isConneted ? (
             <div className="flex items-center justify-center">
@@ -114,18 +126,15 @@ const Mypage = () => ***REMOVED***
                   src=***REMOVED***imageSrc***REMOVED***
                   alt="profile image"
                 />
-                <div className="text-xs text-center mt-1 text-blue-400">
-                  <label htmlFor="profile-image">
-                    <span>이미지 변경</span>
-                    <input accept="image/*" onChange=***REMOVED***handleFileUpload***REMOVED*** className="hidden" id="profile-image" type="file" />
-                  </label>
+                <div className="text-xs text-center mt-1">
+                  <span>***REMOVED***userInfo.name***REMOVED***</span>
                 </div>
               </div>
               <RingIcon />
               <div>
                 <img
                   className="bg-main1 rounded-full h-[70px] w-[70px] mt-5"
-                  src=***REMOVED***"/icons/profile.png"***REMOVED***
+                  src=***REMOVED***coupleImageSrc***REMOVED***
                   alt="profile image"
                 />
                 <div className="text-xs text-center mt-1">
@@ -158,7 +167,7 @@ const Mypage = () => ***REMOVED***
       </div>
 
       <div className="flex justify-between ml-3 mr-10 mt-2">
-        
+
         <div className="flex flex-col">
           <span className="my-2 text-gray-600">이름</span>
           <span className="my-3 text-gray-600">전화번호</span>
@@ -195,6 +204,7 @@ const Mypage = () => ***REMOVED***
       <div className="flex justify-end mt-10 mb-10 mr-3" onClick=***REMOVED***handleUpdate***REMOVED***>
         <TodoButton title="수정하기" colorId=***REMOVED***1***REMOVED*** />
       </div>
+
     </div>
   )
 ***REMOVED***

@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    show-sql: true
+  application:
+    name: weddy
+  profiles:
+    active: common , schedule
+  config:
+    import: optional:configserver:***REMOVED***:8888
+
+
+management:
+endpoints:
+    web:
+      exposure:
+        include: refresh
+
+
+
+
+server:
+  port: 8080

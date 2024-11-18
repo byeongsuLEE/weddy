@@ -1,5 +1,5 @@
 import ***REMOVED*** BrowserProvider, ethers ***REMOVED*** from "ethers";
-import MyNFT from '../../../blockchain/NFT/build/contracts/MyNFT.json';
+import MyNFT from '@/hooks/contracts/MyNFT.json';
 import detectEthereumProvider from "@metamask/detect-provider";
 
 interface WindowWithEthereum extends Window ***REMOVED***
@@ -10,7 +10,7 @@ declare let window: WindowWithEthereum;
 
 //== NFT 정보 가져온 후 화면 출력 함수 ==//
 export const getNFT = async () => ***REMOVED***
-  const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
+  const contractAddress = '0xAD30D0d050D7071B3Ce8077ada6d9D5F907a0B08';
   const contractABI = MyNFT.abi;
 
   const provider = new BrowserProvider(window.ethereum);

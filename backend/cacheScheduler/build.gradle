@@ -1,0 +1,74 @@
+plugins ***REMOVED***
+	id 'java'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.6'
+***REMOVED***
+
+group = 'ssafy'
+version = '0.0.1-SNAPSHOT'
+
+java ***REMOVED***
+	toolchain ***REMOVED***
+		languageVersion = JavaLanguageVersion.of(17)
+	***REMOVED***
+***REMOVED***
+
+configurations ***REMOVED***
+	compileOnly ***REMOVED***
+		extendsFrom annotationProcessor
+	***REMOVED***
+***REMOVED***
+
+
+
+repositories ***REMOVED***
+	mavenCentral()
+	maven ***REMOVED***
+		url = uri('***REMOVED***/repository/maven-snapshots')
+		allowInsecureProtocol = true //http를 사용하기 위해 추가
+		credentials***REMOVED***
+			username = "weddy"
+			password = "weddy"
+		***REMOVED***
+	***REMOVED***
+***REMOVED***
+
+dependencies ***REMOVED***
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// spring cloud config
+	implementation 'org.springframework.cloud:spring-cloud-starter-config:4.1.3'
+	// mybatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+	// 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
+	implementation 'weddy:common-lib:1.0.2-SNAPSHOT'
+
+
+	// Spring Retry
+	implementation 'org.springframework.retry:spring-retry'
+
+	// Spring AOP
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	//fcm
+	implementation 'com.google.firebase:firebase-admin:9.4.1'
+***REMOVED***
+
+tasks.named('test') ***REMOVED***
+	useJUnitPlatform()
+***REMOVED***
+bootJar ***REMOVED***
+	enabled = true
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+***REMOVED***
+jar ***REMOVED***
+	enabled = false
+***REMOVED***
+

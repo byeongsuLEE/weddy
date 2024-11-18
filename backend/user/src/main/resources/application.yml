@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://34.64.98.78:3306/weddy?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: user1
+    password: 123123123
+  application:
+    name: weddy
+  profiles:
+    active: common, user
+  config:
+    import: optional:configserver:***REMOVED***:8888
+  cloud:
+    gcp:
+      storage:
+        bucket: weddy
+        project-id: sigma-outcome-440304-k4
+        credentials:
+          location: classpath:***REMOVED***
+
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+# 이거 나중에 바꿔야함
+server:
+  port: 8080

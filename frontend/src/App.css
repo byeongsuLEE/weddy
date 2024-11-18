@@ -1,0 +1,117 @@
+.app-container ***REMOVED***
+  width: 414px;
+  height: 100vh;
+  position: relative;
+***REMOVED***
+
+.makeImg-button***REMOVED***
+  position: fixed;
+  bottom: 20%;
+  right: 5%;
+  z-index: 1000;
+***REMOVED***
+
+.makeImg-modal***REMOVED***
+  position: fixed;
+  bottom: 20%;
+  right: 20%;
+  z-index: 1000;
+***REMOVED***
+
+.leva-container ***REMOVED***
+  position: absolute;
+  top: 18%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+***REMOVED***
+
+.input-container ***REMOVED***
+  position: absolute;
+  top: 20%;
+  left: 22%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+***REMOVED***
+
+.canvas ***REMOVED***
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  
+  z-index: 0;
+***REMOVED***
+
+.toggle-container ***REMOVED***
+  position: absolute;
+  top: 1px;
+  z-index: 10;
+  pointer-events: auto;
+  width: 414px;
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #F9F9F4;
+  padding: 10px;
+  border-radius: 8px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+***REMOVED***
+
+
+.toggle-container::-webkit-scrollbar ***REMOVED***
+  display: none;
+  /* 웹킷 브라우저에서 스크롤바 숨기기 */
+***REMOVED***
+
+.toggle-title ***REMOVED***
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+***REMOVED***
+
+.toggle-group ***REMOVED***
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 15px;
+***REMOVED***
+
+.toggle-group h4 ***REMOVED***
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+***REMOVED***
+
+.toggle-button ***REMOVED***
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid #FCCD2A;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.2s ease;
+  width: 60px;
+***REMOVED***
+
+.toggle-button.active ***REMOVED***
+  border-color: #ff3300;
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px rgba(243, 219, 2, 0.3);
+***REMOVED***
+
+.toggle-button-image ***REMOVED***
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+***REMOVED***
+
+.toggle-button-label ***REMOVED***
+  margin-top: 5px;
+  font-size: 0.9em;
+***REMOVED***
+
+

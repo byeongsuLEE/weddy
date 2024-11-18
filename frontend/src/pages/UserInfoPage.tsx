@@ -11,6 +11,7 @@ import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 const UserInfo = () => ***REMOVED***
   const navigate = useNavigate();
   const formdata = new FormData();
+  const fcmToken = sessionStorage.getItem('fcmToken');
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png");
   const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
     name: '',
@@ -43,19 +44,23 @@ const UserInfo = () => ***REMOVED***
     reader.readAsDataURL(file);
   ***REMOVED***
 
-  //== 결혼 예정일 등록 ==//
-  const weddingSchedule: Schedule = ***REMOVED***
-    type: "WEDDING",
-    startDate: userInfo.date,
-    endDate: userInfo.date,
-    content: "결혼식"
-  ***REMOVED***
-
    //== 회원 정보 수정 ==//
    const handleUpdate = async () => ***REMOVED***
-    await editInformation(userInfo);
-    await schedule(weddingSchedule);
-    navigate('/');
+    if (fcmToken) ***REMOVED***
+      //== 결혼 예정일 등록 ==//
+      const weddingSchedule: Schedule = ***REMOVED***
+        type: "WEDDING",
+        startDate: userInfo.date,
+        endDate: userInfo.date,
+        content: "결혼식",
+        userCoupleToken: ***REMOVED***
+          myFcmToken: fcmToken
+        ***REMOVED***
+      ***REMOVED***
+      await editInformation(userInfo);
+      await schedule(weddingSchedule);
+      navigate('/');
+    ***REMOVED***
   ***REMOVED***;
 
   useEffect(() => ***REMOVED***

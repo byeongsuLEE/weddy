@@ -1,0 +1,89 @@
+plugins ***REMOVED***
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.6'
+***REMOVED***
+
+group = 'com.ssafy'
+version = '0.0.1-SNAPSHOT'
+
+java ***REMOVED***
+    toolchain ***REMOVED***
+        languageVersion = JavaLanguageVersion.of(17)
+    ***REMOVED***
+***REMOVED***
+
+configurations ***REMOVED***
+    compileOnly ***REMOVED***
+        extendsFrom annotationProcessor
+    ***REMOVED***
+***REMOVED***
+
+repositories ***REMOVED***
+    mavenCentral()
+***REMOVED***
+
+ext ***REMOVED***
+    set('springCloudVersion', "2023.0.3")
+    springCloudGcpVersion = "5.7.0"
+***REMOVED***
+
+dependencies ***REMOVED***
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway-mvc'
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-mustache'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+    // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-storage
+    implementation group: 'com.google.cloud', name: 'google-cloud-storage', version: '2.44.1'
+    implementation group: 'com.google.cloud', name: 'spring-cloud-gcp-dependencies', version: '5.8.0', ext: 'pom'
+    implementation 'com.google.cloud:google-cloud-storage'
+
+
+    //fcm test
+    implementation 'com.google.firebase:firebase-admin:9.4.1'
+
+***REMOVED***
+
+dependencyManagement ***REMOVED***
+    imports ***REMOVED***
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$***REMOVED***springCloudVersion***REMOVED***"
+    ***REMOVED***
+***REMOVED***
+
+tasks.named('test') ***REMOVED***
+    useJUnitPlatform()
+***REMOVED***
+
+
+bootJar ***REMOVED***
+	enabled = true
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+***REMOVED***
+jar ***REMOVED***
+	enabled = false
+***REMOVED***
+
+

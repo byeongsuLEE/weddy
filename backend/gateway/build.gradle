@@ -1,0 +1,74 @@
+plugins ***REMOVED***
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+***REMOVED***
+
+group = 'com.ssafy'
+version = '0.0.1-SNAPSHOT'
+
+java ***REMOVED***
+	toolchain ***REMOVED***
+		languageVersion = JavaLanguageVersion.of(17)
+	***REMOVED***
+***REMOVED***
+
+configurations ***REMOVED***
+	compileOnly ***REMOVED***
+		extendsFrom annotationProcessor
+	***REMOVED***
+***REMOVED***
+
+repositories ***REMOVED***
+	mavenCentral()
+***REMOVED***
+
+ext ***REMOVED***
+	set('springCloudVersion', "2023.0.3")
+***REMOVED***
+
+dependencies ***REMOVED***
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Spring Cloud Gateway (WebFlux 기반이므로 Spring Web 의존성은 필요 없음)
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Development and testing dependencies
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	//jjwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+***REMOVED***
+
+dependencyManagement ***REMOVED***
+	imports ***REMOVED***
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:$***REMOVED***springCloudVersion***REMOVED***"
+	***REMOVED***
+***REMOVED***
+
+tasks.named('test') ***REMOVED***
+	useJUnitPlatform()
+***REMOVED***
+
+
+bootJar ***REMOVED***
+	enabled = true
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+***REMOVED***
+jar ***REMOVED***
+	enabled = false
+***REMOVED***
