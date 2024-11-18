@@ -13,7 +13,6 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Slf4j
-@Component
 public class JWTFilter implements WebFilter ***REMOVED***
 
     private final JWTUtil jwtUtil;
