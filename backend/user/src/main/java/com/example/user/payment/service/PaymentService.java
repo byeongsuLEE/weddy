@@ -80,16 +80,33 @@ public class PaymentService ***REMOVED***
         String paymentId = contractInfoRequestDto.getPaymentId();
         Long paidAmount = contractInfoRequestDto.getTotalMount();
 
+
+        log.info(" 결제 인증 시작");
+
+        log.info( " contractId : " + contractId);
+        log.info( " paymentId : " + paymentId);
+        log.info( " paidAmount : " + paidAmount);
+
         //결제내역 조회
         isPaymentIdValid(paymentId);
 
         // 계약서가 잘못되면 에러
         Contract contract= contractRepository.findById(contractId).orElse(null);
-        if(contract==null) return false;
+        if(contract==null)
+        ***REMOVED***
+            log.info("계약서가 존재하지 않습니다.");
+            return false;
+        ***REMOVED***
+
 
         //가격 일치 여부 판단.
         Boolean isPaidAmountValidated =contract.validation(paidAmount);
-        if(!isPaidAmountValidated) return false;
+        if(!isPaidAmountValidated)
+        ***REMOVED***
+            log.info("결제 금액이 일치하지 않습니다.");
+            return false;
+        ***REMOVED***
+
 
         return true;
     ***REMOVED***
