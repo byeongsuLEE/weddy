@@ -40,16 +40,6 @@ public class SecurityConfig ***REMOVED***
                         .anyExchange().authenticated()) // 나머지 요청은 인증 필요
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .addFilterAt(new JWTFilter(jwtUtil), SecurityWebFiltersOrder.AUTHENTICATION) // JWTFilter를 추가
-                .exceptionHandling()
-                .authenticationEntryPoint((exchange, e) -> ***REMOVED***
-                    String path = exchange.getRequest().getPath().value();
-                    String method = exchange.getRequest().getMethodValue();
-                    log.warn("[인증 실패] 요청 경로: ***REMOVED******REMOVED***, HTTP 메서드: ***REMOVED******REMOVED***", path, method);
-                    return Mono.fromRunnable(() -> ***REMOVED***
-                        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-                    ***REMOVED***);
-                ***REMOVED***)
-                .and()
                 .build();
     ***REMOVED***
 
