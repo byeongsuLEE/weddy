@@ -51,7 +51,6 @@ function AppContent() ***REMOVED***
     ***REMOVED***
 
     const initializeMessageListener = async () => ***REMOVED***
-      alert("메시지 리스너 실행");
       try ***REMOVED***
         await onMessageListener();
         alert("메시지 리스너 실행 완료");
