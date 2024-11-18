@@ -28,6 +28,7 @@ public class SecurityConfig ***REMOVED***
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) ***REMOVED***
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)  // CSRF 비활성화
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers(
                                 "/auth/**",
