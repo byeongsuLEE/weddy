@@ -21094,12 +21094,12 @@
         ***REMOVED***
       ***REMOVED***,
       "links": ***REMOVED******REMOVED***,
-      "address": "0x7A90F1EBfe965003E7281362F2b0f0Af8C40b840",
-      "transactionHash": "0xef505f6d4450725abfedf89bd54e2a47caaf5397f595748b7d2d211c4d48f64b"
+      "address": "0xAD30D0d050D7071B3Ce8077ada6d9D5F907a0B08",
+      "transactionHash": "0xdd0b6c1daece0772656ce8da7936339833522bdd4818b09226a0d9cd85f9c1d5"
     ***REMOVED***
   ***REMOVED***,
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-11-12T23:35:31.167Z",
+  "updatedAt": "2024-11-18T04:24:12.605Z",
   "networkType": "ethereum",
   "devdoc": ***REMOVED***
     "kind": "dev",

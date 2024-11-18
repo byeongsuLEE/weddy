@@ -10,7 +10,7 @@ declare let window: WindowWithEthereum;
 
 //== NFT 정보 가져온 후 화면 출력 함수 ==//
 export const getNFT = async () => ***REMOVED***
-  const contractAddress = '0xE09a0B91F52BD80cAffbA3b4799d3f0F0F953A18';
+  const contractAddress = '0xAD30D0d050D7071B3Ce8077ada6d9D5F907a0B08';
   const contractABI = MyNFT.abi;
 
   const provider = new BrowserProvider(window.ethereum);
