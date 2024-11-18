@@ -49,6 +49,7 @@ export const requestForToken = async (): Promise<string | null> => ***REMOVED***
   ***REMOVED***
 ***REMOVED***;
 
+
 export const onMessageListener = (): Promise<MessagePayload> => ***REMOVED***
   return new Promise((resolve) => ***REMOVED***
     onMessage(messaging, (payload: MessagePayload) => ***REMOVED***
