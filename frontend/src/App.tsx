@@ -51,9 +51,12 @@ function AppContent() ***REMOVED***
     ***REMOVED***
 
     const initializeMessageListener = async () => ***REMOVED***
+      alert("메시지 리스너 실행");
       try ***REMOVED***
         await onMessageListener();
+        alert("메시지 리스너 실행 완료");
       ***REMOVED*** catch ***REMOVED***
+        alert("메시지 리스너 오류");
         // 포그라운드 메시지 리스너 오류 처리 로직
       ***REMOVED***
     ***REMOVED***;
