@@ -28,6 +28,12 @@ public class JWTFilter implements WebFilter ***REMOVED***
         String method = String.valueOf(exchange.getRequest().getMethod());
         log.info("[요청 경로]: ***REMOVED******REMOVED***, [HTTP 메서드]: ***REMOVED******REMOVED***", path, method);
 
+        // OPTIONS 요청은 무시
+        if ("OPTIONS".equalsIgnoreCase(method)) ***REMOVED***
+            log.info("[JWTFilter] OPTIONS 요청입니다. 필터를 통과합니다.");
+            return chain.filter(exchange);
+        ***REMOVED***
+
         // 제외할 경로 설정
         List<String> excludedPaths = List.of(
                 "/login", "/api/oauth2",
