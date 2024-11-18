@@ -5,7 +5,7 @@ import ***REMOVED*** RecoilRoot, useRecoilValue ***REMOVED*** from "recoil";
 import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi";
 import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
-// import ***REMOVED*** onMessageListener ***REMOVED*** from "./firebase";
+import ***REMOVED*** onMessageListener ***REMOVED*** from "./firebase";
 import "./index.css";
 import BoardDetail from "./pages/BoardDetailPage";
 import Board from "./pages/BoardPage";
@@ -50,17 +50,16 @@ function AppContent() ***REMOVED***
       saveFcmToken(fcmToken, userId);
     ***REMOVED***
 
-    // const initializeMessageListener = async () => ***REMOVED***
-    //   try ***REMOVED***
-    //     await onMessageListener();
-    //     alert("메시지 리스너 실행 완료");
-    //   ***REMOVED*** catch ***REMOVED***
-    //     alert("메시지 리스너 오류");
-    //     // 포그라운드 메시지 리스너 오류 처리 로직
-    //   ***REMOVED***
-    // ***REMOVED***;
+    const initializeMessageListener = async () => ***REMOVED***
+      try ***REMOVED***
+        await onMessageListener();
+      ***REMOVED*** catch ***REMOVED***
+        alert("포그라운드 메시지 리스너 오류 발생");
+        // 포그라운드 메시지 리스너 오류 처리 로직
+      ***REMOVED***
+    ***REMOVED***;
 
-    // initializeMessageListener();
+    initializeMessageListener();
   ***REMOVED***, [token, userId, fcmToken, nowPath]);
 
   return (
