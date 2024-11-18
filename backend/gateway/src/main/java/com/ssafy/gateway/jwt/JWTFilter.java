@@ -13,7 +13,6 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Slf4j
-@Component
 public class JWTFilter implements WebFilter ***REMOVED***
 
     private final JWTUtil jwtUtil;
@@ -73,6 +72,7 @@ public class JWTFilter implements WebFilter ***REMOVED***
         Authentication authToken = new UsernamePasswordAuthenticationToken(username, null, List.of());
         log.info("필터인증완료");
 
-        return chain.filter(exchange);
+        return chain.filter(exchange)
+                .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authToken));
     ***REMOVED***
 ***REMOVED***
