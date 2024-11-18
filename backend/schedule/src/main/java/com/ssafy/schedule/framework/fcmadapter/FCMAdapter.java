@@ -20,27 +20,27 @@ public class FCMAdapter implements FCMOutputPort ***REMOVED***
     public void send(String token, String title, String body) ***REMOVED***
         try ***REMOVED***
             // 알림 메시지 생성
-//            Notification notification = Notification.builder()
-//                    .setTitle(title)
-//                    .setBody(body)
-//                    .build();
-//
-//            Message message = Message.builder()
-//                    .setToken(token)
-//                    .setNotification(notification)
-//                    .build();
-
-            // 알림 메시지 생성
             Notification notification = Notification.builder()
                     .setTitle(title)
                     .setBody(body)
                     .build();
+
             Message message = Message.builder()
                     .setToken(token)
                     .setNotification(notification)
-                    .putData("title", title)
-                    .putData("body", body)
                     .build();
+
+            // 알림 메시지 생성
+//            Notification notification = Notification.builder()
+//                    .setTitle(title)
+//                    .setBody(body)
+//                    .build();
+//            Message message = Message.builder()
+//                    .setToken(token)
+//                    .setNotification(notification)
+//                    .putData("title", title)
+//                    .putData("body", body)
+//                    .build();
 
             // FCM으로 메시지 전송
             String response = FirebaseMessaging.getInstance().send(message);
