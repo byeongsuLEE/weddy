@@ -30,8 +30,10 @@ export default defineConfig(***REMOVED***
       ***REMOVED***,
       workbox: ***REMOVED***
         maximumFileSizeToCacheInBytes: 5242880,
-      ***REMOVED***
-    ***REMOVED***),
+      ***REMOVED***,
+      filename: 'firebase-messaging-sw.js', // 서비스 워커 파일 이름 변경
+    ***REMOVED***)
+    ,
   ],
   css: ***REMOVED***
     postcss: ***REMOVED***
