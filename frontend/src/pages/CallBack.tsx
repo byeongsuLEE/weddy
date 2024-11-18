@@ -72,7 +72,7 @@ const CallBack = () => ***REMOVED***
       ***REMOVED***
     ***REMOVED***;
     requestPermissionsAndToken();
-  ***REMOVED***, [setToken, userId]);
+  ***REMOVED***, [userId, userInfo, navigate, setToken]);
 
   return null;
 ***REMOVED***;
