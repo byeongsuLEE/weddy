@@ -8,10 +8,12 @@
     import com.ssafy.schedule.framework.web.dto.input.CreateScheduleInputDto;
     import com.ssafy.schedule.framework.web.dto.output.ScheduleOutputDto;
     import lombok.RequiredArgsConstructor;
+    import lombok.extern.slf4j.Slf4j;
     import org.springframework.stereotype.Service;
     import org.springframework.transaction.annotation.Transactional;
 
 
+    @Slf4j
     @Service
     @Transactional
     @RequiredArgsConstructor
@@ -27,6 +29,8 @@
 
             Schedule schedule =   Schedule.createSchedule(createScheduleInputDto);
             Schedule savedSchedule = scheduleOutPutPort.save(schedule);
+
+            log.info("fcm token : ***REMOVED******REMOVED*** ",createScheduleInputDto.getUserCoupleToken().getMyFcmToken());
             //푸시알림을 위한 일정 저장
             scheduleRedisCacheOutputPort.saveScheduleToCache(createScheduleInputDto);
             fcmOutputPort.send(createScheduleInputDto.getUserCoupleToken().getMyFcmToken(),createScheduleInputDto.getType().name(),createScheduleInputDto.getContent());
