@@ -10,6 +10,7 @@ import GotoIcon from "../../icons/Goto";
 import ProgressBar from "./ProgressBar";
 import ***REMOVED*** NftType ***REMOVED*** from "@/api/nft.type";
 import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+import AlertBox from "@/common/AlertBox";
 
 interface ContractListBoxProps ***REMOVED***
   type: string;
@@ -21,6 +22,7 @@ interface ContractListBoxProps ***REMOVED***
 const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***REMOVED***: ContractListBoxProps) => ***REMOVED***
   const [showIcon, setShowIcon] = useState<Boolean>(false);
   const [nftData, setNftData] = useState<NftType | undefined>();
+  const [showAlert, setShowAlert] = useState(false); // AlertBox 상태 추가
 
   const handleChangeStatus = async () => ***REMOVED***
     if (contractInfo) ***REMOVED***
@@ -28,11 +30,19 @@ const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***
     ***REMOVED***
   ***REMOVED***;
 
-  const handlePayment = async() => ***REMOVED***
+  const handlePayment = async () => ***REMOVED***
     if (contractInfo) ***REMOVED***
       await requestPayment(contractInfo);
       await changeStatus(contractInfo.id);
       onChange(contractInfo.id);
+
+      // AlertBox 열기
+      setShowAlert(true);
+
+      // 2초 후 AlertBox 닫기
+      setTimeout(() => ***REMOVED***
+        setShowAlert(false);
+      ***REMOVED***, 2000);
     ***REMOVED***
   ***REMOVED***;
 
@@ -53,6 +63,7 @@ const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***
 
   return (
     <div className="mb-5">
+      ***REMOVED***showAlert && <AlertBox title="결제" description="결제가 완료되었습니다." />***REMOVED***
       <Accordion
         sx=***REMOVED******REMOVED***
           boxShadow: "none",

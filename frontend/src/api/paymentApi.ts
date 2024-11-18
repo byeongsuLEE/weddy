@@ -43,7 +43,7 @@ export const requestPayment = async (
       // 결제 성공 시 서버로 정보 전송
       await sendPaymentSuccessToServer(contractInfo, paymentId);
     ***REMOVED*** else ***REMOVED***
-      alert(`결제 실패: $***REMOVED***response.message***REMOVED***`);
+      console.error(`결제 실패: $***REMOVED***response.message***REMOVED***`);
     ***REMOVED***
   ***REMOVED***
 ***REMOVED***;
@@ -80,13 +80,12 @@ const sendPaymentSuccessToServer = async (
     );
 
     if (response.status === 200) ***REMOVED***
-      alert("결제 성공 정보 서버 전송 완료");
+      console.log("결제 성공 정보 서버 전송 완료");
     ***REMOVED*** else ***REMOVED***
-      alert("서버 전송 실패");
+      console.warn("서버 전송 실패");
     ***REMOVED***
   ***REMOVED*** catch (error) ***REMOVED***
     console.error("서버 전송 오류:", error);
-    alert("서버 전송 중 오류가 발생했습니다.");
   ***REMOVED***
 ***REMOVED***;
 
