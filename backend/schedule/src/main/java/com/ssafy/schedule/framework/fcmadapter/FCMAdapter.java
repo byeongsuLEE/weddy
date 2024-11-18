@@ -30,8 +30,14 @@ public class FCMAdapter implements FCMOutputPort ***REMOVED***
 //                    .setNotification(notification)
 //                    .build();
 
+            // 알림 메시지 생성
+            Notification notification = Notification.builder()
+                    .setTitle(title)
+                    .setBody(body)
+                    .build();
             Message message = Message.builder()
                     .setToken(token)
+                    .setNotification(notification)
                     .putData("title", title)
                     .putData("body", body)
                     .build();
