@@ -56,19 +56,17 @@ const PlannerPage = () => ***REMOVED***
       <div className="mt-10">
         ***REMOVED***Array.isArray(recommendList) && recommendList.length > 0 ? (
           <>
-            ***REMOVED***["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
-              <PlannerBox
-                key=***REMOVED***category***REMOVED***
-                title=***REMOVED***category***REMOVED***
-                type=***REMOVED***category***REMOVED***
-                cartItem=***REMOVED***
-                  recommendList.filter(
-                    (item: Product) => item.type === category
-                  )
-                ***REMOVED***
-                onAmountChange=***REMOVED***handleAmountChange***REMOVED***
-              />
-            ))***REMOVED***
+            <PlannerBox
+              key=***REMOVED***"STUDIO"***REMOVED***
+              title=***REMOVED***"STUDIO"***REMOVED***
+              type=***REMOVED***"STUDIO"***REMOVED***
+              cartItem=***REMOVED***
+                recommendList.filter(
+                  (item: Product) => item.type === "STUDIO"
+                )
+              ***REMOVED***
+              onAmountChange=***REMOVED***handleAmountChange***REMOVED***
+            />
 
             <div className="flex justify-between mt-10 mx-10">
               <span className="text-lg font-bold">
