@@ -13,6 +13,6 @@ export const aiRecommend = async (message: string): Promise<Product[]> => ***REM
     params: ***REMOVED*** message ***REMOVED***,
   ***REMOVED***);
   
-  console.log(response.data);
-  return response.data;
+  console.log(response.data.data);
+  return response.data.data;
 ***REMOVED***;
