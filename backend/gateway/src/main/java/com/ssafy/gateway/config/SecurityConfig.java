@@ -39,6 +39,7 @@ public class SecurityConfig ***REMOVED***
                         ).permitAll() // 인증 및 OAuth2 경로 허용
                         .anyExchange().authenticated()) // 나머지 요청은 인증 필요
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .addFilterAt(new JWTFilter(jwtUtil), SecurityWebFiltersOrder.AUTHENTICATION) // JWTFilter를 추가
                 .build();
     ***REMOVED***
