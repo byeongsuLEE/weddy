@@ -42,7 +42,7 @@ public class CreateScheduleInputDto ***REMOVED***
         return CreateScheduleInputDto.builder()
                 .startDate((paymentProductInfo.getStartDate()))
                 .endDate((paymentProductInfo.getEndDate()))
-                .content(paymentProductInfo.getProduct().getProductContent())
+                .content(paymentProductInfo.getTitle())
                 .productId(paymentProductInfo.getProduct().getProductId())
                 .userId(paymentProductInfo.getUserId())
                 .code(paymentProductInfo.getCode())
