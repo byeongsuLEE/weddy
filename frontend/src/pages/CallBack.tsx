@@ -22,6 +22,10 @@ const CallBack = () => ***REMOVED***
     ***REMOVED***,
   ***REMOVED***);
 
+  const ***REMOVED*** data: userInfo ***REMOVED*** = useQuery("getUserInfo", getUserInfo, ***REMOVED***
+    enabled: userInfoEnabled,
+  ***REMOVED***);
+
   useEffect(() => ***REMOVED***
     const registerServiceWorker = async () => ***REMOVED***
       if ("serviceWorker" in navigator) ***REMOVED***
@@ -55,6 +59,7 @@ const CallBack = () => ***REMOVED***
           if (token) ***REMOVED***
             sessionStorage.setItem('fcmToken', token);
             setToken(token);
+            
             if (userInfo && userInfo[0]?.date != null) ***REMOVED***
               navigate("/");
             ***REMOVED*** else if (userInfo) ***REMOVED***
@@ -68,10 +73,6 @@ const CallBack = () => ***REMOVED***
     ***REMOVED***;
     requestPermissionsAndToken();
   ***REMOVED***, [setToken, userId]);
-
-  const ***REMOVED*** data: userInfo ***REMOVED*** = useQuery("getUserInfo", getUserInfo, ***REMOVED***
-    enabled: userInfoEnabled,
-  ***REMOVED***);
 
   return null;
 ***REMOVED***;
