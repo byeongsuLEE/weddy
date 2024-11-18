@@ -11,7 +11,7 @@ import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
 const UserInfo = () => ***REMOVED***
   const navigate = useNavigate();
   const formdata = new FormData();
-  const firebaseToken = sessionStorage.getItem('firebaseToken');
+  const fcmToken = sessionStorage.getItem('fcmToken');
   const [imageSrc, setImageSrc] = useState<string>("/icons/profile.png");
   const [userInfo, setUserInfo] = useState<userInformation>(***REMOVED***
     name: '',
@@ -46,7 +46,7 @@ const UserInfo = () => ***REMOVED***
 
    //== 회원 정보 수정 ==//
    const handleUpdate = async () => ***REMOVED***
-    if (firebaseToken) ***REMOVED***
+    if (fcmToken) ***REMOVED***
       //== 결혼 예정일 등록 ==//
       const weddingSchedule: Schedule = ***REMOVED***
         type: "WEDDING",
@@ -54,7 +54,7 @@ const UserInfo = () => ***REMOVED***
         endDate: userInfo.date,
         content: "결혼식",
         userCoupleToken: ***REMOVED***
-          myFcmToken: firebaseToken
+          myFcmToken: fcmToken
         ***REMOVED***
       ***REMOVED***
       await editInformation(userInfo);
