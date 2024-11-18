@@ -74,7 +74,7 @@ const sendPaymentSuccessToServer = async (
       ***REMOVED***
         headers: ***REMOVED***
           "Content-Type": "application/json",
-          Authorization: `Bearer $***REMOVED***sessionStorage.getItem("token")***REMOVED***`, // ACCESS_TOKEN 추가
+          Authorization: sessionStorage.getItem("token"), // ACCESS_TOKEN 추가
         ***REMOVED***,
       ***REMOVED***
     );
