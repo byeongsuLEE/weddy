@@ -28,22 +28,19 @@ const CallBack = () => ***REMOVED***
 
   useEffect(() => ***REMOVED***
     const registerServiceWorker = async () => ***REMOVED***
-      if ("serviceWorker" in navigator) ***REMOVED***
-        try ***REMOVED***
-          const existingRegistration =
-            await navigator.serviceWorker.getRegistration(
-              "/firebase-messaging-sw.js"
-            );
-
-          if (existingRegistration) ***REMOVED***
-            return;
-          ***REMOVED***
-
-          await navigator.serviceWorker.register("/firebase-messaging-sw.js");
-        ***REMOVED*** catch  ***REMOVED***
-          // 서비스 워커 등록 실패시 에러 처리 로직
-        ***REMOVED***
+      if ("Notification" in window && "serviceWorker" in navigator) ***REMOVED***
+        console.log("푸시 알림 지원");
+        // 푸시 알림 및 서비스 워커 관련 초기화 코드 실행
+        navigator.serviceWorker.register("/firebase-messaging-sw.js").then(() => ***REMOVED***
+          console.log("Service Worker 등록 성공");
+        ***REMOVED***).catch((error) => ***REMOVED***
+          console.error("Service Worker 등록 실패:", error);
+        ***REMOVED***);
+      ***REMOVED*** else ***REMOVED***
+        console.log("푸시 알림 미지원");
+        // 지원하지 않는 환경에 대한 처리 (예: 사용자에게 알림 표시)
       ***REMOVED***
+      
     ***REMOVED***;
 
     registerServiceWorker();
