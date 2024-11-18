@@ -1,15 +1,19 @@
 package com.ssafy.gateway.jwt;
-
+import com.ssafy.gateway.jwt.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Slf4j
-@Component
 public class JWTFilter implements WebFilter ***REMOVED***
 
     private final JWTUtil jwtUtil;
@@ -20,8 +24,8 @@ public class JWTFilter implements WebFilter ***REMOVED***
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) ***REMOVED***
-        String path = exchange.getRequest().getPath().value();
-        String method = exchange.getRequest().getMethod().name();
+        String path = exchange.getRequest().getURI().getPath();
+        String method = String.valueOf(exchange.getRequest().getMethod());
         log.info("[요청 경로]: ***REMOVED******REMOVED***, [HTTP 메서드]: ***REMOVED******REMOVED***", path, method);
 
         // OPTIONS 요청은 무시
@@ -30,23 +34,45 @@ public class JWTFilter implements WebFilter ***REMOVED***
             return chain.filter(exchange);
         ***REMOVED***
 
-        // Authorization 헤더 확인
+        // 제외할 경로 설정
+        List<String> excludedPaths = List.of(
+                "/login", "/api/oauth2",
+                "/oauth2", "/api/login",
+                "/users/token",
+                "/users/token/**",
+                "/api/users/token",
+                "/api/users/token/**"
+        );
+
+        // 제외할 경로인 경우 다음 필터로 이동
+        if (excludedPaths.stream().anyMatch(path::startsWith)) ***REMOVED***
+            log.info("[JWTFilter] 제외된 경로입니다. 필터를 통과합니다: ***REMOVED******REMOVED***", path);
+            return chain.filter(exchange);
+        ***REMOVED***
+
         String authorization = exchange.getRequest().getHeaders().getFirst("Authorization");
+        log.info("[JWTFilter] Authorization 헤더 값: ***REMOVED******REMOVED***", authorization);
+        // Authorization 헤더가 없거나 Bearer 토큰 형식이 아닌 경우 필터 체인 계속
         if (authorization == null || !authorization.startsWith("Bearer ")) ***REMOVED***
             log.warn("[JWTFilter] Authorization 헤더가 없거나 올바르지 않은 형식입니다.");
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
+            return chain.filter(exchange);
         ***REMOVED***
 
-        // 토큰 검증
-        String token = authorization.substring(7); // "Bearer " 제거
+        String token = authorization.substring(7);
+        log.info("[JWTFilter] 추출된 토큰: ***REMOVED******REMOVED***", token);
+        // 토큰 만료 확인
         if (jwtUtil.isExpired(token)) ***REMOVED***
-            log.warn("[JWTFilter] JWT 토큰이 만료되었습니다.");
-            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-            return exchange.getResponse().setComplete();
+            log.info("토큰 만료됨");
+            return chain.filter(exchange);
         ***REMOVED***
 
-        log.info("[JWTFilter] JWT 토큰 검증 완료. 요청을 필터 체인으로 전달합니다.");
-        return chain.filter(exchange);
+        // 토큰에서 사용자 이름 추출
+        String username = jwtUtil.getUsername(token);
+
+        // 간단한 인증 객체 생성 및 SecurityContext에 설정
+        Authentication authToken = new UsernamePasswordAuthenticationToken(username, null, List.of());
+        log.info("필터인증완료");
+        return chain.filter(exchange)
+                .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authToken));
     ***REMOVED***
 ***REMOVED***
