@@ -55,6 +55,11 @@ const CallBack = () => ***REMOVED***
           if (token) ***REMOVED***
             sessionStorage.setItem('fcmToken', token);
             setToken(token);
+            if (userInfo && userInfo[0]?.date != null) ***REMOVED***
+              navigate("/");
+            ***REMOVED*** else if (userInfo) ***REMOVED***
+              navigate("/userInfo");
+            ***REMOVED***
           ***REMOVED***
         ***REMOVED*** catch***REMOVED***
           // 권한 요청이나 토큰 발급 실패시 에러 처리 로직
@@ -67,14 +72,6 @@ const CallBack = () => ***REMOVED***
   const ***REMOVED*** data: userInfo ***REMOVED*** = useQuery("getUserInfo", getUserInfo, ***REMOVED***
     enabled: userInfoEnabled,
   ***REMOVED***);
-
-  useEffect(() => ***REMOVED***
-    if (userInfo && userInfo[0]?.date != null) ***REMOVED***
-      navigate("/");
-    ***REMOVED*** else if (userInfo) ***REMOVED***
-      navigate("/userInfo");
-    ***REMOVED***
-  ***REMOVED***, [userInfo, navigate]);
 
   return null;
 ***REMOVED***;
