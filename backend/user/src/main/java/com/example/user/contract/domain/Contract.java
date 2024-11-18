@@ -74,11 +74,7 @@ public class Contract ***REMOVED***
 
 
     public boolean validation(Long totalMount)***REMOVED***
-        if(this.totalMount != totalMount)***REMOVED***
-            return false;
-        ***REMOVED***
-
-        return true;
+        return this.totalMount.equals(totalMount);
     ***REMOVED***
 
 
