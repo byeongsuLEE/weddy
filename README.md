@@ -102,7 +102,7 @@
 ### 2. 온라인 NFT 계약
 ![erd](exec/계약.gif)
 ### 3. Function Calling 상품 추천
-![erd](exec/상품 추천.gif)
+![erd](exec/상품추천.gif)
 ### 4. 상품 결제
 ![erd](exec/결제.gif)
 ### 5. 3D 모델링
