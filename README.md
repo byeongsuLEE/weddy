@@ -92,10 +92,10 @@
 
 ## ERD 🌐
 
-![erd](exec/웨디 erd.png)
+![erd](exec/웨디erd.png)
 
 ## 아키텍쳐♟️
-![배포아키텍쳐.png](exec/배포 아키텍쳐.png)
+![배포아키텍쳐.png](exec/배포아키텍쳐.png)
 ## [웨딩 업체 중개 플랫폼] 서비스
 ### 1. 일정관리
 ![erd](exec/일정.gif)
