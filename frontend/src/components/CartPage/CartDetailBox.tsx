@@ -1,12 +1,12 @@
-import ***REMOVED*** Checkbox ***REMOVED*** from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 
-interface CartDetailBoxProps ***REMOVED***
+interface CartDetailBoxProps {
   product: string;
   totalMount: number;
   company: string;
-***REMOVED***
+}
 
-const CartDetailBox = (***REMOVED*** product, totalMount, company ***REMOVED***: CartDetailBoxProps) => ***REMOVED***
+const CartDetailBox = ({ product, totalMount, company }: CartDetailBoxProps) => {
 
   return (
     <div className="mx-1 my-2 bg-mainbg h-[70px] w-auto rounded-lg px-5 py-3 flex justify-between">
@@ -14,15 +14,15 @@ const CartDetailBox = (***REMOVED*** product, totalMount, company ***REMOVED***:
         <Checkbox
         />
         <div className="flex flex-col ml-3">
-          <span className="font-bold">***REMOVED***product***REMOVED***</span>
-          <span className="text-sm text-gray-600">***REMOVED***company***REMOVED***</span>
+          <span className="font-bold">{product}</span>
+          <span className="text-sm text-gray-600">{company}</span>
         </div>
       </div>
       <div>
-        ***REMOVED***totalMount.toLocaleString()***REMOVED***원
+        {totalMount.toLocaleString()}원
       </div>
     </div>
   );
-***REMOVED***;
+};
 
 export default CartDetailBox;

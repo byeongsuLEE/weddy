@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContractInfoRequestDto***REMOVED***
+public class ContractInfoRequestDto{
     private Long id;
     private String title;
     private String content;
@@ -36,4 +36,4 @@ public class ContractInfoRequestDto***REMOVED***
     private LocalDate endDate;
     private Product product;
     private String paymentId;
-***REMOVED***
+}

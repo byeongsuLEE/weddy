@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartProductDto ***REMOVED***
+public class CartProductDto {
     Long id;
     String name;
     String type;
@@ -25,4 +25,4 @@ public class CartProductDto ***REMOVED***
     String vendorAddress;
     Long vendorId;
     List<productImageResponseDto> images;
-***REMOVED***
+}

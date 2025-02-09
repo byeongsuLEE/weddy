@@ -4,5 +4,5 @@ import lombok.Builder;
 
 @Builder
 public record SketchRequestDto(String studio,
-                               String dressName) ***REMOVED***
-***REMOVED***
+                               String dressName) {
+}

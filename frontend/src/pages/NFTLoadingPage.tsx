@@ -1,5 +1,5 @@
 
-const NFTLoading = () => ***REMOVED***
+const NFTLoading = () => {
 
   return (
     <div className="flex flex-col items-center mt-32 h-full">
@@ -13,6 +13,6 @@ const NFTLoading = () => ***REMOVED***
 
     </div>
   )
-***REMOVED***
+}
 
 export default NFTLoading;

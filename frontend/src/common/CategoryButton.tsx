@@ -1,56 +1,56 @@
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+import { useEffect, useState } from "react";
 
-interface categoryProps ***REMOVED***
+interface categoryProps {
   changeCategory: (category: string) => void;
-***REMOVED***;
+};
 
-const CategoryButton=(***REMOVED*** changeCategory ***REMOVED***: categoryProps)=>***REMOVED***
+const CategoryButton=({ changeCategory }: categoryProps)=>{
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
-  const handleButtonClick = (buttonName: string) => ***REMOVED***
-    const category = ***REMOVED***
+  const handleButtonClick = (buttonName: string) => {
+    const category = {
       스튜디오: "STUDIO",
       드레스: "DRESS",
       메이크업: "MAKEUP",
-    ***REMOVED*** [buttonName as "스튜디오" | "드레스" | "메이크업"];
+    } [buttonName as "스튜디오" | "드레스" | "메이크업"];
 
     setSelectedButton(category);
-  ***REMOVED***;
+  };
 
-  useEffect(() => ***REMOVED***
-    if (selectedButton)***REMOVED***
+  useEffect(() => {
+    if (selectedButton){
       changeCategory(selectedButton);
-    ***REMOVED***;
-  ***REMOVED***, [selectedButton]);
+    };
+  }, [selectedButton]);
 
   return (
     <>
     <button
-    onClick=***REMOVED***() => handleButtonClick('스튜디오')***REMOVED***
-    className=***REMOVED***`bg-main3 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 $***REMOVED***
+    onClick={() => handleButtonClick('스튜디오')}
+    className={`bg-main3 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 ${
       selectedButton === 'STUDIO' ? 'border-2 border-main6' : ''
-    ***REMOVED***`***REMOVED***
+    }`}
   >
     스튜디오
   </button>
   <button
-    onClick=***REMOVED***() => handleButtonClick('드레스')***REMOVED***
-    className=***REMOVED***`bg-main1 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 $***REMOVED***
+    onClick={() => handleButtonClick('드레스')}
+    className={`bg-main1 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 ${
       selectedButton === 'DRESS' ? 'border-2 border-main2' : ''
-    ***REMOVED***`***REMOVED***
+    }`}
   >
     드레스
   </button>
   <button
-    onClick=***REMOVED***() => handleButtonClick('메이크업')***REMOVED***
-    className=***REMOVED***`bg-main4 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 $***REMOVED***
+    onClick={() => handleButtonClick('메이크업')}
+    className={`bg-main4 w-[90px] h-[30px] text-black flex items-center justify-center rounded-2xl p-1 m-1 ${
       selectedButton === 'MAKEUP' ? 'border-2 border-main5' : ''
-    ***REMOVED***`***REMOVED***
+    }`}
   >
     메이크업
   </button>
   </>
   )
-***REMOVED***
+}
 
 export default CategoryButton;

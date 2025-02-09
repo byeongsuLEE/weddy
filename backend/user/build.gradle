@@ -1,34 +1,34 @@
-plugins ***REMOVED***
+plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.4'
     id 'io.spring.dependency-management' version '1.1.6'
-***REMOVED***
+}
 
 group = 'com.ssafy'
 version = '0.0.1-SNAPSHOT'
 
-java ***REMOVED***
-    toolchain ***REMOVED***
+java {
+    toolchain {
         languageVersion = JavaLanguageVersion.of(17)
-    ***REMOVED***
-***REMOVED***
+    }
+}
 
-configurations ***REMOVED***
-    compileOnly ***REMOVED***
+configurations {
+    compileOnly {
         extendsFrom annotationProcessor
-    ***REMOVED***
-***REMOVED***
+    }
+}
 
-repositories ***REMOVED***
+repositories {
     mavenCentral()
-***REMOVED***
+}
 
-ext ***REMOVED***
+ext {
     set('springCloudVersion', "2023.0.3")
     springCloudGcpVersion = "5.7.0"
-***REMOVED***
+}
 
-dependencies ***REMOVED***
+dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -65,25 +65,25 @@ dependencies ***REMOVED***
     //fcm test
     implementation 'com.google.firebase:firebase-admin:9.4.1'
 
-***REMOVED***
+}
 
-dependencyManagement ***REMOVED***
-    imports ***REMOVED***
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$***REMOVED***springCloudVersion***REMOVED***"
-    ***REMOVED***
-***REMOVED***
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
 
-tasks.named('test') ***REMOVED***
+tasks.named('test') {
     useJUnitPlatform()
-***REMOVED***
+}
 
 
-bootJar ***REMOVED***
+bootJar {
 	enabled = true
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-***REMOVED***
-jar ***REMOVED***
+}
+jar {
 	enabled = false
-***REMOVED***
+}
 
 

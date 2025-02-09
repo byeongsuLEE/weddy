@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Sketch ***REMOVED***
+public class Sketch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +27,14 @@ public class Sketch ***REMOVED***
     private UserEntity user;
 
     @Builder
-    public Sketch(SketchRequestDto requestDto, String image, UserEntity user) ***REMOVED***
+    public Sketch(SketchRequestDto requestDto, String image, UserEntity user) {
         this.image = image;
         this.studio = requestDto.studio();
         this.dressName = requestDto.dressName();
         this.user = user;
-    ***REMOVED***
+    }
 
-    public SketchResponseDto getUserSketch(Sketch sketch) ***REMOVED***
+    public SketchResponseDto getUserSketch(Sketch sketch) {
         return SketchResponseDto.builder()
                 .id(sketch.id)
                 .image(sketch.image)
@@ -42,5 +42,5 @@ public class Sketch ***REMOVED***
                 .dressName(sketch.dressName)
                 .user(user.getId())
                 .build();
-    ***REMOVED***
-***REMOVED***
+    }
+}

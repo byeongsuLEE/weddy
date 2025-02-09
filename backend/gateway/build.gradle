@@ -1,33 +1,33 @@
-plugins ***REMOVED***
+plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.4'
 	id 'io.spring.dependency-management' version '1.1.6'
-***REMOVED***
+}
 
 group = 'com.ssafy'
 version = '0.0.1-SNAPSHOT'
 
-java ***REMOVED***
-	toolchain ***REMOVED***
+java {
+	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
-	***REMOVED***
-***REMOVED***
+	}
+}
 
-configurations ***REMOVED***
-	compileOnly ***REMOVED***
+configurations {
+	compileOnly {
 		extendsFrom annotationProcessor
-	***REMOVED***
-***REMOVED***
+	}
+}
 
-repositories ***REMOVED***
+repositories {
 	mavenCentral()
-***REMOVED***
+}
 
-ext ***REMOVED***
+ext {
 	set('springCloudVersion', "2023.0.3")
-***REMOVED***
+}
 
-dependencies ***REMOVED***
+dependencies {
 	// Spring Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
@@ -52,23 +52,23 @@ dependencies ***REMOVED***
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
-***REMOVED***
+}
 
-dependencyManagement ***REMOVED***
-	imports ***REMOVED***
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:$***REMOVED***springCloudVersion***REMOVED***"
-	***REMOVED***
-***REMOVED***
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
 
-tasks.named('test') ***REMOVED***
+tasks.named('test') {
 	useJUnitPlatform()
-***REMOVED***
+}
 
 
-bootJar ***REMOVED***
+bootJar {
 	enabled = true
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-***REMOVED***
-jar ***REMOVED***
+}
+jar {
 	enabled = false
-***REMOVED***
+}

@@ -18,9 +18,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Embeddable
-public class Product ***REMOVED***
+public class Product {
     private Long productId;
     private String productContent;
     private String productName;
     private ProductType type;
-***REMOVED***
+}

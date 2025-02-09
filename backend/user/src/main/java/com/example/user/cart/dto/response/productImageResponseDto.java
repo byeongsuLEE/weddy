@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class productImageResponseDto ***REMOVED***
+public class productImageResponseDto {
     private String imageUrl;
-***REMOVED***
+}

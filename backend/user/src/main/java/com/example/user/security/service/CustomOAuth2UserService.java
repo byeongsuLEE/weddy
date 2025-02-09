@@ -17,21 +17,21 @@ import java.security.SecureRandom;
 
 
 @Service
-public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED***
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
 
-    public CustomOAuth2UserService(UserRepository userRepository) ***REMOVED***
+    public CustomOAuth2UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    ***REMOVED***
+    }
 
     @Override
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException ***REMOVED***
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
-        if (oAuth2User == null) ***REMOVED***
+        if (oAuth2User == null) {
             throw new OAuth2AuthenticationException("OAuth2User가 null입니다. 사용자 정보 로딩 실패");
-        ***REMOVED***
+        }
 
         System.out.println(oAuth2User.toString()+"\n"+"\n");
         System.out.println("Client Registration: " + userRequest.getClientRegistration());
@@ -40,15 +40,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         OAuth2Response oAuth2Response = null;
         System.out.println(registrationId);
-        if (registrationId.equals("naver")) ***REMOVED***
+        if (registrationId.equals("naver")) {
             oAuth2Response = new NaverResponse(oAuth2User.getAttributes());
-        ***REMOVED*** else if (registrationId.equals("google")) ***REMOVED***
+        } else if (registrationId.equals("google")) {
             oAuth2Response = new GoogleResponse(oAuth2User.getAttributes());
-        ***REMOVED*** else return null;
+        } else return null;
         String socialId = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
         UserEntity existData = userRepository.findBySocialId(socialId);
 
-        if (existData == null) ***REMOVED***
+        if (existData == null) {
 
             String randomCode = generateRandomCode(6);
 
@@ -69,7 +69,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
             userDTO.setPicture(oAuth2Response.getPicture());
 
             return new CustomOAuth2User(userDTO);
-        ***REMOVED*** else ***REMOVED***
+        } else {
 
             existData.toBuilder()
                     .email(oAuth2Response.getEmail())
@@ -85,20 +85,20 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService ***REMOVED
             userDTO.setPicture(oAuth2Response.getPicture());
 
             return new CustomOAuth2User(userDTO);
-        ***REMOVED***
+        }
 
-    ***REMOVED***
-    public static String generateRandomCode(int length) ***REMOVED***
+    }
+    public static String generateRandomCode(int length) {
         SecureRandom random = new SecureRandom();
         StringBuilder code = new StringBuilder();
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-        for (int i = 0; i < length; i++) ***REMOVED***
+        for (int i = 0; i < length; i++) {
             int index = random.nextInt(characters.length());
             code.append(characters.charAt(index));
-        ***REMOVED***
+        }
 
         return code.toString();
-    ***REMOVED***
+    }
 
-***REMOVED***
+}

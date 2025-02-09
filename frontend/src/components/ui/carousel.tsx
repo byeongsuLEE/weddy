@@ -1,51 +1,51 @@
 import * as React from "react"
-import ***REMOVED*** ArrowLeftIcon, ArrowRightIcon ***REMOVED*** from "@radix-ui/react-icons"
-import useEmblaCarousel, ***REMOVED***
+import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons"
+import useEmblaCarousel, {
   type UseEmblaCarouselType,
-***REMOVED*** from "embla-carousel-react"
+} from "embla-carousel-react"
 
-import ***REMOVED*** cn ***REMOVED*** from "@/lib/utils"
-import ***REMOVED*** Button ***REMOVED*** from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
 type CarouselPlugin = UseCarouselParameters[1]
 
-type CarouselProps = ***REMOVED***
+type CarouselProps = {
   opts?: CarouselOptions
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
-***REMOVED***
+}
 
-type CarouselContextProps = ***REMOVED***
+type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0]
   api: ReturnType<typeof useEmblaCarousel>[1]
   scrollPrev: () => void
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
-***REMOVED*** & CarouselProps
+} & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
-function useCarousel() ***REMOVED***
+function useCarousel() {
   const context = React.useContext(CarouselContext)
 
-  if (!context) ***REMOVED***
+  if (!context) {
     throw new Error("useCarousel must be used within a <Carousel />")
-  ***REMOVED***
+  }
 
   return context
-***REMOVED***
+}
 
 const Carousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & CarouselProps
 >(
   (
-    ***REMOVED***
+    {
       orientation = "horizontal",
       opts,
       setApi,
@@ -53,74 +53,74 @@ const Carousel = React.forwardRef<
       className,
       children,
       ...props
-    ***REMOVED***,
+    },
     ref
-  ) => ***REMOVED***
+  ) => {
     const [carouselRef, api] = useEmblaCarousel(
-      ***REMOVED***
+      {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
-      ***REMOVED***,
+      },
       plugins
     )
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
 
-    const onSelect = React.useCallback((api: CarouselApi) => ***REMOVED***
-      if (!api) ***REMOVED***
+    const onSelect = React.useCallback((api: CarouselApi) => {
+      if (!api) {
         return
-      ***REMOVED***
+      }
 
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
-    ***REMOVED***, [])
+    }, [])
 
-    const scrollPrev = React.useCallback(() => ***REMOVED***
+    const scrollPrev = React.useCallback(() => {
       api?.scrollPrev()
-    ***REMOVED***, [api])
+    }, [api])
 
-    const scrollNext = React.useCallback(() => ***REMOVED***
+    const scrollNext = React.useCallback(() => {
       api?.scrollNext()
-    ***REMOVED***, [api])
+    }, [api])
 
     const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => ***REMOVED***
-        if (event.key === "ArrowLeft") ***REMOVED***
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === "ArrowLeft") {
           event.preventDefault()
           scrollPrev()
-        ***REMOVED*** else if (event.key === "ArrowRight") ***REMOVED***
+        } else if (event.key === "ArrowRight") {
           event.preventDefault()
           scrollNext()
-        ***REMOVED***
-      ***REMOVED***,
+        }
+      },
       [scrollPrev, scrollNext]
     )
 
-    React.useEffect(() => ***REMOVED***
-      if (!api || !setApi) ***REMOVED***
+    React.useEffect(() => {
+      if (!api || !setApi) {
         return
-      ***REMOVED***
+      }
 
       setApi(api)
-    ***REMOVED***, [api, setApi])
+    }, [api, setApi])
 
-    React.useEffect(() => ***REMOVED***
-      if (!api) ***REMOVED***
+    React.useEffect(() => {
+      if (!api) {
         return
-      ***REMOVED***
+      }
 
       onSelect(api)
       api.on("reInit", onSelect)
       api.on("select", onSelect)
 
-      return () => ***REMOVED***
+      return () => {
         api?.off("select", onSelect)
-      ***REMOVED***
-    ***REMOVED***, [api, onSelect])
+      }
+    }, [api, onSelect])
 
     return (
       <CarouselContext.Provider
-        value=***REMOVED******REMOVED***
+        value={{
           carouselRef,
           api: api,
           opts,
@@ -130,132 +130,132 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
-        ***REMOVED******REMOVED***
+        }}
       >
         <div
-          ref=***REMOVED***ref***REMOVED***
-          onKeyDownCapture=***REMOVED***handleKeyDown***REMOVED***
-          className=***REMOVED***cn("relative", className)***REMOVED***
+          ref={ref}
+          onKeyDownCapture={handleKeyDown}
+          className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
-          ***REMOVED***...props***REMOVED***
+          {...props}
         >
-          ***REMOVED***children***REMOVED***
+          {children}
         </div>
       </CarouselContext.Provider>
     )
-  ***REMOVED***
+  }
 )
 Carousel.displayName = "Carousel"
 
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->((***REMOVED*** className, ...props ***REMOVED***, ref) => ***REMOVED***
-  const ***REMOVED*** carouselRef, orientation ***REMOVED*** = useCarousel()
+>(({ className, ...props }, ref) => {
+  const { carouselRef, orientation } = useCarousel()
 
   return (
-    <div ref=***REMOVED***carouselRef***REMOVED*** className="overflow-hidden">
+    <div ref={carouselRef} className="overflow-hidden">
       <div
-        ref=***REMOVED***ref***REMOVED***
-        className=***REMOVED***cn(
+        ref={ref}
+        className={cn(
           "flex",
           orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
           className
-        )***REMOVED***
-        ***REMOVED***...props***REMOVED***
+        )}
+        {...props}
       />
     </div>
   )
-***REMOVED***)
+})
 CarouselContent.displayName = "CarouselContent"
 
 const CarouselItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->((***REMOVED*** className, ...props ***REMOVED***, ref) => ***REMOVED***
-  const ***REMOVED*** orientation ***REMOVED*** = useCarousel()
+>(({ className, ...props }, ref) => {
+  const { orientation } = useCarousel()
 
   return (
     <div
-      ref=***REMOVED***ref***REMOVED***
+      ref={ref}
       role="group"
       aria-roledescription="slide"
-      className=***REMOVED***cn(
+      className={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className
-      )***REMOVED***
-      ***REMOVED***...props***REMOVED***
+      )}
+      {...props}
     />
   )
-***REMOVED***)
+})
 CarouselItem.displayName = "CarouselItem"
 
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->((***REMOVED*** className, variant = "outline", size = "icon", ...props ***REMOVED***, ref) => ***REMOVED***
-  const ***REMOVED*** orientation, scrollPrev, canScrollPrev ***REMOVED*** = useCarousel()
+>(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
   return (
     <Button
-      ref=***REMOVED***ref***REMOVED***
-      variant=***REMOVED***variant***REMOVED***
-      size=***REMOVED***size***REMOVED***
-      className=***REMOVED***cn(
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
         "hidden",
         "absolute  h-8 w-8 rounded-full",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
-      )***REMOVED***
-      disabled=***REMOVED***!canScrollPrev***REMOVED***
-      onClick=***REMOVED***scrollPrev***REMOVED***
-      ***REMOVED***...props***REMOVED***
+      )}
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      {...props}
     >
       <ArrowLeftIcon className="h-4 w-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
-***REMOVED***)
+})
 CarouselPrevious.displayName = "CarouselPrevious"
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->((***REMOVED*** className, variant = "outline", size = "icon", ...props ***REMOVED***, ref) => ***REMOVED***
-  const ***REMOVED*** orientation, scrollNext, canScrollNext ***REMOVED*** = useCarousel()
+>(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+  const { orientation, scrollNext, canScrollNext } = useCarousel()
 
   return (
     <Button
-      ref=***REMOVED***ref***REMOVED***
-      variant=***REMOVED***variant***REMOVED***
-      size=***REMOVED***size***REMOVED***
-      className=***REMOVED***cn(
+      ref={ref}
+      variant={variant}
+      size={size}
+      className={cn(
         "absolute h-8 w-8 rounded-full",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
-      )***REMOVED***
-      disabled=***REMOVED***!canScrollNext***REMOVED***
-      onClick=***REMOVED***scrollNext***REMOVED***
-      ***REMOVED***...props***REMOVED***
+      )}
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      {...props}
     >
       <ArrowRightIcon className="h-4 w-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   )
-***REMOVED***)
+})
 CarouselNext.displayName = "CarouselNext"
 
-export ***REMOVED***
+export {
   type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-***REMOVED***
+}

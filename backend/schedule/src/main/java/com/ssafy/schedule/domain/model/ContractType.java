@@ -1,6 +1,6 @@
 package com.ssafy.schedule.domain.model;
 
 
-public enum ContractType ***REMOVED***
+public enum ContractType {
     DRESS,MAKEUP,STUDIO,WEDDING;
-***REMOVED***
+}

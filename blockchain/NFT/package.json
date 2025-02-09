@@ -1,7 +1,7 @@
-***REMOVED***
-  "dependencies": ***REMOVED***
+{
+  "dependencies": {
     "@openzeppelin/contracts": "^4.3.2",
     "@truffle/hdwallet-provider": "^2.1.15",
     "dotenv": "^16.4.5"
-  ***REMOVED***
-***REMOVED***
+  }
+}

@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCoupleTokenDto ***REMOVED***
+public class UserCoupleTokenDto {
 
     String myFcmToken;
     String coupleFcmToken;
-***REMOVED***
+}

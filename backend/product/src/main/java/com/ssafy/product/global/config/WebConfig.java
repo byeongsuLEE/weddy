@@ -5,9 +5,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfig implements WebMvcConfigurer ***REMOVED***
+public class WebConfig implements WebMvcConfigurer {
     @Override
-    public void addCorsMappings(CorsRegistry registry) ***REMOVED***
+    public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:5173", "https://localhost:5174",
                         "http://weddy.info",   // 추가 (필요한 경우 포트 포함)
@@ -16,5 +16,5 @@ public class WebConfig implements WebMvcConfigurer ***REMOVED***
                 .allowedHeaders("*")
                 .exposedHeaders("Authorization", "x-xsrf-token", "Access-Control-Allow-Headers", "Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers")
                 .allowCredentials(true);
-    ***REMOVED***
-***REMOVED***
+    }
+}

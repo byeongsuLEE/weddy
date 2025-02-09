@@ -11,5 +11,5 @@ public record ReviewResponseDto(Long id,
                                 ProductResponseDto product,
                                 String content,
                                 @JsonFormat(pattern = "yyyy-MM-dd") LocalDate date,
-                                Double score) ***REMOVED***
-***REMOVED***
+                                Double score) {
+}

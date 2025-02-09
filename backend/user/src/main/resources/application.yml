@@ -9,14 +9,14 @@ spring:
   profiles:
     active: common, user
   config:
-    import: optional:configserver:***REMOVED***:8888
+    import: optional:configserver:**REMOVED**
   cloud:
     gcp:
       storage:
         bucket: weddy
         project-id: sigma-outcome-440304-k4
         credentials:
-          location: classpath:***REMOVED***
+          location: classpath:sigma-outcome-440304-k4-96c9253930d8.json
 
 
   jpa:

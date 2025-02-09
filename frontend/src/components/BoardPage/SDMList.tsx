@@ -1,57 +1,57 @@
 import Search from "@/common/Search";
-import ***REMOVED*** TabsContent ***REMOVED*** from "@radix-ui/react-tabs";
-import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+import { TabsContent } from "@radix-ui/react-tabs";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Product } from "@/api/product.type";
 import SDMBox from "./SDMBox";
 
-interface SDMListProps ***REMOVED***
+interface SDMListProps {
   value: string;
   productList: Product[];
-***REMOVED***
+}
 
-const SDMList = (***REMOVED*** value, productList ***REMOVED***: SDMListProps) => ***REMOVED***
+const SDMList = ({ value, productList }: SDMListProps) => {
   const [searchTerm, setSearchTerm] = useState<string>();
   const [filteredList, setFilteredList] = useState<Product[]>([]);
 
-  // const search = (searchTerm: string) => ***REMOVED***
+  // const search = (searchTerm: string) => {
   //   const data = productList.filter((product: Product) => product.name === searchTerm);
   //   setFilteredList(data);
   //   setSearchTerm(searchTerm);
-  // ***REMOVED***;
+  // };
 
-  // const search = (searchTerm: string) => ***REMOVED***
+  // const search = (searchTerm: string) => {
   //   const data = productList.filter((product: Product) =>
   //     product.name.includes(searchTerm)
   //   );
   //   setFilteredList(data);
   //   setSearchTerm(searchTerm);
-  // ***REMOVED***;
+  // };
 
-  useEffect(() => ***REMOVED***
-    if (searchTerm) ***REMOVED***
+  useEffect(() => {
+    if (searchTerm) {
       const filteredData = productList.filter((product: Product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) // 대소문자 구분 없이 검색
       );
       setFilteredList(filteredData);
-    ***REMOVED*** else ***REMOVED***
+    } else {
       setFilteredList(productList);
-    ***REMOVED***
-  ***REMOVED***, [searchTerm, productList]);
+    }
+  }, [searchTerm, productList]);
   
 
   return (
     <div>
-      <TabsContent value=***REMOVED***value***REMOVED*** className="flex flex-wrap justify-center gap-8">
+      <TabsContent value={value} className="flex flex-wrap justify-center gap-8">
       <Search
-          search=***REMOVED***(term: string) => setSearchTerm(term)***REMOVED*** // 검색어를 실시간 업데이트
+          search={(term: string) => setSearchTerm(term)} // 검색어를 실시간 업데이트
         />
 
-        ***REMOVED***searchTerm ? (
+        {searchTerm ? (
           filteredList && filteredList.length > 0 ? (
             filteredList.map((product: Product) => (
-              <Link to=***REMOVED***`board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
-                <SDMBox src=***REMOVED***product.images[0].imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
+              <Link to={`board/detail/${product.id}`} key={product.id}>
+                <SDMBox src={product.images[0].imageUrl} name={product.name} price={product.price} />
               </Link>
             ))
           ) : (
@@ -60,17 +60,17 @@ const SDMList = (***REMOVED*** value, productList ***REMOVED***: SDMListProps) =
         ) : productList && productList.length > 0 ? (
           productList.map((product: Product) => (
             product.images.length > 0 ? (
-              <Link to=***REMOVED***`/board/detail/$***REMOVED***product.id***REMOVED***`***REMOVED*** key=***REMOVED***product.id***REMOVED***>
-                <SDMBox src=***REMOVED***product.images[0].imageUrl***REMOVED*** name=***REMOVED***product.name***REMOVED*** price=***REMOVED***product.price***REMOVED*** />
+              <Link to={`/board/detail/${product.id}`} key={product.id}>
+                <SDMBox src={product.images[0].imageUrl} name={product.name} price={product.price} />
               </Link>
             ) : null
           ))
         ) : (
           <p>상품이 없습니다.</p>
-        )***REMOVED***
+        )}
       </TabsContent>
     </div>
   );
-***REMOVED***;
+};
 
 export default SDMList;

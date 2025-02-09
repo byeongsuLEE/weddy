@@ -9,7 +9,7 @@ Run ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
 
 # JAR 파일을 app.jar로 복사
 ARG JAR_FILE=build/libs/*.jar
-COPY $***REMOVED***JAR_FILE***REMOVED*** app.jar
+COPY ${JAR_FILE} app.jar
 
 # 컨테이너 외부 통신을 위한 포트 설정
 EXPOSE 8080

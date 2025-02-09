@@ -1,94 +1,94 @@
 import AlertBox from "@/common/AlertBox";
 import MakeImg from '@/components/SketchPage/MakeImg';
-import ***REMOVED*** Environment, OrbitControls, useGLTF ***REMOVED*** from '@react-three/drei';
-import ***REMOVED*** Canvas, useThree ***REMOVED*** from '@react-three/fiber';
-import ***REMOVED*** Leva, useControls ***REMOVED*** from 'leva';
-import React, ***REMOVED*** useEffect, useState ***REMOVED*** from 'react';
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
+import { Canvas, useThree } from '@react-three/fiber';
+import { Leva, useControls } from 'leva';
+import React, { useEffect, useState } from 'react';
 import * as THREE from 'three';
 import '../App.css';
 
 
 // ToggleButton의 Props 타입 정의
-interface ToggleButtonProps ***REMOVED***
+interface ToggleButtonProps {
   label: string;
   image: string;
   isVisible: boolean;
   onClick: () => void;
-***REMOVED***
+}
 
 // 커스텀 이미지 버튼 컴포넌트
-const ToggleButton: React.FC<ToggleButtonProps> = (***REMOVED*** label, image, isVisible, onClick ***REMOVED***) => ***REMOVED***
+const ToggleButton: React.FC<ToggleButtonProps> = ({ label, image, isVisible, onClick }) => {
   return (
-    <div className=***REMOVED***`toggle-button $***REMOVED***isVisible ? 'active' : ''***REMOVED***`***REMOVED*** onClick=***REMOVED***onClick***REMOVED***>
-      <img src=***REMOVED***image***REMOVED*** alt=***REMOVED***label***REMOVED*** className="toggle-button-image" />
-      <div className="toggle-button-label">***REMOVED***label***REMOVED***</div>
+    <div className={`toggle-button ${isVisible ? 'active' : ''}`} onClick={onClick}>
+      <img src={image} alt={label} className="toggle-button-image" />
+      <div className="toggle-button-label">{label}</div>
     </div>
   );
-***REMOVED***;
+};
 
 // PartMeshes의 Props 타입 정의
-interface PartMeshesProps ***REMOVED***
+interface PartMeshesProps {
   visibility: Record<string, boolean>;
-  scaleAdjustments: ***REMOVED*** width?: number; depth?: number ***REMOVED***;
+  scaleAdjustments: { width?: number; depth?: number };
   modelPath: string;
-***REMOVED***
+}
 
 
 
 // 각 파트별 컴포넌트 (기본 크기를 유지하면서 scale 조절 가능하게 설정)
-const PartMeshes: React.FC<PartMeshesProps> = (***REMOVED*** visibility, scaleAdjustments, modelPath ***REMOVED***) => ***REMOVED***
-  const ***REMOVED*** scene ***REMOVED*** = useGLTF(modelPath);
-  const [initialScales, setInitialScales] = useState<Record<string, THREE.Vector3>>(***REMOVED******REMOVED***);
+const PartMeshes: React.FC<PartMeshesProps> = ({ visibility, scaleAdjustments, modelPath }) => {
+  const { scene } = useGLTF(modelPath);
+  const [initialScales, setInitialScales] = useState<Record<string, THREE.Vector3>>({});
 
-  useEffect(() => ***REMOVED***
-    const newInitialScales: Record<string, THREE.Vector3> = ***REMOVED*** ...initialScales ***REMOVED***;
+  useEffect(() => {
+    const newInitialScales: Record<string, THREE.Vector3> = { ...initialScales };
 
-    scene.traverse((child) => ***REMOVED***
-      if ((child as THREE.Mesh).isMesh) ***REMOVED***
+    scene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         mesh.visible = visibility[mesh.name];
 
-        if (!newInitialScales[mesh.name]) ***REMOVED***
+        if (!newInitialScales[mesh.name]) {
           newInitialScales[mesh.name] = mesh.scale.clone();
-        ***REMOVED***
+        }
 
-        if (newInitialScales[mesh.name]) ***REMOVED***
+        if (newInitialScales[mesh.name]) {
           const widthScale = scaleAdjustments.width || 1;
           const depthScale = scaleAdjustments.depth || 1;
 
-          if (modelPath.includes("dress")) ***REMOVED***
+          if (modelPath.includes("dress")) {
             mesh.scale.set(
               newInitialScales[mesh.name].x * widthScale,
               newInitialScales[mesh.name].y * depthScale,
               newInitialScales[mesh.name].z
             );
-          ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***);
+          }
+        }
+      }
+    });
 
     setInitialScales(newInitialScales);
-  ***REMOVED***, [scene, visibility, scaleAdjustments]);
+  }, [scene, visibility, scaleAdjustments]);
 
-  return <primitive object=***REMOVED***scene***REMOVED*** />;
-***REMOVED***;
+  return <primitive object={scene} />;
+};
 
 // CameraSettings 컴포넌트
-const CameraSettings: React.FC = () => ***REMOVED***
-  const ***REMOVED*** camera ***REMOVED*** = useThree();
-  useEffect(() => ***REMOVED***
+const CameraSettings: React.FC = () => {
+  const { camera } = useThree();
+  useEffect(() => {
     camera.position.set(0, 1, 5);
     camera.lookAt(0, 1, 0);
     camera.zoom = 1.2;
     camera.updateProjectionMatrix();
-  ***REMOVED***, [camera]);
+  }, [camera]);
 
   return null;
-***REMOVED***;
+};
 
 // Sketch 컴포넌트
-const Sketch: React.FC = () => ***REMOVED***
-  const [visibility, setVisibility] = useState<Record<string, boolean>>(***REMOVED***
+const Sketch: React.FC = () => {
+  const [visibility, setVisibility] = useState<Record<string, boolean>>({
     dress_1: false,
     dress_2: false,
     dress_3: false,
@@ -104,7 +104,7 @@ const Sketch: React.FC = () => ***REMOVED***
     arm_1: false,
     arm_2: false,
     arm_3: false,
-  ***REMOVED***);
+  });
 
   const dressList = ['../assets/dress/dress1.png', '../assets/dress/dress2.png', '../assets/dress/dress3.png', '../assets/dress/dress4.png', '../assets/dress/dress5.png'];
   const topList = ['../assets/top/top1.png', '../assets/top/top2.png', '../assets/top/top3.png', '../assets/top/top4.png', '../assets/top/top5.png'];
@@ -112,48 +112,48 @@ const Sketch: React.FC = () => ***REMOVED***
   const armList = ['../assets/arm/arm1.png', '../assets/arm/arm2.png', '../assets/arm/arm3.png'];
 
   // Leva 슬라이더로 각 축별 스케일 값을 개별적으로 조정
-  const ***REMOVED*** dressWidthScale, dressDepthScale ***REMOVED*** = useControls(***REMOVED***
-    dressWidthScale: ***REMOVED***
+  const { dressWidthScale, dressDepthScale } = useControls({
+    dressWidthScale: {
       value: 0.6,
       min: 0.6,
       max: 1,
       step: 0.1,
       label: "Dress Width Scale"
-    ***REMOVED***,
-    dressDepthScale: ***REMOVED***
+    },
+    dressDepthScale: {
       value: 1,
       min: 1,
       max: 1.5,
       step: 0.1,
       label: "Dress Depth Scale"
-    ***REMOVED***
-  ***REMOVED***);
+    }
+  });
 
-  const selectVisibility = (name: string, category: string) => ***REMOVED***
-    setVisibility((prev) => ***REMOVED***
-      const updatedVisibility = ***REMOVED*** ...prev ***REMOVED***;
+  const selectVisibility = (name: string, category: string) => {
+    setVisibility((prev) => {
+      const updatedVisibility = { ...prev };
 
       // 선택된 항목의 상태를 토글
       updatedVisibility[name] = !prev[name];
 
       // 동일 카테고리의 다른 항목은 모두 false로 설정
-      Object.keys(updatedVisibility).forEach((key) => ***REMOVED***
-        if (key.startsWith(category) && key !== name) ***REMOVED***
+      Object.keys(updatedVisibility).forEach((key) => {
+        if (key.startsWith(category) && key !== name) {
           updatedVisibility[key] = false;
-        ***REMOVED***
-      ***REMOVED***);
+        }
+      });
 
       return updatedVisibility;
-    ***REMOVED***);
-  ***REMOVED***;
+    });
+  };
   const [canvasElement, setCanvasElement] = useState<HTMLCanvasElement | null>(null);
   // const [imgURL, setImgURL] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
   const [blobData, setBlobData] = useState<Blob | null>(null);
 
-  const captureImage = () => ***REMOVED***
-    if (canvasElement) ***REMOVED***
-      requestAnimationFrame(() => ***REMOVED***
+  const captureImage = () => {
+    if (canvasElement) {
+      requestAnimationFrame(() => {
         const dataURL = canvasElement.toDataURL("image/png"); // PNG로 설정
         const base64Data = dataURL.split(",")[1];
 
@@ -161,138 +161,138 @@ const Sketch: React.FC = () => ***REMOVED***
         const byteString = atob(base64Data);
         const arrayBuffer = new ArrayBuffer(byteString.length);
         const uint8Array = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) ***REMOVED***
+        for (let i = 0; i < byteString.length; i++) {
           uint8Array[i] = byteString.charCodeAt(i);
-        ***REMOVED***
-        const blob = new Blob([uint8Array], ***REMOVED*** type: "image/png" ***REMOVED***); // Blob 타입을 PNG로 설정
+        }
+        const blob = new Blob([uint8Array], { type: "image/png" }); // Blob 타입을 PNG로 설정
 
         setBlobData(blob); // Blob을 상태로 저장
         setIsOpen(true);
-      ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***;
+      });
+    }
+  };
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleSave = () => ***REMOVED***
+  const handleSave = () => {
     setShowAlert(true);
-    setTimeout(() => ***REMOVED***
+    setTimeout(() => {
       setShowAlert(false);
-    ***REMOVED***, 2000);
-  ***REMOVED***;
+    }, 2000);
+  };
 
 
   return (
     <div className="app-container">
-      ***REMOVED***showAlert && <AlertBox title="3D 스케치" description="스케치 저장 완료!" />***REMOVED***
+      {showAlert && <AlertBox title="3D 스케치" description="스케치 저장 완료!" />}
 
 
       <Canvas
-        onCreated=***REMOVED***(***REMOVED*** gl, scene, camera ***REMOVED***) => ***REMOVED***
+        onCreated={({ gl, scene, camera }) => {
           setCanvasElement(gl.domElement); // 캔버스 엘리먼트를 상태에 저장
           gl.render(scene, camera); // 초기 렌더링 강제 실행
-        ***REMOVED******REMOVED***
+        }}
         shadows
-        camera=***REMOVED******REMOVED*** fov: 40, position: [0, 1, 5] ***REMOVED******REMOVED***
+        camera={{ fov: 40, position: [0, 1, 5] }}
         className="canvas"
       >
-        <hemisphereLight groundColor=***REMOVED***'#eeeeee'***REMOVED*** intensity=***REMOVED***1.0***REMOVED*** />
-        <ambientLight intensity=***REMOVED***0.5***REMOVED*** />
-        <pointLight position=***REMOVED***[10, 10, 10]***REMOVED*** intensity=***REMOVED***1.2***REMOVED*** />
-        <directionalLight position=***REMOVED***[-5, 5, 5]***REMOVED*** intensity=***REMOVED***0.8***REMOVED*** castShadow />
-        <spotLight position=***REMOVED***[5, 15, 10]***REMOVED*** angle=***REMOVED***0.3***REMOVED*** penumbra=***REMOVED***1***REMOVED*** intensity=***REMOVED***1.2***REMOVED*** castShadow />
+        <hemisphereLight groundColor={'#eeeeee'} intensity={1.0} />
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} intensity={1.2} />
+        <directionalLight position={[-5, 5, 5]} intensity={0.8} castShadow />
+        <spotLight position={[5, 15, 10]} angle={0.3} penumbra={1} intensity={1.2} castShadow />
 
         <PartMeshes
-          visibility=***REMOVED***visibility***REMOVED***
-          scaleAdjustments=***REMOVED******REMOVED*** width: dressWidthScale, depth: dressDepthScale ***REMOVED******REMOVED***
+          visibility={visibility}
+          scaleAdjustments={{ width: dressWidthScale, depth: dressDepthScale }}
           modelPath="../assets/dress.glb"
         />
         <PartMeshes
-          visibility=***REMOVED***visibility***REMOVED***
-          scaleAdjustments=***REMOVED******REMOVED******REMOVED******REMOVED***
+          visibility={visibility}
+          scaleAdjustments={{}}
           modelPath="../assets/shoulder.glb"
         />
         <PartMeshes
-          visibility=***REMOVED***visibility***REMOVED***
-          scaleAdjustments=***REMOVED******REMOVED******REMOVED******REMOVED***
+          visibility={visibility}
+          scaleAdjustments={{}}
           modelPath="../assets/top.glb"
         />
         <PartMeshes
-          visibility=***REMOVED***visibility***REMOVED***
-          scaleAdjustments=***REMOVED******REMOVED******REMOVED******REMOVED***
+          visibility={visibility}
+          scaleAdjustments={{}}
           modelPath="../assets/arm.glb"
         />
 
         <Environment preset="sunset" />
         <CameraSettings />
-        <OrbitControls target=***REMOVED***[0, 1, 0]***REMOVED*** enablePan=***REMOVED***false***REMOVED*** />
+        <OrbitControls target={[0, 1, 0]} enablePan={false} />
       </Canvas>
 
       <div className="toggle-container">
 
         <div className="toggle-group">
           <h4>Dress</h4>
-          ***REMOVED***dressList.map((dress, index) => (
+          {dressList.map((dress, index) => (
             <ToggleButton
-              key=***REMOVED***`dress_$***REMOVED***index + 1***REMOVED***`***REMOVED***
-              label=***REMOVED***` $***REMOVED***index + 1***REMOVED***`***REMOVED***
-              image=***REMOVED***dress***REMOVED***
-              isVisible=***REMOVED***visibility[`dress_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`dress_$***REMOVED***index + 1***REMOVED***`, 'dress')***REMOVED***
+              key={`dress_${index + 1}`}
+              label={` ${index + 1}`}
+              image={dress}
+              isVisible={visibility[`dress_${index + 1}`]}
+              onClick={() => selectVisibility(`dress_${index + 1}`, 'dress')}
             />
-          ))***REMOVED***
+          ))}
         </div>
 
         <div className="toggle-group">
           <h4>Top</h4>
-          ***REMOVED***topList.map((top, index) => (
+          {topList.map((top, index) => (
             <ToggleButton
-              key=***REMOVED***`top_$***REMOVED***index + 1***REMOVED***`***REMOVED***
-              label=***REMOVED***` $***REMOVED***index + 1***REMOVED***`***REMOVED***
-              image=***REMOVED***top***REMOVED***
-              isVisible=***REMOVED***visibility[`top_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`top_$***REMOVED***index + 1***REMOVED***`, 'top')***REMOVED***
+              key={`top_${index + 1}`}
+              label={` ${index + 1}`}
+              image={top}
+              isVisible={visibility[`top_${index + 1}`]}
+              onClick={() => selectVisibility(`top_${index + 1}`, 'top')}
             />
-          ))***REMOVED***
+          ))}
         </div>
 
         <div className="toggle-group">
           <h4>Shoulder</h4>
-          ***REMOVED***shoulderList.map((shoulder, index) => (
+          {shoulderList.map((shoulder, index) => (
             <ToggleButton
-              key=***REMOVED***`shoulder_$***REMOVED***index + 1***REMOVED***`***REMOVED***
-              label=***REMOVED***`$***REMOVED***index + 1***REMOVED***`***REMOVED***
-              image=***REMOVED***shoulder***REMOVED***
-              isVisible=***REMOVED***visibility[`shoulder_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`shoulder_$***REMOVED***index + 1***REMOVED***`, 'shoulder')***REMOVED***
+              key={`shoulder_${index + 1}`}
+              label={`${index + 1}`}
+              image={shoulder}
+              isVisible={visibility[`shoulder_${index + 1}`]}
+              onClick={() => selectVisibility(`shoulder_${index + 1}`, 'shoulder')}
             />
-          ))***REMOVED***
+          ))}
         </div>
 
         <div className="toggle-group">
           <h4>Arm</h4>
-          ***REMOVED***armList.map((arm, index) => (
+          {armList.map((arm, index) => (
             <ToggleButton
-              key=***REMOVED***`arm_$***REMOVED***index + 1***REMOVED***`***REMOVED***
-              label=***REMOVED***` $***REMOVED***index + 1***REMOVED***`***REMOVED***
-              image=***REMOVED***arm***REMOVED***
-              isVisible=***REMOVED***visibility[`arm_$***REMOVED***index + 1***REMOVED***`]***REMOVED***
-              onClick=***REMOVED***() => selectVisibility(`arm_$***REMOVED***index + 1***REMOVED***`, 'arm')***REMOVED***
+              key={`arm_${index + 1}`}
+              label={` ${index + 1}`}
+              image={arm}
+              isVisible={visibility[`arm_${index + 1}`]}
+              onClick={() => selectVisibility(`arm_${index + 1}`, 'arm')}
             />
-          ))***REMOVED***
+          ))}
         </div>
       </div>
       <div className="leva-container">
         <Leva collapsed />
       </div>
 
-      <div onClick=***REMOVED***captureImage***REMOVED*** className="plusIconButton">
+      <div onClick={captureImage} className="plusIconButton">
         <button className='bg-main2 rounded-lg p-2 text-sm'>이미지 만들기</button>
       </div>
       <div className='makeImg-modal'>
-        <MakeImg isOpen=***REMOVED***isOpen***REMOVED*** setIsOpen=***REMOVED***setIsOpen***REMOVED*** blobData=***REMOVED***blobData***REMOVED*** onSave=***REMOVED***handleSave***REMOVED***/>
+        <MakeImg isOpen={isOpen} setIsOpen={setIsOpen} blobData={blobData} onSave={handleSave}/>
       </div>
     </div>
   );
-***REMOVED***;
+};
 
 export default Sketch;

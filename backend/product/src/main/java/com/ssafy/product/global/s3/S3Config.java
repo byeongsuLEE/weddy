@@ -9,22 +9,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class S3Config ***REMOVED***
-    @Value("$***REMOVED***cloud.aws.credentials.accessKey***REMOVED***")
+public class S3Config {
+    @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
-    @Value("$***REMOVED***cloud.aws.credentials.secretKey***REMOVED***")
+    @Value("${cloud.aws.credentials.secretKey}")
     private String secretKey;
-    @Value("$***REMOVED***cloud.aws.region.static***REMOVED***")
+    @Value("${cloud.aws.region.static}")
     private String region;
 
     @Bean
-    public AmazonS3Client amazonS3Client() ***REMOVED***
+    public AmazonS3Client amazonS3Client() {
         BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
         return (AmazonS3Client) AmazonS3ClientBuilder.standard()
                 .withRegion(region)
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
-    ***REMOVED***
+    }
 
-***REMOVED***
+}
 

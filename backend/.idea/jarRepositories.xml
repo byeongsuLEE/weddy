@@ -44,7 +44,7 @@
     <remote-repository>
       <option name="id" value="maven" />
       <option name="name" value="maven" />
-      <option name="url" value="***REMOVED***/repository/maven-snapshots" />
+      <option name="url" value="http://34.64.229.146:8081/repository/maven-snapshots" />
     </remote-repository>
   </component>
 </project>

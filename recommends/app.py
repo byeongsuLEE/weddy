@@ -20,16 +20,16 @@ REDIS_PORT = os.getenv('REDIS_PORT')
 REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
 
 # 필수 환경 변수 확인
-required_env_vars = ***REMOVED***
+required_env_vars = {
     'ANTHROPIC_API_KEY': ANTHROPIC_API_KEY,
     'REDIS_HOST': REDIS_HOST,
     'REDIS_PORT': REDIS_PORT,
     'REDIS_PASSWORD': REDIS_PASSWORD
-***REMOVED***
+}
 
 missing_vars = [var for var, value in required_env_vars.items() if not value]
 if missing_vars:
-    raise ValueError(f"Missing required environment variables: ***REMOVED***', '.join(missing_vars)***REMOVED***")
+    raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
 # Anthropic API 클라이언트 초기화
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
@@ -56,12 +56,12 @@ class ProductImageResponseDto:
         return ProductImageResponseDto(imageUrl=data.get('imageUrl', ''))
 
 # 검색 가능 필드 및 가중치 정의
-SEARCHABLE_FIELDS = ***REMOVED***
+SEARCHABLE_FIELDS = {
     "address": 5,
     "price": 5,
     "type": 5,
     "name": 2
-***REMOVED***
+}
 
 def create_less_than(value: str) -> Tuple[str, int]:
     return 'less_than', int(value) * 10000
@@ -73,7 +73,7 @@ def create_range(start: str, end: str) -> Tuple[str, Tuple[int, int]]:
     return 'range', (int(start) * 10000, int(end) * 10000)
 
 # 가격 관련 패턴 및 키워드
-PRICE_PATTERNS = ***REMOVED***
+PRICE_PATTERNS = {
     # 특정 가격 이하
     r'(\d+)만원\s*(?:이하|미만|까지)': create_less_than,
     
@@ -82,9 +82,9 @@ PRICE_PATTERNS = ***REMOVED***
     
     # 가격 범위
     r'(\d+)만원에서\s*(\d+)만원': create_range,
-***REMOVED***
+}
 
-PRICE_KEYWORDS = ***REMOVED***
+PRICE_KEYWORDS = {
     '저렴한': ('less_than', 500000),
     '싼': ('less_than', 500000),
     '값싼': ('less_than', 500000),
@@ -94,7 +94,7 @@ PRICE_KEYWORDS = ***REMOVED***
     '고급': ('greater_than', 1000000),
     '럭셔리': ('greater_than', 1000000),
     '프리미엄': ('greater_than', 800000),
-***REMOVED***
+}
 
 def get_all_products_from_redis() -> List[Dict[str, Any]]:
     """Redis에서 모든 상품 데이터 가져오기"""
@@ -107,17 +107,17 @@ def get_all_products_from_redis() -> List[Dict[str, Any]]:
                 images_data = json.loads(product_data.get('images', '[]'))
                 images = [ProductImageResponseDto.from_dict(img) for img in images_data]
                 
-                product = ***REMOVED***
+                product = {
                     'id': int(product_data.get('id', 0)),
                     'name': product_data.get('name', ''),
                     'type': product_data.get('type', ''),
                     'price': int(product_data.get('price', 0)),
                     'address': product_data.get('address', ''),
-                    'images': [***REMOVED***'imageUrl': img.imageUrl***REMOVED*** for img in images]
-                ***REMOVED***
+                    'images': [{'imageUrl': img.imageUrl} for img in images]
+                }
                 products.append(product)
     except Exception as e:
-        print(f"Error fetching products from Redis: ***REMOVED***e***REMOVED***")
+        print(f"Error fetching products from Redis: {e}")
         raise
     return products
 
@@ -128,40 +128,40 @@ def get_claude_interpretation(user_input: str) -> Dict[str, Any]:
             model="claude-3-5-sonnet-20241022",
             max_tokens=100,
             messages=[
-                ***REMOVED***
+                {
                     "role": "user",
                     "content": user_input
-                ***REMOVED***
+                }
             ],
             tools=[
-                ***REMOVED***
+                {
                     "type": "function",
-                    "function": ***REMOVED***
+                    "function": {
                         "name": "recommend_studio",
                         "description": "사용자 요청에 맞는 스튜디오 추천",
-                        "parameters": ***REMOVED***
+                        "parameters": {
                             "type": "object",
-                            "properties": ***REMOVED***
-                                "location": ***REMOVED***
+                            "properties": {
+                                "location": {
                                     "type": "string",
                                     "description": "원하는 지역 (예: 서울, 부산 등)"
-                                ***REMOVED***,
-                                "min_price": ***REMOVED***
+                                },
+                                "min_price": {
                                     "type": "integer",
                                     "description": "최소 가격 (단위: 원)"
-                                ***REMOVED***,
-                                "max_price": ***REMOVED***
+                                },
+                                "max_price": {
                                     "type": "integer",
                                     "description": "최대 가격 (단위: 원)"
-                                ***REMOVED***,
-                                "style": ***REMOVED***
+                                },
+                                "style": {
                                     "type": "string",
                                     "description": "스튜디오 스타일 (예: 모던, 빈티지, 럭셔리 등)"
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
+                                }
+                            }
+                        }
+                    }
+                }
             ]
         )
         
@@ -173,7 +173,7 @@ def get_claude_interpretation(user_input: str) -> Dict[str, Any]:
         
         return None
     except Exception as e:
-        print(f"Error in Claude interpretation: ***REMOVED***e***REMOVED***")
+        print(f"Error in Claude interpretation: {e}")
         return None
 
 def extract_price_conditions(user_input: str) -> List[Tuple[str, Any]]:
@@ -192,7 +192,7 @@ def extract_price_conditions(user_input: str) -> List[Tuple[str, Any]]:
                     result = func(groups[0], groups[1])
                 conditions.append(result)
             except Exception as e:
-                print(f"Error processing pattern ***REMOVED***pattern***REMOVED***: ***REMOVED***e***REMOVED***")
+                print(f"Error processing pattern {pattern}: {e}")
                 continue
                 
     # 키워드 매칭
@@ -293,11 +293,11 @@ def get_recommendations():
         # 요청에서 message 파라미터 추출
         message = request.args.get('message')
         if not message:
-            return jsonify(***REMOVED***
+            return jsonify({
                 "message": "메시지가 필요합니다",
                 "status": 400,
                 "data": []
-            ***REMOVED***), 400
+            }), 400
 
         # Claude를 통한 사용자 입력 해석
         interpretation = get_claude_interpretation(message)
@@ -332,37 +332,37 @@ def get_recommendations():
         # API 명세에 맞게 데이터 포맷 변환
         formatted_studios = []
         for studio in recommended_studios:
-            formatted_studio = ***REMOVED***
+            formatted_studio = {
                 "id": studio["id"],
                 "type": studio["type"],
                 "name": studio["name"],
-                "price": f"***REMOVED***studio['price']:,***REMOVED***",
+                "price": f"{studio['price']:,}",
                 "address": studio["address"],
                 "images": studio.get("images", [])
-            ***REMOVED***
+            }
             formatted_studios.append(formatted_studio)
 
-        response = ***REMOVED***
+        response = {
             "message": "",
             "status": 200,
             "data": formatted_studios
-        ***REMOVED***
+        }
 
         return jsonify(response), 200
 
     except redis.ConnectionError:
-        return jsonify(***REMOVED***
+        return jsonify({
             "message": "데이터베이스 연결 오류",
             "status": 500,
             "data": []
-        ***REMOVED***), 500
+        }), 500
     except Exception as e:
-        print(f"Error in get_recommendations: ***REMOVED***str(e)***REMOVED***")
-        return jsonify(***REMOVED***
+        print(f"Error in get_recommendations: {str(e)}")
+        return jsonify({
             "message": str(e),
             "status": 500,
             "data": []
-        ***REMOVED***), 500
+        }), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

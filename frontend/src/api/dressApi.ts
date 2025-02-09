@@ -1,29 +1,29 @@
 import axios from "axios";
-import ***REMOVED*** Dress ***REMOVED*** from "./dress.type";
+import { Dress } from "./dress.type";
 
 
 const BASE_URL = `/api/users/sketch`
 
 // 드레스 전체 조회
-export const getDressList = async (): Promise<Dress[]> => ***REMOVED***
-  const response = await axios(***REMOVED***
+export const getDressList = async (): Promise<Dress[]> => {
+  const response = await axios({
     method: "get",
-    url: `$***REMOVED***BASE_URL***REMOVED***`,
-    headers: ***REMOVED***
+    url: `${BASE_URL}`,
+    headers: {
       Authorization: sessionStorage.getItem("token")
-    ***REMOVED***,
-  ***REMOVED***);
+    },
+  });
   return response.data.data;
-***REMOVED***
+}
 
 // 드레스 스케치 저장
-export const saveDress = async (formData: FormData): Promise<void> => ***REMOVED***
-  await axios(***REMOVED***
+export const saveDress = async (formData: FormData): Promise<void> => {
+  await axios({
     method: "post",
-    url: `$***REMOVED***BASE_URL***REMOVED***`,
-    headers: ***REMOVED***
+    url: `${BASE_URL}`,
+    headers: {
       Authorization: sessionStorage.getItem("token") || "",
-    ***REMOVED***,
+    },
     data: formData,
-  ***REMOVED***);
-***REMOVED***
+  });
+}

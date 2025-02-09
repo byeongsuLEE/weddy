@@ -1,8 +1,8 @@
-interface Image ***REMOVED***
+interface Image {
   imageUrl: string;
-***REMOVED***
+}
 
-export interface Product ***REMOVED***
+export interface Product {
   id: string;
   type: string;
   name: string;
@@ -12,10 +12,10 @@ export interface Product ***REMOVED***
   vendorName: string;
   vendorId: string;
   images: Image[];
-***REMOVED***
+}
 
-export interface ReviewData ***REMOVED***
+export interface ReviewData {
   content: string;
   date: string;
   score: number;
-***REMOVED***
+}

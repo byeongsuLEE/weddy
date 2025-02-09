@@ -4,26 +4,26 @@
 
 html,
 body,
-#root ***REMOVED***
+#root {
   height: 100%;
   margin: 0;
   width: 100%;
   font-family: noto-sans, sans-serif;
-***REMOVED***
+}
 
-* ***REMOVED***
+* {
   box-sizing: border-box; /* Tailwind와 충돌하지 않음 */
-***REMOVED***
+}
 
-#root ***REMOVED***
+#root {
   width: 100%;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   height: 100%;
-***REMOVED***
+}
 
-nav ***REMOVED***
+nav {
   position: fixed;
   height: 50px;
   top: 0;
@@ -37,39 +37,39 @@ nav ***REMOVED***
   z-index: 1000;
   background-color: white;
   width: 414px;
-***REMOVED***
+}
 
-nav .textAlign ***REMOVED***
+nav .textAlign {
   margin: 0 20px;
   text-align: center;
-***REMOVED***
+}
 
-.backIcon ***REMOVED***
+.backIcon {
   position: absolute;
   left: 2rem;
   display: flex;
   align-items: center;
-***REMOVED***
+}
 
-.cartIcon ***REMOVED***
+.cartIcon {
   position: absolute;
   right: 2rem;
   display: flex;
   align-items: center;
-***REMOVED***
+}
 
-.App ***REMOVED***
+.App {
   display: flex;
   flex-direction: column;
   height: 100%;
-***REMOVED***
+}
 
-.content ***REMOVED***
+.content {
   flex-grow: 1; /* 남은 공간을 차지 */
   padding-top: 50px;
-***REMOVED***
+}
 
-footer ***REMOVED***
+footer {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -82,9 +82,9 @@ footer ***REMOVED***
   justify-content: space-between;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: white;
-***REMOVED***
+}
 
-.footerButton ***REMOVED***
+.footerButton {
   max-width: 414px; /* iPhone XR, iPhone 11 기준 */
   position: fixed;
   bottom: 0;
@@ -98,9 +98,9 @@ footer ***REMOVED***
   justify-content: center;
   color: white;
   cursor: pointer;
-***REMOVED***
+}
 
-.drawer ***REMOVED***
+.drawer {
   width: 414px; /* iPhone XR, iPhone 11 기준 */
   position: fixed;
   bottom: 0;
@@ -108,9 +108,9 @@ footer ***REMOVED***
   transform: translateX(-50%);
   right: 0;
   display: flex;
-***REMOVED***
+}
 
-.container ***REMOVED***
+.container {
   max-width: 414px; /* iPhone XR, iPhone 11 기준 */
   margin: 0 auto;
   background-color: #f9f9f4;
@@ -119,17 +119,17 @@ footer ***REMOVED***
   flex-grow: 1; /* 남은 공간을 차지 */
   padding-top: 50px;
   /* overflow: hidden; */
-***REMOVED***
+}
 
-.plusIconButton ***REMOVED***
+.plusIconButton {
   position: fixed;
   bottom: 5.5rem; /* footer와 충분히 떨어지도록 */
   right: calc(50% - 190px); /* 414px 화면 폭의 절반에서 아이콘 위치 조정 */
   /* nav 및 footer 위에 위치 */
-***REMOVED***
+}
 
-@layer base ***REMOVED***
-  :root ***REMOVED***
+@layer base {
+  :root {
     --color-main1: #f9f9f4; /* main1 색상 코드 */
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -156,8 +156,8 @@ footer ***REMOVED***
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-  ***REMOVED***
-  .dark ***REMOVED***
+  }
+  .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -182,14 +182,14 @@ footer ***REMOVED***
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-  ***REMOVED***
-***REMOVED***
+  }
+}
 
-@layer base ***REMOVED***
-  * ***REMOVED***
+@layer base {
+  * {
     @apply border-border;
-  ***REMOVED***
-  body ***REMOVED***
+  }
+  body {
     @apply bg-background text-foreground;
-  ***REMOVED***
-***REMOVED***
+  }
+}

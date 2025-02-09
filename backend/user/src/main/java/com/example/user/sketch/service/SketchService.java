@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public interface SketchService ***REMOVED***
+public interface SketchService {
     SketchResponseDto registerSketch(final SketchRequestDto sketchRequestDto, final MultipartFile image , final UserEntity user);
     List<SketchResponseDto> getAllSketchesByUser(final UserEntity user);
-***REMOVED***
+}

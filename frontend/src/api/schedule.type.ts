@@ -1,15 +1,15 @@
-export interface Schedule ***REMOVED***
+export interface Schedule {
   type: string;
   startDate: string | null;
   endDate: string | null;
   content: string;
   productId?: string;
-  userCoupleToken: ***REMOVED***
+  userCoupleToken: {
     myFcmToken: string;
-  ***REMOVED***;
-***REMOVED***
+  };
+}
 
-export interface GetSchedule ***REMOVED***
+export interface GetSchedule {
   id: string;
   contractType: "STUDIO" | "DRESS" | "MAKEUP" | "WEDDING";
   startDate: Date;
@@ -18,4 +18,4 @@ export interface GetSchedule ***REMOVED***
   venderName: string;
   venderPhone: string;
   productId: string;
-***REMOVED***
+}

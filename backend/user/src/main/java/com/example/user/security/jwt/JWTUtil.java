@@ -10,34 +10,34 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
-public class JWTUtil ***REMOVED***
+public class JWTUtil {
 
     private SecretKey secretKey;
-    public JWTUtil(@Value("$***REMOVED***jwt.secret-key***REMOVED***")String secret) ***REMOVED***
+    public JWTUtil(@Value("${jwt.secret-key}")String secret) {
         secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
-    ***REMOVED***
-    public String getUsername(String token) ***REMOVED***
+    }
+    public String getUsername(String token) {
 
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("userName", String.class);
-    ***REMOVED***
+    }
 
-    public String getCode(String token) ***REMOVED***
+    public String getCode(String token) {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("coupleCode", String.class);
-    ***REMOVED***
-    public Long getUserId(String token) ***REMOVED***
+    }
+    public Long getUserId(String token) {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("id", Long.class);
-    ***REMOVED***
+    }
 
-    public Long getExpire(String token) ***REMOVED***
+    public Long getExpire(String token) {
         return Jwts.parser().verifyWith(secretKey).build().parseClaimsJws(token).getBody().getExpiration().getTime();
-    ***REMOVED***
+    }
 
-    public Boolean isExpired(String token) ***REMOVED***
+    public Boolean isExpired(String token) {
 
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
-    ***REMOVED***
+    }
 
-    public String createAccessToken(String username,Long id, String coupleCode, Long expiredMs) ***REMOVED***
+    public String createAccessToken(String username,Long id, String coupleCode, Long expiredMs) {
 
         return Jwts.builder()
                 .claim("id",id)
@@ -47,9 +47,9 @@ public class JWTUtil ***REMOVED***
                 .expiration(new Date(System.currentTimeMillis() + expiredMs*1000))
                 .signWith(secretKey)
                 .compact();
-    ***REMOVED***
+    }
 
-    public String createRefreshToken(String username, Long id, Long expiredMs) ***REMOVED***
+    public String createRefreshToken(String username, Long id, Long expiredMs) {
         return Jwts.builder()
                 .setSubject(id.toString())
                 .claim("userName", username)
@@ -57,5 +57,5 @@ public class JWTUtil ***REMOVED***
                 .expiration(new Date(System.currentTimeMillis() + expiredMs*1000))
                 .signWith(secretKey)
                 .compact();
-    ***REMOVED***
-***REMOVED***
+    }
+}

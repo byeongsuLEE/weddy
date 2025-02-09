@@ -24,14 +24,14 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ScheduleRedisAdapter implements ScheduleRedisCacheOutputPort ***REMOVED***
+public class ScheduleRedisAdapter implements ScheduleRedisCacheOutputPort {
 
     private final RedisUtil redisUtil;
 
 
     @Override
-    public void saveScheduleToCache(CreateScheduleInputDto createScheduleInputDto) ***REMOVED***
+    public void saveScheduleToCache(CreateScheduleInputDto createScheduleInputDto) {
 
         redisUtil.addToHashSet(KeyType.SCHEDULE,createScheduleInputDto);
-    ***REMOVED***
-***REMOVED***
+    }
+}

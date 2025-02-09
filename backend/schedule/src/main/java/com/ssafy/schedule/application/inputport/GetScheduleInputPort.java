@@ -25,27 +25,27 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class GetScheduleInputPort implements GetScheduleUsecase ***REMOVED***
+public class GetScheduleInputPort implements GetScheduleUsecase {
 
     private final ScheduleOutPutPort scheduleOutPutPort;
 
     @Override
-    public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto, LocalDate time) throws Exception ***REMOVED***
+    public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto, LocalDate time) throws Exception {
 
         List<Schedule> schedules = scheduleOutPutPort.getSchedules(userInputDto.getCode(), time);
 
-        if (schedules.isEmpty()) ***REMOVED***
+        if (schedules.isEmpty()) {
             throw new ScheduleNotFoundException(ErrorCode.SCHEDULE_IS_EMPTY);
-        ***REMOVED***
+        }
 
         return schedules.stream()
                 .map(ScheduleOutputDto::mapToDto)
                 .collect(Collectors.toList());
 
-    ***REMOVED***
+    }
 
     @Override
-    public ScheduleOutputDto getSchedule(UserInputDto userInputDto, LocalDateTime localDateTime) throws Exception ***REMOVED***
+    public ScheduleOutputDto getSchedule(UserInputDto userInputDto, LocalDateTime localDateTime) throws Exception {
         return null;
-    ***REMOVED***
-***REMOVED***
+    }
+}

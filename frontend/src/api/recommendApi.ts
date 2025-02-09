@@ -1,18 +1,18 @@
 import axios from "axios";
-import ***REMOVED*** Product ***REMOVED*** from "./product.type";
+import { Product } from "./product.type";
 
 const BASE_URL = `/api/recommends`
 
-export const aiRecommend = async (message: string): Promise<Product[]> => ***REMOVED***
-  const response = await axios(***REMOVED***
+export const aiRecommend = async (message: string): Promise<Product[]> => {
+  const response = await axios({
     method: "get",
-    url: `$***REMOVED***BASE_URL***REMOVED***`,
-    headers: ***REMOVED***
+    url: `${BASE_URL}`,
+    headers: {
       Authorization: sessionStorage.getItem("token"),
-    ***REMOVED***,
-    params: ***REMOVED*** message ***REMOVED***,
-  ***REMOVED***);
+    },
+    params: { message },
+  });
   
   console.log(response.data.data);
   return response.data.data;
-***REMOVED***;
+};

@@ -1,8 +1,8 @@
-***REMOVED***
-  "devDependencies": ***REMOVED***
+{
+  "devDependencies": {
     "@types/firebase": "^3.2.3"
-  ***REMOVED***,
-  "dependencies": ***REMOVED***
+  },
+  "dependencies": {
     "firebase-admin": "^12.7.0"
-  ***REMOVED***
-***REMOVED***
+  }
+}

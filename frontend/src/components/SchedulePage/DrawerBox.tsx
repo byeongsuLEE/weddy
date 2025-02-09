@@ -1,7 +1,7 @@
-import ***REMOVED*** Schedule ***REMOVED*** from "@/api/schedule.type";
-import ***REMOVED*** schedule ***REMOVED*** from "@/api/scheduleApi";
+import { Schedule } from "@/api/schedule.type";
+import { schedule } from "@/api/scheduleApi";
 import CategoryButton from "@/common/CategoryButton";
-import ***REMOVED***
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -10,89 +10,89 @@ import ***REMOVED***
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-***REMOVED*** from "@/components/ui/alert-dialog";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+} from "@/components/ui/alert-dialog";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import DatePick from "./DatePick";
 
-interface AlertDialogDemoProps ***REMOVED***
+interface AlertDialogDemoProps {
   isOpen: boolean;
   addSchedule: () => void;
   onClose: () => void;
-***REMOVED***
+}
 
 const FlexCenterWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-export function AlertDialogDemo(***REMOVED*** isOpen, addSchedule, onClose ***REMOVED***: AlertDialogDemoProps) ***REMOVED***
+export function AlertDialogDemo({ isOpen, addSchedule, onClose }: AlertDialogDemoProps) {
   const firebaseToken = sessionStorage.getItem('fcmToken');
 
-  const [scheduleInfo, setScheduleInfo] = useState<Schedule>(***REMOVED***
+  const [scheduleInfo, setScheduleInfo] = useState<Schedule>({
     startDate: null,
     endDate: null,
     content: '',
     type: '',
-    userCoupleToken: ***REMOVED***
+    userCoupleToken: {
       myFcmToken: ""
-    ***REMOVED***,
-  ***REMOVED***);
+    },
+  });
 
-  useEffect(() => ***REMOVED***
-    if (firebaseToken) ***REMOVED***
-      setScheduleInfo((prev) => (***REMOVED***
+  useEffect(() => {
+    if (firebaseToken) {
+      setScheduleInfo((prev) => ({
         ...prev,
-        userCoupleToken: ***REMOVED***
+        userCoupleToken: {
           myFcmToken: firebaseToken,
-        ***REMOVED***,
-      ***REMOVED***));
-    ***REMOVED***
-  ***REMOVED***, [firebaseToken]);
+        },
+      }));
+    }
+  }, [firebaseToken]);
 
-  function formatDate(date: Date): string ***REMOVED***
+  function formatDate(date: Date): string {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   
-  return `$***REMOVED***year***REMOVED***-$***REMOVED***month***REMOVED***-$***REMOVED***day***REMOVED***`;
-***REMOVED***
+  return `${year}-${month}-${day}`;
+}
 
-  const updateScheduleInfo = (key: keyof Schedule, value: any) => ***REMOVED***
-    setScheduleInfo((prev) => ***REMOVED***
+  const updateScheduleInfo = (key: keyof Schedule, value: any) => {
+    setScheduleInfo((prev) => {
       const formattedValue =
         (key === "startDate" || key === "endDate") && value instanceof Date
           ? formatDate(value)
           : value;
   
-      return ***REMOVED*** ...prev, [key]: formattedValue ***REMOVED***;
-    ***REMOVED***);
-  ***REMOVED***;
+      return { ...prev, [key]: formattedValue };
+    });
+  };
   
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-const updateSchedule = async () => ***REMOVED***
+const updateSchedule = async () => {
   if (isSubmitting) return; // 중복 요청 방지
   setIsSubmitting(true);
-  try ***REMOVED***
+  try {
     await schedule(scheduleInfo);
     addSchedule();
     onClose();
-  ***REMOVED*** catch (error) ***REMOVED***
+  } catch (error) {
     console.error("Failed to update schedule:", error);
-  ***REMOVED*** finally ***REMOVED***
+  } finally {
     setIsSubmitting(false);
-  ***REMOVED***
-***REMOVED***;
+  }
+};
 
-  // const updateSchedule = async () => ***REMOVED***
+  // const updateSchedule = async () => {
   //   await schedule(scheduleInfo);
   //   addSchedule();
   //   onClose();
-  // ***REMOVED***;
+  // };
 
   return (
-    <AlertDialog open=***REMOVED***isOpen***REMOVED*** onOpenChange=***REMOVED***onClose***REMOVED***>
+    <AlertDialog open={isOpen} onOpenChange={onClose}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>일정 추가</AlertDialogTitle>
@@ -100,12 +100,12 @@ const updateSchedule = async () => ***REMOVED***
             <DatePick
               type="start"
               title="시작일"
-              changeDate=***REMOVED***(date) => updateScheduleInfo("startDate", date)***REMOVED***
+              changeDate={(date) => updateScheduleInfo("startDate", date)}
             />
             <DatePick
               type="end"
               title="종료일"
-              changeDate=***REMOVED***(date) => updateScheduleInfo("endDate", date)***REMOVED***
+              changeDate={(date) => updateScheduleInfo("endDate", date)}
             />
           </AlertDialogDescription>
           <FlexCenterWrapper>
@@ -113,18 +113,18 @@ const updateSchedule = async () => ***REMOVED***
               type="text"
               placeholder="일정을 입력하세요."
               className="w-[320px] border rounded-md p-3 my-2 text-[16px]"
-              onChange=***REMOVED***(e) => updateScheduleInfo("content", e.target.value)***REMOVED***
+              onChange={(e) => updateScheduleInfo("content", e.target.value)}
             />
           </FlexCenterWrapper>
           <FlexCenterWrapper>
-            <CategoryButton changeCategory=***REMOVED***(category) => updateScheduleInfo("type", category)***REMOVED*** />
+            <CategoryButton changeCategory={(category) => updateScheduleInfo("type", category)} />
           </FlexCenterWrapper>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick=***REMOVED***onClose***REMOVED***>취소</AlertDialogCancel>
-          <AlertDialogAction onClick=***REMOVED***updateSchedule***REMOVED***>추가</AlertDialogAction>
+          <AlertDialogCancel onClick={onClose}>취소</AlertDialogCancel>
+          <AlertDialogAction onClick={updateSchedule}>추가</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );
-***REMOVED***
+}

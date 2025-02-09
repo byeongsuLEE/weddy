@@ -8,6 +8,7 @@ build/
 !**/src/test/**/build/
 
 ### STS ###
+.env
 .apt_generated
 .classpath
 .factorypath

@@ -1,52 +1,52 @@
-import ***REMOVED*** useMutation, useQuery, useQueryClient ***REMOVED*** from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import ContractListBox from "../components/ContractListPage/ContractListBox";
-import ***REMOVED*** changeStatus, myContract ***REMOVED*** from "@/api/contractApi";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** NftType ***REMOVED*** from "@/api/nft.type";
-import ***REMOVED*** getNFT ***REMOVED*** from "@/hooks/getNFT";
-import ***REMOVED*** ContractData ***REMOVED*** from "@/api/contract.type";
+import { changeStatus, myContract } from "@/api/contractApi";
+import { useEffect, useState } from "react";
+import { NftType } from "@/api/nft.type";
+import { getNFT } from "@/hooks/getNFT";
+import { ContractData } from "@/api/contract.type";
 
-const ContractList = () => ***REMOVED***
+const ContractList = () => {
   const queryClient = useQueryClient();
   const [ nftList, setNftLIst ] = useState<NftType[]>([]);
 
-  const ***REMOVED*** data: contractList ***REMOVED*** = useQuery("myContract", myContract);
+  const { data: contractList } = useQuery("myContract", myContract);
 
-  const changeMutation = useMutation(changeStatus, ***REMOVED***
-    onSuccess: () => ***REMOVED***
+  const changeMutation = useMutation(changeStatus, {
+    onSuccess: () => {
       queryClient.invalidateQueries("myContract");
-    ***REMOVED***
-  ***REMOVED***);
+    }
+  });
 
-  const handleChangeStatus = (contractId: string) => ***REMOVED***
+  const handleChangeStatus = (contractId: string) => {
     changeMutation.mutate(contractId);
-  ***REMOVED***;
+  };
   
-  useEffect(() => ***REMOVED***
-    const update = async () => ***REMOVED***
+  useEffect(() => {
+    const update = async () => {
       const myNFT = await getNFT();
       setNftLIst(myNFT);
-    ***REMOVED***;
+    };
     update();
-  ***REMOVED***, []);
+  }, []);
 
   return (
     <div className="mt-12 mb-32 mx-5">
-      ***REMOVED***nftList ? (
+      {nftList ? (
         <>
-          ***REMOVED***['STUDIO', 'DRESS', 'MAKEUP'].map((category: string) => (
+          {['STUDIO', 'DRESS', 'MAKEUP'].map((category: string) => (
             <ContractListBox
-            key=***REMOVED***category***REMOVED***
-            type=***REMOVED***category***REMOVED***
-            nftList=***REMOVED***nftList.filter((nft: NftType) => nft.type === category)***REMOVED***
-            contractInfo=***REMOVED***contractList?.find((contract: ContractData) => contract.product.type == category)***REMOVED***
-            onChange=***REMOVED***handleChangeStatus***REMOVED***
+            key={category}
+            type={category}
+            nftList={nftList.filter((nft: NftType) => nft.type === category)}
+            contractInfo={contractList?.find((contract: ContractData) => contract.product.type == category)}
+            onChange={handleChangeStatus}
             />
-          ))***REMOVED***
+          ))}
         </>
-      ) : null***REMOVED***
+      ) : null}
     </div>
   );
-***REMOVED***;
+};
 
 export default ContractList;

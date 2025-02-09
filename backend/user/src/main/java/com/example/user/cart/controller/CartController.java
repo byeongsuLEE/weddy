@@ -14,31 +14,31 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users/cart")
-public class CartController ***REMOVED***
+public class CartController {
 
 
     private final CartService cartService;
 
-    public CartController(CartService cartService) ***REMOVED***
+    public CartController(CartService cartService) {
         this.cartService = cartService;
-    ***REMOVED***
+    }
 
-    @PostMapping("/add/***REMOVED***productId***REMOVED***")
-    public ResponseEntity<ApiResponse<String>> addCart(@PathVariable Long productId, @AuthenticationPrincipal UserEntity user) ***REMOVED***
+    @PostMapping("/add/{productId}")
+    public ResponseEntity<ApiResponse<String>> addCart(@PathVariable Long productId, @AuthenticationPrincipal UserEntity user) {
         cartService.addCart(productId, user);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("상품 담기 완료"));
-    ***REMOVED***
+    }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CartProductDto>>> getCart(@AuthenticationPrincipal UserEntity user)***REMOVED***
+    public ResponseEntity<ApiResponse<List<CartProductDto>>> getCart(@AuthenticationPrincipal UserEntity user){
         List<CartProductDto> cartProductDto = cartService.getCart(user);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(cartProductDto,"장바구니 조회 성공"));
-    ***REMOVED***
+    }
 
-    @DeleteMapping("/delete/***REMOVED***productId***REMOVED***")
-    public ResponseEntity<ApiResponse<String>> deleteCart(@PathVariable Long productId, @AuthenticationPrincipal UserEntity user)***REMOVED***
+    @DeleteMapping("/delete/{productId}")
+    public ResponseEntity<ApiResponse<String>> deleteCart(@PathVariable Long productId, @AuthenticationPrincipal UserEntity user){
         cartService.removeCart(productId,user);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(productId + "상품 삭제 성공"));
-    ***REMOVED***
+    }
 
-***REMOVED***
+}

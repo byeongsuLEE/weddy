@@ -1,42 +1,42 @@
-import ***REMOVED*** buttonVariants ***REMOVED*** from "@/components/ui/button";
-import ***REMOVED*** cn ***REMOVED*** from "@/lib/utils";
-import ***REMOVED*** ChevronLeftIcon, ChevronRightIcon ***REMOVED*** from "@radix-ui/react-icons";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import * as React from "react";
-import ***REMOVED*** DayPicker ***REMOVED*** from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker> & ***REMOVED***
+export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   eventDays?: Date[]; // Date 형식의 이벤트 날짜 배열
-***REMOVED***;
+};
 
-function Calendar(***REMOVED***
+function Calendar({
   className,
   classNames,
   showOutsideDays = true,
   eventDays = [],
   ...props
-***REMOVED***: CalendarProps) ***REMOVED***
+}: CalendarProps) {
   
   // `eventDays` 배열에서 날짜가 이벤트에 해당하는지 확인하는 함수
-  // const isEventDay = (day: Date) => ***REMOVED***
+  // const isEventDay = (day: Date) => {
   //   const result = eventDays.some((eventDay: Date) =>
   //     eventDay.toDateString() === day.toDateString()
   //   );
-  //   console.log(`Date: $***REMOVED***day.toDateString()***REMOVED***, Is Event Day: $***REMOVED***result***REMOVED***`);
+  //   console.log(`Date: ${day.toDateString()}, Is Event Day: ${result}`);
   //   return result;
-  // ***REMOVED***;
+  // };
 
   return (
     <DayPicker
-      showOutsideDays=***REMOVED***showOutsideDays***REMOVED***
-      className=***REMOVED***cn("p-3 w-full h-[350px]", className)***REMOVED***
-      classNames=***REMOVED******REMOVED***
+      showOutsideDays={showOutsideDays}
+      className={cn("p-3 w-full h-[350px]", className)}
+      classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 w-full",
         month: "space-y-4 w-full",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
-          buttonVariants(***REMOVED*** variant: "outline" ***REMOVED***),
+          buttonVariants({ variant: "outline" }),
           "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
         ),
         nav_button_previous: "absolute left-1",
@@ -52,7 +52,7 @@ function Calendar(***REMOVED***
             : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
-          buttonVariants(***REMOVED*** variant: "ghost" ***REMOVED***),
+          buttonVariants({ variant: "ghost" }),
           "h-10 w-10 p-0 font-normal aria-selected:opacity-100 relative"
         ),
         day_selected: "bg-main2 text-main2-foreground hover:bg-main2 hover:text-main2-foreground focus:bg-main2 focus:text-main2-foreground",
@@ -62,25 +62,25 @@ function Calendar(***REMOVED***
         day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         ...classNames,
-      ***REMOVED******REMOVED***
-      components=***REMOVED******REMOVED***
+      }}
+      components={{
         IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,
         IconRight: () => <ChevronRightIcon className="h-4 w-4" />,
-      ***REMOVED******REMOVED***
+      }}
       
-      // renderDay=***REMOVED***(day: Date) => (
+      // renderDay={(day: Date) => (
       //   <div className="relative">
-      //     ***REMOVED***day.getDate()***REMOVED***
-      //     ***REMOVED***isEventDay(day) && (
+      //     {day.getDate()}
+      //     {isEventDay(day) && (
       //       <div className="bg-red-500 rounded-full h-2 w-2 absolute bottom-1 left-1/2 transform -translate-x-1/2"></div>
-      //     )***REMOVED***
+      //     )}
       //   </div>
-      // )***REMOVED***
-      ***REMOVED***...props***REMOVED***
+      // )}
+      {...props}
     />
   );
-***REMOVED***
+}
 
 Calendar.displayName = "Calendar";
 
-export ***REMOVED*** Calendar ***REMOVED***;
+export { Calendar };

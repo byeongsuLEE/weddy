@@ -1,39 +1,39 @@
-plugins ***REMOVED***
+plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.5'
 	id 'io.spring.dependency-management' version '1.1.6'
-***REMOVED***
+}
 
 group = 'ssafy'
 version = '0.0.1-SNAPSHOT'
 
-java ***REMOVED***
-	toolchain ***REMOVED***
+java {
+	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
-	***REMOVED***
-***REMOVED***
+	}
+}
 
-configurations ***REMOVED***
-	compileOnly ***REMOVED***
+configurations {
+	compileOnly {
 		extendsFrom annotationProcessor
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 
 
-repositories ***REMOVED***
+repositories {
 	mavenCentral()
-	maven ***REMOVED***
-		url = uri('***REMOVED***/repository/maven-snapshots')
+	maven {
+		url = uri('**REMOVED**/repository/maven-snapshots')
 		allowInsecureProtocol = true //http를 사용하기 위해 추가
-		credentials***REMOVED***
+		credentials{
 			username = "weddy"
 			password = "weddy"
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+		}
+	}
+}
 
-dependencies ***REMOVED***
+dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
@@ -59,16 +59,16 @@ dependencies ***REMOVED***
 
 	//fcm
 	implementation 'com.google.firebase:firebase-admin:9.4.1'
-***REMOVED***
+}
 
-tasks.named('test') ***REMOVED***
+tasks.named('test') {
 	useJUnitPlatform()
-***REMOVED***
-bootJar ***REMOVED***
+}
+bootJar {
 	enabled = true
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-***REMOVED***
-jar ***REMOVED***
+}
+jar {
 	enabled = false
-***REMOVED***
+}
 

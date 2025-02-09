@@ -2,40 +2,40 @@ package com.example.user.security.dto;
 
 import java.util.Map;
 
-public class GoogleResponse implements OAuth2Response***REMOVED***
+public class GoogleResponse implements OAuth2Response{
 
     private final Map<String, Object> attribute;
 
-    public GoogleResponse(Map<String, Object> attribute) ***REMOVED***
+    public GoogleResponse(Map<String, Object> attribute) {
 
         this.attribute = attribute;
-    ***REMOVED***
+    }
 
     @Override
-    public String getProvider() ***REMOVED***
+    public String getProvider() {
 
         return "google";
-    ***REMOVED***
+    }
 
     @Override
-    public String getProviderId() ***REMOVED***
+    public String getProviderId() {
 
         return attribute.get("sub").toString();
-    ***REMOVED***
+    }
 
     @Override
-    public String getEmail() ***REMOVED***
+    public String getEmail() {
 
         return attribute.get("email").toString();
-    ***REMOVED***
+    }
 
     @Override
-    public String getName() ***REMOVED***
+    public String getName() {
 
         return attribute.get("name").toString();
-    ***REMOVED***
+    }
 
-    public String getPicture()***REMOVED***
+    public String getPicture(){
         return attribute.get("picture").toString();
-    ***REMOVED***
-***REMOVED***
+    }
+}

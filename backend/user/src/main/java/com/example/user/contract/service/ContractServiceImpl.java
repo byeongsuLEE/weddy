@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ContractServiceImpl implements ContractService ***REMOVED***
+public class ContractServiceImpl implements ContractService {
 
     private final ContractRepository contractRepository;
 
@@ -27,38 +27,38 @@ public class ContractServiceImpl implements ContractService ***REMOVED***
 
 
     @Override
-    public List<Contract> createContract(UserEntity user, List<CreateContractRequestDto> createContractRequestListDto) ***REMOVED***
+    public List<Contract> createContract(UserEntity user, List<CreateContractRequestDto> createContractRequestListDto) {
 
         List<Contract> contractList = createContractEntity(user, createContractRequestListDto);
         List<ContractResponseDto> contractResponseDtos = mapToCreateContractResponseDtoList(contractList);
         return  contractRepository.saveAll(contractList);
-    ***REMOVED***
+    }
 
     @Override
-    public Contract changeContractStatus(Long contractId) ***REMOVED***
+    public Contract changeContractStatus(Long contractId) {
         Contract contract = contractRepository.findById(contractId)
                 .orElseThrow(() -> new ContractNotFoundException(ErrorCode.CONTRACT_NOT_FOUND));
         contract.changeStatus();
         return contract;
 
-    ***REMOVED***
+    }
     @Transactional(readOnly = true)
     @Override
-    public Contract getContract(Long contractId) ***REMOVED***
+    public Contract getContract(Long contractId) {
         return contractRepository.findById(contractId)
                 .orElseThrow(() -> new ContractNotFoundException(ErrorCode.PRODUCT_NOT_FOUND_EXCEPTION));
 
-    ***REMOVED***
+    }
 
     @Override
-    public List<Contract> getAllContract(UserEntity userEntity) ***REMOVED***
+    public List<Contract> getAllContract(UserEntity userEntity) {
         return contractRepository.findByUserCoupleCode(userEntity.getCoupleCode());
 
 
-    ***REMOVED***
+    }
 
 
-    public List<Contract> createContractEntity(UserEntity user, List<CreateContractRequestDto> createContractRequestListDto) ***REMOVED***
+    public List<Contract> createContractEntity(UserEntity user, List<CreateContractRequestDto> createContractRequestListDto) {
         //TODO: 계약서 리스트 생성
 
         List<Contract> contractList = createContractRequestListDto.stream()
@@ -77,8 +77,8 @@ public class ContractServiceImpl implements ContractService ***REMOVED***
                 .collect(Collectors.toList());
 
         return contractList;
-    ***REMOVED***
-    public  List<ContractResponseDto> mapToCreateContractResponseDtoList(List<Contract> contract) ***REMOVED***
+    }
+    public  List<ContractResponseDto> mapToCreateContractResponseDtoList(List<Contract> contract) {
         //TODO: CreateContractResponseDto 매핑
         return contract.stream()
                 .map((contract1) -> ContractResponseDto.builder()
@@ -100,5 +100,5 @@ public class ContractServiceImpl implements ContractService ***REMOVED***
                         .userId(contract1.getUser().getId())
                         .build())
                 .collect(Collectors.toList());
-    ***REMOVED***
-***REMOVED***
+    }
+}

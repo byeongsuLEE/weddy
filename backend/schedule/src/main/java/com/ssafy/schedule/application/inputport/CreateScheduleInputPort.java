@@ -17,7 +17,7 @@
     @Service
     @Transactional
     @RequiredArgsConstructor
-    public class CreateScheduleInputPort implements CreateScheduleUsecase ***REMOVED***
+    public class CreateScheduleInputPort implements CreateScheduleUsecase {
 
 
         private final ScheduleOutPutPort scheduleOutPutPort;
@@ -25,15 +25,15 @@
         private final FCMOutputPort fcmOutputPort;
 
         @Override
-        public ScheduleOutputDto createSchedule(CreateScheduleInputDto createScheduleInputDto) ***REMOVED***
+        public ScheduleOutputDto createSchedule(CreateScheduleInputDto createScheduleInputDto) {
 
             Schedule schedule =   Schedule.createSchedule(createScheduleInputDto);
             Schedule savedSchedule = scheduleOutPutPort.save(schedule);
 
-            log.info("fcm token : ***REMOVED******REMOVED*** ",createScheduleInputDto.getUserCoupleToken().getMyFcmToken());
+            log.info("fcm token : {} ",createScheduleInputDto.getUserCoupleToken().getMyFcmToken());
             //푸시알림을 위한 일정 저장
             scheduleRedisCacheOutputPort.saveScheduleToCache(createScheduleInputDto);
             fcmOutputPort.send(createScheduleInputDto.getUserCoupleToken().getMyFcmToken(),createScheduleInputDto.getType().name(),createScheduleInputDto.getContent());
             return createScheduleInputDto.mapToDto(savedSchedule);
-        ***REMOVED***
-    ***REMOVED***
+        }
+    }

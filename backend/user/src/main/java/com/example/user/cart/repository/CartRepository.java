@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CartRepository extends JpaRepository<CartEntity,Long> ***REMOVED***
+public interface CartRepository extends JpaRepository<CartEntity,Long> {
 
     List<CartEntity> findByCoupleCode(String coupleCode);
 
@@ -21,4 +21,4 @@ public interface CartRepository extends JpaRepository<CartEntity,Long> ***REMOVE
     @Modifying
     @Query("DELETE FROM CartEntity e WHERE e.productId = :productId AND e.coupleCode = :coupleCode")
     int deleteByUserIdAndProductId(Long productId, String coupleCode);
-***REMOVED***
+}

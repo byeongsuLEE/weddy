@@ -18,7 +18,7 @@ import java.util.Optional;
  */
 
 @Repository
-public interface ScheduleRepository extends JpaRepository<Schedule, Long> ***REMOVED***
+public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
 
     // 아래코드가 mysql에 어떤 코드로 변환되는지 코드로 작성해주시오.
@@ -29,4 +29,4 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> ***REM
     Optional <Schedule> findById(Long id);
 
     List<Schedule> findByCode(String coupleCode);
-***REMOVED***
+}

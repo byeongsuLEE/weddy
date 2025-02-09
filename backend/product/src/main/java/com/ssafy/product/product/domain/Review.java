@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class) // Auditing 기능 활성화
-public class Review ***REMOVED***
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,7 +34,7 @@ public class Review ***REMOVED***
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public ReviewResponseDto getReview(Review review, Product product) ***REMOVED***
+    public ReviewResponseDto getReview(Review review, Product product) {
         return ReviewResponseDto.builder()
                 .id(review.id)
                 .userId(review.userId)
@@ -43,13 +43,13 @@ public class Review ***REMOVED***
                 .date(review.date)
                 .score(review.score)
                 .build();
-    ***REMOVED***
+    }
 
     @Builder
-    public Review(ReviewRequestDto reviewRequestDto, Product product, Long userId) ***REMOVED***
+    public Review(ReviewRequestDto reviewRequestDto, Product product, Long userId) {
         this.userId = userId;
         this.content = reviewRequestDto.content();
         this.score = reviewRequestDto.score();
         this.product = product;
-    ***REMOVED***
-***REMOVED***
+    }
+}

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateScheduleInputDto ***REMOVED***
+public class CreateScheduleInputDto {
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -25,7 +25,7 @@ public class CreateScheduleInputDto ***REMOVED***
     private String code;
     private UserCoupleTokenDto userCoupleToken;
 
-    public static CreateScheduleInputDto  createScheduleInputDto(LocalDate startDate, LocalDate endDate, String content, Long productId, Long userId, String code, UserCoupleTokenDto userCoupleToken ) ***REMOVED***
+    public static CreateScheduleInputDto  createScheduleInputDto(LocalDate startDate, LocalDate endDate, String content, Long productId, Long userId, String code, UserCoupleTokenDto userCoupleToken ) {
         return CreateScheduleInputDto.builder()
                 .startDate(startDate)
                 .endDate(endDate)
@@ -35,10 +35,10 @@ public class CreateScheduleInputDto ***REMOVED***
                 .code(code)
                 .userCoupleToken(userCoupleToken)
                 .build();
-    ***REMOVED***
+    }
 
     public static CreateScheduleInputDto createScheduleInputDto(PaymentProductInfo paymentProductInfo)
-    ***REMOVED***
+    {
         return CreateScheduleInputDto.builder()
                 .startDate((paymentProductInfo.getStartDate()))
                 .endDate((paymentProductInfo.getEndDate()))
@@ -49,9 +49,9 @@ public class CreateScheduleInputDto ***REMOVED***
                 .userCoupleToken(paymentProductInfo.getUserCoupleToken())
                 .type(paymentProductInfo.getProduct().getType())
                 .build();
-    ***REMOVED***
+    }
 
-    public ScheduleOutputDto mapToDto(Schedule schedule) ***REMOVED***
+    public ScheduleOutputDto mapToDto(Schedule schedule) {
         return ScheduleOutputDto.builder()
                 .id(schedule.getId())
 
@@ -63,10 +63,10 @@ public class CreateScheduleInputDto ***REMOVED***
                 .code(schedule.getCode())
                 .contractType(schedule.getType())
                 .build();
-    ***REMOVED***
+    }
 
-    public void updateUserInfo(Long userId, String code) ***REMOVED***
+    public void updateUserInfo(Long userId, String code) {
         this.userId = userId;
         this.code = code;
-    ***REMOVED***
-***REMOVED***
+    }
+}

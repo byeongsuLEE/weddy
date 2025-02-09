@@ -16,16 +16,16 @@ import java.util.List;
 
 @Configuration
 @EnableWebFluxSecurity
-public class SecurityConfig ***REMOVED***
+public class SecurityConfig {
 
     private final JWTUtil jwtUtil;
 
-    public SecurityConfig(JWTUtil jwtUtil) ***REMOVED***
+    public SecurityConfig(JWTUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
-    ***REMOVED***
+    }
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) ***REMOVED***
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)  // CSRF 비활성화
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
@@ -42,10 +42,10 @@ public class SecurityConfig ***REMOVED***
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .addFilterAt(new JWTFilter(jwtUtil), SecurityWebFiltersOrder.AUTHENTICATION) // JWTFilter를 추가
                 .build();
-    ***REMOVED***
+    }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() ***REMOVED***
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://weddy.info:5173", "http://weddy.info:5174", "https://weddy.info"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
@@ -57,5 +57,5 @@ public class SecurityConfig ***REMOVED***
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    ***REMOVED***
-***REMOVED***
+    }
+}

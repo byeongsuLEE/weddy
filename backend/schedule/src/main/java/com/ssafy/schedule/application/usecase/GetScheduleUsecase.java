@@ -12,9 +12,9 @@ import java.util.List;
  * 작성날짜 : 2024-10-26
  * 설명    :
  */
-public interface GetScheduleUsecase ***REMOVED***
+public interface GetScheduleUsecase {
     public List<ScheduleOutputDto> getAllSchedules(UserInputDto userInputDto, LocalDate time) throws Exception;
     public ScheduleOutputDto getSchedule(UserInputDto userInputDto, LocalDateTime localDateTime) throws Exception;
 
 
-***REMOVED***
+}

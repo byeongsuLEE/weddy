@@ -1,11 +1,11 @@
-import ***REMOVED*** useEffect ***REMOVED*** from "react";
-import ***REMOVED*** QueryClient, QueryClientProvider ***REMOVED*** from "react-query";
-import ***REMOVED*** BrowserRouter, Route, Routes, useLocation, useNavigate ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** RecoilRoot, useRecoilValue ***REMOVED*** from "recoil";
-import ***REMOVED*** saveFcmToken ***REMOVED*** from "./api/userApi";
+import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { RecoilRoot, useRecoilValue } from "recoil";
+import { saveFcmToken } from "./api/userApi";
 import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
-import ***REMOVED*** onMessageListener ***REMOVED*** from "./firebase";
+import { onMessageListener } from "./firebase";
 import "./index.css";
 import BoardDetail from "./pages/BoardDetailPage";
 import Board from "./pages/BoardPage";
@@ -26,11 +26,11 @@ import Review from "./pages/ReviewPage";
 import Schedule from "./pages/SchedulePage";
 import Sketch from "./pages/SketchPage";
 import UserInfo from "./pages/UserInfoPage";
-import ***REMOVED*** firebaseTokenState ***REMOVED*** from "./store/firebaseToken";
+import { firebaseTokenState } from "./store/firebaseToken";
 
 const queryClient = new QueryClient();
 
-function AppContent() ***REMOVED***
+function AppContent() {
   const userId = sessionStorage.getItem("userId");
   const token = sessionStorage.getItem("token");
   const fcmToken = useRecoilValue(firebaseTokenState);
@@ -40,63 +40,63 @@ function AppContent() ***REMOVED***
   const currentDetail = location.pathname.split("/")[2];
   const nowPath = location.pathname;
 
-  useEffect(() => ***REMOVED***
-    if (!token && nowPath !== "/api/oauth2/authorization/google" && nowPath !== "/callback") ***REMOVED***
+  useEffect(() => {
+    if (!token && nowPath !== "/api/oauth2/authorization/google" && nowPath !== "/callback") {
       navigate("/login");
-    ***REMOVED***
+    }
 
-    if (userId && fcmToken) ***REMOVED***
+    if (userId && fcmToken) {
       saveFcmToken(fcmToken, userId);
-    ***REMOVED***
+    }
 
-    const initializeMessageListener = async () => ***REMOVED***
-      try ***REMOVED***
+    const initializeMessageListener = async () => {
+      try {
         await onMessageListener();
-      ***REMOVED*** catch ***REMOVED***
+      } catch {
         alert("포그라운드 메시지 리스너 오류 발생");
         // 포그라운드 메시지 리스너 오류 처리 로직
-      ***REMOVED***
-    ***REMOVED***;
+      }
+    };
 
     initializeMessageListener();
-  ***REMOVED***, [token, userId, fcmToken, nowPath]);
+  }, [token, userId, fcmToken, nowPath]);
 
   return (
     <>
-      ***REMOVED***currentPath !== "login" && currentPath !== "userinfo" && <Navbar />***REMOVED***
+      {currentPath !== "login" && currentPath !== "userinfo" && <Navbar />}
       <Routes>
-        <Route path="/" element=***REMOVED***<Main />***REMOVED*** />
-        <Route path="/review/:productId" element=***REMOVED***<Review />***REMOVED*** />
-        <Route path="/cart" element=***REMOVED***<Cart />***REMOVED*** />
-        <Route path="/login" element=***REMOVED***<Login />***REMOVED*** />
-        <Route path="/userinfo" element=***REMOVED***<UserInfo />***REMOVED*** />
-        <Route path="/board" element=***REMOVED***<Board />***REMOVED*** />
-        <Route path="/board/detail/:productId" element=***REMOVED***<BoardDetail />***REMOVED*** />
-        <Route path="/prompt" element=***REMOVED***<Prompt />***REMOVED*** />
-        <Route path="/planner" element=***REMOVED***<Planner />***REMOVED*** />
-        <Route path="/schedule" element=***REMOVED***<Schedule />***REMOVED*** />
-        <Route path="/dress" element=***REMOVED***<DressSketch />***REMOVED*** />
-        <Route path="/dress/img" element=***REMOVED***<DressImg />***REMOVED*** />
-        <Route path="/sketch" element=***REMOVED***<Sketch />***REMOVED*** />
-        <Route path="/contract/:category/:contractId" element=***REMOVED***<Contract />***REMOVED*** />
-        <Route path="/contract/list" element=***REMOVED***<ContractList />***REMOVED*** />
-        <Route path="/mypage" element=***REMOVED***<Mypage />***REMOVED*** />
-        <Route path="/callback" element=***REMOVED***<CallBack />***REMOVED*** />
-        <Route path="/nft/loading" element=***REMOVED***<NFTLoading />***REMOVED*** />
-        <Route path="/recommend/loading" element=***REMOVED***<RecommendLoading />***REMOVED*** />
+        <Route path="/" element={<Main />} />
+        <Route path="/review/:productId" element={<Review />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/userinfo" element={<UserInfo />} />
+        <Route path="/board" element={<Board />} />
+        <Route path="/board/detail/:productId" element={<BoardDetail />} />
+        <Route path="/prompt" element={<Prompt />} />
+        <Route path="/planner" element={<Planner />} />
+        <Route path="/schedule" element={<Schedule />} />
+        <Route path="/dress" element={<DressSketch />} />
+        <Route path="/dress/img" element={<DressImg />} />
+        <Route path="/sketch" element={<Sketch />} />
+        <Route path="/contract/:category/:contractId" element={<Contract />} />
+        <Route path="/contract/list" element={<ContractList />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/callback" element={<CallBack />} />
+        <Route path="/nft/loading" element={<NFTLoading />} />
+        <Route path="/recommend/loading" element={<RecommendLoading />} />
       </Routes>
-      ***REMOVED***currentPath !== "login" &&
+      {currentPath !== "login" &&
         currentPath !== "userinfo" &&
-        currentDetail !== "detail" && <Footer />***REMOVED***
+        currentDetail !== "detail" && <Footer />}
     </>
   );
-***REMOVED***
+}
 
-function App() ***REMOVED***
+function App() {
   return (
     <div className="container">
       <RecoilRoot>
-        <QueryClientProvider client=***REMOVED***queryClient***REMOVED***>
+        <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <AppContent />
           </BrowserRouter>
@@ -104,6 +104,6 @@ function App() ***REMOVED***
       </RecoilRoot>
     </div>
   );
-***REMOVED***
+}
 
 export default App;

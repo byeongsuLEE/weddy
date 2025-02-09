@@ -1,13 +1,13 @@
-export interface Dress ***REMOVED***
+export interface Dress {
   id: bigint;
   image: string;
   studio: string;
   dressName: string;
   user: number;
-***REMOVED***
+}
 
-// export interface SaveDress ***REMOVED***
+// export interface SaveDress {
 //   studio: string;
 //   dressName: string;
 //   sketch: string;
-// ***REMOVED***
+// }

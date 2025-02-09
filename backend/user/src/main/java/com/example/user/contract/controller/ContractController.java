@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/contracts")
 @RequiredArgsConstructor
-public class ContractController ***REMOVED***
+public class ContractController {
 
     private final ContractService contractService;
 
@@ -40,12 +40,12 @@ public class ContractController ***REMOVED***
      * @param createContractRequestListDto
      * @return
      */
-    @PostMapping("/***REMOVED***userId***REMOVED***")
-    public ResponseEntity<ApiResponse<List<ContractResponseDto>>> createInitalContract(@AuthenticationPrincipal UserEntity entity, @PathVariable Long userId, @RequestBody List<CreateContractRequestDto> createContractRequestListDto) ***REMOVED***
+    @PostMapping("/{userId}")
+    public ResponseEntity<ApiResponse<List<ContractResponseDto>>> createInitalContract(@AuthenticationPrincipal UserEntity entity, @PathVariable Long userId, @RequestBody List<CreateContractRequestDto> createContractRequestListDto) {
         List<Contract> contractList = contractService.createContract(entity, createContractRequestListDto);
         List<ContractResponseDto> contractResponseDtoList = mapToCreateContractResponseDtoList(contractList);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(contractResponseDtoList, "계약이 성공적으로 생성되었습니다."));
-    ***REMOVED***
+    }
 
     /**
      *
@@ -56,12 +56,12 @@ public class ContractController ***REMOVED***
      * @param contractId
      * @return
      */
-    @PatchMapping("/***REMOVED***contractId***REMOVED***")
-    public ResponseEntity<ApiResponse<ContractResponseDto>> changeContractStatus(@PathVariable Long contractId) ***REMOVED***
+    @PatchMapping("/{contractId}")
+    public ResponseEntity<ApiResponse<ContractResponseDto>> changeContractStatus(@PathVariable Long contractId) {
         Contract contract = contractService.changeContractStatus(contractId);
         ContractResponseDto contractResponseDto = contract.mapToCreateContractResponseDto(contract);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(contractResponseDto, "계약서 상태가 변경되었습니다."));
-    ***REMOVED***
+    }
 
     /**
      *
@@ -73,11 +73,11 @@ public class ContractController ***REMOVED***
      * @return
      */
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ContractResponseDto>>> getAllContract(@AuthenticationPrincipal UserEntity userEntity) ***REMOVED***
+    public ResponseEntity<ApiResponse<List<ContractResponseDto>>> getAllContract(@AuthenticationPrincipal UserEntity userEntity) {
         List<Contract> contractList = contractService.getAllContract(userEntity);
         List<ContractResponseDto> contractResponseDtoList = mapToCreateContractResponseDtoList(contractList);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(contractResponseDtoList, "계약서 전체조회 성공"));
-    ***REMOVED***
+    }
 
 
     /**
@@ -90,12 +90,12 @@ public class ContractController ***REMOVED***
      * @param userEntity
      * @return
      */
-    @GetMapping("/***REMOVED***contractId***REMOVED***")
-    public ResponseEntity<ApiResponse<ContractResponseDto>> getContract(@PathVariable Long contractId,@AuthenticationPrincipal UserEntity userEntity) ***REMOVED***
+    @GetMapping("/{contractId}")
+    public ResponseEntity<ApiResponse<ContractResponseDto>> getContract(@PathVariable Long contractId,@AuthenticationPrincipal UserEntity userEntity) {
         Contract contract = contractService.getContract(contractId);
         ContractResponseDto contractResponseDto = contract.mapToCreateContractResponseDto(contract);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(contractResponseDto, "계약서 상세조회 성공"));
-    ***REMOVED***
+    }
 
 
     /**
@@ -107,7 +107,7 @@ public class ContractController ***REMOVED***
      * @param contract
      * @return
      */
-    public  List<ContractResponseDto> mapToCreateContractResponseDtoList(List<Contract> contract) ***REMOVED***
+    public  List<ContractResponseDto> mapToCreateContractResponseDtoList(List<Contract> contract) {
         //TODO: CreateContractResponseDto 매핑
         return contract.stream()
                 .map((contract1) -> ContractResponseDto.builder()
@@ -129,7 +129,7 @@ public class ContractController ***REMOVED***
                         .userId(contract1.getUser().getId())
                         .build())
                 .collect(Collectors.toList());
-    ***REMOVED***
+    }
 
 
-***REMOVED***
+}

@@ -6,6 +6,6 @@ import weddy.commonlib.dto.response.ReviewResponseDto;
 import java.util.List;
 
 @Mapper
-public interface ReviewMapper ***REMOVED***
+public interface ReviewMapper {
     List<ReviewResponseDto> getAllReviews();
-***REMOVED***
+}

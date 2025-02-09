@@ -18,45 +18,45 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @RequiredArgsConstructor
 @EnableRedisRepositories // Redis 레포지토리 기능 활성화
-public class RedisConfig ***REMOVED***
-    @Value("$***REMOVED***spring.redis.product.host***REMOVED***")
+public class RedisConfig {
+    @Value("${spring.redis.product.host}")
     private String host;
-    @Value("$***REMOVED***spring.redis.product.port***REMOVED***")
+    @Value("${spring.redis.product.port}")
     private int port;
-    @Value("$***REMOVED***spring.redis.product.password***REMOVED***")
+    @Value("${spring.redis.product.password}")
     private String password;
     private final ObjectMapper objectMapper;
 
     @Bean // 스프링 컨텍스트에 RedisConnectionFactory 빈 등록
-    public RedisConnectionFactory redisUserConnectionFactory() ***REMOVED***
+    public RedisConnectionFactory redisUserConnectionFactory() {
         // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
         redisStandaloneConfiguration.setPassword(password);
         redisStandaloneConfiguration.setDatabase(1); // DB 0번 사용
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
-    ***REMOVED***
+    }
 
     @Bean // 스프링 컨텍스트에 RedisConnectionFactory 빈 등록
-    public RedisConnectionFactory redisConnectionFactory() ***REMOVED***
+    public RedisConnectionFactory redisConnectionFactory() {
         // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
         redisStandaloneConfiguration.setPassword(password);
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
-    ***REMOVED***
+    }
 
     @Bean
-    public RedisConnectionFactory redisScheduleConnectionFactory() ***REMOVED***
+    public RedisConnectionFactory redisScheduleConnectionFactory() {
         // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
         redisStandaloneConfiguration.setPassword(password);
         redisStandaloneConfiguration.setDatabase(2); // DB 0번 사용
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
-    ***REMOVED***
+    }
 
 
     @Bean
     @Primary
-    public RedisTemplate<String, Object> redisTemplate() ***REMOVED***
+    public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>(); // RedisTemplate 인스턴스 생성
         redisTemplate.setConnectionFactory(redisConnectionFactory()); // Redis 연결 팩토리 설정
 
@@ -72,11 +72,11 @@ public class RedisConfig ***REMOVED***
 
         redisTemplate.afterPropertiesSet();
         return redisTemplate; // 설정이 완료된 RedisTemplate 인스턴스를 반환
-    ***REMOVED***
+    }
 
 
     @Bean(name = "redisScheduleTemplate")
-    public RedisTemplate<String, Object> redisScheduleTemplate() ***REMOVED***
+    public RedisTemplate<String, Object> redisScheduleTemplate() {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisScheduleConnectionFactory());
 
@@ -90,11 +90,11 @@ public class RedisConfig ***REMOVED***
 
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
-    ***REMOVED***
+    }
 
 
     @Bean(name = "redisUserTemplate")
-    public RedisTemplate<String, String> redisUserTemplate() ***REMOVED***
+    public RedisTemplate<String, String> redisUserTemplate() {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisUserConnectionFactory());
 
@@ -106,7 +106,7 @@ public class RedisConfig ***REMOVED***
 
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
-    ***REMOVED***
+    }
 
 
-***REMOVED***
+}

@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/payments")
-public class PaymentController ***REMOVED***
+public class PaymentController {
 
     private final PaymentService paymentService;
 
     @PostMapping("/success")
-    public ResponseEntity<ApiResponse<String>> success(@RequestBody ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> success(@RequestBody ContractInfoRequestDto contractInfoRequestDto) {
         paymentService.paymentSuccess(contractInfoRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success( null,"결제 성공 후 이벤트 발송 성공 "));
-    ***REMOVED***
+    }
 
-***REMOVED***
+}

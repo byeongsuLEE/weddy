@@ -4,11 +4,11 @@ import com.ssafy.schedule.common.response.ErrorCode;
 import lombok.Getter;
 
 @Getter
-public class ScheduleNotFoundException extends RuntimeException ***REMOVED***
+public class ScheduleNotFoundException extends RuntimeException {
     private final ErrorCode errorCode;
 
 
-    public ScheduleNotFoundException(ErrorCode errorCode) ***REMOVED***
+    public ScheduleNotFoundException(ErrorCode errorCode) {
         this.errorCode = errorCode;
-    ***REMOVED***
-***REMOVED***
+    }
+}

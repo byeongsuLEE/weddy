@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentProductInfo ***REMOVED***
+public class PaymentProductInfo {
     private Long id;
     private String title;
     private String content;
@@ -31,8 +31,8 @@ public class PaymentProductInfo ***REMOVED***
     private String paymentId;
     private UserCoupleTokenDto userCoupleToken;
 
-    public void addFcmTokenInfo(UserCoupleTokenDto userCoupleToken) ***REMOVED***
+    public void addFcmTokenInfo(UserCoupleTokenDto userCoupleToken) {
         this.userCoupleToken = userCoupleToken;
-    ***REMOVED***
+    }
 
-***REMOVED***
+}

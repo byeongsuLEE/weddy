@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreateContractRequestDto ***REMOVED***
+public class CreateContractRequestDto {
 
     private Long userId;
     private String code;
@@ -32,4 +32,4 @@ public class CreateContractRequestDto ***REMOVED***
     private LocalDate endDate;
     private Product product;
 
-***REMOVED***
+}

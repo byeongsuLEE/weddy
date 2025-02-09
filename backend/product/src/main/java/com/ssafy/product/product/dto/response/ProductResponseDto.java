@@ -11,5 +11,5 @@ public record ProductResponseDto(Long id,
                                  ProductType type,
                                  int price,
                                  String address,
-                                 List<ProductImageResponseDto> images) ***REMOVED***
-***REMOVED***
+                                 List<ProductImageResponseDto> images) {
+}

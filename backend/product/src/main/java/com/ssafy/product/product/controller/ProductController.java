@@ -20,45 +20,45 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/products")
 @Slf4j
-public class ProductController ***REMOVED***
+public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ProductResponseDto>>> getAllProducts() ***REMOVED***
+    public ResponseEntity<ApiResponse<List<ProductResponseDto>>> getAllProducts() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(productService.getList(),"상품 전체 조회"));
-    ***REMOVED***
-    @GetMapping("/***REMOVED***product_id***REMOVED***")
-    public ResponseEntity<ApiResponse<ProductResponseDto>> getProductById(@PathVariable("product_id") Long productId) ***REMOVED***
+    }
+    @GetMapping("/{product_id}")
+    public ResponseEntity<ApiResponse<ProductResponseDto>> getProductById(@PathVariable("product_id") Long productId) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(productService.detailProduct(productId),"상품 상세 조회"));
-    ***REMOVED***
+    }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ProductResponseDto>> registProduct(@RequestPart("product") ProductRegistRequestDto registRequestDto, @RequestPart(value = "image", required = false) List<MultipartFile> images, HttpServletRequest request)***REMOVED***
+    public ResponseEntity<ApiResponse<ProductResponseDto>> registProduct(@RequestPart("product") ProductRegistRequestDto registRequestDto, @RequestPart(value = "image", required = false) List<MultipartFile> images, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success(HttpStatus.CREATED,productService.registProduct(registRequestDto, images, request),"상품 등록"));
-    ***REMOVED***
+    }
 
-    @GetMapping("/***REMOVED***product_id***REMOVED***/review")
-    public ResponseEntity<ApiResponse<List<ReviewResponseDto>>> getReviewByProductId(@PathVariable("product_id") Long productId) ***REMOVED***
+    @GetMapping("/{product_id}/review")
+    public ResponseEntity<ApiResponse<List<ReviewResponseDto>>> getReviewByProductId(@PathVariable("product_id") Long productId) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(productService.reviewList(productId),"상품 리뷰 조회"));
-    ***REMOVED***
+    }
 
-    @PostMapping("/***REMOVED***product_id***REMOVED***/review")
+    @PostMapping("/{product_id}/review")
     public ResponseEntity<ApiResponse<ReviewResponseDto>> registReviewByProductId(@RequestBody ReviewRequestDto reviewRequestDto,
                                                                                   @PathVariable("product_id") Long productId,
-                                                                                  HttpServletRequest request) ***REMOVED***
+                                                                                  HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success(HttpStatus.CREATED,productService.registerReview(reviewRequestDto,productId,request),"리뷰 등록"));
 
-    ***REMOVED***
+    }
 
     @GetMapping("/ranking")
-    public ResponseEntity<ApiResponse<List<ProductResponseDto>>> getRankingProducts() ***REMOVED***
+    public ResponseEntity<ApiResponse<List<ProductResponseDto>>> getRankingProducts() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(productService.rankingList(),"랭킹 조회 (최대 8개)"));
-    ***REMOVED***
+    }
 
-***REMOVED***
+}

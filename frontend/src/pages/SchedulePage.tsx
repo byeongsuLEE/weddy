@@ -1,76 +1,76 @@
-import ***REMOVED*** GetSchedule ***REMOVED*** from "@/api/schedule.type";
-import ***REMOVED*** getSchedule ***REMOVED*** from "@/api/scheduleApi";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** useQuery, useQueryClient ***REMOVED*** from "react-query";
+import { GetSchedule } from "@/api/schedule.type";
+import { getSchedule } from "@/api/scheduleApi";
+import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import CalenderBox from "../components/SchedulePage/CalenderBox";
-import ***REMOVED*** AlertDialogDemo ***REMOVED*** from "../components/SchedulePage/DrawerBox";
+import { AlertDialogDemo } from "../components/SchedulePage/DrawerBox";
 import ScheduleBox from "../components/SchedulePage/ScheduleBox";
 import PlusIcon from "../icons/PlusIcon";
 
-const Schedule = () => ***REMOVED***
+const Schedule = () => {
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const [ selectedDate, setSelectedDate ] = useState<Date>(new Date());
   const [ formattedDate, setFormattedDate ] = useState<string>('');
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     setFormattedDate(
-      selectedDate.toLocaleString('ko-KR', ***REMOVED***
+      selectedDate.toLocaleString('ko-KR', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
         hour12: false,
-      ***REMOVED***)
+      })
       .replace(/\./g, '')
       .replace(/\s/g, '-')
       .slice(0, 19)
     );
-  ***REMOVED***, [selectedDate]);
+  }, [selectedDate]);
   
 
-  const ***REMOVED*** data: scheduleList = [] ***REMOVED*** = useQuery(
+  const { data: scheduleList = [] } = useQuery(
     ['getSchedule', formattedDate],
     () => getSchedule(formattedDate),
-    ***REMOVED*** enabled: !!formattedDate***REMOVED***
+    { enabled: !!formattedDate}
   );
 
-  const handleAddSchedule = () => ***REMOVED***
+  const handleAddSchedule = () => {
     queryClient.invalidateQueries('getSchedule');
-  ***REMOVED***;
+  };
 
-  const handleCloseDialog = () => ***REMOVED***
+  const handleCloseDialog = () => {
     setIsOpen(false);
-  ***REMOVED***;
+  };
 
-  const handleDateChange = (date: Date) => ***REMOVED***
+  const handleDateChange = (date: Date) => {
     setSelectedDate(date);
-  ***REMOVED***;
+  };
 
   return (
     <div className="m-5 flex flex-col">
-      <CalenderBox onDateChange=***REMOVED***handleDateChange***REMOVED*** />
+      <CalenderBox onDateChange={handleDateChange} />
       <div className="my-5 mx-3 font-bold">
-        ***REMOVED***selectedDate.toLocaleDateString("ko-KR", ***REMOVED***
+        {selectedDate.toLocaleDateString("ko-KR", {
           weekday: "long",
           day: "numeric",
-        ***REMOVED***)***REMOVED***
+        })}
       </div>
 
-      ***REMOVED***scheduleList.length > 0 ? (
+      {scheduleList.length > 0 ? (
         scheduleList.map((schedule: GetSchedule) => (
-          <ScheduleBox key=***REMOVED***schedule.id***REMOVED*** type=***REMOVED***schedule.contractType***REMOVED*** title=***REMOVED***schedule.content***REMOVED***/>
+          <ScheduleBox key={schedule.id} type={schedule.contractType} title={schedule.content}/>
         ))
       ) : (
         <ScheduleBox type="etc" title="일정이 없습니다." />
-      )***REMOVED***
+      )}
 
-      <div onClick=***REMOVED***() => ***REMOVED*** setIsOpen(true); ***REMOVED******REMOVED*** className="plusIconButton">
+      <div onClick={() => { setIsOpen(true); }} className="plusIconButton">
         <PlusIcon />
       </div>
 
-      <AlertDialogDemo isOpen=***REMOVED***isOpen***REMOVED*** addSchedule=***REMOVED***handleAddSchedule***REMOVED*** onClose=***REMOVED***handleCloseDialog***REMOVED*** />
+      <AlertDialogDemo isOpen={isOpen} addSchedule={handleAddSchedule} onClose={handleCloseDialog} />
     </div>
   )
-***REMOVED***
+}
 
 export default Schedule;

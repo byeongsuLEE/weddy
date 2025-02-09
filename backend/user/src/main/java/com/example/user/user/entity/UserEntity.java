@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor  // JPA가 기본 생성자를 필요로 하므로 추가
 @Builder(toBuilder = true)  // toBuilder = true 옵션을 사용하여 기존 객체 기반 빌더 생성 가능
-public class UserEntity ***REMOVED***
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,14 +33,14 @@ public class UserEntity ***REMOVED***
     private Long otherId;
     private String fcmToken;
 
-    public void updateFcmToken(String fcmToken) ***REMOVED***
+    public void updateFcmToken(String fcmToken) {
         this.fcmToken = fcmToken;
-    ***REMOVED***
+    }
 
     @Builder
     public UserEntity(Long id, String coupleCode, String socialId, String name, String email,
                       String address, String phone, String picture, LocalDate date,
-                      Long otherId, String fcmToken) ***REMOVED***
+                      Long otherId, String fcmToken) {
         this.id = id;
         this.coupleCode = coupleCode;
         this.socialId = socialId;
@@ -52,5 +52,5 @@ public class UserEntity ***REMOVED***
         this.date = date;
         this.otherId = otherId;
         this.fcmToken = fcmToken;
-    ***REMOVED***
-***REMOVED***
+    }
+}

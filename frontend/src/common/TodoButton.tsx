@@ -1,18 +1,18 @@
-interface TodoButtonProps ***REMOVED***
+interface TodoButtonProps {
   title: string;
   colorId?: number;
   cursor?: string;
-***REMOVED***
+}
 
-const TodoButton = (***REMOVED*** title, colorId, cursor ***REMOVED***: TodoButtonProps) => ***REMOVED***
+const TodoButton = ({ title, colorId, cursor }: TodoButtonProps) => {
   const colorClass = colorId === 1 ? "bg-main1" : "bg-main2";
   return (
     <button
-      style=***REMOVED******REMOVED***cursor: cursor***REMOVED******REMOVED***
-      className=***REMOVED***`w-[120px] h-[30px] flex items-center justify-center $***REMOVED***colorClass***REMOVED*** rounded-3xl p-2`***REMOVED***
+      style={{cursor: cursor}}
+      className={`w-[120px] h-[30px] flex items-center justify-center ${colorClass} rounded-3xl p-2`}
     >
-      ***REMOVED***title***REMOVED***
+      {title}
     </button>
   );
-***REMOVED***;
+};
 export default TodoButton;

@@ -10,8 +10,8 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class ProducerUtil<K, V> ***REMOVED***
-    @Value("$***REMOVED***producers.cart-response-topic.name***REMOVED***")
+public class ProducerUtil<K, V> {
+    @Value("${producers.cart-response-topic.name}")
     private String sendCartListTopic;
 
     private final KafkaTemplate<K, List<ProductResponseDto>> kafkaTemplate;
@@ -21,7 +21,7 @@ public class ProducerUtil<K, V> ***REMOVED***
      *
      * @param value 메시지 값
      */
-    public void sendCartListTopic(K key, List<ProductResponseDto> value) ***REMOVED***
+    public void sendCartListTopic(K key, List<ProductResponseDto> value) {
         kafkaTemplate.send(sendCartListTopic, key, value);
-    ***REMOVED***
-***REMOVED***
+    }
+}

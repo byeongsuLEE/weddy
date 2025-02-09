@@ -18,7 +18,7 @@ import java.util.Set;
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class RedisUtil ***REMOVED***
+public class RedisUtil {
     private final int RANKING_MAX_SIZE = 7;
     private final int INCREASE = 1;
     private final String ZSET_KEY = "productRanking";
@@ -26,9 +26,9 @@ public class RedisUtil ***REMOVED***
     private ZSetOperations<String, Object> zSetOps;
 
     @PostConstruct
-    public void init() ***REMOVED***
+    public void init() {
         this.zSetOps = redisTemplate.opsForZSet();
-    ***REMOVED***
+    }
 
     /**
      * 키, 값, TTL 시간 설정하여 삽입
@@ -36,10 +36,10 @@ public class RedisUtil ***REMOVED***
      * @param key
      * @param value
      */
-    public void setData(String key, Object value) ***REMOVED***
+    public void setData(String key, Object value) {
         redisTemplate.opsForValue()
                 .set(key, value);
-    ***REMOVED***
+    }
 
     /**
      * 키에대한 값 가져오기
@@ -47,19 +47,19 @@ public class RedisUtil ***REMOVED***
      * @param key
      * @return
      */
-    public Object getData(String key) ***REMOVED***
+    public Object getData(String key) {
         return redisTemplate.opsForValue()
                 .get(key);
-    ***REMOVED***
+    }
 
     /**
      * 키 삭제
      *
      * @param key
      */
-    public void deleteData(String key) ***REMOVED***
+    public void deleteData(String key) {
         redisTemplate.delete(key);
-    ***REMOVED***
+    }
 
     /**
      * 현재 생성되어있는 키에 값 추가하기
@@ -67,57 +67,57 @@ public class RedisUtil ***REMOVED***
      * @param key
      * @param value
      */
-    public void appendData(String key, String value) ***REMOVED***
+    public void appendData(String key, String value) {
         redisTemplate.opsForValue()
                 .append(key, value);
-    ***REMOVED***
+    }
 
     /**
      * sortedSet 데이터 추가
      * @param product
      */
-    public void addToSortedSet(final ProductResponseDto product) ***REMOVED***
+    public void addToSortedSet(final ProductResponseDto product) {
         // 새로운 데이터 추가 및 기존데이터 score 증가
         zSetOps.incrementScore(ZSET_KEY, product, INCREASE);
-    ***REMOVED***
+    }
 
     /**
      * sortedSet 기준 상위 RANKING_MAX_SIZE 개의 데이터 조회
      */
-    public Set<Object> getTopRanked() ***REMOVED***
+    public Set<Object> getTopRanked() {
         return zSetOps.reverseRange(ZSET_KEY, 0, RANKING_MAX_SIZE); // 높은 점수 순으로 정렬
-    ***REMOVED***
+    }
 
 
     /**
      * HashSet 자료구조 사용 데이터 저장
      */
-    public void addToHashSet(final KeyType keyType , final Long id, final Object object) ***REMOVED***
-        if(object instanceof ReviewResponseDto) ***REMOVED***
+    public void addToHashSet(final KeyType keyType , final Long id, final Object object) {
+        if(object instanceof ReviewResponseDto) {
             ObjectMapper objectMapper = new ObjectMapper();
             // Java 8 날짜/시간 타입 지원 모듈 등록
             objectMapper.registerModule(new JavaTimeModule());
             ReviewResponseDto review = objectMapper.convertValue(object, ReviewResponseDto.class);
             redisTemplate.opsForHash().put(keyType.name() + ":" + id, review.getId(), object);
             return;
-        ***REMOVED***
+        }
         redisTemplate.opsForHash().put(keyType.name(), id, object);
-    ***REMOVED***
+    }
 
     /**
      * HashSet 단일 데이터 조회
      * @param id
      * @return
      */
-    public Object getHashValue(final KeyType keyType, final Long id) ***REMOVED***
+    public Object getHashValue(final KeyType keyType, final Long id) {
         return redisTemplate.opsForHash().get(keyType.name(), id);
-    ***REMOVED***
+    }
 
     /**
      * HashSet 전체 데이터 조회
      * @return
      */
-    public Map<Object, Object> getAllHashValues(String keyType) ***REMOVED***
+    public Map<Object, Object> getAllHashValues(String keyType) {
         return redisTemplate.opsForHash().entries(keyType);
-    ***REMOVED***
-***REMOVED***
+    }
+}

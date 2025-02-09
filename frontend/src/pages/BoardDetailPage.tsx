@@ -1,58 +1,58 @@
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
+import { useQuery } from "react-query";
 import FooterButton from "@/components/BoardDetailPage/FooterButton";
 import BoardContent from "../components/BoardDetailPage/BoardContent";
 import BoardReview from "../components/BoardDetailPage/BoardReview";
-import ***REMOVED*** MainCarousel ***REMOVED*** from "../components/MainPage/MainCarousel";
-import ***REMOVED*** useParams ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** detailProduct, getReviewList ***REMOVED*** from "@/api/productApi";
-import ***REMOVED*** addProductToCart ***REMOVED*** from "@/api/cartApi";
+import { MainCarousel } from "../components/MainPage/MainCarousel";
+import { useParams } from "react-router-dom";
+import { detailProduct, getReviewList } from "@/api/productApi";
+import { addProductToCart } from "@/api/cartApi";
 import Separate from "@/common/Separate";
 import AlertBox from "@/common/AlertBox";
-import ***REMOVED*** useState ***REMOVED*** from "react";
+import { useState } from "react";
 
-const BoardDetail = () => ***REMOVED***
-  const ***REMOVED*** productId ***REMOVED*** = useParams();
+const BoardDetail = () => {
+  const { productId } = useParams();
   const [showAlert, setShowAlert] = useState(false);
 
   //== 상품 상세 데이터 ==//
-  const ***REMOVED*** data: productDetail ***REMOVED*** = useQuery(
+  const { data: productDetail } = useQuery(
     ["detailProduct", productId],
     () => detailProduct(productId),
-    ***REMOVED*** enabled: !!productId ***REMOVED***
+    { enabled: !!productId }
   );
   
   //== 리뷰 리스트 ==//
-  const ***REMOVED*** data: reviewList ***REMOVED*** = useQuery(
+  const { data: reviewList } = useQuery(
     ["getReviewList", productId],
     () => getReviewList(productId),
-    ***REMOVED*** enabled: !!productId ***REMOVED***
+    { enabled: !!productId }
   );
 
   //== 장바구니 담기 ==//
-  const addToCart = async () => ***REMOVED***
+  const addToCart = async () => {
     await addProductToCart(productId);
     setShowAlert(true); // 알림 상태를 true로 설정
     setTimeout(() => setShowAlert(false), 2000); // 3초 후 알림 상태를 false로 변경
-  ***REMOVED***;
+  };
 
   return (
     <div>
-      ***REMOVED***showAlert && <AlertBox title="상품 담기" description="장바구니에 상품 담기 완료!"/>***REMOVED***
-      <MainCarousel imageList=***REMOVED***productDetail?.images***REMOVED*** />
+      {showAlert && <AlertBox title="상품 담기" description="장바구니에 상품 담기 완료!"/>}
+      <MainCarousel imageList={productDetail?.images} />
 
-      <BoardContent product=***REMOVED***productDetail***REMOVED*** />
+      <BoardContent product={productDetail} />
       <div className="mx-5 mb-5">
       <Separate />
       </div>
       <span className="m-5 font-bold">Review</span>
-      <BoardReview reviewList=***REMOVED***reviewList ?? []***REMOVED*** />
+      <BoardReview reviewList={reviewList ?? []} />
 
-      <div onClick=***REMOVED***addToCart***REMOVED***>
+      <div onClick={addToCart}>
         <FooterButton />
       </div>
 
     </div>
   );
-***REMOVED***;
+};
 
 export default BoardDetail;

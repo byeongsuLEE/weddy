@@ -14,13 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
-public class VenderServiceImpl implements VenderService ***REMOVED***
+public class VenderServiceImpl implements VenderService {
     private final VenderRepository venderRepository;
     private final S3Uploader s3Uploader;
     private final JwtUtil jwtUtil;
 
     @Override
-    public VenderResponseDto registVender(@Valid final VenderRequestDto venderRequestDto, final MultipartFile image, final HttpServletRequest request) ***REMOVED***
+    public VenderResponseDto registVender(@Valid final VenderRequestDto venderRequestDto, final MultipartFile image, final HttpServletRequest request) {
         String s3Url = s3Uploader.putS3(image);
         Vender vender = Vender.builder().venderRequestDto(venderRequestDto).s3Url(s3Url).userId(jwtUtil.getUserId(jwtUtil.resolveToken(request))).build();
         venderRepository.save(vender);
@@ -33,5 +33,5 @@ public class VenderServiceImpl implements VenderService ***REMOVED***
                 .address(vender.getAddress())
                 .image(vender.getImageUrl())
                 .build();
-    ***REMOVED***
-***REMOVED***
+    }
+}

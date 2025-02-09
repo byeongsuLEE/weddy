@@ -1,23 +1,23 @@
-interface ScheduleProps ***REMOVED***
+interface ScheduleProps {
   type: "STUDIO" | "DRESS" | "MAKEUP" | "WEDDING" |"etc";
   title: string;
-***REMOVED***
+}
 
-const ScheduleBox = (***REMOVED*** type,title ***REMOVED***: ScheduleProps) => ***REMOVED***
-  const backgroundColor = ***REMOVED***
+const ScheduleBox = ({ type,title }: ScheduleProps) => {
+  const backgroundColor = {
     STUDIO: "bg-main3",
     DRESS: "bg-main1",
     MAKEUP: "bg-main4",
     WEDDING: "bg-red-400",
     etc: "bg-gray-200",
-  ***REMOVED***[type];
+  }[type];
 
   return (
     <div className="flex items-center my-2">
-    <div className=***REMOVED***`$***REMOVED***backgroundColor***REMOVED***  rounded-lg h-[50px] w-[10px] mr-2`***REMOVED***></div>
-      <span>***REMOVED***title***REMOVED***</span>
+    <div className={`${backgroundColor}  rounded-lg h-[50px] w-[10px] mr-2`}></div>
+      <span>{title}</span>
     </div>
   )
-***REMOVED***
+}
 
 export default ScheduleBox;

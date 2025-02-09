@@ -6,6 +6,6 @@ import weddy.commonlib.dto.response.ProductResponseDto;
 import java.util.List;
 
 @Mapper
-public interface ProductMapper ***REMOVED***
+public interface ProductMapper {
     List<ProductResponseDto> getAllProducts();
-***REMOVED***
+}

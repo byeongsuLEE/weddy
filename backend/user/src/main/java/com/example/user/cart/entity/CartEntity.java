@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "Cart")
 @NoArgsConstructor
-public class CartEntity ***REMOVED***
+public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -22,10 +22,10 @@ public class CartEntity ***REMOVED***
     private Long userId;
 
     @Builder
-    public CartEntity(Long id, String coupleCode, Long productId, Long userId) ***REMOVED***
+    public CartEntity(Long id, String coupleCode, Long productId, Long userId) {
         this.id = id;
         this.coupleCode = coupleCode;
         this.productId = productId;
         this.userId = userId;
-    ***REMOVED***
-***REMOVED***
+    }
+}

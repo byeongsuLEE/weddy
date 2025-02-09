@@ -12,20 +12,20 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/users/test")
-public class TestController ***REMOVED***
+public class TestController {
 
     private GCSImageService gcsImageService;
-    public TestController(GCSImageService gcsImageService) ***REMOVED***
+    public TestController(GCSImageService gcsImageService) {
         this.gcsImageService = gcsImageService;
-    ***REMOVED***
+    }
 
     @PostMapping("/image")
-    public String testImage(@RequestParam("image") MultipartFile file)***REMOVED***
-        try ***REMOVED***
+    public String testImage(@RequestParam("image") MultipartFile file){
+        try {
             String url = gcsImageService.uploadImage(file);
             return url;
-        ***REMOVED***catch (Exception e)***REMOVED***
+        }catch (Exception e){
             return "저런.."+e+e.getMessage();
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+        }
+    }
+}

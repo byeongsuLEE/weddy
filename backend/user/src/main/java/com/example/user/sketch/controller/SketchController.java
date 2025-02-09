@@ -17,18 +17,18 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users/sketch")
-public class SketchController ***REMOVED***
+public class SketchController {
     private final SketchService sketchService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<SketchResponseDto>>> getAllSketchByUser(@AuthenticationPrincipal UserEntity user) ***REMOVED***
+    public ResponseEntity<ApiResponse<List<SketchResponseDto>>> getAllSketchByUser(@AuthenticationPrincipal UserEntity user) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(sketchService.getAllSketchesByUser(user),"사용자 스케치 리스트"));
-    ***REMOVED***
+    }
 
     @PostMapping()
-    public ResponseEntity<ApiResponse<SketchResponseDto>> registerSketch(@RequestPart(name = "sketch") SketchRequestDto requestDto, @RequestPart MultipartFile image, @AuthenticationPrincipal UserEntity user) ***REMOVED***
+    public ResponseEntity<ApiResponse<SketchResponseDto>> registerSketch(@RequestPart(name = "sketch") SketchRequestDto requestDto, @RequestPart MultipartFile image, @AuthenticationPrincipal UserEntity user) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ApiResponse.success(sketchService.registerSketch(requestDto,image,user),"사용자 스케치 등록"));
-    ***REMOVED***
-***REMOVED***
+    }
+}

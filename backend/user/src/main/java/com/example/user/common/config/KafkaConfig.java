@@ -27,14 +27,14 @@ import java.util.Map;
  * 이를 통해 프로듀서가 Kafka 브로커에 연결하고 데이터를 전송할 준비를 갖추게 됩니다.
  */
 @Configuration
-public class KafkaConfig ***REMOVED***
-    @Value("$***REMOVED***kafka.bootstrapAddress***REMOVED***")
+public class KafkaConfig {
+    @Value("${kafka.bootstrapAddress}")
     private String BOOTSTRAPSERVERS;
     ;  // 카프카 연결을 위한 브로커인 부트스트랩 서버 주소
 
 
     @Bean
-    public ProducerFactory<String, PaymentProductInfo> kafkaProducerFactory() ***REMOVED***
+    public ProducerFactory<String, PaymentProductInfo> kafkaProducerFactory() {
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -42,16 +42,16 @@ public class KafkaConfig ***REMOVED***
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class); // 값 직렬화
 
         return new DefaultKafkaProducerFactory<>(config);
-    ***REMOVED***
+    }
 
     @Bean
-    public KafkaTemplate<String, PaymentProductInfo> kafkaTemplate() ***REMOVED***
+    public KafkaTemplate<String, PaymentProductInfo> kafkaTemplate() {
         return new KafkaTemplate<>(kafkaProducerFactory());
-    ***REMOVED***
+    }
 
     // 상품정보용 Kafka 프로듀서
     @Bean
-    public ProducerFactory<String,Object> defaultkafkaProducerFactory() ***REMOVED***
+    public ProducerFactory<String,Object> defaultkafkaProducerFactory() {
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -59,17 +59,17 @@ public class KafkaConfig ***REMOVED***
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class); // 값 직렬화
 
         return new DefaultKafkaProducerFactory<>(config);
-    ***REMOVED***
+    }
 
     @Bean
     @Qualifier("defaultKafkaTemplate")
-    public KafkaTemplate<String,Object> defaultkafkaTemplate() ***REMOVED***
+    public KafkaTemplate<String,Object> defaultkafkaTemplate() {
         return new KafkaTemplate<>(defaultkafkaProducerFactory());
-    ***REMOVED***
+    }
 
     // 상품정보용 Kafka 컨슈머 설정
     @Bean
-    public ConsumerFactory<String, CartProductDto> cartConsumerFactory()***REMOVED***
+    public ConsumerFactory<String, CartProductDto> cartConsumerFactory(){
 
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -81,15 +81,15 @@ public class KafkaConfig ***REMOVED***
         deserializer.addTrustedPackages("*"); // 모든 패키지에서 오는 클래스 신뢰
 
         return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), deserializer);
-    ***REMOVED***
+    }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CartProductDto> cartKafkaListenerContainerFactory() ***REMOVED***
+    public ConcurrentKafkaListenerContainerFactory<String, CartProductDto> cartKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, CartProductDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(cartConsumerFactory());
         return factory;
-    ***REMOVED***
+    }
 
 
 
-***REMOVED***
+}

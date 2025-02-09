@@ -23,14 +23,14 @@ import java.util.Map;
  * 이를 통해 프로듀서가 Kafka 브로커에 연결하고 데이터를 전송할 준비를 갖추게 됩니다.
  */
 @Configuration
-public class KafkaConfig ***REMOVED***
-    @Value("$***REMOVED***kafka.bootstrapAddress***REMOVED***")
+public class KafkaConfig {
+    @Value("${kafka.bootstrapAddress}")
     private String BOOTSTRAPSERVERS;
     ;  // 카프카 연결을 위한 브로커인 부트스트랩 서버 주소
 
 
     @Bean
-    public ProducerFactory<String, EventResult> kafkaProducerFactory() ***REMOVED***
+    public ProducerFactory<String, EventResult> kafkaProducerFactory() {
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAPSERVERS);
@@ -38,13 +38,13 @@ public class KafkaConfig ***REMOVED***
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class); // 값 직렬화
 
         return new DefaultKafkaProducerFactory<>(config);
-    ***REMOVED***
+    }
 
 
 
     @Bean
-    public KafkaTemplate<String, EventResult> kafkaTemplate() ***REMOVED***
+    public KafkaTemplate<String, EventResult> kafkaTemplate() {
         return new KafkaTemplate<>(kafkaProducerFactory());
-    ***REMOVED***
+    }
 
-***REMOVED***
+}

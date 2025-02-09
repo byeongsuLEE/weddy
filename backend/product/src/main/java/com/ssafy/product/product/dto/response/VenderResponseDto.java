@@ -8,5 +8,5 @@ public record VenderResponseDto(Long id,
                                 String businessNumber,
                                 String phone,
                                 String address,
-                                String image) ***REMOVED***
-***REMOVED***
+                                String image) {
+}

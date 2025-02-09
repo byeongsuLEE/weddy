@@ -40,7 +40,7 @@
         FROM
             ProductImage
         WHERE
-            product_id = #***REMOVED***id***REMOVED***
+            product_id = #{id}
     </select>
 </mapper>
 

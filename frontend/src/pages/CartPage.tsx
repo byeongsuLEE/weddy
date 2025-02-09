@@ -1,94 +1,94 @@
-import ***REMOVED*** getCartItems ***REMOVED*** from "@/api/cartApi";
-import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
-import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+import { getCartItems } from "@/api/cartApi";
+import { createContract } from "@/api/contractApi";
+import { Product } from "@/api/product.type";
 import TodoButton from "@/common/TodoButton";
 import CartListBox from "@/components/CartPage/CartListBox";
-import ***REMOVED*** useState ***REMOVED*** from "react";
-import ***REMOVED*** useQuery, useQueryClient ***REMOVED*** from "react-query";
-import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 
-const CartPage = () => ***REMOVED***
+const CartPage = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [selectedList, setSelectedList] = useState<***REMOVED*** [type: string]: Product | null; ***REMOVED***>(***REMOVED***
+  const [selectedList, setSelectedList] = useState<{ [type: string]: Product | null; }>({
     STUDIO: null,
     DRESS: null,
     MAKEUP: null,
-  ***REMOVED***);
+  });
 
-  const ***REMOVED*** data: cartList ***REMOVED*** = useQuery("getCartItems", getCartItems);
+  const { data: cartList } = useQuery("getCartItems", getCartItems);
 
-  const handleRemove = () => ***REMOVED***
+  const handleRemove = () => {
     queryClient.invalidateQueries("getCartItems");
-  ***REMOVED***;
+  };
 
   //== 총 가격 계산 ==//
   const totalAmount = Object.values(selectedList).reduce((acc, item) => acc + (Number(item?.price) || 0), 0).toLocaleString();
 
   //== 선택한 상품 변경 ==//
-  const handleProductChange = (category: string, product: Product | null) => ***REMOVED***
-    setSelectedList((prev) => (***REMOVED***
+  const handleProductChange = (category: string, product: Product | null) => {
+    setSelectedList((prev) => ({
       ...prev,
       [category]: product,
-    ***REMOVED***));
-  ***REMOVED***;
+    }));
+  };
 
   //== 계약서 요청 ==//
-  const handleCreateContract = async () => ***REMOVED***
+  const handleCreateContract = async () => {
     const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
     await createContract(contractItems);
     navigate("/contract/list");
-  ***REMOVED***;
+  };
 
   return (
     <div className="flex flex-col relative">
       <div className="m-5 flex flex-col items-center">
-        ***REMOVED***["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
+        {["STUDIO", "DRESS", "MAKEUP"].map((category: string) => (
           <CartListBox
-            key=***REMOVED***category***REMOVED***
-            category=***REMOVED***category***REMOVED***
-            productList=***REMOVED***Array.isArray(cartList) ? cartList?.filter((item: Product) => item.type === category) : []***REMOVED***
-            selectedList=***REMOVED***selectedList***REMOVED***
-            onProductChange=***REMOVED***handleProductChange***REMOVED***
-            onRemove=***REMOVED***handleRemove***REMOVED***
+            key={category}
+            category={category}
+            productList={Array.isArray(cartList) ? cartList?.filter((item: Product) => item.type === category) : []}
+            selectedList={selectedList}
+            onProductChange={handleProductChange}
+            onRemove={handleRemove}
           />
-        ))***REMOVED***
+        ))}
       </div>
 
       <div className="flex justify-end mr-10 mt-14">
         <div className="flex flex-col mr-3">
-          ***REMOVED***Object.entries(selectedList).map(([category, item]) =>
+          {Object.entries(selectedList).map(([category, item]) =>
             item?.name ? (
-              <span key=***REMOVED***category***REMOVED*** className="my-1">
-                ***REMOVED***item.name***REMOVED***
+              <span key={category} className="my-1">
+                {item.name}
               </span>
             ) : null
-          )***REMOVED***
+          )}
           <span className="font-bold mt-2">총 가격: </span>
         </div>
         <div className="flex flex-col text-end">
-          ***REMOVED***Object.entries(selectedList).map(([category, item]) =>
+          {Object.entries(selectedList).map(([category, item]) =>
             item?.price ? (
-              <span key=***REMOVED***category***REMOVED*** className="my-1">
-                ***REMOVED***Number(item.price).toLocaleString()***REMOVED***원
+              <span key={category} className="my-1">
+                {Number(item.price).toLocaleString()}원
               </span>
             ) : null
-          )***REMOVED***
+          )}
           <span className="font-bold mt-2">
-            ***REMOVED***totalAmount.toLocaleString()***REMOVED***원
+            {totalAmount.toLocaleString()}원
           </span>
         </div>
       </div>
 
       <div
         className="flex justify-end mr-10 mt-5 mb-24"
-        onClick=***REMOVED***handleCreateContract***REMOVED***
+        onClick={handleCreateContract}
       >
         <TodoButton title="계약 요청" />
       </div>
     </div>
   );
-***REMOVED***;
+};
 
 export default CartPage;

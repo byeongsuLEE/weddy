@@ -14,15 +14,15 @@ If you are developing a production application, we recommend updating the config
 - Configure the top-level `parserOptions` property like this:
 
 ```js
-export default tseslint.config(***REMOVED***
-  languageOptions: ***REMOVED***
+export default tseslint.config({
+  languageOptions: {
     // other options...
-    parserOptions: ***REMOVED***
+    parserOptions: {
       project: ['./tsconfig.node.json', './tsconfig.app.json'],
       tsconfigRootDir: import.meta.dirname,
-    ***REMOVED***,
-  ***REMOVED***,
-***REMOVED***)
+    },
+  },
+})
 ```
 
 - Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
@@ -33,18 +33,18 @@ export default tseslint.config(***REMOVED***
 // eslint.config.js
 import react from 'eslint-plugin-react'
 
-export default tseslint.config(***REMOVED***
+export default tseslint.config({
   // Set the react version
-  settings: ***REMOVED*** react: ***REMOVED*** version: '18.3' ***REMOVED*** ***REMOVED***,
-  plugins: ***REMOVED***
+  settings: { react: { version: '18.3' } },
+  plugins: {
     // Add the react plugin
     react,
-  ***REMOVED***,
-  rules: ***REMOVED***
+  },
+  rules: {
     // other rules...
     // Enable its recommended rules
     ...react.configs.recommended.rules,
     ...react.configs['jsx-runtime'].rules,
-  ***REMOVED***,
-***REMOVED***)
+  },
+})
 ```

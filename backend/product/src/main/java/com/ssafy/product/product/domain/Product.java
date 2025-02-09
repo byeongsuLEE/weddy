@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product ***REMOVED***
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,7 +44,7 @@ public class Product ***REMOVED***
     @JoinColumn(name = "vender_id")
     private Vender vender;
 
-    public ProductResponseDto getProduct(Product product) ***REMOVED***
+    public ProductResponseDto getProduct(Product product) {
         List<ProductImageResponseDto> images = product.productImages.stream()
                 .map(image -> ProductImageResponseDto.builder()
                         .imageUrl(image.getImageUrl())
@@ -63,18 +63,18 @@ public class Product ***REMOVED***
                 .vendorAddress(product.vender.getAddress())
                 .vendorId(product.vender.getId())
                 .build();
-    ***REMOVED***
+    }
 
     @Builder
-    public Product(ProductRegistRequestDto productRegistRequestDto, Vender vender)***REMOVED***
+    public Product(ProductRegistRequestDto productRegistRequestDto, Vender vender){
         this.name = productRegistRequestDto.name();
         this.type = productRegistRequestDto.type();
         this.price = productRegistRequestDto.price();
         this.address = productRegistRequestDto.address();
         this.vender = vender;
-    ***REMOVED***
+    }
 
-    public ProductResponseDto registProductResponseDto(Product product, List<ProductImage> images) ***REMOVED***
+    public ProductResponseDto registProductResponseDto(Product product, List<ProductImage> images) {
         List<ProductImageResponseDto> imagesDto = images.stream()
                 .map(image -> ProductImageResponseDto.builder()
                         .imageUrl(image.getImageUrl())
@@ -92,5 +92,5 @@ public class Product ***REMOVED***
                 .vendorAddress(product.vender.getAddress())
                 .vendorId(product.vender.getId())
                 .build();
-    ***REMOVED***
-***REMOVED***
+    }
+}

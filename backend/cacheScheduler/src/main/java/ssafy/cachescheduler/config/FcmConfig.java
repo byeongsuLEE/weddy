@@ -15,19 +15,19 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Configuration
-public class FcmConfig ***REMOVED***
+public class FcmConfig {
 
     @Bean
-    public FirebaseApp initializeFirebase() throws IOException ***REMOVED***
+    public FirebaseApp initializeFirebase() throws IOException {
         // InputStream을 통해 classpath 리소스를 읽어옴
-        try (InputStream serviceAccount = new ClassPathResource("keystore/service-account.json").getInputStream()) ***REMOVED***
+        try (InputStream serviceAccount = new ClassPathResource("keystore/service-account.json").getInputStream()) {
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
 
             return FirebaseApp.initializeApp(options);
-        ***REMOVED*** catch (FileNotFoundException e) ***REMOVED***
+        } catch (FileNotFoundException e) {
             throw new RuntimeException("Firebase service account 파일을 찾을 수 없습니다.", e);
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+        }
+    }
+}

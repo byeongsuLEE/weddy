@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserApplicationTests ***REMOVED***
+class UserApplicationTests {
 
     @Test
-    void contextLoads() ***REMOVED***
-    ***REMOVED***
+    void contextLoads() {
+    }
 
-***REMOVED***
+}

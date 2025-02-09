@@ -1,6 +1,6 @@
-import ***REMOVED*** atom ***REMOVED*** from 'recoil';
+import { atom } from 'recoil';
 
-export const firebaseTokenState = atom<string | null>(***REMOVED***
+export const firebaseTokenState = atom<string | null>({
   key: 'firebaseTokenState',
   default: null,
-***REMOVED***);
+});

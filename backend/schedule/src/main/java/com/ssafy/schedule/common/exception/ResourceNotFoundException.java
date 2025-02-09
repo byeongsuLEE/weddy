@@ -1,16 +1,16 @@
 package com.ssafy.schedule.common.exception;
 
-public class ResourceNotFoundException extends RuntimeException ***REMOVED***
-    public ResourceNotFoundException(String message) ***REMOVED***
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
         super(message);
-    ***REMOVED***
-    public ResourceNotFoundException(String message, Throwable cause) ***REMOVED***
+    }
+    public ResourceNotFoundException(String message, Throwable cause) {
         super(message, cause);
-    ***REMOVED***
-    public ResourceNotFoundException() ***REMOVED***
+    }
+    public ResourceNotFoundException() {
         super();
-    ***REMOVED***
-    public ResourceNotFoundException(Throwable cause) ***REMOVED***
+    }
+    public ResourceNotFoundException(Throwable cause) {
         super(cause);
-    ***REMOVED***
-***REMOVED***
+    }
+}

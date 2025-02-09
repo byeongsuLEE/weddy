@@ -1,28 +1,28 @@
 import GotoIcon from "@/icons/Goto";
-import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
+import { Link } from "react-router-dom";
 
-interface SketchBoxProps ***REMOVED***
+interface SketchBoxProps {
   studioName: string;
   dressName: string;
   imgSrc?: string;
-***REMOVED***
+}
 
-const SketchBox = (***REMOVED*** studioName, dressName, imgSrc ***REMOVED***: SketchBoxProps) => ***REMOVED***
+const SketchBox = ({ studioName, dressName, imgSrc }: SketchBoxProps) => {
   return (
     <>
       <div className="bg-white h-[70px] rounded-lg w-[350px] my-3 p-5 flex justify-between items-center">
-        <span>***REMOVED***studioName***REMOVED*** _ ***REMOVED***dressName***REMOVED***</span>
+        <span>{studioName} _ {dressName}</span>
         <Link 
-          to=***REMOVED******REMOVED***
+          to={{
             pathname: "/dress/img",
-          ***REMOVED******REMOVED***
-          state=***REMOVED******REMOVED*** imgSrc, studioName, dressName ***REMOVED******REMOVED***
+          }}
+          state={{ imgSrc, studioName, dressName }}
         >
           <GotoIcon />
         </Link>
       </div>
     </>
   );
-***REMOVED***;
+};
 
 export default SketchBox;

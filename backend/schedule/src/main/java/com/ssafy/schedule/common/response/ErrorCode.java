@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public enum ErrorCode ***REMOVED***
+public enum ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND,"해당 유저를 찾을 수 없습니다."),
     DUPLICATE_EMAIL(HttpStatus.CONFLICT,"이미 가입되어있는 이메일입니다."),
     DUPLICATE_PHONE_NUMBER(HttpStatus.CONFLICT,"이미 가입되어있는 전화번호입니다."),
@@ -45,4 +45,4 @@ public enum ErrorCode ***REMOVED***
     SCHEDULE_IS_EMPTY(HttpStatus.NO_CONTENT,"해당되는 일정이 없습니다.");
     private HttpStatus status;
     private String message;
-***REMOVED***
+}

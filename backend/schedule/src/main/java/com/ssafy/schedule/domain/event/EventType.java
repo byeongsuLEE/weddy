@@ -1,5 +1,5 @@
 package com.ssafy.schedule.domain.event;
 
-public enum EventType ***REMOVED***
+public enum EventType {
     CONTRACT_PAYMENT;
-***REMOVED***
+}

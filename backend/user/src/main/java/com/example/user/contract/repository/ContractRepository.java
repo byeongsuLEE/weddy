@@ -10,7 +10,7 @@ import java.util.Optional;
 
 
 @Repository
-public interface ContractRepository extends JpaRepository<Contract, Long> ***REMOVED***
+public interface ContractRepository extends JpaRepository<Contract, Long> {
     Optional<Contract> findByIdAndUser(Long contractId, UserEntity userEntity);
 
     List<Contract> findByUserCoupleCode(String coupleCode);
@@ -19,4 +19,4 @@ public interface ContractRepository extends JpaRepository<Contract, Long> ***REM
 
 
 
-***REMOVED***
+}

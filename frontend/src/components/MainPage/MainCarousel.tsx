@@ -1,56 +1,56 @@
 import Autoplay from "embla-carousel-autoplay"
 import * as React from "react"
 
-import ***REMOVED*** Card, CardContent ***REMOVED*** from "../ui/card"
-import ***REMOVED***
+import { Card, CardContent } from "../ui/card"
+import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious
-***REMOVED*** from "../ui/carousel"
+} from "../ui/carousel"
 
-interface ImageData ***REMOVED***
+interface ImageData {
   imageUrl: string;
-***REMOVED***
+}
 
-interface MainCarouselProps ***REMOVED***
+interface MainCarouselProps {
   imageList: ImageData[] | string[] | undefined;
-***REMOVED***
+}
 
 
-export const MainCarousel = (***REMOVED*** imageList ***REMOVED***: MainCarouselProps) => ***REMOVED***
+export const MainCarousel = ({ imageList }: MainCarouselProps) => {
   const plugin = React.useRef(
-    Autoplay(***REMOVED*** delay: 2000, stopOnInteraction: true ***REMOVED***)
+    Autoplay({ delay: 2000, stopOnInteraction: true })
   )
 
   return (
     <>
       <Carousel
-        plugins=***REMOVED***[plugin.current]***REMOVED***
+        plugins={[plugin.current]}
         className="w-full"
-        onMouseEnter=***REMOVED***plugin.current.stop***REMOVED***
-        onMouseLeave=***REMOVED***plugin.current.reset***REMOVED***
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
       >
         <CarouselContent>
-        ***REMOVED***imageList?.map((item, index) => (
-          <CarouselItem key=***REMOVED***index***REMOVED***>
+        {imageList?.map((item, index) => (
+          <CarouselItem key={index}>
             <Card>
               <CardContent>
-                <a href=***REMOVED***index === 0 ? '/board' : index === 1 ? '/schedule' : index === 2 ?'/contract/list': '/prompt'***REMOVED***>
+                <a href={index === 0 ? '/board' : index === 1 ? '/schedule' : index === 2 ?'/contract/list': '/prompt'}>
                   <img
                     className="w-full h-full object-cover"
-                    src=***REMOVED***typeof item === 'string' ? item : item.imageUrl***REMOVED***
+                    src={typeof item === 'string' ? item : item.imageUrl}
                     alt="제품 상세 이미지"
                   />
                 </a>
               </CardContent>
             </Card>
           </CarouselItem>
-        ))***REMOVED***
+        ))}
 
         </CarouselContent>
         <CarouselPrevious />
       </Carousel>
     </>
   )
-***REMOVED***
+}

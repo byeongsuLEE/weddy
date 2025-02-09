@@ -14,16 +14,16 @@ import weddy.commonlib.constant.KeyType;
 
 @Repository
 @RequiredArgsConstructor
-public class RedisUtil ***REMOVED***
+public class RedisUtil {
     private static final Logger log = LoggerFactory.getLogger(RedisUtil.class);
 
     private final RedisTemplate<String, Object> redisTemplate;
     /**
      * HashSet 자료구조 사용 데이터 저장
      */
-    public <K> void addToHashSet(final KeyType keyType, final Object object) ***REMOVED***
+    public <K> void addToHashSet(final KeyType keyType, final Object object) {
 
-        if(object instanceof CreateScheduleInputDto) ***REMOVED***
+        if(object instanceof CreateScheduleInputDto) {
 
             ObjectMapper objectMapper = new ObjectMapper();
             // Java 8 날짜/시간 타입 지원 모듈 등록
@@ -46,19 +46,19 @@ public class RedisUtil ***REMOVED***
             System.out.println("조회된 값: hashKey " + hashKey);
             Object retrievedObject = redisTemplate.opsForHash().get(redisKey, hashKey);
 
-            if (retrievedObject != null) ***REMOVED***
+            if (retrievedObject != null) {
                 log.info("조회된 값: " + retrievedObject.toString());
-            ***REMOVED*** else ***REMOVED***
+            } else {
                 log.info("해당 키에 대한 데이터가 없습니다.");
-            ***REMOVED***
+            }
 //
 //            // 커플이 존재할 경우 커플의 FCM Token도 저장
-//            if(schedule.getUserCoupleToken().getCoupleFcmToken() != null) ***REMOVED***
+//            if(schedule.getUserCoupleToken().getCoupleFcmToken() != null) {
 //                redisTemplate.opsForHash().put(keyType.name() + ":" +schedule.getStartDate(), schedule.getCode(), object);
-//            ***REMOVED***
+//            }
 
-        ***REMOVED***
+        }
 
-    ***REMOVED***
+    }
     
-***REMOVED***
+}

@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class FCMAdapter implements FCMOutputPort ***REMOVED***
+public class FCMAdapter implements FCMOutputPort {
     @Override
-    public void send(String token, String title, String body) ***REMOVED***
-        try ***REMOVED***
+    public void send(String token, String title, String body) {
+        try {
             // 알림 메시지 생성
 //            Notification notification = Notification.builder()
 //                    .setTitle(title)
@@ -52,8 +52,8 @@ public class FCMAdapter implements FCMOutputPort ***REMOVED***
             String response = FirebaseMessaging.getInstance().send(message);
             log.info("Successfully sent message: " + response);
 
-        ***REMOVED*** catch (Exception e) ***REMOVED***
+        } catch (Exception e) {
             log.info("Error sending FCM message: " + e.getMessage());
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+        }
+    }
+}

@@ -1,23 +1,23 @@
-import ***REMOVED*** useLocation ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** capturedImageState ***REMOVED*** from "@/store/imageState";
-import ***REMOVED*** useRecoilState ***REMOVED*** from "recoil";
+import { useLocation } from "react-router-dom";
+import { capturedImageState } from "@/store/imageState";
+import { useRecoilState } from "recoil";
 
-const DressImg = () => ***REMOVED***
+const DressImg = () => {
   const [capturedImage] = useRecoilState(capturedImageState);
   const location = useLocation();
-  const ***REMOVED*** studioName, dressName, imgSrc ***REMOVED*** = location.state || ***REMOVED******REMOVED***;
+  const { studioName, dressName, imgSrc } = location.state || {};
 
   return (
-    <div style=***REMOVED******REMOVED*** position: 'relative', display: 'inline-block' ***REMOVED******REMOVED***>
-      ***REMOVED***(imgSrc || capturedImage) && (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      {(imgSrc || capturedImage) && (
         <>
           <img
-            src=***REMOVED***imgSrc ? imgSrc : (capturedImage ? URL.createObjectURL(capturedImage) : "")***REMOVED***
+            src={imgSrc ? imgSrc : (capturedImage ? URL.createObjectURL(capturedImage) : "")}
             alt="Captured"
-            style=***REMOVED******REMOVED*** width: '100%' ***REMOVED******REMOVED***
+            style={{ width: '100%' }}
           />
           <div
-            style=***REMOVED******REMOVED***
+            style={{
               position: 'absolute',
               top: '15%',
               left: '50%',
@@ -29,14 +29,14 @@ const DressImg = () => ***REMOVED***
               fontWeight: 'bold',
               textAlign: 'center',
               width: '100%',
-            ***REMOVED******REMOVED***
+            }}
           >
-            ***REMOVED***studioName || '스튜디오명'***REMOVED*** _ ***REMOVED***dressName || '드레스명'***REMOVED***
+            {studioName || '스튜디오명'} _ {dressName || '드레스명'}
           </div>
         </>
-      )***REMOVED***
+      )}
     </div>
   );
-***REMOVED***
+}
 
 export default DressImg;

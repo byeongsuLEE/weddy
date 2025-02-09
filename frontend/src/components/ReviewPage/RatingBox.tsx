@@ -1,26 +1,26 @@
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import ***REMOVED*** SyntheticEvent ***REMOVED*** from 'react';
+import { SyntheticEvent } from 'react';
 
-interface scoreProp ***REMOVED***
+interface scoreProp {
   getScore: (rating: number) => void;
-***REMOVED***;
+};
 
-const RatingBox = (***REMOVED*** getScore ***REMOVED***: scoreProp) => ***REMOVED***
+const RatingBox = ({ getScore }: scoreProp) => {
 
-  const handleScore = (event: SyntheticEvent<Element>, value: number | null) => ***REMOVED***
-    if (value !== null && event) ***REMOVED***
+  const handleScore = (event: SyntheticEvent<Element>, value: number | null) => {
+    if (value !== null && event) {
       getScore(value);
-    ***REMOVED***;
-  ***REMOVED***;
+    };
+  };
 
   return (
     <>
-      <Stack spacing=***REMOVED***1***REMOVED***>
-        <Rating name="size-medium" defaultValue=***REMOVED***0***REMOVED*** onChange=***REMOVED***handleScore***REMOVED*** />
+      <Stack spacing={1}>
+        <Rating name="size-medium" defaultValue={0} onChange={handleScore} />
       </Stack>
     </>
   );
-***REMOVED***;
+};
 
 export default RatingBox;

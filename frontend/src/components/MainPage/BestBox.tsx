@@ -1,27 +1,27 @@
 import BestIcon from "@/icons/BestIcon";
 
-interface BestBoxProps ***REMOVED***
+interface BestBoxProps {
   src: string;
   title: string;
   price: number;
   index?: number;
-***REMOVED***
+}
 
-const BestBox = (***REMOVED***src, title, price, index***REMOVED***:BestBoxProps) => ***REMOVED***
+const BestBox = ({src, title, price, index}:BestBoxProps) => {
   // //== 베스트 ==//
-  // const ***REMOVED*** data: getRankedProductList ***REMOVED*** = useQuery('getRankedProducts', getRankedProducts);
+  // const { data: getRankedProductList } = useQuery('getRankedProducts', getRankedProducts);
 
   return(
     <div className="flex flex-col items-center relative">
-      <img className="w-[150px] h-[150px] rounded-md" src=***REMOVED***src***REMOVED*** alt="" />
+      <img className="w-[150px] h-[150px] rounded-md" src={src} alt="" />
       <div className="absolute top-0 left-0">
       <BestIcon />
-      <span className="absolute top-3 left-5 text-white font-bold text-xs z-10">***REMOVED***index***REMOVED***</span>
+      <span className="absolute top-3 left-5 text-white font-bold text-xs z-10">{index}</span>
       </div>
-      <span className="w-[150px]">***REMOVED***title***REMOVED***</span>
-      <span>***REMOVED***price.toLocaleString()***REMOVED***원</span>
+      <span className="w-[150px]">{title}</span>
+      <span>{price.toLocaleString()}원</span>
     </div>
   )
-***REMOVED***
+}
 
 export default BestBox;

@@ -1,7 +1,7 @@
-import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-import ***REMOVED*** atom ***REMOVED*** from "recoil";
+import { Product } from "@/api/product.type";
+import { atom } from "recoil";
 
-export const recommendState = atom<Product[]>(***REMOVED***
+export const recommendState = atom<Product[]>({
   key: 'recommendState',
   default: [],
-***REMOVED***);
+});

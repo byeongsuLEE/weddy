@@ -1,6 +1,6 @@
 import DressIcon from "@/icons/DressIcon";
 import DressSelectIcon from "@/icons/DressSelectIcon";
-import ***REMOVED*** Link, useLocation ***REMOVED*** from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CalenderIcon from "../icons/CalenderIcon";
 import CalenderSelectIcon from "../icons/CalenderSelectIcon";
 import FileIcon from "../icons/FileIcon";
@@ -11,57 +11,57 @@ import MyIcon from "../icons/MyIcon";
 import MySelectIcon from "../icons/MySelectIcon";
 
 
-const Footer = () => ***REMOVED***
+const Footer = () => {
   const location = useLocation().pathname.split('/')[1];
 
   return (
     <footer className="flex justify-between">
-      ***REMOVED***location === "" ? (
-        <HomeSelectIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+      {location === "" ? (
+        <HomeSelectIcon w={25} h={25} />
       ) : (
 
         <Link to='/'>
-          <HomeIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+          <HomeIcon w={25} h={25} />
         </Link>
 
-      )***REMOVED***
+      )}
 
-      ***REMOVED***location === "schedule" ? (
-        <CalenderSelectIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+      {location === "schedule" ? (
+        <CalenderSelectIcon w={25} h={25} />
       ) : (
         <Link to='/schedule'>
-          <CalenderIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+          <CalenderIcon w={25} h={25} />
         </Link>
 
-      )***REMOVED***
+      )}
 
-      ***REMOVED***location === "dress" ? (
+      {location === "dress" ? (
         <DressSelectIcon />
       ) : (
         <Link to='/dress'>
           <DressIcon/>
         </Link>
-      )***REMOVED***
+      )}
 
-      ***REMOVED***location === "contract" ? (
-        <FileSelectIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+      {location === "contract" ? (
+        <FileSelectIcon w={25} h={25} />
       ) : (
         <Link to='/contract/list'>
-          <FileIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+          <FileIcon w={25} h={25} />
         </Link>
-      )***REMOVED***
+      )}
 
 
-      ***REMOVED***location === "mypage" ? (
-        <MySelectIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+      {location === "mypage" ? (
+        <MySelectIcon w={25} h={25} />
       ) : (
         <Link to='/mypage'>
-          <MyIcon w=***REMOVED***25***REMOVED*** h=***REMOVED***25***REMOVED*** />
+          <MyIcon w={25} h={25} />
         </Link>
-      )***REMOVED***
+      )}
 
     </footer>
   );
-***REMOVED***;
+};
 
 export default Footer;

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor (access = AccessLevel.PROTECTED)
 @AllArgsConstructor (access = AccessLevel.PROTECTED)
-public class Schedule ***REMOVED***
+public class Schedule {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Schedule ***REMOVED***
     private String code;
 
     //문제발생 : 도메인 모델에서 비지니스 로직을 작성할 때 메게변수는 dto로  해도되는지?
-    public static Schedule createSchedule(CreateScheduleInputDto createScheduleInputDto)***REMOVED***
+    public static Schedule createSchedule(CreateScheduleInputDto createScheduleInputDto){
         //객체를 만들고 save까지 하는거같음 apator.save() 이런느낌
 
         Schedule schedule =   Schedule.builder()
@@ -45,10 +45,10 @@ public class Schedule ***REMOVED***
 
 //        Schedule schedule1 = createScheduleAdapter.save(schedule);
         return schedule;
-    ***REMOVED***
+    }
 
     // 새로운 커플 코드로 업데이트
-    public void updateCoupleCode(String coupleCode)***REMOVED***
+    public void updateCoupleCode(String coupleCode){
         this.code = coupleCode;
-    ***REMOVED***
-***REMOVED***
+    }
+}

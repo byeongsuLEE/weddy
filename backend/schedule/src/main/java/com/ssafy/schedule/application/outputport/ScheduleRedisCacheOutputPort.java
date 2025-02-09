@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ScheduleRedisCacheOutputPort ***REMOVED***
+public interface ScheduleRedisCacheOutputPort {
 
     void saveScheduleToCache(CreateScheduleInputDto createScheduleInputDto);
-***REMOVED***
+}

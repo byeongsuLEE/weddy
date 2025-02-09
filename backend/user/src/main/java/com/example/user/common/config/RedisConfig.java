@@ -18,27 +18,27 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @RequiredArgsConstructor
 @EnableRedisRepositories // Redis 레포지토리 기능 활성화
-public class RedisConfig ***REMOVED***
-    @Value("$***REMOVED***spring.redis.user.host***REMOVED***")
+public class RedisConfig {
+    @Value("${spring.redis.user.host}")
     private String host;
-    @Value("$***REMOVED***spring.redis.user.port***REMOVED***")
+    @Value("${spring.redis.user.port}")
     private int port;
-    @Value("$***REMOVED***spring.redis.user.password***REMOVED***")
+    @Value("${spring.redis.user.password}")
     private String password;
 
 
 
     @Bean // 스프링 컨텍스트에 RedisConnectionFactory 빈 등록
-    public RedisConnectionFactory redisConnectionFactory() ***REMOVED***
+    public RedisConnectionFactory redisConnectionFactory() {
         // LettuceConnectionFactory를 사용하여 Redis 연결 팩토리 생성, 호스트와 포트 정보를 사용
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(host, port);
         redisStandaloneConfiguration.setPassword(password);
         redisStandaloneConfiguration.setDatabase(1);
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
-    ***REMOVED***
+    }
 
     @Bean("redisUserTemplate") // 스프링 컨텍스트에 RedisTemplate 빈 등록
-    public RedisTemplate<String, String> userRedisTemplate() ***REMOVED***
+    public RedisTemplate<String, String> userRedisTemplate() {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
 
@@ -50,15 +50,15 @@ public class RedisConfig ***REMOVED***
 
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
-    ***REMOVED***
+    }
 
     @Bean
     @Primary // 기본 빈으로 설정
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) ***REMOVED***
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         return redisTemplate;
-    ***REMOVED***
-***REMOVED***
+    }
+}

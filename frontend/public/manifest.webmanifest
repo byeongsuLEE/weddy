@@ -1,4 +1,4 @@
-***REMOVED***
+{
   "name": "WEDDY",
   "short_name": "WEDDY",
   "start_url": "./",
@@ -9,20 +9,20 @@
   "description": "Wedding Planner App",
   "theme_color": "#ffffff",
   "icons": [
-    ***REMOVED***
+    {
       "src": "https://weddy.info/logos/icon-196x196.png",
       "sizes": "196x196",
       "type": "image/png"
-    ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "src": "https://weddy.info/logos/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png"
-    ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "src": "https://weddy.info/logos/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
-    ***REMOVED***
+    }
   ]
-***REMOVED***
+}

@@ -1,58 +1,58 @@
-import ***REMOVED*** CalendarIcon ***REMOVED*** from "@radix-ui/react-icons"
-import ***REMOVED*** format ***REMOVED*** from "date-fns"
+import { CalendarIcon } from "@radix-ui/react-icons"
+import { format } from "date-fns"
 
-import ***REMOVED*** cn ***REMOVED*** from "@/lib/utils"
-import ***REMOVED*** Button ***REMOVED*** from "../ui/button"
-import ***REMOVED*** Calendar ***REMOVED*** from "../ui/calendar"
-import ***REMOVED***
+import { cn } from "@/lib/utils"
+import { Button } from "../ui/button"
+import { Calendar } from "../ui/calendar"
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-***REMOVED*** from "../ui/popover"
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react"
+} from "../ui/popover"
+import { useEffect, useState } from "react"
 
-interface DatePickProps ***REMOVED***
+interface DatePickProps {
   title:string;
   changeDate: (newDate: Date) => void;
   type: "start" | "center" | "end"; 
-***REMOVED***;
+};
 
-const DatePick = (***REMOVED***title, changeDate,type***REMOVED***:DatePickProps ) => ***REMOVED***
+const DatePick = ({title, changeDate,type}:DatePickProps ) => {
   const [date, setDate] = useState<Date>();
   
 
-  useEffect(() => ***REMOVED***
-    if(date) ***REMOVED***
+  useEffect(() => {
+    if(date) {
       changeDate(date);
-    ***REMOVED***;
-  ***REMOVED***, [date]);
+    };
+  }, [date]);
 
   return (
     <>
       <Popover>
         <PopoverTrigger asChild>
           <Button
-            variant=***REMOVED***"outline"***REMOVED***
-            className=***REMOVED***cn(
+            variant={"outline"}
+            className={cn(
               "w-[150px] justify-start text-left mx-2 my-1 font-normal",
               !date && "text-muted-foreground"
-            )***REMOVED***
+            )}
           >
             <CalendarIcon />
-            ***REMOVED***date ? format(date, "yyyy-MM-dd") : <span>***REMOVED***title***REMOVED***</span>***REMOVED***
+            {date ? format(date, "yyyy-MM-dd") : <span>{title}</span>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align=***REMOVED***type***REMOVED***>
+        <PopoverContent className="w-auto p-0" align={type}>
           <Calendar
             mode="single"
-            selected=***REMOVED***date***REMOVED***
-            onSelect=***REMOVED***setDate***REMOVED***
+            selected={date}
+            onSelect={setDate}
             initialFocus
           />
         </PopoverContent>
       </Popover>
     </>
   )
-***REMOVED***
+}
 
 export default DatePick

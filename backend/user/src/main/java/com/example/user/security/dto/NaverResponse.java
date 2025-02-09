@@ -2,36 +2,36 @@ package com.example.user.security.dto;
 
 import java.util.Map;
 
-public class NaverResponse implements OAuth2Response ***REMOVED***
+public class NaverResponse implements OAuth2Response {
 
     private final Map<String, Object> attribute;
 
-    public NaverResponse(Map<String, Object> attribute) ***REMOVED***
+    public NaverResponse(Map<String, Object> attribute) {
         this.attribute = (Map<String, Object>) attribute.get("response");
-    ***REMOVED***
+    }
 
     @Override
-    public String getProvider() ***REMOVED***
+    public String getProvider() {
         return "naver";
-    ***REMOVED***
+    }
 
     @Override
-    public String getProviderId() ***REMOVED***
+    public String getProviderId() {
         return attribute.get("id").toString();
-    ***REMOVED***
+    }
 
     @Override
-    public String getEmail() ***REMOVED***
+    public String getEmail() {
         return attribute.get("email").toString();
-    ***REMOVED***
+    }
 
     @Override
-    public String getName() ***REMOVED***
+    public String getName() {
         return attribute.get("name").toString();
-    ***REMOVED***
+    }
 
     @Override
-    public String getPicture() ***REMOVED***
+    public String getPicture() {
         return "";
-    ***REMOVED***
-***REMOVED***
+    }
+}

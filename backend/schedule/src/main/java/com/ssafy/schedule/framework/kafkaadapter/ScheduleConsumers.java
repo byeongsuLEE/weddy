@@ -33,7 +33,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ScheduleConsumers ***REMOVED***
+public class ScheduleConsumers {
 
     private final ObjectMapper objectMapper ;
     private final CreateScheduleUsecase createScheduleUsecase;
@@ -43,12 +43,12 @@ public class ScheduleConsumers ***REMOVED***
     private final RedisTemplate<String,Object> redisTemplate;
     private final FCMOutputPort fcmOutputPort;
 
-    @KafkaListener(topics = "$***REMOVED***consumer.topic1.name***REMOVED***",groupId = "$***REMOVED***consumer.groupid.name***REMOVED***")
-    public void paymentProduct(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
+    @KafkaListener(topics = "${consumer.topic1.name}",groupId = "${consumer.groupid.name}")
+    public void paymentProduct(ConsumerRecord<String, String> record) throws IOException {
 
         PaymentProductInfo paymentProductInfo = objectMapper.readValue(record.value(), PaymentProductInfo.class);
         EventResult eventResult = EventResult.createEventResult(paymentProductInfo);
-        try***REMOVED***
+        try{
 
             log.info("뭐가 되는거지? "+ record.value());
 
@@ -67,17 +67,17 @@ public class ScheduleConsumers ***REMOVED***
             // 성공 시 이벤트 발생
             eventResult.updateIsSuccess(true);
 
-        ***REMOVED***
-        catch(Exception e)***REMOVED***
+        }
+        catch(Exception e){
             eventResult.updateIsSuccess(false);
 
-        ***REMOVED***
+        }
 //        eventProducer.occurEvent(event);
 
-    ***REMOVED***
+    }
 
-    @KafkaListener(topics = "$***REMOVED***consumer.topic2.name***REMOVED***",groupId = "$***REMOVED***consumer.groupid.name***REMOVED***")
-    public void coupleCodeChange(ConsumerRecord<String, String> record) throws IOException ***REMOVED***
+    @KafkaListener(topics = "${consumer.topic2.name}",groupId = "${consumer.groupid.name}")
+    public void coupleCodeChange(ConsumerRecord<String, String> record) throws IOException {
 
         log.info("커플 코드 변경 이벤트 받음  "+ record.value());
         Map<String,String>  userData = objectMapper.readValue(record.value(), Map.class);
@@ -86,23 +86,23 @@ public class ScheduleConsumers ***REMOVED***
 
         // 커플코드 변경 시 일정 정보 업데이트
         // 기존 일정 데이터의 유저 정보를
-        scheduleOutPutPort.getSchedulesByCoupleCode(oldCoupleCode).forEach(schedule -> ***REMOVED***
+        scheduleOutPutPort.getSchedulesByCoupleCode(oldCoupleCode).forEach(schedule -> {
             schedule.updateCoupleCode(newCoupleCode);
 
             String key = "SCHEDULE:"+schedule.getStartDate().toString();
             Object scheduleInfo = redisTemplate.opsForHash().get(key, oldCoupleCode);
             redisTemplate.opsForHash().put(key,newCoupleCode,scheduleInfo);
             redisTemplate.opsForHash().delete(key,oldCoupleCode);
-        ***REMOVED***);
+        });
 
 
 
 
 
-    ***REMOVED***
+    }
 
 
 
-***REMOVED***
+}
 
 

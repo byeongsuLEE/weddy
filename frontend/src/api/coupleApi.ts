@@ -3,15 +3,15 @@ import axios from "axios";
 const BASE_URL = `/api/users`
 
 //== 커플 코드 연결 ==//
-export const connectCoupleCode = async (code: string): Promise<void> => ***REMOVED***
-  await axios(***REMOVED***
+export const connectCoupleCode = async (code: string): Promise<void> => {
+  await axios({
     method: 'patch',
-    url: `$***REMOVED***BASE_URL***REMOVED***/couple-connect`,
-    headers: ***REMOVED***
+    url: `${BASE_URL}/couple-connect`,
+    headers: {
       Authorization: sessionStorage.getItem("token")
-    ***REMOVED***,
-    data: ***REMOVED***
+    },
+    data: {
       "code": code
-    ***REMOVED***
-  ***REMOVED***);
-***REMOVED***;
+    }
+  });
+};

@@ -1,4 +1,4 @@
-const CartIcon = () => ***REMOVED***
+const CartIcon = () => {
   return (
     <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4.33333 1L1 5V19C1 19.5304 1.23413 20.0391 1.65087 20.4142C2.06762 20.7893 2.63285 21 3.22222 21H18.7778C19.3671 21 19.9324 20.7893 20.3491 20.4142C20.7659 20.0391 21 19.5304 21 19V5L17.6667 1H4.33333Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -8,5 +8,5 @@ const CartIcon = () => ***REMOVED***
 
 
   )
-***REMOVED***
+}
 export default CartIcon

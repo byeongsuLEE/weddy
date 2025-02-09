@@ -1,41 +1,41 @@
-plugins ***REMOVED***
+plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.4'
 	id 'io.spring.dependency-management' version '1.1.6'
-***REMOVED***
+}
 
 group = 'com.ssafy'
 version = '0.0.1-SNAPSHOT'
 
-java ***REMOVED***
-	toolchain ***REMOVED***
+java {
+	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
-	***REMOVED***
-***REMOVED***
+	}
+}
 
-configurations ***REMOVED***
-	compileOnly ***REMOVED***
+configurations {
+	compileOnly {
 		extendsFrom annotationProcessor
-	***REMOVED***
-***REMOVED***
+	}
+}
 
-repositories ***REMOVED***
+repositories {
 	mavenCentral()
-	maven ***REMOVED***
-		url = uri('***REMOVED***/repository/maven-snapshots')
+	maven {
+		url = uri('**REMOVED**repository/maven-snapshots')
 		allowInsecureProtocol = true //http를 사용하기 위해 추가
-		credentials***REMOVED***
+		credentials{
 			username = "weddy"
 			password = "weddy"
-		***REMOVED***
-	***REMOVED***
-***REMOVED***
+		}
+	}
+}
 
-ext ***REMOVED***
+ext {
 	set('springCloudVersion', "2023.0.3")
-***REMOVED***
+}
 
-dependencies ***REMOVED***
+dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
@@ -73,23 +73,23 @@ dependencies ***REMOVED***
 
 	// 배포했던 라이브러리 명시. group:artifact:version으로 구성 (Nexus)
 	implementation 'weddy:common-lib:1.0.2-SNAPSHOT'
-***REMOVED***
+}
 
-dependencyManagement ***REMOVED***
-	imports ***REMOVED***
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:$***REMOVED***springCloudVersion***REMOVED***"
-	***REMOVED***
-***REMOVED***
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
 
-tasks.named('test') ***REMOVED***
+tasks.named('test') {
 	useJUnitPlatform()
-***REMOVED***
+}
 
 
-bootJar ***REMOVED***
+bootJar {
 	enabled = true
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-***REMOVED***
-jar ***REMOVED***
+}
+jar {
 	enabled = false
-***REMOVED***
+}

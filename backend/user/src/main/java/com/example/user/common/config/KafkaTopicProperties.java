@@ -5,39 +5,39 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "producers")
-public class KafkaTopicProperties ***REMOVED***
+public class KafkaTopicProperties {
 
     private Topic cartRequestTopic;
     private Topic cartResponseTopic;
 
     // Topic 중첩 클래스
-    public static class Topic ***REMOVED***
+    public static class Topic {
         private String name;
 
         // Getter와 Setter
-        public String getName() ***REMOVED***
+        public String getName() {
             return name;
-        ***REMOVED***
+        }
 
-        public void setName(String name) ***REMOVED***
+        public void setName(String name) {
             this.name = name;
-        ***REMOVED***
-    ***REMOVED***
+        }
+    }
 
     // Getter와 Setter
-    public Topic getCartRequestTopic() ***REMOVED***
+    public Topic getCartRequestTopic() {
         return cartRequestTopic;
-    ***REMOVED***
+    }
 
-    public void setCartRequestTopic(Topic cartRequestTopic) ***REMOVED***
+    public void setCartRequestTopic(Topic cartRequestTopic) {
         this.cartRequestTopic = cartRequestTopic;
-    ***REMOVED***
+    }
 
-    public Topic getCartResponseTopic() ***REMOVED***
+    public Topic getCartResponseTopic() {
         return cartResponseTopic;
-    ***REMOVED***
+    }
 
-    public void setCartResponseTopic(Topic cartResponseTopic) ***REMOVED***
+    public void setCartResponseTopic(Topic cartResponseTopic) {
         this.cartResponseTopic = cartResponseTopic;
-    ***REMOVED***
-***REMOVED***
+    }
+}

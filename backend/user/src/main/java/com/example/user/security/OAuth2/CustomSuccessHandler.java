@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler ***REMOVED***
+public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JWTUtil jwtUtil;
     private final RedisTemplate<String, String> redisTemplate;
-    public CustomSuccessHandler(JWTUtil jwtUtil, RedisTemplate redisTemplate) ***REMOVED***
+    public CustomSuccessHandler(JWTUtil jwtUtil, RedisTemplate redisTemplate) {
         this.jwtUtil = jwtUtil;
         this.redisTemplate = redisTemplate;
-    ***REMOVED***
+    }
 
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException ***REMOVED***
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         //OAuth2User
         CustomOAuth2User customUserDetails = (CustomOAuth2User) authentication.getPrincipal();
@@ -33,5 +33,5 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 //        String redirectUrl = "https://naver.com";
         getRedirectStrategy().sendRedirect(request, response, redirectUrl);
 
-    ***REMOVED***
-***REMOVED***
+    }
+}

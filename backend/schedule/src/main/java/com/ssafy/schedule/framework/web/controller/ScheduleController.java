@@ -26,14 +26,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/schedules")
 @RequiredArgsConstructor
-public class ScheduleController ***REMOVED***
+public class ScheduleController {
 
     private final CreateScheduleInputPort createScheduleInputPort;
     private final GetScheduleInputPort getScheduleInputPort;
     private final JwtUtil jwtUtil;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<ScheduleOutputDto>> createSchedule(@RequestBody CreateScheduleInputDto requestDto, @RequestHeader("Authorization") String token) ***REMOVED***
+    public ResponseEntity<ApiResponse<ScheduleOutputDto>> createSchedule(@RequestBody CreateScheduleInputDto requestDto, @RequestHeader("Authorization") String token) {
         token = token.substring(7);
         Long userId = jwtUtil.extractUserId(token);
         String code = jwtUtil.extractCode(token);
@@ -41,17 +41,17 @@ public class ScheduleController ***REMOVED***
 
         ScheduleOutputDto scheduleOutputDto = createScheduleInputPort.createSchedule(requestDto);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(HttpStatus.OK,scheduleOutputDto, "일정 등록 성공하였습니다."));
-    ***REMOVED***
+    }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<ScheduleOutputDto>>> getSchedules(
             @RequestParam(value = "date", required = false) LocalDate time,
-            @RequestHeader("Authorization") String token) throws Exception ***REMOVED***
+            @RequestHeader("Authorization") String token) throws Exception {
 
         UserInputDto userInputDto = setUserDto(token);
         List<ScheduleOutputDto> scheduleOutputDtoList = getScheduleInputPort.getAllSchedules(userInputDto,time);
         return ResponseEntity.status(HttpStatus.OK).body(ApiResponse.success(HttpStatus.OK, scheduleOutputDtoList, "일정 불러오기 성공"));
-    ***REMOVED***
+    }
 
 
     /**
@@ -63,7 +63,7 @@ public class ScheduleController ***REMOVED***
      * @ 작성일   : 2024-10-28
      * @ 설명     : JWT 토큰을 통해 UserInputDto 객체를 설정합니다
      */
-    private UserInputDto setUserDto(String token) ***REMOVED***
+    private UserInputDto setUserDto(String token) {
         token = token.substring(7);
         Long userId = jwtUtil.extractUserId(token);
         String code = jwtUtil.extractCode(token);
@@ -73,5 +73,5 @@ public class ScheduleController ***REMOVED***
                 .code(code).build();
 
         return userInputDto;
-    ***REMOVED***
-***REMOVED***
+    }
+}

@@ -28,13 +28,13 @@ import java.util.concurrent.CompletableFuture;
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
-public class PaymentService ***REMOVED***
+public class PaymentService {
 
-    @Value(value = "$***REMOVED***portone.api-key***REMOVED***")
+    @Value(value = "${portone.api-key}")
     private String API_SECRET_KEY;
-    @Value(value = "$***REMOVED***portone.store-id***REMOVED***")
+    @Value(value = "${portone.store-id}")
     private String STORE_ID;
-    @Value(value = "$***REMOVED***producers.topic1.name***REMOVED***")
+    @Value(value = "${producers.topic1.name}")
     private String TOPIC_PAYMENT;
 
     private final KafkaTemplate<String ,PaymentProductInfo> kafkaTemplate;
@@ -49,22 +49,22 @@ public class PaymentService ***REMOVED***
      * @ 설명     :결제 성공 후 게약서 상태 정보 변경 및 카프카를 통해 일정 자동 등록 이벤트 발생
      * @param contractInfoRequestDto
      */
-    public void paymentSuccess(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
+    public void paymentSuccess(ContractInfoRequestDto contractInfoRequestDto) {
         UserEntity userEntity = userRepository.findById(contractInfoRequestDto.getUserId()).orElse(null);
         if (userEntity == null) return ;
         contractInfoRequestDto.setCode(userEntity.getCoupleCode());
         boolean isValidatedPayment = validatePayment(contractInfoRequestDto);
-        if(!isValidatedPayment) ***REMOVED***
+        if(!isValidatedPayment) {
             //결제 취소 로직 작성
             String reason = " 결제 인증 실패";
             paymentCancel(contractInfoRequestDto.getPaymentId(), reason);
             return ;
-        ***REMOVED***
+        }
 
         log.info("결제성공" + contractInfoRequestDto.toString());
         contractService.changeContractStatus(contractInfoRequestDto.getId());
         occurPaymentEvent(contractInfoRequestDto);
-    ***REMOVED***
+    }
 
     /**
      * 결제 인증
@@ -75,7 +75,7 @@ public class PaymentService ***REMOVED***
      * @return
 
      */
-    private boolean validatePayment(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
+    private boolean validatePayment(ContractInfoRequestDto contractInfoRequestDto) {
         Long contractId = contractInfoRequestDto.getId();
         String paymentId = contractInfoRequestDto.getPaymentId();
         Long paidAmount = contractInfoRequestDto.getTotalMount();
@@ -93,26 +93,26 @@ public class PaymentService ***REMOVED***
         // 계약서가 잘못되면 에러
         Contract contract= contractRepository.findById(contractId).orElse(null);
         if(contract==null)
-        ***REMOVED***
+        {
             log.info("계약서가 존재하지 않습니다.");
             return false;
-        ***REMOVED***
+        }
 
 
         //가격 일치 여부 판단.
         Boolean isPaidAmountValidated =contract.validation(paidAmount);
         if(!isPaidAmountValidated)
-        ***REMOVED***
+        {
             log.info("결제 금액이 일치하지 않습니다.");
             return false;
-        ***REMOVED***
+        }
 
 
         return true;
-    ***REMOVED***
+    }
 
 
-    public void isPaymentIdValid(String paymentId)***REMOVED***
+    public void isPaymentIdValid(String paymentId){
 
         String url  = "https://api.portone.io/payments/" + paymentId;
         RestTemplate restTemplate = new RestTemplate();
@@ -123,18 +123,18 @@ public class PaymentService ***REMOVED***
         ResponseEntity<String> response = restTemplate.exchange(url,HttpMethod.GET,entity,String.class
         );
 
-        if(response.getStatusCode().is2xxSuccessful())***REMOVED***
+        if(response.getStatusCode().is2xxSuccessful()){
             log.info("결제내역 조회 성공");
-        ***REMOVED***else***REMOVED***
+        }else{
             log.info("결제내역 조회 실패");
             throw new PaymentNotValidateException(ErrorCode.PAYMENT_NOT_VALIDATE);
-        ***REMOVED***
+        }
 
 
 
-    ***REMOVED***
+    }
 
-    public void paymentCancel(String paymentId, String reason) ***REMOVED***
+    public void paymentCancel(String paymentId, String reason) {
         // 결제 취소 로직
 
         RestTemplate restTemplate = new RestTemplate();
@@ -142,7 +142,7 @@ public class PaymentService ***REMOVED***
         HttpHeaders headers  = new HttpHeaders();
         headers.add("Authorization","PortOne "+API_SECRET_KEY);
         headers.setContentType(MediaType.APPLICATION_JSON);  // Content-Type 추가
-        String requestBody = "***REMOVED***\"reason\":\""  + reason +"\"***REMOVED***";
+        String requestBody = "{\"reason\":\""  + reason +"\"}";
         HttpEntity<String > entity = new HttpEntity<>(requestBody,headers);
 
         ResponseEntity<String> response  =  restTemplate.exchange(
@@ -152,12 +152,12 @@ public class PaymentService ***REMOVED***
                 String.class
         );
 
-        if(response.getStatusCode().is2xxSuccessful())***REMOVED***
+        if(response.getStatusCode().is2xxSuccessful()){
             log.info("결제 취소 성공");
-        ***REMOVED***else***REMOVED***
+        }else{
             log.info("결제 취소 실패");
-        ***REMOVED***
-    ***REMOVED***
+        }
+    }
 
 
 
@@ -169,27 +169,27 @@ public class PaymentService ***REMOVED***
 
      * @param contractInfoRequestDto
      */
-    public void occurPaymentEvent(ContractInfoRequestDto contractInfoRequestDto)  ***REMOVED***
+    public void occurPaymentEvent(ContractInfoRequestDto contractInfoRequestDto)  {
         PaymentProductInfo paymentProductInfo = mapToPaymentProductInfo(contractInfoRequestDto);
         UserCoupleTokenDto fcmToken = userService.getFcmToken(contractInfoRequestDto.getCode(), contractInfoRequestDto.getUserId());
         paymentProductInfo.addFcmTokenInfo(fcmToken);
         log.info("전달된 paymentinfo: " +paymentProductInfo.toString());
         CompletableFuture<SendResult<String, PaymentProductInfo>> send = kafkaTemplate.send(TOPIC_PAYMENT, paymentProductInfo);
         // 이 함수는 이벤트가 전달 됐는지를 확인하는거다.
-        send.whenComplete((sendResult,ex)->***REMOVED***
-            if(ex!=null)***REMOVED***
+        send.whenComplete((sendResult,ex)->{
+            if(ex!=null){
                 log.info("결제 이벤트 전달 실패."+ ex.getMessage());
 
-            ***REMOVED***else***REMOVED***
+            }else{
                 PaymentProductInfo value = (PaymentProductInfo) sendResult.getProducerRecord().value();
                 log.info("결제 이벤트 전달 완료");
 
 
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+            }
+        });
+    }
 
-    private PaymentProductInfo mapToPaymentProductInfo(ContractInfoRequestDto contractInfoRequestDto) ***REMOVED***
+    private PaymentProductInfo mapToPaymentProductInfo(ContractInfoRequestDto contractInfoRequestDto) {
         return PaymentProductInfo.builder()
                 .id(contractInfoRequestDto.getId())
                 .title(contractInfoRequestDto.getTitle())
@@ -206,6 +206,6 @@ public class PaymentService ***REMOVED***
                 .product(contractInfoRequestDto.getProduct())
                 .paymentId(contractInfoRequestDto.getPaymentId())
                 .build();
-    ***REMOVED***
+    }
 
-***REMOVED***
+}

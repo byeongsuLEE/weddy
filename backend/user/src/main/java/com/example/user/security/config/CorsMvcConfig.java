@@ -5,10 +5,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class CorsMvcConfig implements WebMvcConfigurer ***REMOVED***
+public class CorsMvcConfig implements WebMvcConfigurer {
 
     @Override
-    public void addCorsMappings(CorsRegistry corsRegistry) ***REMOVED***
+    public void addCorsMappings(CorsRegistry corsRegistry) {
 
         corsRegistry.addMapping("/**")
                 .allowedOrigins("http://localhost:5173", "http://localhost:5174", "https://2846-121-178-98-57.ngrok-free.app")  // 두 출처를 한 번에 추가
@@ -17,5 +17,5 @@ public class CorsMvcConfig implements WebMvcConfigurer ***REMOVED***
                 .exposedHeaders("Authorization", "x-xsrf-token", "Access-Control-Allow-Headers", "Origin", "Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers")        // 노출할 헤더 설정
                 .allowCredentials(true)                                            // 쿠키 포함 허용
                 .maxAge(3600L);
-    ***REMOVED***
-***REMOVED***
+    }
+}

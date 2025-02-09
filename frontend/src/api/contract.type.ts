@@ -1,20 +1,20 @@
-export interface ContractProduct ***REMOVED***
+export interface ContractProduct {
   productId: string;
   productName: string;
   productContent: string;
   type: string;
-***REMOVED***
+}
 
-export interface SentContractType ***REMOVED***
+export interface SentContractType {
   userId: string;
   totalMount: string;
   companyName: string;
   startDate: string;
   endDate: string;
   product: ContractProduct;
-***REMOVED***
+}
 
-export interface ContractData ***REMOVED***
+export interface ContractData {
   id: string;
   product: ContractProduct;
   userId?: string;
@@ -31,4 +31,4 @@ export interface ContractData ***REMOVED***
   title: string;
   userName: string;
   code: string;
-***REMOVED***
+}

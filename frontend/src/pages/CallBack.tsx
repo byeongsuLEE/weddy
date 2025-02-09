@@ -1,12 +1,12 @@
-import ***REMOVED*** getToken, getUserInfo ***REMOVED*** from "@/api/userApi";
-import ***REMOVED*** requestForToken, requestNotificationPermission ***REMOVED*** from "@/firebase";
-import ***REMOVED*** firebaseTokenState ***REMOVED*** from "@/store/firebaseToken";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import ***REMOVED*** useLocation, useNavigate ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** useSetRecoilState ***REMOVED*** from "recoil";
+import { getToken, getUserInfo } from "@/api/userApi";
+import { requestForToken, requestNotificationPermission } from "@/firebase";
+import { firebaseTokenState } from "@/store/firebaseToken";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 
-const CallBack = () => ***REMOVED***
+const CallBack = () => {
   const navigate = useNavigate();
   const params = new URLSearchParams(useLocation().search);
   const userId = params.get("id");
@@ -15,63 +15,63 @@ const CallBack = () => ***REMOVED***
 
   const setToken = useSetRecoilState(firebaseTokenState);
 
-  useQuery(["getToken", userId], () => getToken(userId ?? undefined), ***REMOVED***
+  useQuery(["getToken", userId], () => getToken(userId ?? undefined), {
     enabled: !!userId,
-    onSuccess: () => ***REMOVED***
+    onSuccess: () => {
       setUserInfoEnabled(true);
-    ***REMOVED***,
-  ***REMOVED***);
+    },
+  });
 
-  const ***REMOVED*** data: userInfo ***REMOVED*** = useQuery("getUserInfo", getUserInfo, ***REMOVED***
+  const { data: userInfo } = useQuery("getUserInfo", getUserInfo, {
     enabled: userInfoEnabled,
-  ***REMOVED***);
+  });
 
-  useEffect(() => ***REMOVED***
-    const registerServiceWorker = async () => ***REMOVED***
-      if ("Notification" in window && "serviceWorker" in navigator) ***REMOVED***
+  useEffect(() => {
+    const registerServiceWorker = async () => {
+      if ("Notification" in window && "serviceWorker" in navigator) {
         console.log("푸시 알림 지원");
         // 푸시 알림 및 서비스 워커 관련 초기화 코드 실행
-        navigator.serviceWorker.register("/firebase-messaging-sw.js").then(() => ***REMOVED***
+        navigator.serviceWorker.register("/firebase-messaging-sw.js").then(() => {
           console.log("Service Worker 등록 성공");
-        ***REMOVED***).catch((error) => ***REMOVED***
+        }).catch((error) => {
           console.error("Service Worker 등록 실패:", error);
-        ***REMOVED***);
-      ***REMOVED*** else ***REMOVED***
+        });
+      } else {
         console.log("푸시 알림 미지원");
         // 지원하지 않는 환경에 대한 처리 (예: 사용자에게 알림 표시)
-      ***REMOVED***
+      }
       
-    ***REMOVED***;
+    };
 
     registerServiceWorker();
-  ***REMOVED***, []);
+  }, []);
 
-  useEffect(() => ***REMOVED***
-    const requestPermissionsAndToken = async () => ***REMOVED***
-      if (userId) ***REMOVED***
-        try ***REMOVED***
+  useEffect(() => {
+    const requestPermissionsAndToken = async () => {
+      if (userId) {
+        try {
           await requestNotificationPermission();
           const token = await requestForToken();
           
-          if (token) ***REMOVED***
+          if (token) {
             sessionStorage.setItem('fcmToken', token);
             setToken(token);
             
-            if (userInfo && userInfo[0]?.date != null) ***REMOVED***
+            if (userInfo && userInfo[0]?.date != null) {
               navigate("/");
-            ***REMOVED*** else if (userInfo) ***REMOVED***
+            } else if (userInfo) {
               navigate("/userInfo");
-            ***REMOVED***
-          ***REMOVED***
-        ***REMOVED*** catch***REMOVED***
+            }
+          }
+        } catch{
           // 권한 요청이나 토큰 발급 실패시 에러 처리 로직
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***;
+        }
+      }
+    };
     requestPermissionsAndToken();
-  ***REMOVED***, [userId, userInfo, navigate, setToken]);
+  }, [userId, userInfo, navigate, setToken]);
 
   return null;
-***REMOVED***;
+};
 
 export default CallBack;

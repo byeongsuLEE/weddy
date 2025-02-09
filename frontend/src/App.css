@@ -1,40 +1,40 @@
-.app-container ***REMOVED***
+.app-container {
   width: 414px;
   height: 100vh;
   position: relative;
-***REMOVED***
+}
 
-.makeImg-button***REMOVED***
+.makeImg-button{
   position: fixed;
   bottom: 20%;
   right: 5%;
   z-index: 1000;
-***REMOVED***
+}
 
-.makeImg-modal***REMOVED***
+.makeImg-modal{
   position: fixed;
   bottom: 20%;
   right: 20%;
   z-index: 1000;
-***REMOVED***
+}
 
-.leva-container ***REMOVED***
+.leva-container {
   position: absolute;
   top: 18%;
   left: 85%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-***REMOVED***
+}
 
-.input-container ***REMOVED***
+.input-container {
   position: absolute;
   top: 20%;
   left: 22%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-***REMOVED***
+}
 
-.canvas ***REMOVED***
+.canvas {
   position: absolute;
   bottom: 50px;
   left: 0;
@@ -42,9 +42,9 @@
   width: 100%;
   
   z-index: 0;
-***REMOVED***
+}
 
-.toggle-container ***REMOVED***
+.toggle-container {
   position: absolute;
   top: 1px;
   z-index: 10;
@@ -57,35 +57,35 @@
   border-radius: 8px;
   -ms-overflow-style: none;
   scrollbar-width: none;
-***REMOVED***
+}
 
 
-.toggle-container::-webkit-scrollbar ***REMOVED***
+.toggle-container::-webkit-scrollbar {
   display: none;
   /* 웹킷 브라우저에서 스크롤바 숨기기 */
-***REMOVED***
+}
 
-.toggle-title ***REMOVED***
+.toggle-title {
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
-***REMOVED***
+}
 
-.toggle-group ***REMOVED***
+.toggle-group {
   display: inline-block;
   vertical-align: top;
   margin-right: 15px;
-***REMOVED***
+}
 
-.toggle-group h4 ***REMOVED***
+.toggle-group h4 {
   margin-bottom: 8px;
   font-weight: bold;
   font-size: 1em;
   text-align: center;
-***REMOVED***
+}
 
-.toggle-button ***REMOVED***
+.toggle-button {
   cursor: pointer;
   display: inline-block;
   margin: 5px;
@@ -95,23 +95,23 @@
   text-align: center;
   transition: all 0.2s ease;
   width: 60px;
-***REMOVED***
+}
 
-.toggle-button.active ***REMOVED***
+.toggle-button.active {
   border-color: #ff3300;
   transform: scale(1.05);
   box-shadow: 0px 0px 10px rgba(243, 219, 2, 0.3);
-***REMOVED***
+}
 
-.toggle-button-image ***REMOVED***
+.toggle-button-image {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-***REMOVED***
+}
 
-.toggle-button-label ***REMOVED***
+.toggle-button-label {
   margin-top: 5px;
   font-size: 0.9em;
-***REMOVED***
+}
 
 

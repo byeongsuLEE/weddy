@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Builder
-public class Contract ***REMOVED***
+public class Contract {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +54,7 @@ public class Contract ***REMOVED***
 
 
 
-    public ContractResponseDto mapToCreateContractResponseDto(Contract contract) ***REMOVED***
+    public ContractResponseDto mapToCreateContractResponseDto(Contract contract) {
         //TODO: CreateContractResponseDto 매핑
         return ContractResponseDto.builder()
                         .id(contract.getId())
@@ -70,21 +70,21 @@ public class Contract ***REMOVED***
                         .userId(contract.getUser().getId())
                         .userName(contract.getUser().getName())
                         .build();
-    ***REMOVED***
+    }
 
 
-    public boolean validation(Long totalMount)***REMOVED***
+    public boolean validation(Long totalMount){
         return this.totalMount.equals(totalMount);
-    ***REMOVED***
+    }
 
 
 
 
 
-    public void changeStatus() ***REMOVED***
+    public void changeStatus() {
         //이 함수가 호출되면 계약서 상태가 변경이된다.
 
-            switch (this.status) ***REMOVED***
+            switch (this.status) {
                 case CONTRACT_PENDING:
                     this.status = ContractStatus.SIGN_PENDING;
                     break;
@@ -96,8 +96,8 @@ public class Contract ***REMOVED***
                     break;
                 default:
                     break;
-            ***REMOVED***
+            }
 
-    ***REMOVED***
-***REMOVED***
+    }
+}
 

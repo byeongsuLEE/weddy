@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Builder
 @Getter
-public class ContractResponseDto ***REMOVED***
+public class ContractResponseDto {
     private Long id;
     private String title;
     private String content;
@@ -30,4 +30,4 @@ public class ContractResponseDto ***REMOVED***
     private Product product;
 
 
-***REMOVED***
+}

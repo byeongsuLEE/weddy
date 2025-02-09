@@ -7,5 +7,5 @@ public record SketchResponseDto(Long id,
                                 String image,
                                 String studio,
                                 String dressName,
-                                Long user) ***REMOVED***
-***REMOVED***
+                                Long user) {
+}

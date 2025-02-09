@@ -1,21 +1,21 @@
-import ***REMOVED*** Dress ***REMOVED*** from "@/api/dress.type";
-import ***REMOVED*** getDressList ***REMOVED*** from "@/api/dressApi";
+import { Dress } from "@/api/dress.type";
+import { getDressList } from "@/api/dressApi";
 import TodoButton from "@/common/TodoButton";
 import SketchBox from "@/components/DressSketchPage/Sketchbox";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
-import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const DressSketch = () => ***REMOVED***
+const DressSketch = () => {
   const [dressList, setDressList] = useState<Dress[]>([]);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     getDressList()
-      .then((data: Dress[]) => ***REMOVED***
+      .then((data: Dress[]) => {
         console.log("Fetched Data:", data);
         setDressList(data || []); // 데이터 없을 경우 빈 배열 설정
-      ***REMOVED***)
+      })
       .catch((error) => console.error("Error fetching dress list:", error));
-  ***REMOVED***, []);
+  }, []);
 
   return (
     <div className="m-5 flex flex-col items-center">
@@ -24,20 +24,20 @@ const DressSketch = () => ***REMOVED***
           <TodoButton title="스케치 하기" />
         </Link>
       </div>
-      ***REMOVED***dressList && dressList.length > 0 ? (
+      {dressList && dressList.length > 0 ? (
         dressList.map((sketch, index) => (
           <SketchBox
-            key=***REMOVED***index***REMOVED***
-            imgSrc=***REMOVED***sketch.image***REMOVED***
-            studioName=***REMOVED***sketch.studio***REMOVED***
-            dressName=***REMOVED***sketch.dressName***REMOVED***
+            key={index}
+            imgSrc={sketch.image}
+            studioName={sketch.studio}
+            dressName={sketch.dressName}
           />
         ))
       ) : (
         <p>제작한 드레스 이미지가 없습니다.</p>
-      )***REMOVED***
+      )}
     </div>
   );
-***REMOVED***;
+};
 
 export default DressSketch;

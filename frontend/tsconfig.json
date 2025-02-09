@@ -1,20 +1,20 @@
-***REMOVED***
+{
   "files": [],
   "references": [
-    ***REMOVED***
+    {
       "path": "./tsconfig.app.json"
-    ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "path": "./tsconfig.node.json"
-    ***REMOVED***
+    }
   ],
-  "compilerOptions": ***REMOVED***
+  "compilerOptions": {
     "baseUrl": ".",
-    "paths": ***REMOVED***
+    "paths": {
       "@/*": [
         "./src/*"
       ]
-    ***REMOVED***,
+    },
     "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "esnext", "webworker"],
@@ -25,5 +25,5 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-  ***REMOVED***
-***REMOVED***
+  }
+}

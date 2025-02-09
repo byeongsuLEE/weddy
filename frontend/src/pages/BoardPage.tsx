@@ -1,55 +1,55 @@
-import ***REMOVED*** useState, useMemo ***REMOVED*** from "react";
-import ***REMOVED*** ComboboxDemo ***REMOVED*** from "../common/Filter";
+import { useState, useMemo } from "react";
+import { ComboboxDemo } from "../common/Filter";
 import SDMList from "../components/BoardPage/SDMList";
-import ***REMOVED*** Tabs, TabsContent, TabsList, TabsTrigger ***REMOVED*** from "../components/ui/tabs";
-import ***REMOVED*** allProducts ***REMOVED*** from "@/api/productApi";
-import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
-import ***REMOVED*** useQuery ***REMOVED*** from "react-query";
-import ***REMOVED*** useSearchParams ***REMOVED*** from "react-router-dom";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { allProducts } from "@/api/productApi";
+import { Product } from "@/api/product.type";
+import { useQuery } from "react-query";
+import { useSearchParams } from "react-router-dom";
 
-const Board = () => ***REMOVED***
+const Board = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
   
   const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category") || "studio";
 
-  const ***REMOVED*** data: allProductList ***REMOVED*** = useQuery("allProducts", allProducts);
+  const { data: allProductList } = useQuery("allProducts", allProducts);
 
-  const handleTabChange = (value: string) => setSearchParams(***REMOVED*** category: value ***REMOVED***);
+  const handleTabChange = (value: string) => setSearchParams({ category: value });
 
   const handleRegionSelect = (value: string) => setSelectedRegion(value);
 
   const handlePriceSelect = (value: string) =>
     setSelectedPrice(parseInt(value.replace(/,/g, ""), 10));
 
-  const filteredProductList = useMemo(() => ***REMOVED***
-    return allProductList?.filter((product: Product) => ***REMOVED***
+  const filteredProductList = useMemo(() => {
+    return allProductList?.filter((product: Product) => {
       const matchesRegion = selectedRegion ? product.address.includes(selectedRegion) : true;
       const matchesPrice = selectedPrice ? Number(product.price) <= selectedPrice : true;
       return matchesRegion && matchesPrice;
-    ***REMOVED***);
-  ***REMOVED***, [selectedRegion, selectedPrice, allProductList]);
+    });
+  }, [selectedRegion, selectedPrice, allProductList]);
 
   const regions = [
-    ***REMOVED*** value: "서울", label: "서울" ***REMOVED***,
-    ***REMOVED*** value: "부산", label: "부산" ***REMOVED***,
-    ***REMOVED*** value: "대구", label: "대구" ***REMOVED***,
-    ***REMOVED*** value: "대전", label: "대전" ***REMOVED***,
-    ***REMOVED*** value: "인천", label: "인천" ***REMOVED***,
-    ***REMOVED*** value: "광주", label: "광주" ***REMOVED***,
-    ***REMOVED*** value: "울산", label: "울산" ***REMOVED***,
+    { value: "서울", label: "서울" },
+    { value: "부산", label: "부산" },
+    { value: "대구", label: "대구" },
+    { value: "대전", label: "대전" },
+    { value: "인천", label: "인천" },
+    { value: "광주", label: "광주" },
+    { value: "울산", label: "울산" },
   ];
 
   const prices = [
-    ***REMOVED*** value: "5000000", label: "5,000,000" ***REMOVED***,
-    ***REMOVED*** value: "10000000", label: "10,000,000" ***REMOVED***,
-    ***REMOVED*** value: "15000000", label: "15,000,000" ***REMOVED***,
+    { value: "5000000", label: "5,000,000" },
+    { value: "10000000", label: "10,000,000" },
+    { value: "15000000", label: "15,000,000" },
   ];
 
   return (
     <div className="mb-20 mt-5">
-      <Tabs defaultValue=***REMOVED***category***REMOVED*** onValueChange=***REMOVED***handleTabChange***REMOVED***>
+      <Tabs defaultValue={category} onValueChange={handleTabChange}>
         <TabsList className="flex justify-center">
           <TabsTrigger value="studio">스튜디오</TabsTrigger>
           <TabsTrigger value="dress">드레스</TabsTrigger>
@@ -57,23 +57,23 @@ const Board = () => ***REMOVED***
         </TabsList>
 
         <div className="flex text-gray-600 justify-center gap-4 mt-5">
-          <ComboboxDemo lists=***REMOVED***regions***REMOVED*** title="지역" onSelect=***REMOVED***handleRegionSelect***REMOVED*** />
-          <ComboboxDemo lists=***REMOVED***prices***REMOVED*** title="가격" onSelect=***REMOVED***handlePriceSelect***REMOVED*** />
+          <ComboboxDemo lists={regions} title="지역" onSelect={handleRegionSelect} />
+          <ComboboxDemo lists={prices} title="가격" onSelect={handlePriceSelect} />
         </div>
 
-        ***REMOVED***["studio", "dress", "makeup"].map((type) => (
-          <TabsContent key=***REMOVED***type***REMOVED*** value=***REMOVED***type***REMOVED***>
+        {["studio", "dress", "makeup"].map((type) => (
+          <TabsContent key={type} value={type}>
             <SDMList
-              value=***REMOVED***type***REMOVED***
-              productList=***REMOVED***Array.isArray(filteredProductList) ? filteredProductList.filter(
+              value={type}
+              productList={Array.isArray(filteredProductList) ? filteredProductList.filter(
                 (product) => product.type === type.toUpperCase()
-              ) : []***REMOVED***
+              ) : []}
             />
           </TabsContent>
-        ))***REMOVED***
+        ))}
       </Tabs>
     </div>
   );
-***REMOVED***;
+};
 
 export default Board;

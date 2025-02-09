@@ -10,23 +10,23 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 
 @Component
-public class JwtUtil ***REMOVED***
+public class JwtUtil {
     private SecretKey secretKey;
 
-    public JwtUtil(@Value("$***REMOVED***jwt.secret-key***REMOVED***")String secret) ***REMOVED***
+    public JwtUtil(@Value("${jwt.secret-key}")String secret) {
         secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
-    ***REMOVED***
-    public String getUsername(String token) ***REMOVED***
+    }
+    public String getUsername(String token) {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("userName", String.class);
-    ***REMOVED***
-    public String getCode(String token) ***REMOVED***
+    }
+    public String getCode(String token) {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("coupleCode", String.class);
-    ***REMOVED***
-    public Long getUserId(String token) ***REMOVED***
+    }
+    public Long getUserId(String token) {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("id", Long.class);
-    ***REMOVED***
+    }
 
-    public String resolveToken(HttpServletRequest request) ***REMOVED***
+    public String resolveToken(HttpServletRequest request) {
         return request.getHeader("Authorization").substring(7);
-    ***REMOVED***
-***REMOVED***
+    }
+}

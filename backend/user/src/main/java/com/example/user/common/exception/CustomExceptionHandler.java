@@ -17,44 +17,44 @@ import java.util.Objects;
 
 @Slf4j
 @RestControllerAdvice
-public class CustomExceptionHandler ***REMOVED***
+public class CustomExceptionHandler {
 
     @ExceptionHandler(UserTokenNotFoundException.class)
-    public ResponseEntity<ApiResponse<String>> userTokenNotFoundException(UserTokenNotFoundException e) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> userTokenNotFoundException(UserTokenNotFoundException e) {
         ErrorCode errorCode = e.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode));
-    ***REMOVED***
+    }
 
 
     @ExceptionHandler(PaymentNotValidateException.class)
-    public ResponseEntity<ApiResponse<String>> paymentNotValidateException(PaymentNotValidateException e) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> paymentNotValidateException(PaymentNotValidateException e) {
         ErrorCode errorCode = e.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(ContractNotFoundException.class)
-    public ResponseEntity<ApiResponse<String>> contractNotFoundException(ContractNotFoundException e) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> contractNotFoundException(ContractNotFoundException e) {
         ErrorCode errorCode = e.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ApiResponse<String>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
         return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE)
                 .body(ApiResponse.error(ErrorCode.FILE_TOO_LARGE));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<ApiResponse<String>> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(ApiResponse.error(ErrorCode.METHOD_NOT_ALLOWED));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         log.info(ex.getObjectName());
         log.info(ex.getBindingResult().toString());
         log.info(ex.getTitleMessageCode());
@@ -67,39 +67,39 @@ public class CustomExceptionHandler ***REMOVED***
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ApiResponse.error(HttpStatus.BAD_REQUEST,errorMessage));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ApiResponse<String>> UsernotFoundException(MethodArgumentTypeMismatchException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> UsernotFoundException(MethodArgumentTypeMismatchException ex) {
         log.info(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiResponse.error(ErrorCode.USER_NOT_FOUND));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(CartNotFoundException.class)
-    public ResponseEntity<ApiResponse<String>> UserNotFoundException(CartNotFoundException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> UserNotFoundException(CartNotFoundException ex) {
         log.info(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.error(HttpStatus.NOT_FOUND,ex.getMessage()));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(ConflictItemsException.class)
-    public ResponseEntity<ApiResponse<String>> ConflictItemsException(ConflictItemsException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> ConflictItemsException(ConflictItemsException ex) {
         log.info(ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ApiResponse.error(HttpStatus.CONFLICT,ex.getMessage()));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(ImageUploadFailedException.class)
-    public ResponseEntity<ApiResponse<String>> ImageUploadFailedException(ImageUploadFailedException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> ImageUploadFailedException(ImageUploadFailedException ex) {
         log.info(ex.getMessage());
         ErrorCode errorCode = ex.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode));
-    ***REMOVED***
+    }
 //    @ExceptionHandler(JsonProcessingException.class)
-//    public ResponseEntity<ApiResponse<String>> handleJsonProcessingException(JsonProcessingException ex) ***REMOVED***
-//        log.error("JSON 처리 중 오류 발생: ***REMOVED******REMOVED***", ex.getMessage());
+//    public ResponseEntity<ApiResponse<String>> handleJsonProcessingException(JsonProcessingException ex) {
+//        log.error("JSON 처리 중 오류 발생: {}", ex.getMessage());
 //        return ResponseEntity.status(HttpStatus.PROCESSING)
 //                .body(ApiResponse.error(HttpStatus.PROCESSING,ex.getMessage()));
-//    ***REMOVED***
-***REMOVED***
+//    }
+}

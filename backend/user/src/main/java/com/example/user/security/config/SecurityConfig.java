@@ -21,27 +21,27 @@ import java.util.List;
 @Slf4j // 로깅 추가
 @Controller
 @EnableWebSecurity
-public class SecurityConfig ***REMOVED***
+public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomSuccessHandler customSuccessHandler;
     private final JWTFilter jwtFilter;
 
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomSuccessHandler customSuccessHandler, JWTFilter jwtFilter) ***REMOVED***
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomSuccessHandler customSuccessHandler, JWTFilter jwtFilter) {
         this.customOAuth2UserService = customOAuth2UserService;
         this.customSuccessHandler = customSuccessHandler;
         this.jwtFilter = jwtFilter;
-    ***REMOVED***
+    }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, UserRepository userRepository) throws Exception ***REMOVED***
+    public SecurityFilterChain filterChain(HttpSecurity http, UserRepository userRepository) throws Exception {
         log.info("[SecurityConfig] SecurityFilterChain 설정 시작");
 
         // CORS 설정
-        http.cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() ***REMOVED***
+        http.cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
             @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) ***REMOVED***
-                log.info("[CORS 설정] 요청 URI: ***REMOVED******REMOVED***", request.getRequestURI());
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                log.info("[CORS 설정] 요청 URI: {}", request.getRequestURI());
                 CorsConfiguration configuration = new CorsConfiguration();
                 configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:5174", "https://weddy.info"));
                 configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
@@ -50,11 +50,11 @@ public class SecurityConfig ***REMOVED***
                 configuration.setMaxAge(3600L);
                 configuration.setExposedHeaders(List.of("Set-Cookie", "Authorization"));
                 return configuration;
-            ***REMOVED***
-        ***REMOVED***));
+            }
+        }));
 
         // 경로별 인가 작업 - 로그인 및 공개 경로만 허용
-        http.authorizeHttpRequests(auth -> ***REMOVED***
+        http.authorizeHttpRequests(auth -> {
             log.info("[권한 설정] 공개 경로 허용");
             auth.requestMatchers(
                             "/",
@@ -68,7 +68,7 @@ public class SecurityConfig ***REMOVED***
                             "/api/users/token",
                             "/api/users/token/**").permitAll()
                     .anyRequest().authenticated();
-        ***REMOVED***);
+        });
 
         // CSRF 비활성화
         log.info("[CSRF 설정] CSRF 비활성화");
@@ -88,15 +88,15 @@ public class SecurityConfig ***REMOVED***
 
         // 소셜 로그인 설정
         log.info("[소셜 로그인 설정] 시작");
-        http.oauth2Login(oAuth2 -> ***REMOVED***
+        http.oauth2Login(oAuth2 -> {
             log.info("[소셜 로그인 설정] 로그인 페이지: http://weddy.info/login");
             oAuth2.loginPage("http://weddy.info/login")
-                    .userInfoEndpoint(userInfo -> ***REMOVED***
+                    .userInfoEndpoint(userInfo -> {
                         log.info("[소셜 로그인 설정] 사용자 정보 서비스 설정");
                         userInfo.userService(customOAuth2UserService);
-                    ***REMOVED***)
+                    })
                     .successHandler(customSuccessHandler);
-        ***REMOVED***);
+        });
 
         // 세션 설정 : STATELESS
         log.info("[세션 관리 설정] STATELESS 모드 설정");
@@ -104,5 +104,5 @@ public class SecurityConfig ***REMOVED***
 
         log.info("[SecurityConfig] SecurityFilterChain 설정 완료");
         return http.build();
-    ***REMOVED***
-***REMOVED***
+    }
+}

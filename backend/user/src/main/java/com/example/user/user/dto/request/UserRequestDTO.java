@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequestDTO ***REMOVED***
+public class UserRequestDTO {
     private Long id;
     private String coupleCode;
     private String socialId;
@@ -20,4 +20,4 @@ public class UserRequestDTO ***REMOVED***
     private String picture;
     private LocalDate date;
     private Long otherId;
-***REMOVED***
+}

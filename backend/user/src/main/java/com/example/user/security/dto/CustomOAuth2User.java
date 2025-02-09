@@ -8,44 +8,44 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-public class CustomOAuth2User implements OAuth2User ***REMOVED***
+public class CustomOAuth2User implements OAuth2User {
 
     private final UserDTO userDTO;
-    public CustomOAuth2User(UserDTO userDTO) ***REMOVED***
+    public CustomOAuth2User(UserDTO userDTO) {
         this.userDTO = userDTO;
-    ***REMOVED***
+    }
 
     @Override
-    public Map<String, Object> getAttributes() ***REMOVED***
+    public Map<String, Object> getAttributes() {
         return Map.of();
-    ***REMOVED***
+    }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() ***REMOVED***
+    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        Collection<GrantedAuthority> collection = new ArrayList<>();
 //
-//        collection.add(new GrantedAuthority() ***REMOVED***
+//        collection.add(new GrantedAuthority() {
 //            @Override
-//            public String getAuthority() ***REMOVED***
+//            public String getAuthority() {
 //                return userDTO.getRole();
-//            ***REMOVED***
-//        ***REMOVED***);
+//            }
+//        });
 //        return collection;
         return new ArrayList<>();
-    ***REMOVED***
+    }
 
     @Override
-    public String getName() ***REMOVED***
+    public String getName() {
         return userDTO.getName();
-    ***REMOVED***
+    }
 
-    public Long getUserId()***REMOVED***
+    public Long getUserId(){
         return userDTO.getId();
-    ***REMOVED***
+    }
 
-    public String getCode()***REMOVED***
+    public String getCode(){
         return userDTO.getCoupleCode();
-    ***REMOVED***
+    }
 
-    public String getPicture()***REMOVED***return userDTO.getPicture();***REMOVED***
-***REMOVED***
+    public String getPicture(){return userDTO.getPicture();}
+}

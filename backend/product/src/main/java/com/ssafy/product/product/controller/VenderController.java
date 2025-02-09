@@ -18,14 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/venders")
 @RequiredArgsConstructor
-public class VenderController ***REMOVED***
+public class VenderController {
     private final VenderService venderService;
 
     @PostMapping
     public ResponseEntity<ApiResponse<VenderResponseDto>> registerVender(@Valid @RequestPart VenderRequestDto venderRequestDto,
                                                                          @RequestPart MultipartFile image,
-                                                                         HttpServletRequest request) ***REMOVED***
+                                                                         HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.success(HttpStatus.CREATED,venderService.registVender(venderRequestDto, image,request),"업체 등록"));
-    ***REMOVED***
-***REMOVED***
+    }
+}

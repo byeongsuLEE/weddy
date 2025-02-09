@@ -1,37 +1,37 @@
-import ***REMOVED*** ContractData ***REMOVED*** from "@/api/contract.type";
-import ***REMOVED*** changeStatus ***REMOVED*** from "@/api/contractApi";
-import ***REMOVED*** requestPayment ***REMOVED*** from "@/api/paymentApi";
+import { ContractData } from "@/api/contract.type";
+import { changeStatus } from "@/api/contractApi";
+import { requestPayment } from "@/api/paymentApi";
 import DropdownIcon from "@/icons/DropdownIcon";
 import FileSelectIcon from "@/icons/FileSelectIcon";
-import ***REMOVED*** Accordion, AccordionDetails, AccordionSummary ***REMOVED*** from "@mui/material";
-import ***REMOVED*** Link ***REMOVED*** from "react-router-dom";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Link } from "react-router-dom";
 import TodoButton from "../../common/TodoButton";
 import GotoIcon from "../../icons/Goto";
 import ProgressBar from "./ProgressBar";
-import ***REMOVED*** NftType ***REMOVED*** from "@/api/nft.type";
-import ***REMOVED*** useEffect, useState ***REMOVED*** from "react";
+import { NftType } from "@/api/nft.type";
+import { useEffect, useState } from "react";
 import AlertBox from "@/common/AlertBox";
 
-interface ContractListBoxProps ***REMOVED***
+interface ContractListBoxProps {
   type: string;
   nftList: NftType[];
   contractInfo?: ContractData;
   onChange: (contractId: string) => void;
-***REMOVED***
+}
 
-const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***REMOVED***: ContractListBoxProps) => ***REMOVED***
+const ContractListBox = ({ type, nftList, contractInfo, onChange }: ContractListBoxProps) => {
   const [showIcon, setShowIcon] = useState<Boolean>(false);
   const [nftData, setNftData] = useState<NftType | undefined>();
   const [showAlert, setShowAlert] = useState(false); // AlertBox 상태 추가
 
-  const handleChangeStatus = async () => ***REMOVED***
-    if (contractInfo) ***REMOVED***
+  const handleChangeStatus = async () => {
+    if (contractInfo) {
       onChange(contractInfo.id);
-    ***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
-  const handlePayment = async () => ***REMOVED***
-    if (contractInfo) ***REMOVED***
+  const handlePayment = async () => {
+    if (contractInfo) {
       await requestPayment(contractInfo);
       await changeStatus(contractInfo.id);
       onChange(contractInfo.id);
@@ -40,126 +40,126 @@ const ContractListBox = (***REMOVED*** type, nftList, contractInfo, onChange ***
       setShowAlert(true);
 
       // 2초 후 AlertBox 닫기
-      setTimeout(() => ***REMOVED***
+      setTimeout(() => {
         setShowAlert(false);
-      ***REMOVED***, 2000);
-    ***REMOVED***
-  ***REMOVED***;
+      }, 2000);
+    }
+  };
 
-  const goNFT = () => ***REMOVED***
-    if (nftData) ***REMOVED***
+  const goNFT = () => {
+    if (nftData) {
       window.open(nftData.image);
-    ***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
-  useEffect(() => ***REMOVED***
-    if (nftList) ***REMOVED***
+  useEffect(() => {
+    if (nftList) {
       setNftData(nftList.find((nft: NftType) => nft.type === contractInfo?.product.type));
-    ***REMOVED***
-    if (nftData) ***REMOVED***
+    }
+    if (nftData) {
       setShowIcon(true);
-    ***REMOVED***
-  ***REMOVED***, [nftList, nftData]);
+    }
+  }, [nftList, nftData]);
 
   return (
     <div className="mb-5">
-      ***REMOVED***showAlert && <AlertBox title="결제" description="결제가 완료되었습니다." />***REMOVED***
+      {showAlert && <AlertBox title="결제" description="결제가 완료되었습니다." />}
       <Accordion
-        sx=***REMOVED******REMOVED***
+        sx={{
           boxShadow: "none",
           border: "none",
           borderRadius: "10px",
           marginY: 3,
-          "&:before": ***REMOVED***
+          "&:before": {
             display: "none",
-          ***REMOVED***,
-        ***REMOVED******REMOVED***
+          },
+        }}
       >
         <AccordionSummary
           aria-controls="panel1-content"
           id="panel1-header"
           className="w-[350px] h-[100px]"
-          sx=***REMOVED******REMOVED***
+          sx={{
             boxShadow: "none",
             borderBottom: "none",
             padding: "16px",
             borderRadius: "10px",
             margin: 0,
-          ***REMOVED******REMOVED***
+          }}
         >
-          ***REMOVED***contractInfo ? (
+          {contractInfo ? (
             <div className="flex justify-between w-[300px]">
               <div className="flex items-center">
                 <div>
                   <div className="flex items-center justify-between mx-2 mb-5">
-                    <h1 className="font-bold mr-4">***REMOVED***type***REMOVED***</h1>
+                    <h1 className="font-bold mr-4">{type}</h1>
                     <DropdownIcon />
                   </div>
-                  <ProgressBar status=***REMOVED***contractInfo.status***REMOVED*** />
+                  <ProgressBar status={contractInfo.status} />
                 </div>
               </div>
             </div>
           ) : (
             <div className="flex items-center justify-between mx-2 mb-5  w-[335px]">
-              <h1 className="font-bold ml-4">***REMOVED***type***REMOVED***</h1>
+              <h1 className="font-bold ml-4">{type}</h1>
               <div className="flex items-center">
                 <DropdownIcon />
               </div>
             </div>
-          )***REMOVED***
+          )}
         </AccordionSummary>
-        <AccordionDetails sx=***REMOVED******REMOVED*** border: "none" ***REMOVED******REMOVED***>
-          ***REMOVED***contractInfo ? (
+        <AccordionDetails sx={{ border: "none" }}>
+          {contractInfo ? (
             <div className="flex justify-between mt-10">
-              <Link to=***REMOVED***`/board/detail/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>
+              <Link to={`/board/detail/${contractInfo.product.productId}`}>
                 <div className="flex items-center">
-                  <h1 className="font-bold mr-4">***REMOVED***contractInfo.companyName***REMOVED***</h1>
+                  <h1 className="font-bold mr-4">{contractInfo.companyName}</h1>
                   <GotoIcon />
                 </div>
               </Link>
 
-              ***REMOVED***contractInfo.status === "CONTRACT_PENDING" && (
-                <div onClick=***REMOVED***handleChangeStatus***REMOVED***>
+              {contractInfo.status === "CONTRACT_PENDING" && (
+                <div onClick={handleChangeStatus}>
                   <TodoButton
                     title="계약 대기중"
-                    colorId=***REMOVED***2***REMOVED***
+                    colorId={2}
                     cursor="default"
                   />
                 </div>
-              )***REMOVED***
-              ***REMOVED***contractInfo.status === "SIGN_PENDING" && (
+              )}
+              {contractInfo.status === "SIGN_PENDING" && (
                 <Link
-                  to=***REMOVED***`/contract/$***REMOVED***contractInfo.product.type.toLowerCase()***REMOVED***/$***REMOVED***contractInfo.id***REMOVED***`***REMOVED***
+                  to={`/contract/${contractInfo.product.type.toLowerCase()}/${contractInfo.id}`}
                 >
-                  <TodoButton title="서명 하기" colorId=***REMOVED***1***REMOVED*** />
+                  <TodoButton title="서명 하기" colorId={1} />
                 </Link>
-              )***REMOVED***
-              ***REMOVED***contractInfo.status === "PAYMENT_PENDING" && (
-                <div onClick=***REMOVED***handlePayment***REMOVED***>
-                  <TodoButton title="결제 하기" colorId=***REMOVED***1***REMOVED*** />
+              )}
+              {contractInfo.status === "PAYMENT_PENDING" && (
+                <div onClick={handlePayment}>
+                  <TodoButton title="결제 하기" colorId={1} />
                 </div>
-              )***REMOVED***
-              ***REMOVED***contractInfo.status === "PAYMENT_COMPLETED" && (
+              )}
+              {contractInfo.status === "PAYMENT_COMPLETED" && (
                 <div className="flex items-center">
-                  ***REMOVED***showIcon ? (
+                  {showIcon ? (
                     <>
-                      <div className="mr-2" onClick=***REMOVED***goNFT***REMOVED***>
-                        <FileSelectIcon w=***REMOVED***20***REMOVED*** h=***REMOVED***20***REMOVED*** />
+                      <div className="mr-2" onClick={goNFT}>
+                        <FileSelectIcon w={20} h={20} />
                       </div>
                     </>
-                  ) : null ***REMOVED***
-                  <Link to=***REMOVED***`/review/$***REMOVED***contractInfo.product.productId***REMOVED***`***REMOVED***>
-                    <TodoButton title="리뷰 쓰기" colorId=***REMOVED***1***REMOVED*** />
+                  ) : null }
+                  <Link to={`/review/${contractInfo.product.productId}`}>
+                    <TodoButton title="리뷰 쓰기" colorId={1} />
                   </Link>
                 </div>
-              )***REMOVED***
+              )}
             </div>
           ) : (
             <div>계약중인 계약서가 없습니다.</div>
-          )***REMOVED***
+          )}
         </AccordionDetails>
       </Accordion>
     </div>
   );
-***REMOVED***;
+};
 export default ContractListBox;

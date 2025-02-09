@@ -21,39 +21,39 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaConfig ***REMOVED***
-    @Value("$***REMOVED***kafka.bootstrapAddress***REMOVED***")
+public class KafkaConfig {
+    @Value("${kafka.bootstrapAddress}")
     private String bootstrapServers;
 
-    @Value("$***REMOVED***spring.kafka.consumer.group-id***REMOVED***")
+    @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
 
-    @Value("$***REMOVED***spring.kafka.consumer.auto-offset-reset***REMOVED***")
+    @Value("${spring.kafka.consumer.auto-offset-reset}")
     private String autoOffsetReset;
 
     // Producer 설정
     @Bean
-    public Map<String, Object> producerConfigs() ***REMOVED***
+    public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class); // JSON 직렬화
         return props;
-    ***REMOVED***
+    }
 
     @Bean
-    public ProducerFactory<String, List<ProductResponseDto>> producerFactory() ***REMOVED***
+    public ProducerFactory<String, List<ProductResponseDto>> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
-    ***REMOVED***
+    }
 
     @Bean
-    public KafkaTemplate<String, List<ProductResponseDto>> kafkaTemplate() ***REMOVED***
+    public KafkaTemplate<String, List<ProductResponseDto>> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
-    ***REMOVED***
+    }
 
     // Consumer 설정
     @Bean
-    public Map<String, Object> consumerConfigs() ***REMOVED***
+    public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
@@ -66,18 +66,18 @@ public class KafkaConfig ***REMOVED***
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, "java.util.ArrayList"); // 제네릭 없이 설정
         props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
         return props;
-    ***REMOVED***
+    }
 
     @Bean
-    public ConsumerFactory<String, List> consumerFactory() ***REMOVED*** // 제네릭 없이 List 사용
+    public ConsumerFactory<String, List> consumerFactory() { // 제네릭 없이 List 사용
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
-    ***REMOVED***
+    }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, List> kafkaListenerContainerFactory() ***REMOVED*** // 제네릭 없이 List 사용
+    public ConcurrentKafkaListenerContainerFactory<String, List> kafkaListenerContainerFactory() { // 제네릭 없이 List 사용
         ConcurrentKafkaListenerContainerFactory<String, List> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
-    ***REMOVED***
-***REMOVED***
+    }
+}

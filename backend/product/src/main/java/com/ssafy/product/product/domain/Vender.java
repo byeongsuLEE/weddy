@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Vender ***REMOVED***
+public class Vender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,12 +36,12 @@ public class Vender ***REMOVED***
 
 
     @Builder
-    public Vender (VenderRequestDto venderRequestDto, String s3Url, Long userId)***REMOVED***
+    public Vender (VenderRequestDto venderRequestDto, String s3Url, Long userId){
         this.name = venderRequestDto.name();
         this.businessNumber = venderRequestDto.businessNumber();
         this.phone = venderRequestDto.phone();
         this.address = venderRequestDto.address();
         this.imageUrl = s3Url;
         this.userId = userId;
-    ***REMOVED***
-***REMOVED***
+    }
+}

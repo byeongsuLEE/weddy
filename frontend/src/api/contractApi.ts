@@ -1,81 +1,81 @@
 import axios from "axios"
-import ***REMOVED*** ContractData, ContractProduct, SentContractType ***REMOVED*** from "./contract.type";
-import ***REMOVED*** Product ***REMOVED*** from "./product.type";
+import { ContractData, ContractProduct, SentContractType } from "./contract.type";
+import { Product } from "./product.type";
 
 const BASE_URL = `/api/contracts`
 
 //== 계약서 생성 ==// 
-export const createContract = async (contractItems: Product[]): Promise<void> => ***REMOVED***
-  const contracts = contractItems.map((item) => ***REMOVED***
-    const date = new Date().toLocaleDateString('ko-KR', ***REMOVED***
+export const createContract = async (contractItems: Product[]): Promise<void> => {
+  const contracts = contractItems.map((item) => {
+    const date = new Date().toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
-    ***REMOVED***).replace(/. /g, '-').slice(0, 10);
+    }).replace(/. /g, '-').slice(0, 10);
 
-    const contractProduct: ContractProduct = ***REMOVED***
+    const contractProduct: ContractProduct = {
       productId: item.id,
       productName: item.name,
       productContent: item.content,
       type: item.type,
-    ***REMOVED***;
+    };
 
-    return ***REMOVED***
+    return {
       userId: sessionStorage.getItem("userId") as string,
       totalMount: item.price,
       companyName: item.vendorName,
       startDate: date,
       endDate: date,
       product: contractProduct,
-    ***REMOVED***;
-  ***REMOVED***);
+    };
+  });
   
   return requestContract(contracts);
-***REMOVED***;
+};
 
 //== 계약 요청 ==//
-export const requestContract = async (contractList: SentContractType[]): Promise<void> => ***REMOVED***
-  await axios(***REMOVED***
+export const requestContract = async (contractList: SentContractType[]): Promise<void> => {
+  await axios({
     method: 'post',
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***sessionStorage.getItem('userId')***REMOVED***`,
-    headers: ***REMOVED***
+    url: `${BASE_URL}/${sessionStorage.getItem('userId')}`,
+    headers: {
       Authorization: sessionStorage.getItem("token")
-    ***REMOVED***,
+    },
     data: contractList
-  ***REMOVED***);
-***REMOVED***;
+  });
+};
 
 //== 계약 리스트 ==//
-export const myContract = async (): Promise<ContractData[]> => ***REMOVED***
-  const response = await axios(***REMOVED*** 
+export const myContract = async (): Promise<ContractData[]> => {
+  const response = await axios({ 
     method: 'get',
     url: BASE_URL,
-    headers: ***REMOVED***
+    headers: {
       Authorization:sessionStorage.getItem("token")
-    ***REMOVED***
-  ***REMOVED***);
+    }
+  });
   return response.data.data;
-***REMOVED***;
+};
 
 //== 계약서 상세 조회 ==//
-export const contractInfo = async (contractId?: string): Promise<ContractData> => ***REMOVED***
-  const response = await axios(***REMOVED***
+export const contractInfo = async (contractId?: string): Promise<ContractData> => {
+  const response = await axios({
     method: 'get',
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
-    headers: ***REMOVED***
+    url: `${BASE_URL}/${contractId}`,
+    headers: {
       Authorization: sessionStorage.getItem("token")
-    ***REMOVED***
-  ***REMOVED***);
+    }
+  });
   return response.data.data;
-***REMOVED***;
+};
 
 //== 계약서 상태 변경 ==//
-export const changeStatus = async (contractId?: string): Promise<void> => ***REMOVED***
-  await axios(***REMOVED***
+export const changeStatus = async (contractId?: string): Promise<void> => {
+  await axios({
     method: 'patch',
-    url: `$***REMOVED***BASE_URL***REMOVED***/$***REMOVED***contractId***REMOVED***`,
-    headers: ***REMOVED***
+    url: `${BASE_URL}/${contractId}`,
+    headers: {
       Authorization: sessionStorage.getItem("token")
-    ***REMOVED***
-  ***REMOVED***);
-***REMOVED***;
+    }
+  });
+};

@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ScheduleJpaAdapter implements ScheduleOutPutPort ***REMOVED***
+public class ScheduleJpaAdapter implements ScheduleOutPutPort {
 
     private final ScheduleRepository scheduleRepository;
 
@@ -32,22 +32,22 @@ public class ScheduleJpaAdapter implements ScheduleOutPutPort ***REMOVED***
      * @return
      */
     @Override
-    public List<Schedule> getSchedules(String coupleCode, LocalDate date) ***REMOVED***
+    public List<Schedule> getSchedules(String coupleCode, LocalDate date) {
         return scheduleRepository.findByCodeAndDate(coupleCode,date);
-    ***REMOVED***
+    }
 
     @Override
-    public Optional<Schedule> getSchedule(Long scheduleId) ***REMOVED***
+    public Optional<Schedule> getSchedule(Long scheduleId) {
         return scheduleRepository.findById(scheduleId);
-    ***REMOVED***
+    }
 
     @Override
-    public Schedule save(Schedule schedule) ***REMOVED***
+    public Schedule save(Schedule schedule) {
             return scheduleRepository.save(schedule);
-    ***REMOVED***
+    }
 
     @Override
-    public List<Schedule> getSchedulesByCoupleCode(String coupleCode) ***REMOVED***
+    public List<Schedule> getSchedulesByCoupleCode(String coupleCode) {
         return scheduleRepository.findByCode(coupleCode);
-    ***REMOVED***
-***REMOVED***
+    }
+}

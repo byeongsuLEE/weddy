@@ -15,36 +15,36 @@ import java.util.Objects;
 
 @Slf4j
 @RestControllerAdvice
-public class CustomExceptionHandler ***REMOVED***
+public class CustomExceptionHandler {
 
     @ExceptionHandler(ImageInvalidException.class)
-    public ResponseEntity<ApiResponse<String>> imageInvalidException(ImageInvalidException e) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> imageInvalidException(ImageInvalidException e) {
         ErrorCode errorCode = e.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(ProductNotFoundExpception.class)
-    public ResponseEntity<ApiResponse<String>> productNotFoundException(ProductNotFoundExpception e) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> productNotFoundException(ProductNotFoundExpception e) {
         ErrorCode errorCode = e.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ApiResponse<String>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
         return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE)
                 .body(ApiResponse.error(ErrorCode.FILE_TOO_LARGE));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseEntity<ApiResponse<String>> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(ApiResponse.error(ErrorCode.METHOD_NOT_ALLOWED));
-    ***REMOVED***
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         log.info(ex.getObjectName());
         log.info(ex.getBindingResult().toString());
         log.info(ex.getTitleMessageCode());
@@ -57,5 +57,5 @@ public class CustomExceptionHandler ***REMOVED***
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ApiResponse.error(HttpStatus.BAD_REQUEST,errorMessage));
-    ***REMOVED***
-***REMOVED***
+    }
+}

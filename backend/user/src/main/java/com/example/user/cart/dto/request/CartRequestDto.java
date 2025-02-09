@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartRequestDto ***REMOVED***
+public class CartRequestDto {
     Long id;
-***REMOVED***
+}

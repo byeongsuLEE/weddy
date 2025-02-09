@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductImage ***REMOVED***
+public class ProductImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +21,8 @@ public class ProductImage ***REMOVED***
     private Product product;
 
     @Builder
-    public ProductImage(String imageUrl, Product product) ***REMOVED***
+    public ProductImage(String imageUrl, Product product) {
         this.imageUrl = imageUrl;
         this.product = product;
-    ***REMOVED***
-***REMOVED***
+    }
+}

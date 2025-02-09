@@ -30,7 +30,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class UserService ***REMOVED***
+public class UserService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final KafkaTemplate<String, Object> kafkaTemplate;
@@ -39,25 +39,25 @@ public class UserService ***REMOVED***
     private final FcmService fcmService;
     private final RedisTemplate<String, String> redisTemplate;
 
-    public UserService(KafkaTemplate<String, Object> kafkaTemplate, UserRepository userRepository, GCSImageService gcsImageService, FcmService fcmService, @Qualifier("redisUserTemplate") RedisTemplate<String, String> redisTemplate)***REMOVED***
+    public UserService(KafkaTemplate<String, Object> kafkaTemplate, UserRepository userRepository, GCSImageService gcsImageService, FcmService fcmService, @Qualifier("redisUserTemplate") RedisTemplate<String, String> redisTemplate){
         this.kafkaTemplate = kafkaTemplate;
         this.userRepository = userRepository;
         this.gcsImageService = gcsImageService;
         this.fcmService = fcmService;
         this.redisTemplate = redisTemplate;
-    ***REMOVED***
-    @Value("$***REMOVED***producers.couplecode.name***REMOVED***")
+    }
+    @Value("${producers.couplecode.name}")
     private final String coupleTopic = "coupleTopic";
 
-    public List<UserResponseDTO> userInfo(UserEntity user) ***REMOVED***
+    public List<UserResponseDTO> userInfo(UserEntity user) {
         // userEntity와 otherUserEntity를 각각 조회하며, 없으면 UserNotFoundException 발생
         UserEntity userEntity = userRepository.findById(user.getId())
                 .orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
         UserEntity otherUserEntity = null;
-        if(user.getOtherId() != null)***REMOVED***
+        if(user.getOtherId() != null){
             otherUserEntity = userRepository.findById(user.getOtherId())
                     .orElse(null); // otherUserEntity는 없을 수 있으므로 예외를 발생시키지 않고 null을 허용
-        ***REMOVED***
+        }
 
         List<UserResponseDTO> responseList = new ArrayList<>();
 
@@ -65,24 +65,24 @@ public class UserService ***REMOVED***
         responseList.add(UserResponseDTO.fromEntity(userEntity));
 
         // otherUserEntity가 존재할 경우에만 리스트에 추가
-        if (otherUserEntity != null) ***REMOVED***
+        if (otherUserEntity != null) {
             responseList.add(UserResponseDTO.fromEntity(otherUserEntity));
-        ***REMOVED***
+        }
 
         return responseList;
-    ***REMOVED***
+    }
 
-    public UserResponseDTO coupleCode(String coupleCode)***REMOVED***
+    public UserResponseDTO coupleCode(String coupleCode){
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
                 .coupleCode(coupleCode)
                 .build();
 
         return userResponseDTO;
-    ***REMOVED***
+    }
 
-    public void updateUserInfo(Long id, Map<String, Object> info) ***REMOVED***
+    public void updateUserInfo(Long id, Map<String, Object> info) {
         UserEntity existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        log.info("Received update info: ***REMOVED******REMOVED***", info);
+        log.info("Received update info: {}", info);
 
         // 기존 엔티티의 필드를 복사하고 필요 시 새로운 값을 설정
         UserEntity.UserEntityBuilder builder = existingUser.toBuilder();
@@ -93,37 +93,37 @@ public class UserService ***REMOVED***
         builder.address(info.get("address") != null ? info.get("address").toString() : existingUser.getAddress());
         builder.email(info.get("email") != null ? info.get("email").toString() : existingUser.getEmail());
 
-        if (info.get("picture") != null && info.get("picture") instanceof MultipartFile) ***REMOVED***
+        if (info.get("picture") != null && info.get("picture") instanceof MultipartFile) {
             MultipartFile pictureFile = (MultipartFile) info.get("picture");
-            try ***REMOVED***
+            try {
                 String pictureUrl = gcsImageService.uploadImage(pictureFile);
                 builder.picture(pictureUrl);
-            ***REMOVED*** catch (Exception e) ***REMOVED***
+            } catch (Exception e) {
                 throw new RuntimeException("Failed to upload picture", e);
-            ***REMOVED***
-        ***REMOVED*** else ***REMOVED***
+            }
+        } else {
             builder.picture(existingUser.getPicture());
-        ***REMOVED***
+        }
 
         builder.date(info.get("date") != null ? LocalDate.parse(info.get("date").toString()) : existingUser.getDate());
 
         // 새 엔티티를 저장하여 기존 필드는 유지하고 필요한 필드만 업데이트
         UserEntity updatedUser = builder.build();
         userRepository.save(updatedUser);
-    ***REMOVED***
+    }
 
 
 
-    public UserResponseDTO connectCoupleCode(String coupleCode, Long id) throws JsonProcessingException ***REMOVED***
+    public UserResponseDTO connectCoupleCode(String coupleCode, Long id) throws JsonProcessingException {
         UserEntity userEntity = userRepository.findById(id).orElse(null);
         int count = userRepository.countByCoupleCode(coupleCode);
         String oldCoupleCode = userRepository.findById(id).get().getCoupleCode();
         if(count != 1) throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
         UserEntity otheruserEntity = userRepository.findByCoupleCode(coupleCode).get(0); // 이부분 내가 바꿨으니 확인 해보셈
 
-        if (userEntity == null || otheruserEntity == null) ***REMOVED***
+        if (userEntity == null || otheruserEntity == null) {
             throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
-        ***REMOVED***
+        }
         //userEntity 전송용 저장
         Map<String, String> userData = new HashMap<>();
         userData.put("oldCoupleCode", oldCoupleCode);
@@ -165,7 +165,7 @@ public class UserService ***REMOVED***
                 .picture(otheruserEntity.getPicture())
                 .date(otheruserEntity.getDate())
                 .build();
-    ***REMOVED***
+    }
 
     /**
      *  토큰 가져오기
@@ -178,11 +178,11 @@ public class UserService ***REMOVED***
      * @return
      */
     @Transactional(readOnly = true)
-    public UserCoupleTokenDto getFcmToken(String coupleCode, Long myUserId) ***REMOVED***
+    public UserCoupleTokenDto getFcmToken(String coupleCode, Long myUserId) {
         List<UserEntity> userEntity = getUserEntities(coupleCode);
         return getUserCoupleTokenDto(myUserId, userEntity);
 
-    ***REMOVED***
+    }
 
     /**
      * fcmadapter 토큰 저장
@@ -194,7 +194,7 @@ public class UserService ***REMOVED***
      * @param fcmToken
      */
     @Transactional
-    public void setFcmToken(Long userId, String fcmToken) ***REMOVED***
+    public void setFcmToken(Long userId, String fcmToken) {
         UserEntity userEntity = getUserEntity(userId);
         String beforeFcmToken = userEntity.getFcmToken();
         userEntity.updateFcmToken(fcmToken);
@@ -205,42 +205,42 @@ public class UserService ***REMOVED***
         redisTemplate.opsForHash().put("USER:"+coupleCode, userId.toString(), fcmToken);
 
 
-    ***REMOVED***
+    }
 
 
 
-    private UserEntity getUserEntity(Long userId) ***REMOVED***
+    private UserEntity getUserEntity(Long userId) {
         UserEntity userEntity = userRepository.findById(userId).orElse(null);
-        if (userEntity == null) ***REMOVED***
+        if (userEntity == null) {
             throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND);
-        ***REMOVED***
+        }
         return userEntity;
-    ***REMOVED***
+    }
 
-    private List<UserEntity> getUserEntities(String coupleCode) ***REMOVED***
+    private List<UserEntity> getUserEntities(String coupleCode) {
         List<UserEntity> userEntity = userRepository.findByCoupleCode(coupleCode);
-        if (userEntity == null) ***REMOVED***
+        if (userEntity == null) {
              throw new UserTokenNotFoundException(ErrorCode.USER_TOKEN_NOT_FOUND);
-        ***REMOVED***
+        }
         return userEntity;
-    ***REMOVED***
+    }
 
-    private static UserCoupleTokenDto getUserCoupleTokenDto(Long myUserId, List<UserEntity> userEntity) ***REMOVED***
+    private static UserCoupleTokenDto getUserCoupleTokenDto(Long myUserId, List<UserEntity> userEntity) {
         String myToken = null;
         String coupleToken =null ;
 
-        for(UserEntity user : userEntity)***REMOVED***
-            if(user.getId().equals(myUserId))***REMOVED***
+        for(UserEntity user : userEntity){
+            if(user.getId().equals(myUserId)){
                 myToken = user.getFcmToken();
-            ***REMOVED***else***REMOVED***
+            }else{
                 coupleToken = user.getFcmToken();
-            ***REMOVED***
-        ***REMOVED***
+            }
+        }
 
         return UserCoupleTokenDto.builder()
                 .myFcmToken(myToken)
                 .coupleFcmToken(coupleToken)
                 .build();
-    ***REMOVED***
-***REMOVED***
+    }
+}
 // 테스트용 주석 2

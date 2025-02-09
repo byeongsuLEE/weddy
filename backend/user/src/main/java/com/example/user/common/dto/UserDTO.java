@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO ***REMOVED***
+public class UserDTO {
     private Long id;
     private String coupleCode;
     private String name;
@@ -15,4 +15,4 @@ public class UserDTO ***REMOVED***
     private String adress;
     private String phone;
     private String picture;
-***REMOVED***
+}

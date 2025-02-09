@@ -11,19 +11,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Getter
-@JsonPropertyOrder(***REMOVED***"code", "message", "data"***REMOVED***)
+@JsonPropertyOrder({"code", "message", "data"})
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public class ApiResponse<T> ***REMOVED***
+public class ApiResponse<T> {
     private final HttpStatus status;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final T data;
 
-    public static <T> ApiResponse<T> success(T data) ***REMOVED***
+    public static <T> ApiResponse<T> success(T data) {
         return new ApiResponse<T>(HttpStatus.OK,null, data);
-    ***REMOVED***
+    }
 
     /**
      *
@@ -36,27 +36,27 @@ public class ApiResponse<T> ***REMOVED***
 
 
      */
-    public static <T> ApiResponse<T> success(HttpStatus status , T data,String message) ***REMOVED***
+    public static <T> ApiResponse<T> success(HttpStatus status , T data,String message) {
         return new ApiResponse<T>(status, message, data);
-    ***REMOVED***
-    public static <T> ApiResponse<T> error(ErrorCode errorCode) ***REMOVED***
+    }
+    public static <T> ApiResponse<T> error(ErrorCode errorCode) {
         return new ApiResponse<T>(errorCode.getStatus(),errorCode.getMessage(),null);
-    ***REMOVED***
+    }
 
-    public static <T> ApiResponse<T> error(HttpStatus status, String message) ***REMOVED***
+    public static <T> ApiResponse<T> error(HttpStatus status, String message) {
         return new ApiResponse<T>(status,message,null);
-    ***REMOVED***
+    }
 
     /**
      * Json 형태로 반환
      * @return
      */
-    public String toJson() ***REMOVED***
-        try ***REMOVED***
+    public String toJson() {
+        try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(this);
-        ***REMOVED*** catch (JsonProcessingException e) ***REMOVED***
-            return "***REMOVED******REMOVED***";
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+        } catch (JsonProcessingException e) {
+            return "{}";
+        }
+    }
+}

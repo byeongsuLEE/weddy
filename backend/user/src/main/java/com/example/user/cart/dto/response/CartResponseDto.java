@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartResponseDto ***REMOVED***
+public class CartResponseDto {
     String coupleCode;
     Long productId;
     Long userId;
 
-    public CartResponseDto(CartEntity cartEntity) ***REMOVED***
+    public CartResponseDto(CartEntity cartEntity) {
         this.coupleCode = cartEntity.getCoupleCode();
         this.productId = cartEntity.getProductId();
         this.userId = cartEntity.getUserId();
-    ***REMOVED***
-***REMOVED***
+    }
+}

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 
-import ***REMOVED*** cn ***REMOVED*** from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const Popover = PopoverPrimitive.Root;
 
@@ -12,14 +12,14 @@ const PopoverAnchor = PopoverPrimitive.Anchor;
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->((***REMOVED*** className, align = "center", side = "bottom", sideOffset = 4, ...props ***REMOVED***, ref) => (
+>(({ className, align = "center", side = "bottom", sideOffset = 4, ...props }, ref) => (
   <PopoverPrimitive.Portal>
     <PopoverPrimitive.Content
-      ref=***REMOVED***ref***REMOVED***
-      align=***REMOVED***align***REMOVED***
-      side=***REMOVED***side***REMOVED***
-      sideOffset=***REMOVED***sideOffset***REMOVED***
-      className=***REMOVED***cn(
+      ref={ref}
+      align={align}
+      side={side}
+      sideOffset={sideOffset}
+      className={cn(
         "z-50 w-40 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
@@ -27,12 +27,12 @@ const PopoverContent = React.forwardRef<
         "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2",
         "data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className
-      )***REMOVED***
-      style=***REMOVED******REMOVED*** transformOrigin: "bottom center" ***REMOVED******REMOVED*** // 하단 중앙에서 애니메이션 시작
-      ***REMOVED***...props***REMOVED***
+      )}
+      style={{ transformOrigin: "bottom center" }} // 하단 중앙에서 애니메이션 시작
+      {...props}
     />
   </PopoverPrimitive.Portal>
 ));
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
-export ***REMOVED*** Popover, PopoverTrigger, PopoverContent, PopoverAnchor ***REMOVED***;
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };

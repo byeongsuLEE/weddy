@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-public class UserInputDto ***REMOVED***
+public class UserInputDto {
     Long userId;
     String code;
-***REMOVED***
+}

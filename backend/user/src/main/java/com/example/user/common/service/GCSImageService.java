@@ -13,18 +13,18 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class GCSImageService ***REMOVED***
+public class GCSImageService {
 
     private final Storage storage;
 
-    @Value("$***REMOVED***spring.cloud.gcp.storage.bucket***REMOVED***")
+    @Value("${spring.cloud.gcp.storage.bucket}")
     private String bucketName;
 
-    public GCSImageService(Storage storage) ***REMOVED***
+    public GCSImageService(Storage storage) {
         this.storage = storage;
-    ***REMOVED***
+    }
 
-    public String uploadImage(MultipartFile imageFile) ***REMOVED***
+    public String uploadImage(MultipartFile imageFile) {
         String originalName = imageFile.getOriginalFilename();
         String ext = imageFile.getContentType();
         String uuid = UUID.randomUUID().toString();
@@ -36,15 +36,15 @@ public class GCSImageService ***REMOVED***
                 .setContentType(ext)
                 .build();
 
-        try ***REMOVED***
+        try {
             // InputStream을 사용해 GCS에 이미지 업로드
             storage.create(blobInfo, imageFile.getInputStream());
-            log.info("Image uploaded successfully. URL: ***REMOVED******REMOVED***", uploadPath);
+            log.info("Image uploaded successfully. URL: {}", uploadPath);
             return uploadPath;
 
-        ***REMOVED*** catch (IOException e) ***REMOVED***
+        } catch (IOException e) {
             log.error("Failed to upload image to GCS", e);
             return null;
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+        }
+    }
+}

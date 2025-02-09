@@ -6,8 +6,8 @@ import com.example.user.user.entity.UserEntity;
 
 import java.util.List;
 
-public interface CartService***REMOVED***
+public interface CartService{
     void addCart(Long productId, UserEntity userEntity);
     List<CartProductDto> getCart(UserEntity userEntity);
     void removeCart(Long productId,UserEntity userEntity);
-***REMOVED***
+}

@@ -5,6 +5,6 @@ import com.ssafy.product.product.dto.response.VenderResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface VenderService ***REMOVED***
+public interface VenderService {
     VenderResponseDto registVender(final VenderRequestDto venderRequestDto, final MultipartFile image, final HttpServletRequest request);
-***REMOVED***
+}

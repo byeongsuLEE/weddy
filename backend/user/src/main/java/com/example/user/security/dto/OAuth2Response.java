@@ -1,6 +1,6 @@
 package com.example.user.security.dto;
 
-public interface OAuth2Response ***REMOVED***
+public interface OAuth2Response {
 
     //제공자 (Ex. naver, google, ...)
     String getProvider();
@@ -12,4 +12,4 @@ public interface OAuth2Response ***REMOVED***
     String getName();
 
     String getPicture();
-***REMOVED***
+}

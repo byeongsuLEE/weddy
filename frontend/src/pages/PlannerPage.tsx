@@ -1,46 +1,46 @@
-import ***REMOVED*** createContract ***REMOVED*** from "@/api/contractApi";
-import ***REMOVED*** Product ***REMOVED*** from "@/api/product.type";
+import { createContract } from "@/api/contractApi";
+import { Product } from "@/api/product.type";
 import TodoButton from "@/common/TodoButton";
 import PlannerBox from "@/components/PlannerPage/PlannerBox";
-import ***REMOVED*** recommendState ***REMOVED*** from "@/store/recommendState";
-import ***REMOVED*** useState ***REMOVED*** from "react";
-import ***REMOVED*** useNavigate ***REMOVED*** from "react-router-dom";
-import ***REMOVED*** useRecoilValue ***REMOVED*** from "recoil";
+import { recommendState } from "@/store/recommendState";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
-const PlannerPage = () => ***REMOVED***
+const PlannerPage = () => {
   const navigate = useNavigate();
   const recommendList = useRecoilValue(recommendState);
 
-  const [selectedList, setSelectedList] = useState<***REMOVED*** [type: string]: Product | null; ***REMOVED***>(***REMOVED***
+  const [selectedList, setSelectedList] = useState<{ [type: string]: Product | null; }>({
     studio: null,
     dress: null,
     makeup: null,
-  ***REMOVED***);
+  });
 
-  const [selectedAmounts, setSelectedAmounts] = useState<***REMOVED*** [key: string]: number; ***REMOVED***>(***REMOVED***
+  const [selectedAmounts, setSelectedAmounts] = useState<{ [key: string]: number; }>({
     studio: 0,
     dress: 0,
     makeup: 0,
-  ***REMOVED***);
+  });
 
   const totalAmount = Object.values(selectedAmounts).reduce((acc, amount) => acc + amount, 0);
 
-  const handleAmountChange = (type: string, selectedCartItem: Product | null) => ***REMOVED***
+  const handleAmountChange = (type: string, selectedCartItem: Product | null) => {
     const amount = selectedCartItem ? parseInt(selectedCartItem.price) : 0;
 
-    setSelectedAmounts((prev) => (***REMOVED*** ...prev, [type]: amount ***REMOVED***));
-    setSelectedList((prev) => (***REMOVED*** ...prev, [type]: selectedCartItem ***REMOVED***));
-  ***REMOVED***;
+    setSelectedAmounts((prev) => ({ ...prev, [type]: amount }));
+    setSelectedList((prev) => ({ ...prev, [type]: selectedCartItem }));
+  };
 
-  const handleCreateContract = async () => ***REMOVED***
+  const handleCreateContract = async () => {
     const contractItems = Object.values(selectedList).filter(Boolean) as Product[];
     await createContract(contractItems);
     navigate("/contract/list");
-  ***REMOVED***;
+  };
 
-  const goPrompt = () => ***REMOVED***
+  const goPrompt = () => {
     navigate('/prompt');
-  ***REMOVED***;
+  };
 
   return (
     <>
@@ -54,25 +54,25 @@ const PlannerPage = () => ***REMOVED***
       </div>
 
       <div className="mt-10">
-        ***REMOVED***Array.isArray(recommendList) && recommendList.length > 0 ? (
+        {Array.isArray(recommendList) && recommendList.length > 0 ? (
           <>
             <PlannerBox
-              key=***REMOVED***"STUDIO"***REMOVED***
-              title=***REMOVED***"STUDIO"***REMOVED***
-              type=***REMOVED***"STUDIO"***REMOVED***
-              cartItem=***REMOVED***
+              key={"STUDIO"}
+              title={"STUDIO"}
+              type={"STUDIO"}
+              cartItem={
                 recommendList.filter(
                   (item: Product) => item.type === "STUDIO"
                 )
-              ***REMOVED***
-              onAmountChange=***REMOVED***handleAmountChange***REMOVED***
+              }
+              onAmountChange={handleAmountChange}
             />
 
             <div className="flex justify-between mt-10 mx-10">
               <span className="text-lg font-bold">
-                총 합계: ***REMOVED***totalAmount.toLocaleString()***REMOVED***원
+                총 합계: {totalAmount.toLocaleString()}원
               </span>
-              <div onClick=***REMOVED***handleCreateContract***REMOVED***>
+              <div onClick={handleCreateContract}>
                 <TodoButton title="계약 요청" />
               </div>
             </div>
@@ -80,16 +80,16 @@ const PlannerPage = () => ***REMOVED***
         ) : (
           <div className="flex flex-col m-5">
             <p className="text-center mb-5">추천받은 상품이 없습니다.</p>
-            <div className="ml-auto" onClick=***REMOVED***goPrompt***REMOVED***>
+            <div className="ml-auto" onClick={goPrompt}>
               <TodoButton title="추천 받기" />
             </div>
           </div>
-        )***REMOVED***
+        )}
 
 
       </div>
     </>
   );
-***REMOVED***;
+};
 
 export default PlannerPage;

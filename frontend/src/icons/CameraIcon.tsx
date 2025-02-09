@@ -1,4 +1,4 @@
-const CameraIcon = () => ***REMOVED***
+const CameraIcon = () => {
   return (
     <div className="bg-gray-400 h-[50px] w-[50px] rounded-full flex">
       <svg width="50" height="50" viewBox="0 0 117 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -7,5 +7,5 @@ const CameraIcon = () => ***REMOVED***
     </div>
 
   )
-***REMOVED***
+}
 export default CameraIcon;

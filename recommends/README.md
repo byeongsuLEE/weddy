@@ -11,7 +11,7 @@
 
 ```env
 ANTHROPIC_API_KEY=your_api_key_here
-***REMOVED***
+REDIS_HOST=34.64.98.78
 REDIS_PORT=6379
 REDIS_PASSWORD=your_password_here
 ```

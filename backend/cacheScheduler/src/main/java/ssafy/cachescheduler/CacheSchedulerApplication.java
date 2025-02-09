@@ -10,10 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableAsync       // 비동기 처리 활성화
 @EnableRetry       // Retry 기능 활성화
-public class CacheSchedulerApplication ***REMOVED***
+public class CacheSchedulerApplication {
 
-	public static void main(String[] args) ***REMOVED***
+	public static void main(String[] args) {
 		SpringApplication.run(CacheSchedulerApplication.class, args);
-	***REMOVED***
+	}
 
-***REMOVED***
+}

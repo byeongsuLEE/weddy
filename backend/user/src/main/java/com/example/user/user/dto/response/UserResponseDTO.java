@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Data
 @Builder
-public class UserResponseDTO ***REMOVED***
+public class UserResponseDTO {
     private Long id;
     private String coupleCode;
     private String socialId;
@@ -23,7 +23,7 @@ public class UserResponseDTO ***REMOVED***
     private Long otherId;
 
     // UserEntity로부터 UserResponseDTO 생성하는 정적 메서드
-    public static UserResponseDTO fromEntity(UserEntity userEntity) ***REMOVED***
+    public static UserResponseDTO fromEntity(UserEntity userEntity) {
         return UserResponseDTO.builder()
                 .id(userEntity.getId())
                 .coupleCode(userEntity.getCoupleCode())
@@ -36,5 +36,5 @@ public class UserResponseDTO ***REMOVED***
                 .date(userEntity.getDate())
                 .otherId(userEntity.getOtherId())
                 .build();
-    ***REMOVED***
-***REMOVED***
+    }
+}

@@ -1,6 +1,6 @@
-import ***REMOVED*** atom ***REMOVED*** from 'recoil';
+import { atom } from 'recoil';
 
-export const capturedImageState = atom<Blob | null>(***REMOVED***
+export const capturedImageState = atom<Blob | null>({
   key: 'capturedImageState',
   default: null,
-***REMOVED***);
+});

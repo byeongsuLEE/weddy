@@ -8,10 +8,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-public class LogFilter extends OncePerRequestFilter ***REMOVED***
+public class LogFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException ***REMOVED***
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 요청 정보 로그 출력
         System.out.println("Request URI: " + request.getRequestURI());
         System.out.println("Request Method: " + request.getMethod());
@@ -23,5 +23,5 @@ public class LogFilter extends OncePerRequestFilter ***REMOVED***
 
         // 응답 정보 로그 출력
         System.out.println("Response Status: " + response.getStatus());
-    ***REMOVED***
-***REMOVED***
+    }
+}

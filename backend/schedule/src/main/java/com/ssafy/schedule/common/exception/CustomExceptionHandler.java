@@ -19,27 +19,27 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
  */
 @Slf4j
 @RestControllerAdvice
-public class CustomExceptionHandler ***REMOVED***
+public class CustomExceptionHandler {
 
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiResponse<String>> handleUserNotFoundException(UserNotFoundException userNotFoundException)
-    ***REMOVED***
+    {
         ErrorCode errorCode = userNotFoundException.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode.getStatus(),errorCode.getMessage()));
 
-    ***REMOVED***
+    }
 
 
     @ExceptionHandler(ScheduleNotFoundException.class)
     public ResponseEntity<ApiResponse<String>> handleUserNotFoundException(ScheduleNotFoundException scheduleNotFoundException)
-    ***REMOVED***
+    {
         ErrorCode errorCode = scheduleNotFoundException.getErrorCode();
         return ResponseEntity.status(errorCode.getStatus())
                 .body(ApiResponse.error(errorCode.getStatus(),errorCode.getMessage()));
 
-    ***REMOVED***
+    }
 
 
 
@@ -59,10 +59,10 @@ public class CustomExceptionHandler ***REMOVED***
      * @return
      */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ApiResponse<String>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) ***REMOVED***
+    public ResponseEntity<ApiResponse<String>> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
         return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE)
                 .body(ApiResponse.error(ErrorCode.FILE_TOO_LARGE));
-    ***REMOVED***
+    }
 
 //    /**
 //     * 작성자   : 안진우
@@ -71,8 +71,8 @@ public class CustomExceptionHandler ***REMOVED***
 //     * @return HTTP 상태 코드와 ApiResponse를 포함한 응답 객체 .
 //     */
 //    @ExceptionHandler(BadCredentialsException.class)
-//    public ResponseEntity<ApiResponse<String>> handleBadCredentialsException(BadCredentialsException ex) ***REMOVED***
+//    public ResponseEntity<ApiResponse<String>> handleBadCredentialsException(BadCredentialsException ex) {
 //        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 //                .body(ApiResponse.error(ErrorCode.EMAIL_OR_PASSWORD_UNMATCH));
-//    ***REMOVED***
-***REMOVED***
+//    }
+}

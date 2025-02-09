@@ -1,4 +1,4 @@
-export interface userInformation ***REMOVED***
+export interface userInformation {
   name: string;
   phone: string;
   email: string;
@@ -6,4 +6,4 @@ export interface userInformation ***REMOVED***
   coupleCode: string;
   date: string;
   picture?: string;
-***REMOVED***
+}

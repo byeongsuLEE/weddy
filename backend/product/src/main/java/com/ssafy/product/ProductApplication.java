@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableJpaAuditing
 @EnableAspectJAutoProxy // AOP 활성화
-public class ProductApplication ***REMOVED***
+public class ProductApplication {
 
-	public static void main(String[] args) ***REMOVED***
+	public static void main(String[] args) {
 		SpringApplication.run(ProductApplication.class, args);
-	***REMOVED***
+	}
 
-***REMOVED***
+}

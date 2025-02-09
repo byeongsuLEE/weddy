@@ -1,10 +1,10 @@
 const BASE_URL = "https://weddy.info/api/oauth2/authorization";
 //== 네이버 로그인 ==//
-export const naverLogin = () => ***REMOVED***
-  window.location.href = `$***REMOVED***BASE_URL***REMOVED***/naver`;
-***REMOVED***;
+export const naverLogin = () => {
+  window.location.href = `${BASE_URL}/naver`;
+};
 
 //== 구글 로그인 ==//
-export const googleLogin = () => ***REMOVED***
-  window.location.href = `$***REMOVED***BASE_URL***REMOVED***/google`;
-***REMOVED***;
+export const googleLogin = () => {
+  window.location.href = `${BASE_URL}/google`;
+};

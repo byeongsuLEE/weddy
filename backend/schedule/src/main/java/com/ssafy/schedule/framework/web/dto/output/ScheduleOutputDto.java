@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class ScheduleOutputDto ***REMOVED***
+public class ScheduleOutputDto {
 
     // front로 보내는 response랑 같음
 
@@ -32,7 +32,7 @@ public class ScheduleOutputDto ***REMOVED***
      * @return
      */
 
-    public static ScheduleOutputDto mapToDto(Schedule schedule) ***REMOVED***
+    public static ScheduleOutputDto mapToDto(Schedule schedule) {
         return ScheduleOutputDto.builder()
                 .id(schedule.getId())
                 .contractType(schedule.getType())
@@ -42,7 +42,7 @@ public class ScheduleOutputDto ***REMOVED***
                 .productId(schedule.getProductId())
                 .code(schedule.getCode())
                 .build();
-    ***REMOVED***
+    }
 
 
-***REMOVED***
+}

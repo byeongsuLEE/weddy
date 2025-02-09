@@ -18,26 +18,26 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class SketchServiceImpl implements SketchService ***REMOVED***
+public class SketchServiceImpl implements SketchService {
     private final SketchRepository sketchRepository;
     private final GCSImageService gcsImageService;
 
     @Override
     @Transactional
-    public SketchResponseDto registerSketch(final SketchRequestDto sketchRequestDto, final MultipartFile image, final UserEntity user) ***REMOVED***
-        if(image != null && !image.isEmpty())***REMOVED***
+    public SketchResponseDto registerSketch(final SketchRequestDto sketchRequestDto, final MultipartFile image, final UserEntity user) {
+        if(image != null && !image.isEmpty()){
             String imageUrl = gcsImageService.uploadImage(image);
             Sketch sketch = sketchRepository.save(Sketch.builder().requestDto(sketchRequestDto).image(imageUrl).user(user).build());
             return sketch.getUserSketch(sketch);
-        ***REMOVED***
+        }
         throw new ImageUploadFailedException(ErrorCode.IMAGE_UPLOAD_FAIL);
-    ***REMOVED***
+    }
 
     @Override
-    public List<SketchResponseDto> getAllSketchesByUser(UserEntity user) ***REMOVED***
+    public List<SketchResponseDto> getAllSketchesByUser(UserEntity user) {
         return sketchRepository.findByUser(user)
                 .stream()
                 .map(sketch -> sketch.getUserSketch(sketch))
                 .toList();
-    ***REMOVED***
-***REMOVED***
+    }
+}
