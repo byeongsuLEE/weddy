@@ -43,30 +43,18 @@
     <h1>📚 기술 스택 & 버전 정보</h1>
 </div>
 
-### Common
-
-1. 이슈 관리: ![Jira](https://img.shields.io/badge/jira-blue?style=for-the-badge&logo=jira&logoColor=white)
-2. 형상 관리: ![GitLab](https://img.shields.io/badge/gitlab-orange?style=for-the-badge&logo=gitlab&logoColor=white)
-3. 커뮤니케이션: ![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white) ![Google Spreadsheet](https://img.shields.io/badge/spread%20sheet-white?style=for-the-badge&logo=google&logoColor=black) ![Discord](https://img.shields.io/badge/discord-5865F2.svg?style=for-the-badge&logo=discord&logoColor=white) ![MatterMost](https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white)
-
 ### BackEnd
 
-![IntelliJ](https://img.shields.io/badge/intellij-black?style=for-the-badge&logo=intellijidea&logoColor=white)
 ![JAVA](https://img.shields.io/badge/JAVA-red?style=for-the-badge&logo=java&logoColor=black)
-![Gradle](https://img.shields.io/badge/gradle-black?style=for-the-badge&logo=gradle&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/spring%20boot-green?style=for-the-badge&logo=springboot&logoColor=white)
 ![Spring Security](https://img.shields.io/badge/spring%20security-green?style=for-the-badge&logo=springsecurity&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JWT&logoColor=white)
+![Gradle](https://img.shields.io/badge/gradle-black?style=for-the-badge&logo=gradle&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-blue?style=for-the-badge&logo=mysql&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white)  
-![Amazon S3](https://img.shields.io/badge/amazone%20s3-red?style=for-the-badge&logo=amazons3&logoColor=white)
-![WebRTC](https://img.shields.io/badge/webRTC-green?style=for-the-badge&logo=webrtc&logoColor=white)
-
-
 
 ### FrontEnd
 
-[![VSCode](https://img.shields.io/badge/vscode-blue?style=for-the-badge&logo=vscode&logoColor=blue)
 ![Node.js](https://img.shields.io/badge/nodejs-green?style=for-the-badge&logo=node.js&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-red?style=for-the-badge&logo=npm&logoColor=#CB3837)
 ![Webpack](https://img.shields.io/badge/webpack-black?style=for-the-badge&logo=webpack&logoColor=#8DD6F9)
@@ -75,20 +63,28 @@
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-blue?style=for-the-badge&logo=tailwindcss&logoColor=#06B6D4)
 ![Figma](https://img.shields.io/badge/figma-white?style=for-the-badge&logo=figma&logoColor=#F24E1E)
 ![DaisyUI](https://img.shields.io/badge/daisyui-yellow?style=for-the-badge&logo=daisyui&logoColor=#5A0EF8)
-]()
 
-### CI/CD
+### DevOps
+![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![AWS EKS](https://img.shields.io/badge/AWS%20EKS-FF9900?style=for-the-badge&logo=amazon-eks&logoColor=white)
+![AWS ECR](https://img.shields.io/badge/AWS%20ECR-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
+![Route53](https://img.shields.io/badge/Route53-FF9900?style=for-the-badge&logo=amazon-route53&logoColor=white)
+![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white)
+![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white)
+![ArgoCD](https://img.shields.io/badge/ArgoCD-EF7B4D?style=for-the-badge&logo=argo&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
+### ETC
+![Jira](https://img.shields.io/badge/jira-blue?style=for-the-badge&logo=jira&logoColor=white)
 ![GitLab](https://img.shields.io/badge/gitlab-orange?style=for-the-badge&logo=gitlab&logoColor=white)
-![Jenkins](https://img.shields.io/badge/jenkins-red?style=for-the-badge&logo=jenkins&logoColor=black)
-![Nginx](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=black)
-![Docker](https://img.shields.io/badge/docker-skyblue?style=for-the-badge&logo=docker&logoColor=blue)
-
--
-
-### WAS
-
-![EC2](https://img.shields.io/badge/EC2-white?style=for-the-badge&logo=amazonec2&logoColor=red)
+![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white) 
+![Google Spreadsheet](https://img.shields.io/badge/spread%20sheet-white?style=for-the-badge&logo=google&logoColor=black) 
+![Discord](https://img.shields.io/badge/discord-5865F2.svg?style=for-the-badge&logo=discord&logoColor=white) 
+![MatterMost](https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white)
+![IntelliJ](https://img.shields.io/badge/intellij-black?style=for-the-badge&logo=intellijidea&logoColor=white)
+![VSCode](https://img.shields.io/badge/vscode-blue?style=for-the-badge&logo=vscode&logoColor=blue)
 
 ## ERD 🌐
 
