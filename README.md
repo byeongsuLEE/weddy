@@ -55,6 +55,13 @@
 ![MySQL](https://img.shields.io/badge/mysql-blue?style=for-the-badge&logo=mysql&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white)  
 
+Java: 17
+SpringBoot: 3.3.2
+Spring Security: 3.3.2
+JWT: 0.11.5
+MySQL: mysql Ver 9.0.1
+Redis: 3.3.2
+
 ### FrontEnd
 
 ![Node.js](https://img.shields.io/badge/nodejs-green?style=for-the-badge&logo=node.js&logoColor=white)
@@ -65,6 +72,15 @@
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-blue?style=for-the-badge&logo=tailwindcss&logoColor=#06B6D4)
 ![Figma](https://img.shields.io/badge/figma-white?style=for-the-badge&logo=figma&logoColor=#F24E1E)
 ![DaisyUI](https://img.shields.io/badge/daisyui-yellow?style=for-the-badge&logo=daisyui&logoColor=#5A0EF8)
+
+Node.JS: 20.12.2
+npm: 10.5.0
+WebPack
+REACT: 18.3.1
+Zustand: 4.5.4
+TailwindCSS: 3.4.8
+Figma
+DaisyUI: 4.12.10
 
 ### DevOps
 ![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
